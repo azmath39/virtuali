@@ -1,0 +1,22 @@
+<h1>Create a Tour</h1>
+<%= form_for Painting.new do |f| %>
+  <%= f.label :image, "Upload Images:" %>
+  <%= f.file_field :image, multiple: true, name: "painting[image]" %>
+<% end %>
+<div style ="float: right;margin: -50px 220px 0 0">
+  <%= link_to "Continue..", '#', :class => 'btn btn-small btn-primary' %>
+</div>
+
+<div id="paintings">
+  <%= render @paintings %>
+</div>
+<div class="clear">
+</div>
+<br/>
+
+<script id="template-upload" type="text/x-tmpl">
+<%#*<div class="upload">%>
+  <%#*{%=o.name%}%>
+  <%#*<div class="progress"><div class="bar" style="width: 0%"></div></div>%>
+<%#*</div>%>
+</script>

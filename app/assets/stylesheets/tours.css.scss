@@ -1,0 +1,15 @@
+// Place all the styles related to the tours controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+#final_tour{
+background-color: #1F1C1C;
+border: 40px solid #B2ACAC;
+border-radius: 15px;
+height: 650px;
+color: white;
+}
+
+#final_tour table, tr, th, td{
+margin-top: 20px;
+text-align:center;
+}

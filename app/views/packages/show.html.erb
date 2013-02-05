@@ -1,0 +1,22 @@
+<%# render :layout => false %>
+<% unless @products.nil? %>
+<h3>Package Selection</h3>
+  <% @products.each do |p| %>
+    <%= p.name %>: <br/>
+    <div style = "border:2px solid #cccccc;padding:20px;">
+    <% p.packages.each do |pkg| %>
+      <% @i=0 %>
+      <div>
+        <%#= check_box_tag "product[package][#{@i}]", pkg.price %>
+        <%= pkg.name %>&nbsp;<%= link_to "Select", '#', :onclick=>"package_amount(#{pkg.price})", :class => 'btn btn-mini' %>
+        <% @i += 1 %>
+        <%#*Price: $ <%=pkg.price%%>
+        <%#*Pictures For Tour:<%=pkg.pictures_for_tour%<br/>%>
+      </div><br />
+    <% end %>
+    </div>
+    <%end%>
+    <%#*<div>%>
+      <%#= link_to "Ok", '#', :onclick=>"package_amount()", :class => 'btn' %>
+    <%#*</div>%>
+<%end%>

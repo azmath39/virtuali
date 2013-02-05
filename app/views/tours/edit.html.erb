@@ -1,0 +1,5 @@
+<%= form_for @tour, {:url => '/tours/update'} do |f| %>
+  <%= f.hidden_field :id   %>
+  <%= f.text_field :name %>
+  <%= f.submit "update" %>
+<% end %>

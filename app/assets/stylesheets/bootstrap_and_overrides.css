@@ -1,0 +1,52 @@
+/*
+  =require twitter-bootstrap-static/bootstrap
+
+  Use Font Awesome icons (default)
+  To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
+  =require twitter-bootstrap-static/fontawesome
+  */
+
+  .navbar-inner {
+    background-color: none;
+    background-image: linear-gradient(to bottom, black, black);
+    background-repeat: no-repeat;
+    border: 1px solid yellow;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+    min-height: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.navbar .nav>li>a{
+    float:none;
+    padding:10px 15px 10px;
+    color:#777777;
+    text-decoration:none;
+    text-shadow:none;
+}
+.navbar .brand {
+    text-shadow:none;
+}
+.navbar .nav > li > a:hover {
+    background-color: transparent;
+    color: white;
+    text-decoration: none;
+}
+.btn [class^="icon-"], .nav [class^="icon-"], .btn [class*=" icon-"], .nav [class*=" icon-"]{
+    line-height: 2.9em;
+}
+ footer {
+color: #666;
+background: #222;
+padding: 17px 0 18px 0;
+border-top: 1px solid #000;
+border-radius: 4px 4px 4px 4px;
+margin: 100px 160px 0 160px;
+}
+footer a {
+color: #999;
+}
+footer a:hover {
+color: #efefef;
+}
+

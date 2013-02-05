@@ -1,0 +1,4 @@
+<% @tours.each do |f| %>
+  <%= f.name %>&nbsp;<%= link_to "edit", { :controller => 'tours', :action => 'edit', :id => f.id } %>
+  &nbsp;<%= link_to "Delete", {:controller => 'tours', :action => 'destroy', :id => f.id }, :confirm => "Are you sure?" %> <br />
+<% end %>

@@ -1,0 +1,56 @@
+<div class="span10" id="final_tour">
+  <div style="height: 400px; width: 650px; margin: 30px 0 0 30px;">
+    <% @objs = [] %>
+    <% @tour.paintings.each do |img|%>
+      
+      <% @objs << img %>
+    <% end %>
+    
+    <div id="myCarousel" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="active item"><%= image_tag(@objs[0].image_url(:large))%> </div>
+        <div class="item"><%= image_tag(@objs[1].image_url(:large))%></div>
+        <div class="item"><%= image_tag(@objs[2].image_url(:large)) %></div>
+        <div class="item"><%= image_tag(@objs[3].image_url(:large)) %></div>
+        <div class="item"><%= image_tag(@objs[4].image_url(:large)) %></div>
+      </div>
+      
+       <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+       <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+    </div>
+
+  </div>
+  <div style="height: 200px; width: 150px; float: right;border: 1px red solid;margin: -400px 60px 0 30px;">
+    profile pic
+  </div>
+  <div style="float: right; height: 150px; width: 200px;border: 1px solid red;margin: -150px 30px 0 30px;">
+    image1
+  </div>
+  <div style="float: right; height: 150px; width: 200px;border: 1px solid red;margin: 50px -230px 0 30px;">
+   click for tour
+  </div>
+  <div style="height: 200px; width: 650px; margin: 10px 0 0 30px;">
+    <table>
+      <tr>
+        <th>Address</th>
+        <th>Price</th>
+        <th>Bedrooms</th>
+        <th>Bathrooms</th>
+        <th>Sq.feets</th>
+      </tr>
+      <tr>
+        <td><%= @tour.address %> </td>
+        <td><%= @tour.price %> </td>
+        <td><%= @tour.bed_rooms %> </td>
+        <td><%= @tour.bath_rooms %> </td>
+        <td><%= @tour.square_footage %> </td>
+      </tr>
+      <tr>
+        <td colspan="5">&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="5"><%= @tour.description %> </td>
+      </tr>
+    </table>
+  </div>
+</div>

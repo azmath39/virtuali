@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: selected_packages
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  package_id :integer
+#  price      :float
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  package_id: 1
+  price: 1.5
+
+two:
+  user_id: 1
+  package_id: 1
+  price: 1.5
