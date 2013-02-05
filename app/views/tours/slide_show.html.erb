@@ -1,0 +1,21 @@
+<div style="margin: 0 0 0 70px;">
+<h1>Displaying Photos</h1>
+<script src="/root/rails_project/sample_app/app/assets/javascript/galleria-1.2.9.min.js"></script>
+<div id="abc" style="height: 550px; width: 850px;border: 5px solid #da5656;border-radius: 2px;">
+<% @tour.paintings.each do |p| %>
+    <span class="content">
+      <%= image_tag p.image_url(:large) %>
+    </span>
+<% end %>
+</div>
+</div>
+<script>
+        Galleria.loadTheme("<%= javascript_path('galleria.classic.js') %>");
+        Galleria.configure({
+          transition: 'fade'
+        });
+        Galleria.run('#abc', {
+          autoplay: 6000
+        });
+
+</script>

@@ -1,11 +1,15 @@
 <h1>Create a Tour</h1>
 <%= form_for Painting.new do |f| %>
-  <%= f.label :image, "Upload Images:" %>
+<div class="fileupload btn btn-warning">
+  <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
 <% end %>
+</div>
+
 <div style ="float: right;margin: -50px 220px 0 0">
   <%= link_to "Continue..", '/tours/new', :class => 'btn btn-small btn-primary' %>
 </div>
+
 <div id="paintings">
   <%#= render @paintings %>
 </div>

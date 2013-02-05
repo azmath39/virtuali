@@ -27,7 +27,7 @@
     image1
   </div>
   <div style="float: right; height: 150px; width: 200px;border: 1px solid red;margin: 50px -230px 0 30px;">
-   click for tour
+   <%= link_to "Click for tour", {:controller => 'tours', :action => 'slide_show', :id => @tour.id }%>
   </div>
   <div style="height: 200px; width: 650px; margin: 10px 0 0 30px;">
     <table>

@@ -1,6 +1,6 @@
 class ToursController < ApplicationController
   def index
-    @tours = Tour.all
+    @tours = current_user.tours
   end
   def show
     @tour = Tour.find(params[:id])
@@ -53,5 +53,8 @@ class ToursController < ApplicationController
   end
   def final_tour
     @tour = current_user.tours.last
+  end
+  def slide_show
+    @tour = Tour.find(params[:id])
   end
 end

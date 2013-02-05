@@ -15,6 +15,8 @@
 //= require twitter/bootstrap
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
+//= require galleria-1.2.9.min
+//= require galleria.classic
 //= require_tree .
 function packages(){
     var products = new Array();
