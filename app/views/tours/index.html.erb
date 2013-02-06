@@ -2,7 +2,8 @@
 <% @tours.each do |t| %>
 <div class="span6" style="background-color: #D3D3D3; margin: 0px 0 0 300px;padding: 10px 10px 0px 10px; border-radius: 2px;">
   <div>
-    <%= link_to(image_tag(t.paintings.first.image_url(:small)),{ :controller => 'tours', :action => 'show', :id => t.id}) %>
+    <%#= t.paintings %>
+    <%= link_to(image_tag(t.paintings.compact.first.image_url(:small)),{ :controller => 'tours', :action => 'show', :id => t.id}) %>
   <div style ="float: right; margin: 0 330px 0 0">
     <%= t.address %><br />
     <%= t.bed_rooms %> Beds / <%= t.bath_rooms %> Baths<br />

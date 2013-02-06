@@ -16,6 +16,7 @@
 #  square_footage :integer
 #  bed_rooms      :integer
 #  bath_rooms     :integer
+#  category_id    :integer
 #
 
 require 'test_helper'

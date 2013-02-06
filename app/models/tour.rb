@@ -16,6 +16,7 @@
 #  square_footage :integer
 #  bed_rooms      :integer
 #  bath_rooms     :integer
+#  category_id    :integer
 #
 
 class Tour < ActiveRecord::Base
@@ -23,4 +24,5 @@ class Tour < ActiveRecord::Base
   #validates :name, :presence => true
   belongs_to :user
   has_many :paintings, :dependent => :destroy
+  belongs_to :category
 end

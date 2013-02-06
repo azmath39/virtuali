@@ -1,0 +1,58 @@
+<div class="navbar navbar-fixed-top" >
+  <div class="navbar-inner">
+    <div class="container" style="margin: 5px 10px 0 100px;">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <%= link_to "Virtual I", root_path, :class => 'brand' %>
+      <div class="nav-collapse">
+      <ul class="nav nav-pills">
+        <li class="active"><%= link_to "Home", root_path %></li>
+        <li><%= link_to "About VI", '/pages/about_vi' %></li>
+        <li><%= link_to "Products", '/pages/products' %> </li>
+        <li><%= link_to "FAQ", '/pages/faq' %> </li>
+        <li><%= link_to "Tutorial", '/pages/tutorial' %> </li>
+      </ul>
+      <div class="navbar-text pull-right">
+      <ul class="nav">
+      <% if current_user %>
+        <li style="margin: -10px 0 0 0;"><a href="#"><i class="icon-user"></i><%= current_user.email%> </a></li>
+        <li class="dropdown" id="menu1">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+           Account
+           <b class="caret"></b>
+          </a>
+          <div class="dropdown-menu">
+           <%= link_to '<i class="icon-pencil"></i>Edit'.html_safe, edit_user_registration_path(:id) %><br />
+           <%= link_to '<i class="icon-off"></i>Signout'.html_safe, destroy_user_session_path, :method => :delete %>
+         </div>
+       </li>
+    <% else %>
+        <%#*<li><%= link_to "Signin", new_user_session_path %</li>%>
+        <li class="dropdown" id="menu1">
+         <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
+           Login
+            <b class="caret"></b>
+         </a>
+         <div class="dropdown-menu">
+           <form style="margin: 0px" accept-charset="UTF-8" action="/users/sign_in" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="4L/A2ZMYkhTD3IiNDMTuB/fhPRvyCNGEsaZocUUpw40=" /></div>
+             <fieldset class='textbox' style="padding:10px">
+               <input style="margin-top: 8px" type="email" value="" size="30" name="user[email]" id="user_email" autofocus="autofocus" placeholder="Username"/>
+               <input style="margin-top: 8px" type="password" size="30" name="user[password]" id="user_password" placeholder="Passsword"/>
+               <label class="checkbox"><input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me"/>Remember me</label>
+               <input type="submit" value="Sign in" name="commit" class="btn btn-primary" style="border-radius: 3px;"/><br />
+              <a href="/users/password/new" style="margin-left: 2px;">Forgot your password?</a>
+             </fieldset>
+           </form>
+         </div>
+       </li>
+        <li><%= link_to "Signup", new_user_registration_path %></li>
+    <% end  %>
+      </ul>
+    </div>
+    </div>
+    </div>
+  </div>
+</div>

@@ -13,6 +13,7 @@ class PaintingsController < ApplicationController
     session[:painting]= nil
     @paintings = Painting.all
     @painting = Painting.new
+    @tour = Tour.new
   end
 
   def create

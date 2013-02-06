@@ -4,8 +4,13 @@
 #new_painting {
   clear: both;
 }
-
+#paintings{
+  height: 10px;
+  width: 100%;
+  display: inline;
+}
 .painting {
+position: relative;
   border: solid 1px #CCC;
   padding: 10px;
   float: left;
