@@ -57,4 +57,8 @@ class ToursController < ApplicationController
   def slide_show
     @tour = Tour.find(params[:id])
   end
+  def view_map
+    @tours = Tour.all
+    @json = @tours.to_gmaps4rails
+  end
 end

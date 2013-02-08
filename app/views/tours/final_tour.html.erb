@@ -20,14 +20,17 @@
     </div>
 
   </div>
-  <div style="height: 200px; width: 150px; float: right;border: 1px red solid;margin: -400px 60px 0 30px;">
-    profile pic
+  <div style="height: 210px; width: 150px; float: right;margin: -400px 60px 0 30px; text-align: center;">
+    <%= image_tag(current_user.image_url(:medium)) %>
+    <strong><%= current_user.name %></strong><br />
+    (+91) <%= current_user.phno %><br />
+    <u><%= current_user.email %></u>
   </div>
   <div style="float: right; height: 150px; width: 200px;border: 1px solid red;margin: -150px 30px 0 30px;">
     image1
   </div>
-  <div style="float: right; height: 150px; width: 200px;border: 1px solid red;margin: 50px -230px 0 30px;">
-   <%= link_to "Click for tour", {:controller => 'tours', :action => 'slide_show', :id => @tour.id }%>
+  <div style="float: right; height: 50px; width: 200px;margin: 150px -230px 0px 30px;text-align: center;">
+    <h4><%= link_to "Click for Tour", {:controller => 'tours', :action => 'slide_show', :id => @tour.id }, :class=> 'brn btn-large btn-primary'%></h4>
   </div>
   <div style="height: 200px; width: 650px; margin: 10px 0 0 30px;">
     <table>
@@ -39,7 +42,7 @@
         <th>Sq.feets</th>
       </tr>
       <tr>
-        <td><%= @tour.address %> </td>
+        <td><%= @tour.state %> </td>
         <td><%= @tour.price %> </td>
         <td><%= @tour.bed_rooms %> </td>
         <td><%= @tour.bath_rooms %> </td>

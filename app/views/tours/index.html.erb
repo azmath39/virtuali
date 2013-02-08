@@ -5,7 +5,7 @@
     <%#= t.paintings %>
     <%= link_to(image_tag(t.paintings.compact.first.image_url(:small)),{ :controller => 'tours', :action => 'show', :id => t.id}) %>
   <div style ="float: right; margin: 0 330px 0 0">
-    <%= t.address %><br />
+    <%= t.state %><br />
     <%= t.bed_rooms %> Beds / <%= t.bath_rooms %> Baths<br />
     &#36; <%= t.price %><br />
     <%= link_to "More information...." %><br />
