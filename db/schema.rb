@@ -66,10 +66,10 @@ ActiveRecord::Schema.define(:version => 20130206084753) do
   create_table "paintings", :force => true do |t|
     t.string   "name"
     t.string   "image"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
     t.integer  "attachable_id"
     t.string   "attachable_type"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "tour_id"
   end
 
