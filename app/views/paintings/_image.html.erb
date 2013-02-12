@@ -32,7 +32,7 @@
 
 
 <!-- Add an edit button, passing the HTML id of the image and the public URL of the image -->
-<p><input type='image' src='http://images.aviary.com/images/edit-photo.png' value='Edit photo' onclick="return launchEditor('image1', <%=@painting.image_url%>);" /></p>
+<p><input type='image' src='http://images.aviary.com/images/edit-photo.png' value='Edit photo' onclick="return launchEditor('image1', '<%=@painting.image_url%>');" /></p>
         
 <%= form_for @painting, :html => {:multipart => true} do |f| %>
 <%=f.hidden_field "id"%>
