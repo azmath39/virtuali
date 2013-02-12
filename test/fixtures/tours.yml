@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  name           :string(255)
-#  address        :string(255)
+#  state          :string(255)
 #  description    :string(255)
 #  user_id        :integer
 #  created_at     :datetime         not null
@@ -17,6 +17,9 @@
 #  bed_rooms      :integer
 #  bath_rooms     :integer
 #  category_id    :integer
+#  latitude       :float
+#  longitude      :float
+#  gmaps          :boolean
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

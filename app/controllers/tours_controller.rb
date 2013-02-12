@@ -1,6 +1,6 @@
 class ToursController < ApplicationController
   def index
-    @tours = current_user.tours
+    @tours = current_user.tours.paginate(:page => params[:page], :per_page => 2)
   end
   def show
     @tour = Tour.find(params[:id])
@@ -22,7 +22,7 @@ class ToursController < ApplicationController
         #session.delete(:painting)
         #session[:painting]=nil
         #session.data.delete :painting
-        #flash[:success]="Tour was created successfully."
+        flash[:success] = "Tour was created successfully."
         redirect_to :controller => 'tours', :action => 'final_tour'
       else
         render 'new'
@@ -56,5 +56,12 @@ class ToursController < ApplicationController
   end
   def slide_show
     @tour = Tour.find(params[:id])
+  end
+  def view_map
+    @tours = Tour.all
+    @json = @tours.to_gmaps4rails do |tour, marker|
+      marker.infowindow("#{tour.name}<br />" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
+      marker.title("#{tour.city}")
+    end
   end
 end
