@@ -6,7 +6,7 @@
     <%= select_tag "Name", options_for_select(@names), :id => 'image_name' %>
   </div>
   <div class="actions">
-    <%#= link_to "edit", edit_painting_path(painting) %>
+    <%= link_to "edit", edit_painting_path(painting) %>
     <%= link_to "remove", painting, :method => :delete %>
   </div>
 </div>

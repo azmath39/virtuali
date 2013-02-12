@@ -1,29 +1,80 @@
+<%#*<script>%>
+<%#*$(function(){%>
+  <%#*$('#cropbox').Jcrop({%>
+    <%#*onChange: update_crop,%>
+    <%#*onSelect: update_crop,%>
+    <%#*setSelect: [0, 0, 50, 50],%>
+    <%#*aspectRatio: 1%>
+  <%#*});%>
+<%#*});%>
+<%#*function update_crop(coords){%>
+  <%#*$("#crop_x").val(coords.x);%>
+  <%#*$("#crop_y").val(coords.y);%>
+  <%#*$("#crop_w").val(coords.w);%>
+  <%#*$("#crop_h").val(coords.h);%>
+<%#*}%>
+<%#*</script>%>
 <script>
-$(function(){
-  $('#cropbox').Jcrop({
-    onChange: update_crop,
-    onSelect: update_crop,
-    setSelect: [0, 0, 50, 50],
-    aspectRatio: 1
+  $(document).ready(function(){
+    $('#painting_pro_brightness').popover("bottom");
   });
+  function manipulate(){
+$("#bright_val").text($('#painting_pro_brightness').val());
+   $("#cont_val").text($('#painting_pro_contrast').val());
+   $("#sharp_val").text($('#painting_pro_sharpness').val());
+   $("#sat_val").text($('#painting_pro_saturate').val())
+var bright= parseInt($('#painting_pro_brightness').val());
+var cont= parseInt($('#painting_pro_contrast').val());
+var satu= parseInt($('#painting_pro_saturate').val());
+var sharp= parseInt($('#painting_pro_sharpness').val());
+  Caman("#image-id", function () {
+this.revert();
+
+
+ this.brightness(bright);
+ this.contrast(cont);
+ //this.sharpen(sharp);
+ this.saturation(satu);
+  this.render();
+
+
+});}
+function sharpness(){
+  var sharp= parseInt($('#painting_pro_sharpness').val());
+ Caman("#image-id", function () {
+
+ this.revert();
+this.sharpen(sharp);
+this.render();
 });
-function update_crop(coords){
-  $("#crop_x").val(coords.x);
-  $("#crop_y").val(coords.y);
-  $("#crop_w").val(coords.w);
-  $("#crop_h").val(coords.h);
 }
+function revert(){
+   Caman("#image-id", function () {
+   this.revert();
+
+
+   });
+   $('#painting_pro_brightness').val(0);
+$('#painting_pro_contrast').val(0);
+$('#painting_pro_saturate').val(0);
+$('#painting_pro_sharpness').val(0);
+ $("#bright_val").text($('#painting_pro_brightness').val());
+  $("#cont_val").text($('#painting_pro_contrast').val());
+  $("#sat_val").text($('#painting_pro_saturate').val());
+  $("#sharp_val").text($('#painting_pro_sharpness').val());
+}
+
+
+
+
+
+
+
+
 </script>
+
 <h1>Editing Image</h1>
-<%#= render 'form' %>
-<div>
-<%= image_tag(@painting.image_url) %>
-</div>
-<%#*<div>%>
-<%#= form_for @painting do |f| %>
-  <%# for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
-    <%#= f.hidden_field attribute, :id => attribute %>
-  <%# end %>
-<%#*<p><%= f.submit "crop", :class => 'btn btn-success btn-small' %></p>%>
-<%# end %>
-<%#*</div>%>
+<%= render 'form' %>
+
+
+
