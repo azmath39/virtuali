@@ -3,7 +3,7 @@ class CreatePaintings < ActiveRecord::Migration
     create_table :paintings do |t|
       t.string :name
       t.string :image
-      t.references :paintable, :polymorphic => true
+      
 
       t.timestamps
     end

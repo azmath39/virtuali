@@ -30,10 +30,11 @@ class Tour < ActiveRecord::Base
   belongs_to :category
 
   def gmaps4rails_address
-    "#{state}, #{city}, #{zip}, #{subdivision}"
+    "#{state}, #{city}"
   end
-  def gmaps4rails_infowindow
-#    @val = Tour.all.count
-    "<h5>#{state}</h5>" << "<h5>#{city}</h5>" 
-  end
+#  def gmaps4rails_infowindow
+##    @val = Tour.all.count
+#    @tour = Tour.where("state = ?", "NY")
+#    "<h5>#{state}</h5>" << "<h5>#{city}</h5>" << "<%= link_to 'go to tour', '#' %>"
+#  end
 end

@@ -12,6 +12,9 @@ gem 'rails', '3.2.11'
   gem 'annotate'
   gem 'stripe'
   gem 'twitter-bootstrap-rails'
+  gem 'kaminari' #for pagination only
+  gem 'will_paginate'
+  gem 'will_paginate-bootstrap'
  # gem 'gmaps4rails'
   
   gem 'carrierwave'
@@ -29,7 +32,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', '2'
 gem 'gmaps4rails'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

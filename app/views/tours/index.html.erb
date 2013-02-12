@@ -1,4 +1,7 @@
 <h2 style="margin: 0 0 10px 300px;">List of Tours</h2>
+<div class ="span4" style="margin: 0 142px 0 0px; float: right;">
+  <%= will_paginate @tours, :renderer => BootstrapPagination::Rails %>
+</div>
 <% @tours.each do |t| %>
 <div class="span6" style="background-color: #D3D3D3; margin: 0px 0 0 300px;padding: 10px 10px 0px 10px; border-radius: 2px;">
   <div>

@@ -18,7 +18,7 @@ class Painting < ActiveRecord::Base
 #  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 #  mount_uploader :image, ImageUploader
   belongs_to :tour
-  belongs_to :paintable, :polymorphic => true
+  #belongs_to :paintable, :polymorphic => true
   mount_uploader :image, ImageUploader
   before_create :default_name
 #  before_update :reprocess_image, :if => :cropping?
