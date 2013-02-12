@@ -13,7 +13,7 @@
 #
 
 class Painting < ActiveRecord::Base
-  attr_accessible :image, :name, :pro
+  attr_accessible :image, :name, :pro,:remote_image_url
 #  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   mount_uploader :image, ImageUploader
   belongs_to :tour

@@ -1,0 +1,41 @@
+<!-- Load Feather code -->
+<script type="text/javascript" src="http://feather.aviary.com/js/feather.js"></script>
+
+<!-- Instantiate Feather -->
+<script type='text/javascript'>
+   var featherEditor = new Aviary.Feather({
+       apiKey: 'RvudU_oOFka2BrKDAVGXDQ',
+       apiVersion: 2,
+       tools: 'brightness,saturation,sharpness,contrast',
+       appendTo: '',
+       onSave: function(imageID, newURL) {
+           var img = document.getElementById(imageID);
+           img.src = newURL;
+           $('#painting_remote_image_url  ').val(newURL);
+       },
+       onError: function(errorObj) {
+           alert(errorObj.message);
+       }
+   });
+   function launchEditor(id, src) {
+       featherEditor.launch({
+           image: id,
+           url: src
+       });
+      return false;
+   }
+</script>
+
+<div id='injection_site'></div>
+
+<%= image_tag @painting.image_url,:id=>"image1" %>
+
+
+<!-- Add an edit button, passing the HTML id of the image and the public URL of the image -->
+<p><input type='image' src='http://images.aviary.com/images/edit-photo.png' value='Edit photo' onclick="return launchEditor('image1', 'http://forbesindia.com/media/photogallery/2012/Dec/horse_flame_20121228105002_930x584.jpg');" /></p>
+        
+<%= form_for @painting, :html => {:multipart => true} do |f| %>
+<%=f.hidden_field "id"%>
+<%=f.hidden_field "remote_image_url"%>
+<%= f.submit "Done", :class=>"btn-small btn-success"%>
+<%end%>

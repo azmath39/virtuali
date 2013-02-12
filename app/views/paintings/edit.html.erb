@@ -14,67 +14,69 @@
   <%#*$("#crop_h").val(coords.h);%>
 <%#*}%>
 <%#*</script>%>
-<script>
-  $(document).ready(function(){
-    $('#painting_pro_brightness').popover("bottom");
-  });
-  function manipulate(){
-$("#bright_val").text($('#painting_pro_brightness').val());
-   $("#cont_val").text($('#painting_pro_contrast').val());
-   $("#sharp_val").text($('#painting_pro_sharpness').val());
-   $("#sat_val").text($('#painting_pro_saturate').val())
-var bright= parseInt($('#painting_pro_brightness').val());
-var cont= parseInt($('#painting_pro_contrast').val());
-var satu= parseInt($('#painting_pro_saturate').val());
-var sharp= parseInt($('#painting_pro_sharpness').val());
-  Caman("#image-id", function () {
-this.revert();
 
 
- this.brightness(bright);
- this.contrast(cont);
- //this.sharpen(sharp);
- this.saturation(satu);
-  this.render();
+<%#*<script>%>
+  <%#*$(document).ready(function(){%>
+    <%#*$('#painting_pro_brightness').popover("bottom");%>
+  <%#*});%>
+  <%#*function manipulate(){%>
+<%#*$("#bright_val").text($('#painting_pro_brightness').val());%>
+   <%#*$("#cont_val").text($('#painting_pro_contrast').val());%>
+   <%#*$("#sharp_val").text($('#painting_pro_sharpness').val());%>
+   <%#*$("#sat_val").text($('#painting_pro_saturate').val())%>
+<%#*var bright= parseInt($('#painting_pro_brightness').val());%>
+<%#*var cont= parseInt($('#painting_pro_contrast').val());%>
+<%#*var satu= parseInt($('#painting_pro_saturate').val());%>
+<%#*var sharp= parseInt($('#painting_pro_sharpness').val());%>
+  <%#*Caman("#image-id", function () {%>
+<%#*this.revert();%>
 
 
-});}
-function sharpness(){
-  var sharp= parseInt($('#painting_pro_sharpness').val());
- Caman("#image-id", function () {
-
- this.revert();
-this.sharpen(sharp);
-this.render();
-});
-}
-function revert(){
-   Caman("#image-id", function () {
-   this.revert();
+ <%#*this.brightness(bright);%>
+ <%#*this.contrast(cont);%>
+ <%#*//this.sharpen(sharp);%>
+ <%#*this.saturation(satu);%>
+  <%#*this.render();%>
 
 
-   });
-   $('#painting_pro_brightness').val(0);
-$('#painting_pro_contrast').val(0);
-$('#painting_pro_saturate').val(0);
-$('#painting_pro_sharpness').val(0);
- $("#bright_val").text($('#painting_pro_brightness').val());
-  $("#cont_val").text($('#painting_pro_contrast').val());
-  $("#sat_val").text($('#painting_pro_saturate').val());
-  $("#sharp_val").text($('#painting_pro_sharpness').val());
-}
+<%#*});}%>
+<%#*function sharpness(){%>
+  <%#*var sharp= parseInt($('#painting_pro_sharpness').val());%>
+ <%#*Caman("#image-id", function () {%>
+
+ <%#*this.revert();%>
+<%#*this.sharpen(sharp);%>
+<%#*this.render();%>
+<%#*});%>
+<%#*}%>
+<%#*function revert(){%>
+   <%#*Caman("#image-id", function () {%>
+   <%#*this.revert();%>
 
 
-
-
-
+   <%#*});%>
+   <%#*$('#painting_pro_brightness').val(0);%>
+<%#*$('#painting_pro_contrast').val(0);%>
+<%#*$('#painting_pro_saturate').val(0);%>
+<%#*$('#painting_pro_sharpness').val(0);%>
+ <%#*$("#bright_val").text($('#painting_pro_brightness').val());%>
+  <%#*$("#cont_val").text($('#painting_pro_contrast').val());%>
+  <%#*$("#sat_val").text($('#painting_pro_saturate').val());%>
+  <%#*$("#sharp_val").text($('#painting_pro_sharpness').val());%>
+<%#*}%>
 
 
 
-</script>
+
+
+
+
+
+<%#*</script>%>
 
 <h1>Editing Image</h1>
-<%= render 'form' %>
+<%= render 'image' %>
 
 
 
