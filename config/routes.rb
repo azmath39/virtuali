@@ -1,14 +1,15 @@
 VirtualTour::Application.routes.draw do
   #get "home/index"
- resources :paintings
-  get "packages/show"
+   get "packages/show"
+
+ 
 
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   devise_for :users,:controllers => { :registrations => "Registrations" }
-
+ resources :paintings
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -10,6 +10,7 @@
 
 class Product < ActiveRecord::Base
   attr_accessible :name
+  has_many :users, :through => :selected_products
+  has_many :selected_products
   has_many :packages
-  belongs_to :user
 end

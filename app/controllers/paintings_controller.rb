@@ -10,14 +10,16 @@ class PaintingsController < ApplicationController
   end
   
   def new
-    session[:painting]= nil
-    @paintings = Painting.all
+    
+    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil)
     @painting = Painting.new
     @tour = Tour.new
   end
 
   def create
     @painting = Painting.create(params[:painting])
+    @painting.user_id= current_user.id
+    @painting.save
     puts "***********************"
     p @painting
     
@@ -38,7 +40,7 @@ class PaintingsController < ApplicationController
   def update
     @painting = Painting.find(params[:id])
     if @painting.update_attributes(params[:painting])
-      redirect_to paintings_url, :notice=> "Image was successfully updated."
+      redirect_to new_painting_url, :notice=> "Image was successfully updated."
     else
       render :edit
     end

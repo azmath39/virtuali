@@ -1,5 +1,5 @@
 <h1>Create a Tour</h1>
-<div>
+<div class="span12">
 <%= form_for Painting.new do |f| %>
 <div class="fileupload btn btn-warning">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
@@ -12,18 +12,19 @@
 <%#*</div>%>
 
 <div id="paintings">
-  <%#= render @paintings %>
+  <%= render @paintings %>
 </div>
 <%#*<div class="clear">%>
 <%#*</div>%>
 <br/>
 </div>
 
-
+<div class="span12">
 
 <%= form_for @tour, :url => '/tours/create', :html =>{:class => "form-horizontal"}  do |f| %>
-<h3><legend>Tour Details:</legend></h3>
+ <h3><legend>Tour Details:</legend></h3>
 <div style="float:left;">
+ 
 <div class="control-group">
   <%= f.label :name, :html => {:class => 'control-label'} %>
   <%= f.text_field :name %>
@@ -79,7 +80,7 @@
 </div>
 <% end %>
 </div>
-
+</div>
 <script id="template-upload" type="text/x-tmpl">
 <%#*<div class="upload">%>
   <%#*{%=o.name%}%>

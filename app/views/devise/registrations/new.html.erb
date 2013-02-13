@@ -1,67 +1,212 @@
-<h2>Sign up</h2>
+
+
+<style>
+    /* Prevent the slideshow from flashing on load */
+    #slides {
+      display: none;
+      margin: 100px;
+      padding: 100px;
+      border: 20px black solid;
+      border-radius:30px;
+      background-color:#ccffcc;
+      overflow: scroll;
+
+    }
+
+    /* Center the slideshow */
+    .container {
+      margin: 10px;
+      
+    }
+
+    /* Show active item in the pagination */
+    .slidesjs-pagination .active {
+      color:red;
+    }
+
+    
+    #next_btn{
+      float :right;
+     
+      margin-right: 20px;
+}
+  </style>
+  <style>
+    body {
+      -webkit-font-smoothing: antialiased;
+      font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #232525;
+      padding-top:70px;
+    }
+
+    #slides {
+      display: none
+    }
+
+    #slides .slidesjs-navigation {
+      margin-top:3px;
+    }
+
+    #slides .slidesjs-previous {
+      margin-right: 5px;
+      float: left;
+    }
+
+    #slides .slidesjs-next {
+      margin-right: 5px;
+      float: left;
+   
+    }
+
+    .slidesjs-pagination {
+      margin: 6px 0 0;
+      float: right;
+      list-style: none;
+    }
+
+    .slidesjs-pagination li {
+      float: left;
+      margin: 0 1px;
+    }
+
+    .slidesjs-pagination li a {
+      display: block;
+      width: 13px;
+      height: 0;
+      padding-top: 13px;
+      background-image: url(/img/pagination.png);
+      background-position: 0 0;
+      float: left;
+      overflow: hidden;
+    }
+
+    .slidesjs-pagination li a.active,
+    .slidesjs-pagination li a:hover.active {
+      background-position: 0 -13px
+    }
+
+    .slidesjs-pagination li a:hover {
+      background-position: 0 -26px
+    }
+
+    #slides a:link,
+    #slides a:visited {
+      color: #333
+    }
+
+    #slides a:hover,
+    #slides a:active {
+      color: #9e2020
+    }
+
+    .navbar {
+      overflow: hidden
+    }
+  </style>
+
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :id => 'payment-form', :multipart => true })  do |f| %>
   <%= devise_error_messages! %>
   <%#= render 'shared/error_messages', :target => @user %>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+ 
+    <div id="slides">
+  <div id="personal_info">
+     <h3>Personal Information</h3>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <%= f.label :phno, "Mobile Number"%>
+      <%= f.text_field :phno %>
+    </div>
+    <div>
+      <%= f.label :email %>
+      <%= f.email_field :email, :autofocus => true %>
+    </div>
+    <div>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+    <div>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <div>
+      <%= f.label :image, "Profile Picture" %>
+      <%= f.file_field :image %>
+    </div>
+     <div id="next_btn">
+     <%=button_tag "next", :class => "slidesjs-next slidesjs-navigation btn-large btn-danger", :id=>"btn_personal",:onclick=>"button()" %>
+     </div>
+       
   </div>
-  <div>
-    <%= f.label :phno, "Mobile Number"%>
-    <%= f.text_field :phno %>
-  </div>
-  <div>
-    <%= f.label :email %>
-    <%= f.email_field :email, :autofocus => true %>
-  </div>
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  </div>
-  <div>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
-  </div>
-<div>
-  <%= f.label :image, "Profile Picture" %>
-  <%= f.file_field :image %>
-</div>
+  <div id="product_select">
+    <h3>Product Selection</h3>
+    <%@i=0%>
+    <% Product.all.each do |x| %>
+      <div>
+        <%= check_box_tag "user[product][#{@i}]", x.id %>&nbsp;<%=  x.name%>
+      </div><br/>
+      <% @i+=1 %>
+    <% end %><br />
 
-<h3>Product Selection</h3>
-<%@i=0%>
-<% Product.all.each do |x| %>
-<div>
-<%= check_box_tag "user[product][#{@i}]", x.id %>&nbsp;<%=  x.name%>
-</div><br/>
-<% @i+=1 %>
-<% end %><br />
-<div>
-  <%= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
-</div>
-<div id="packages">
+    <div id="next_btn">
+      <%=button_tag "next", :onclick=>"packages()",  :class => "slidesjs-next slidesjs-navigation btn-large btn-danger" %>
+      <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
+    </div>
+  </div>
+      <div id ="package_info">
+  <div id="packages">
 
-</div>
-<h3>Payment Process</h3>
-<div class = "payment-errors">
-</div>
-<%= hidden_field_tag 'total_amount' %>
-<div id="amount_label">
-  
-</div>
-  <div class="field">
-    <%= label_tag :card_number, "Credit Card Number" %>
-    <%= text_field_tag "card-number", nil, name: nil %>
   </div>
-  <div class="field">
-    <%= label_tag :card_code, "Security Code on Card (CVV)" %>
-    <%= text_field_tag "card-cvc", nil, name: nil %>
+         <div id="next_btn">
+      <%=button_tag "next",  :class => "slidesjs-next slidesjs-navigation btn-large btn-danger" %>
+      <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
+    </div>
+     </div>
+  <div id="payment">
+    <h3>Payment Process</h3>
+    <div class = "payment-errors">
+    </div>
+    <%= hidden_field_tag 'total_amount' %>
+    <div id="amount_label">
+
+    </div>
+    <div class="field">
+      <%= label_tag :card_number, "Credit Card Number" %>
+      <%= text_field_tag "card-number", nil, name: nil %>
+    </div>
+    <div class="field">
+      <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+      <%= text_field_tag "card-cvc", nil, name: nil %>
+    </div>
+    <div>
+      <%= label_tag :card_month, "Card Expiration" %>
+      <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
+      <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
+    </div>
+    <div id="next_btn">
+      <%= f.submit "Sign up", :class=>"btn-large btn-danger" %>
+    </div>
   </div>
-  <div>
-    <%= label_tag :card_month, "Card Expiration" %>
-    <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
-    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
-  </div>
-<div><%= f.submit "Sign up" %>
-</div>
+      <%#= link_to "pre",'#', :class =>"slidesjs-previous slidesjs-navigation" %>
+      <%#= link_to "next",'#',  :class => "slidesjs-next slidesjs-navigation" %>
+        </div>
+
+
 <% end %>
 <%#= render "devise/shared/links" %>
+ <%= javascript_include_tag "jquery.slides.min" %>
+
+<script>
+  $(function() {
+    //$('#btn_personal').prop('disabled', true);
+    
+    $('#slides').slidesjs({
+      width: 940,
+      height: 700,
+      navigation: false
+    
+    });
+  });
+</script>

@@ -17,5 +17,5 @@ class Package < ActiveRecord::Base
   attr_accessible :name, :pictures_for_tour, :price, :product_id, :status, :description
   has_many :users, :through => :selected_packages
   has_many :selected_packages
-  belongs_to :user
+  belongs_to :product
 end

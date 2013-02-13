@@ -22,7 +22,7 @@ class ToursController < ApplicationController
         #session.delete(:painting)
         #session[:painting]=nil
         #session.data.delete :painting
-        flash[:success] = "Tour was created successfully."
+        flash[:notice] = "Tour was created successfully."
         redirect_to :controller => 'tours', :action => 'final_tour'
       else
         render 'new'
