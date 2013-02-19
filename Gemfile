@@ -19,8 +19,6 @@ gem 'rails', '3.2.11'
   gem 'kaminari' #for pagination only
   gem 'will_paginate'
   gem 'will_paginate-bootstrap'
- # gem 'gmaps4rails'
-  
   gem 'carrierwave'
   gem 'rmagick'
   
