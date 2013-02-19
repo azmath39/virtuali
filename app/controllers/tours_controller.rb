@@ -58,10 +58,71 @@ class ToursController < ApplicationController
     @tour = Tour.find(params[:id])
   end
   def view_map
-    @tours = Tour.all
-    @json = @tours.to_gmaps4rails do |tour, marker|
-      marker.infowindow("#{tour.name}<br />" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
-      marker.title("#{tour.city}")
+    
+    if signed_in?
+      @current_user_tours = current_user.tours
+      @json = @current_user_tours.to_gmaps4rails do |tour, marker|
+        marker.infowindow("#{tour.name}<br />" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
+        marker.title("#{tour.city}")
+      end
+    else
+      @all_tours = Tour.all
+      @json = @all_tours.to_gmaps4rails do |tour, marker|
+        marker.infowindow("#{tour.name}<br />" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
+        marker.title("#{tour.city}")
+      end
     end
+    us_states_hash = {'AL'=>"Alabama",
+                    'AK'=>"Alaska",
+                    'AZ'=>"Arizona",
+                    'AR'=>"Arkansas",
+                    'CA'=>"California",
+                    'CO'=>"Colorado",
+                    'CT'=>"Connecticut",
+                    'DE'=>"Delaware",
+                    'DC'=>"District Of Columbia",
+                    'FL'=>"Florida",
+                    'GA'=>"Georgia",
+                    'HI'=>"Hawaii",
+                    'ID'=>"Idaho",
+                    'IL'=>"Illinois",
+                    'IN'=>"Indiana",
+                    'IA'=>"Iowa",
+                    'KS'=>"Kansas",
+                    'KY'=>"Kentucky",
+                    'LA'=>"Louisiana",
+                    'ME'=>"Maine",
+                    'MD'=>"Maryland",
+                    'MA'=>"Massachusetts",
+                    'MI'=>"Michigan",
+                    'MN'=>"Minnesota",
+                    'MS'=>"Mississippi",
+                    'MO'=>"Missouri",
+                    'MT'=>"Montana",
+                    'NE'=>"Nebraska",
+                    'NV'=>"Nevada",
+                    'NH'=>"New Hampshire",
+                    'NJ'=>"New Jersey",
+                    'NM'=>"New Mexico",
+                    'NY'=>"New York",
+                    'NC'=>"North Carolina",
+                    'ND'=>"North Dakota",
+                    'OH'=>"Ohio",
+                    'OK'=>"Oklahoma",
+                    'OR'=>"Oregon",
+                    'PA'=>"Pennsylvania",
+                    'RI'=>"Rhode Island",
+                    'SC'=>"South Carolina",
+                    'SD'=>"South Dakota",
+                    'TN'=>"Tennessee",
+                    'TX'=>"Texas",
+                    'UT'=>"Utah",
+                    'VT'=>"Vermont",
+                    'VA'=>"Virginia",
+                    'WA'=>"Washington",
+                    'WV'=>"West Virginia",
+                    'WI'=>"Wisconsin",
+                    'WY'=>"Wyoming"}
+         @us_states_array = us_states_hash.values
   end
 end

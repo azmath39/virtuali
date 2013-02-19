@@ -23,7 +23,8 @@
 #
 
 class Tour < ActiveRecord::Base
-  attr_accessible :gmaps, :state, :description, :name, :city, :zip, :subdivision, :price, :square_footage, :bed_rooms, :bath_rooms
+  attr_accessible :gmaps, :state, :description, :name, :city, :zip, :subdivision, :price, :square_footage, :bed_rooms, :bath_rooms, :status
+  before_create :set_status
   acts_as_gmappable
   belongs_to :user
   has_many :paintings, :dependent => :destroy
@@ -37,4 +38,7 @@ class Tour < ActiveRecord::Base
 #    @tour = Tour.where("state = ?", "NY")
 #    "<h5>#{state}</h5>" << "<h5>#{city}</h5>" << "<%= link_to 'go to tour', '#' %>"
 #  end
+def set_status
+  self.status = "active"
+end
 end

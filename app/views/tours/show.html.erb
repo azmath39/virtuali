@@ -21,10 +21,17 @@
 
   </div>
   <div style="height: 210px; width: 150px; float: right;margin: -400px 60px 0 30px; text-align: center;">
+    <% if signed_in? %>
     <%= image_tag(current_user.image_url(:medium)) %>
     <strong><%= current_user.name %></strong><br />
     (+91) <%= current_user.phno %><br />
     <u><%= current_user.email %></u>
+    <% else %>
+    <%= image_tag(@tour.user.image_url(:medium)) %>
+    <strong><%= @tour.user.name %></strong><br />
+    (+91) <%= @tour.user.phno %><br />
+    <u><%= @tour.user.email %></u>
+    <% end %>
   </div>
   <div style="float: right; height: 150px; width: 200px;border: 1px solid red;margin: -150px 30px 0 30px;">
     image1

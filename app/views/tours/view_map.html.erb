@@ -1,4 +1,8 @@
 <div id="map-div">
   <h1>Tour Map</h1>
   <%= gmaps4rails(@json) %>
+  
+  <% @us_states_array.each do |state| %>
+  <p><%= state %></p>
+  <% end %>
 </div>

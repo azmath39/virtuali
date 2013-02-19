@@ -1,11 +1,10 @@
 
-
 <style>
     /* Prevent the slideshow from flashing on load */
     #slides {
       display: none;
       margin: 100px;
-      padding: 100px;
+      padding: 10px 100px 100px 100px;
       border: 20px black solid;
       border-radius:30px;
       background-color:#ccffcc;
@@ -36,11 +35,10 @@
       -webkit-font-smoothing: antialiased;
       font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
       color: #232525;
-      padding-top:70px;
     }
 
     #slides {
-      display: none
+      display: block;
     }
 
     #slides .slidesjs-navigation {
@@ -99,9 +97,9 @@
       color: #9e2020
     }
 
-    .navbar {
-      overflow: hidden
-    }
+    <%#*.navbar {%>
+      <%#*overflow: hidden;%>
+    <%#*}%>
   </style>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :id => 'payment-form', :multipart => true })  do |f| %>
@@ -159,11 +157,11 @@
   <div id="packages">
 
   </div>
-         <div id="next_btn">
+    <div id="next_btn">
       <%=button_tag "next",  :class => "slidesjs-next slidesjs-navigation btn-large btn-danger" %>
       <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
     </div>
-     </div>
+    </div>
   <div id="payment">
     <h3>Payment Process</h3>
     <div class = "payment-errors">
