@@ -20,25 +20,30 @@
 #  latitude       :float
 #  longitude      :float
 #  gmaps          :boolean
+#  status         :string(255)
+#  slug           :string(255)
 #
 
 class Tour < ActiveRecord::Base
-  attr_accessible :gmaps, :state, :description, :name, :city, :zip, :subdivision, :price, :square_footage, :bed_rooms, :bath_rooms, :status
+  extend FriendlyId
+  attr_accessible :gmaps, :state, :description, :name, :city, :zip, :subdivision, :price, :square_footage, :bed_rooms, :bath_rooms
+  
   before_create :set_status
+  before_create :set_address
+  friendly_id :address, use: :slugged
   acts_as_gmappable
   belongs_to :user
   has_many :paintings, :dependent => :destroy
   belongs_to :category
-
+  
   def gmaps4rails_address
     "#{state}, #{city}"
   end
-#  def gmaps4rails_infowindow
-##    @val = Tour.all.count
-#    @tour = Tour.where("state = ?", "NY")
-#    "<h5>#{state}</h5>" << "<h5>#{city}</h5>" << "<%= link_to 'go to tour', '#' %>"
-#  end
+
 def set_status
   self.status = "active"
+end
+def set_address
+  self.address = "#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
 end
 end

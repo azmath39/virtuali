@@ -2,16 +2,16 @@
 <div class ="span4" style="margin: 0 144px 0 0px; float: right;">
   <%= will_paginate @tours, :renderer => BootstrapPagination::Rails %>
 </div>
-<% @tours.each do |t| %>
+<% @tours.each do |tour| %>
 <div class="span6" style="background-color: #D3D3D3; margin: 0px 0 0 300px;padding: 10px 10px 0 10px; border-radius: 2px;">
   <div>
     <%#= t.paintings %>
-    <%= link_to(image_tag(t.paintings.compact.first.image_url(:small)),{ :controller => 'tours', :action => 'show', :id => t.id}) unless t.paintings.empty?  %>
+    <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
   <div style ="float: right; margin: 0 330px 0 0">
-    <%= t.state %><br />
-    <%= t.bed_rooms %> Beds / <%= t.bath_rooms %> Baths<br />
-    &#36; <%= t.price %><br />
-    <%= link_to "More information....", { :controller => 'tours', :action => 'show', :id => t.id } %><br />
+    <%= tour.state %><br />
+    <%= tour.bed_rooms %> Beds / <%= tour.bath_rooms %> Baths<br />
+    &#36; <%= tour.price %><br />
+    <%= link_to "More information....", tour %><br />
     <p>Virtual Tour Available</p>
   </div>
     
@@ -19,7 +19,7 @@
   <% if current_user %>
     <div style="float: right;margin: -15px 0 0 100px;">
       <%= link_to "Edit", '#' %> |
-      <%= link_to "Delete", {:controller => 'tours', :action => 'destroy', :id => t.id}, :method => :delete, :confirm => "Are you sure, the action can't be undone?" %>
+      <%= link_to "Delete", tour, :method => :delete, :confirm => "Are you sure, the action can't be undone?" %>
     </div>
     <% end %>
   <hr />

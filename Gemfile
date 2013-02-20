@@ -21,6 +21,8 @@ gem 'rails', '3.2.11'
   gem 'will_paginate-bootstrap'
   gem 'carrierwave'
   gem 'rmagick'
+  gem 'yaml_db'
+  gem 'friendly_id'
   
 # Gems used only for assets and not required
 # in production environments by default.

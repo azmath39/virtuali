@@ -1,47 +1,30 @@
 <div id="map-div">
   <h1>Tour Map</h1>
-  <%= gmaps4rails(@json) %>
+  <%= gmaps({
+  "map_options" => {"auto_zoom" => true, "auto_adjust" => false, "zoom" => 4, "center_latitude" => 38, "center_longitude" => -97 },
+  "markers" => {"data" => @json }
+})
+%>
+  <%#= gmaps4rails(@json) %>
+  <%  @i = 1 %>
   <div class="container-fluid">
     <div class="accordion" id="accordion2">
+      <% @us_states.each do |state| %>
     <div class="accordion-group">
       <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-          Users
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= @i %>" style="text-decoration: none;">
+          <% @count = Tour.where( :state => state).count %>
+          <%= state %>&nbsp;(<%= @count %>)
         </a>
       </div>
-      <div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
+      <div id="collapse<%= @i %>" class="accordion-body collapse" style="height: 0px; ">
         <div class="accordion-inner">
-something
+        
         </div>
       </div>
     </div>
-    <div class="accordion-group">
-      <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-         Tours
-        </a>
-      </div>
-      <div id="collapseTwo" class="accordion-body collapse">
-        <div class="accordion-inner">
-          something
-        </div>
-      </div>
-    </div>
-    <div class="accordion-group">
-      <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-          Performance
-        </a>
-      </div>
-      <div id="collapseThree" class="accordion-body collapse">
-        <div class="accordion-inner">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-      </div>
-    </div>
-  </div>
+    <% @i += 1  %>
+  <% end %>
+    </div> 
 </div>
-  <%# @us_states.each do |state| %>
-  <%#*<p><%= state %></p>%>
-  <%# end %>
 </div>
