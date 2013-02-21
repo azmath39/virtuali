@@ -1,7 +1,7 @@
 class ToursController < ApplicationController
   def index
     if signed_in?
-      @tours = current_user.tours.paginate(:page => params[:page], :per_page => 2)
+      @tours = current_user.tours.paginate(:page => params[:page], :per_page => 5)
     else
       @search = Tour.search(params[:q])
       if params[:q].nil?
