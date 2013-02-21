@@ -1,7 +1,7 @@
 VirtualTour::Application.routes.draw do
   #get "home/index"
    get "packages/show"
-
+   match '/tours/view_map' => 'tours#view_map'
  
 
   ActiveAdmin.routes(self)
