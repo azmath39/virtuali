@@ -1,0 +1,12 @@
+<h2 style="margin: -45px 0 0px 0px;float: left;">Search</h2>
+<div class ="span3" style="margin: 0 1px 0 0px; float: left;">
+  <%= search_form_for @search, :class => 'well form-inline' do |f| %>
+    <%= f.label :state_cont, "State" %>
+    <%= f.text_field :state_cont %><br />
+    <%= f.label :city_cont, "City" %>
+    <%= f.text_field :city_cont %><br />
+    <%= f.label :price_gteq, "Price Between" %><br />
+    <%= f.text_field :price_gteq, :style=> 'width: 94px;' %>&nbsp;<%= f.text_field :price_lteq, :style=> 'width: 94px;' %><br /><br />
+<center><%= f.submit "Search", :class => 'btn btn-medium btn-success' %></center>
+  <% end %>
+</div>

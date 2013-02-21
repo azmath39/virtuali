@@ -1,6 +1,17 @@
 class ToursController < ApplicationController
   def index
-    @tours = current_user.tours.paginate(:page => params[:page], :per_page => 2)
+    if signed_in?
+      @tours = current_user.tours.paginate(:page => params[:page], :per_page => 2)
+    else
+      @search = Tour.search(params[:q])
+      if params[:q].nil?
+        #@tours = Tour.all
+        @tours = Tour.paginate(:page => params[:page], :per_page => 5)
+      else
+        @tours = @search.result.paginate(:page => params[:page], :per_page => 5)
+        
+      end
+    end
   end
   def show
     @tour = Tour.find(params[:id])

@@ -1,4 +1,5 @@
-<h2 style="margin: 0 0 10px 300px;">List of Tours</h2>
+<h2 style="margin: 0 0 10px 280px;">List of Tours</h2>
+<% if current_user %>
 <div class ="span4" style="margin: 0 144px 0 0px; float: right;">
   <%= will_paginate @tours, :renderer => BootstrapPagination::Rails %>
 </div>
@@ -25,4 +26,31 @@
   <hr />
 </div>
 <% end %>
-
+<% else %>
+  <%= render 'search_form'%>
+<% if @tours.blank? %>
+  <p style="color:red;margin-left:280px;">No Tours found, Please try again!</p>
+<% end %>
+<div class ="span4" style="margin: 0 144px 0 0px; float: right;">
+  <%= will_paginate @tours, :renderer => BootstrapPagination::Rails %>
+</div>
+<div class="span6" style="margin: 0 0 0 0px;">
+<% @tours.each do |tour| %>
+<div class="span6" style="background-color: #D3D3D3; margin: 0px 0 0 10px;padding: 10px 10px 0 10px; border-radius: 2px;">
+  <div>
+    <%#= t.paintings %>
+    <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
+  <div style ="float: right; margin: 0 330px 0 0">
+    <%= tour.state %><br />
+    <%= tour.bed_rooms %> Beds / <%= tour.bath_rooms %> Baths<br />
+    &#36; <%= tour.price %><br />
+    <%= link_to "More information....", tour %><br />
+    <p>Virtual Tour Available</p>
+  </div>
+  
+  </div>
+  <hr />
+</div>
+<% end %>
+</div>
+<% end %>
