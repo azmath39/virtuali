@@ -20,6 +20,8 @@
 #  latitude       :float
 #  longitude      :float
 #  gmaps          :boolean
+#  status         :string(255)
+#  slug           :string(255)
 #
 
 require 'test_helper'

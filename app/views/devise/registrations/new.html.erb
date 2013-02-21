@@ -190,7 +190,7 @@
       <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
     </div>
     <div id="next_btn">
-      <%= f.submit "Sign up", :class=>"btn-large btn-danger" %>
+      <%= f.submit "Sign up",  :class=>"btn-large btn-danger", :disable_with => "Please wait.." %>
     </div>
   </div>
       <%#= link_to "pre",'#', :class =>"slidesjs-previous slidesjs-navigation" %>

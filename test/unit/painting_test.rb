@@ -2,14 +2,13 @@
 #
 # Table name: paintings
 #
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  image           :string(255)
-#  attachable_id   :integer
-#  attachable_type :string(255)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  tour_id         :integer
+#  id         :integer          not null, primary key
+#  name       :string(255)
+#  image      :string(255)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  tour_id    :integer
+#  user_id    :integer
 #
 
 require 'test_helper'

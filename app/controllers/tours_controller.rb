@@ -1,9 +1,23 @@
 class ToursController < ApplicationController
   def index
-    @tours = current_user.tours.paginate(:page => params[:page], :per_page => 2)
+    if signed_in?
+      @tours = current_user.tours.paginate(:page => params[:page], :per_page => 2)
+    else
+      @search = Tour.search(params[:q])
+      if params[:q].nil?
+        #@tours = Tour.all
+        @tours = Tour.paginate(:page => params[:page], :per_page => 5)
+      else
+        @tours = @search.result.paginate(:page => params[:page], :per_page => 5)
+        
+      end
+    end
   end
   def show
     @tour = Tour.find(params[:id])
+    if request.path != tour_path(@tour)
+      redirect_to @tour, status: :moved_permanently
+    end
   end
   def new
     @tour = Tour.new
@@ -23,7 +37,7 @@ class ToursController < ApplicationController
         #session[:painting]=nil
         #session.data.delete :painting
         flash[:notice] = "Tour was created successfully."
-        redirect_to :controller => 'tours', :action => 'final_tour'
+        redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
       else
         render 'new'
       end
@@ -58,7 +72,15 @@ class ToursController < ApplicationController
     @tour = Tour.find(params[:id])
   end
   def view_map
-    
+    @gmapsoptions = {
+     "map_options" => {"center_latitude" => 0,
+                       "center_longitude" => 0,
+                       "detect_location" => true,
+                       "center_on_user" => true,
+                       "auto_adjust" => true,
+                       "auto_zoom" => true,
+                       "zoom" => 20 }
+                 }
     if signed_in?
       @current_user_tours = current_user.tours
       @json = @current_user_tours.to_gmaps4rails do |tour, marker|

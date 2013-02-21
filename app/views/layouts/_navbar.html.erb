@@ -15,6 +15,9 @@
         <li><%= link_to "FAQ", '/pages/faq' %> </li>
         <li><%= link_to "Tutorial", '/pages/tutorial' %> </li>
         <li><%= link_to "Tours Map", '/tours/view_map' %> </li>
+        <% if !current_user %>
+        <li><%= link_to "Tours", tours_path %> </li>
+        <% end %>
         <li><%= link_to "Status", '/statuses/show' %> </li>
         <li><%= link_to "How to?", '#' %> </li>
       </ul>
