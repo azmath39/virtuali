@@ -53,3 +53,8 @@ gem 'gmaps4rails'
 
 # To use debugger
 # gem 'debugger'
+#better-errors
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
