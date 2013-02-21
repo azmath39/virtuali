@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  customer_stripe_id: MyString
+  user_id: 1
+
+two:
+  customer_stripe_id: MyString
+  user_id: 1

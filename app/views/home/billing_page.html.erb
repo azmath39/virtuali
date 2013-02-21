@@ -1,0 +1,51 @@
+<% if current_user %>
+<%=button_tag "Buy New Package",:class=>"btn-large btn-primary",:onclick=>"buy_new_package()"%>
+<%if current_user.card.nil?%>
+  <%=button_tag "Change Card Details",:class=>"btn-large btn-primary",:onclick=>"change_card()"%>
+<%=button_tag "Cancel Direct Debit",:class=>"btn-large btn-primary",:onclick=>"cancel_direct_debit()"%>
+<%end%>
+<br/><br/><br/>
+
+  <%current_user.selected_packages.each do |pkg|%>
+<%initiate(pkg)%>
+    <div class="container-fluid">
+      <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+          <div class="accordion-heading">
+<%=pkg.name%> <%20.times do %>&nbsp;<%end%>Status: <%=pkg.status_info%> <%20.times do %>&nbsp;<%end%> Price: $<%=pkg.price%>
+    <%=link_to "view","##{pkg.id}",:class=>"accordion-toggle", "data-toggle"=>"collapse" %>
+
+             
+           
+
+          </div>
+          <div id="<%=pkg.id%>" class="accordion-body collapse" style="height: 0px; ">
+            <div class="accordion-inner">
+              <div class="row-fluid">
+                
+                <div class="span6">
+              Start Date: <%=start_date%>
+                </div><div class="span6">
+              Expires on: <%=end_date%>
+                </div><div class="span5">
+              Number of Pictures <%=pictures%>
+                </div><div class="span5">
+              <%unless current_user.card.nil?%>
+                <%=button_tag "Unsubsribe",:class=>"btn btn-danger",onclick=>"Unsubsribe()"%>
+              <%else%>
+                <%=button_tag "Renew",:class=>"btn btn-success",:onclick=>"renew()"%>
+              <%end%>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  <%end%>
+
+<%else%>
+<%end%>

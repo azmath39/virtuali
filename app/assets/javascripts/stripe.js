@@ -1,12 +1,20 @@
 //stripe
 
   $(function() {
-
+  
   Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
   $('#payment-form').submit(function(event) {
+     
     // Disable the submit button to prevent repeated clicks
     $('.submit-button').prop('disabled', true);
+if (!$("input[name='type_of_transaction']:checked").val()) {
+    
+       $('.payment-errors').text("choose type of transaction ");
+        return false;
+    }
+    else {
 
+  
     Stripe.createToken({
       number: $('#card-number').val(),
       cvc: $('#card-cvc').val(),
@@ -16,13 +24,13 @@
 
     // Prevent the form from submitting with the default action
     return false;
-  });
+    } });
 
 });
 function stripeResponseHandler(status, response) {
   if (response.error) {
     // Show the errors on the form
-    $('.payment-errors').text(response.error.message);
+    $('.payment-errors').text("response.error.message");
     $('.submit-button').prop('disabled', false);
   } else {
     var $form = $('#payment-form');

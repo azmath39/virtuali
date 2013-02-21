@@ -7,6 +7,8 @@ classic-map.png: classic-map.png
 classic-map/index.png: classic-map.png
 gridbg.gif: gridbg.gif
 gridbg/index.gif: gridbg.gif
+icon-money.png: icon-money.png
+icon-money/index.png: icon-money.png
 rails.png: rails.png
 rails/index.png: rails.png
 slide1.jpg: slide1.jpg
@@ -19,12 +21,8 @@ slide4.jpg: slide4.jpg
 slide4/index.jpg: slide4.jpg
 slide5.jpg: slide5.jpg
 slide5/index.jpg: slide5.jpg
-active_admin.js: active_admin.js
-active_admin/index.js: active_admin.js
 application.js: application.js
 application/index.js: application.js
-active_admin.css: active_admin.css
-active_admin/index.css: active_admin.css
 application.css: application.css
 application/index.css: application.css
 loading.gif: loading.gif
@@ -65,7 +63,5 @@ active_admin/application.js: active_admin/application.js
 active_admin/application/index.js: active_admin/application.js
 active_admin/pages/application.js: active_admin/pages/application.js
 active_admin/pages/application/index.js: active_admin/pages/application.js
-active_admin/print.css: active_admin/print.css
-active_admin/print/index.css: active_admin/print.css
 jquery.min.map: jquery.min.map
 jquery/index.min.map: jquery.min.map

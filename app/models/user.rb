@@ -25,17 +25,35 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :phno, :email, :password, :password_confirmation, :remember_me, :image
+  attr_accessible :name, :phno, :email, :password, :password_confirmation, :remember_me, :image,:product,:package
+
   mount_uploader :image, ImageUploader
   has_many :tours, :dependent => :destroy
   has_many :products, :through => :selected_products
   has_many :selected_products
   has_many :packages, :through => :selected_packages
   has_many :selected_packages
-  def packages=()
+  has_one :card
 
+
+
+  def package=(pkg)
+    unless pkg.nil?
+      pkg.each_value do |pk|
+        p=Package.find(pk.to_i)
+        self.selected_packages<<SelectedPackage.create(:package_id=>p.id,:price=>p.price)
+      end
+    end
   end
+  def product=(pro)
+    unless pro.nil?
+      pro.each_value do |pr|
+        self.selected_products<<SelectedProduct.create(:product_id=>pr.to_i)
+      end
+    end
+  end
+
 end

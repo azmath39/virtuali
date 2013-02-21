@@ -5,11 +5,11 @@
     <%= p.name %>: <br/>
     <div style = "border:2px solid #cccccc;padding:20px;">
     <% p.packages.each do |pkg| %>
-      <% @i=0 %>
+ 
       <div>
         <%#= check_box_tag "product[package][#{@i}]", pkg.price %>
-        <%= pkg.name %>&nbsp;<%= link_to "Select", '#', :onclick=>"package_amount(#{pkg.price})", :class => 'btn btn-mini' %>
-        <% @i += 1 %>
+       <%=radio_button_tag "user[package][#{p.id}]",pkg.id,:id=>"package"%> <%= pkg.name %>&nbsp;<%#= link_to "Select", '#', :onclick=>"package_amount(#{pkg.price})", :class => 'btn btn-mini' %>
+        
         <%#*Price: $ <%=pkg.price%%>
         <%#*Pictures For Tour:<%=pkg.pictures_for_tour%<br/>%>
       </div><br />
