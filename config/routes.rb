@@ -12,11 +12,9 @@ VirtualTour::Application.routes.draw do
   devise_for :users,:controllers => { :registrations => "Registrations" }
  resources :paintings
  resources :tours
-<<<<<<< HEAD
- 
-=======
+
  resources :feedbacks, :except => [:edit, :update]
->>>>>>> e3bba9765e907fcb6ffcb381efe28745bc8f5c47
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

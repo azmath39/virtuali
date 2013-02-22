@@ -1,0 +1,34 @@
+<div style="float: right; margin: 10px 60px 0 0;">
+  <%= link_to "Create New tour", '/paintings/new', :class => 'btn btn-success' %>
+  <%= link_to "Display tours", tours_path, :class => 'btn btn-inverse ' %>
+
+  <%= render 'feedback_form', :target => @feedback %>
+  <%#*<a data-toggle="modal" href="#example" class="btn btn-inverse btn-large">Feedback</a>%>
+  <%= link_to "Feedback", "#example", "data-toggle" => "modal", :class => "btn btn-inverse"  %>
+
+
+<%=button_tag "Buy New Package",:class=>"btn btn-danger",:onclick=>"buy_new_package()"%>
+<%unless current_user.card.nil?%>
+  <%=button_tag "Change Card Details",:class=>"btn btn-inverse",:onclick=>"change_card()"%>
+<%=button_tag "Cancel Direct Debit",:class=>"btn btn-inverse",:onclick=>"cancel_direct_debit()"%>
+<%else%>
+<%=button_tag "Create Direct Debit",:class=>"btn btn-danger",:onclick=>"create_direct_debit()",%>
+<%end%>
+  </div>
+<script>
+ function cancel_direct_debit()
+ { if (confirm("Are You Sure, to cancel your Direct Debit. After this you need to make manual payments."))
+     {
+   $.ajax({
+      type: 'GET',
+      url: '/home/cancel_direct_debit'
+
+    }).done(function(text) {
+  $("."+tour).text(text);
+});
+     }else{
+     return false;
+     }
+}
+ 
+</script>

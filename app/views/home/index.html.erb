@@ -1,20 +1,5 @@
-<% if !current_user %>
+<% unless current_user %>
 <%= render 'front_page'%>
 <% else %>
 <%=render 'account_mangement'%>
-
-<div>
-
-<div class="row" style="margin: 70px 0 0 100px;">
-<div class="span6">
-<ul class="nav nav-tabs">
-  <li class="active" ><%= link_to "Home", '#' %></li>
-  <li><%= link_to "Tutorials", '#', "data-toggle" => "tab"%> </li>
-  <li><%= link_to "Tutorials", '#', "data-toggle" => "tab" %></li>
-  <li><%= link_to "Tutorials", '#', "data-toggle" => "tab" %></li>
-  <li><%= link_to "Tutorials", '#', "data-toggle" => "tab" %></li>
-</ul>
-</div>
-</div>
-</div>  
 <% end %>
