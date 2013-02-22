@@ -2,6 +2,7 @@
 #
 # Table name: tours
 #
+
 #  id                  :integer          not null, primary key
 #  name                :string(255)
 #  state               :string(255)
@@ -24,6 +25,7 @@
 #  address             :text
 #  status              :integer
 #  selected_package_id :integer
+
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

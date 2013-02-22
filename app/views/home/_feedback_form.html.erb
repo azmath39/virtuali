@@ -1,0 +1,22 @@
+
+<div id="example" class="modal hide fade in" style="display: none; ">
+<div class="modal-header">
+  <a class="close" data-dismiss="modal">X</a>
+  <h3>Feedback</h3>
+</div>
+<div class="modal-body">
+  <%= form_for :target do |f| %>
+  <%= f.label :satisfaction_status, "Are you satisfied with our service?" %>
+  <%= f.radio_button(:satisfaction_status, "yes", :checked => true) %>&nbsp;Yes<br />
+  <%= f.radio_button(:satisfaction_status, "no") %>&nbsp;No<br /><br />
+  <%= f.label :content, "Comments" %>
+  <%= f.text_area :content, :cols => 10, :rows => 10 %><br />
+  <div class="modal-footer">
+  <a href="#" class="btn" data-dismiss="modal">Close</a>
+  <%= f.submit "Send Feedback", :class => 'btn btn-primary' %>
+</div>
+<% end %>
+</div>
+
+</div>
+

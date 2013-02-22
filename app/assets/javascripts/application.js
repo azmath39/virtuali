@@ -86,3 +86,7 @@ function packages(){
 
   $('#total_amount1').val($('#total_amount').val());
   }
+
+
+  //menu handling
+  

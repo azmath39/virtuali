@@ -2,6 +2,7 @@
 #
 # Table name: tours
 #
+<<<<<<< HEAD
 #  id                  :integer          not null, primary key
 #  name                :string(255)
 #  state               :string(255)
@@ -24,6 +25,29 @@
 #  address             :text
 #  status              :integer
 #  selected_package_id :integer
+=======
+#  id             :integer          not null, primary key
+#  name           :string(255)
+#  state          :string(255)
+#  description    :string(255)
+#  user_id        :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  city           :string(255)
+#  zip            :string(255)
+#  subdivision    :string(255)
+#  price          :float
+#  square_footage :integer
+#  bed_rooms      :integer
+#  bath_rooms     :integer
+#  category_id    :integer
+#  latitude       :float
+#  longitude      :float
+#  gmaps          :boolean
+#  status         :string(255)
+#  slug           :string(255)
+#  address        :text
+>>>>>>> e3bba9765e907fcb6ffcb381efe28745bc8f5c47
 #
 
 class Tour < ActiveRecord::Base
@@ -49,6 +73,7 @@ end
 def set_address
   self.address = "#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
 end
+<<<<<<< HEAD
 def tour_status
 
     case status
@@ -62,4 +87,6 @@ def tour_status
       "Sold"
     end
   end
+=======
+>>>>>>> e3bba9765e907fcb6ffcb381efe28745bc8f5c47
 end

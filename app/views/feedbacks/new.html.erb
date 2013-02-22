@@ -1,0 +1,8 @@
+<%= form_for @feedback do |f| %>
+  <%= f.label :satisfaction_status, "Are you satisfied with our service?" %>
+  <%= f.radio_button(:satisfaction_status, "yes", :checked => true) %>Yes<br />
+  <%= f.radio_button(:satisfaction_status, "no") %>No<br /><br />
+  <%= f.label :content, "Comments" %>
+  <%= f.text_area :content, :cols => 10, :rows => 10 %><br />
+  <%= f.submit "Send Feedback", :class => 'btn btn-primary' %>
+<% end %>
