@@ -16,6 +16,7 @@ class SelectedPackage < ActiveRecord::Base
   belongs_to :user
   belongs_to :package
   after_initialize :asign_status
+  has_one :tour
   def asign_status
     self.status||=0
   end
@@ -36,4 +37,18 @@ class SelectedPackage < ActiveRecord::Base
       "Deleted"
     end
   end
+   def tour_status
+     status_tour = self.tour.status
+    case status_tour
+    when 1
+      "Active"
+    when 0
+      "Pending"
+    when 2
+      "expired"
+    when 3
+      "Sold"
+    end
+  end
+
 end
