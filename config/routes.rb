@@ -13,6 +13,7 @@ VirtualTour::Application.routes.draw do
  resources :paintings
  resources :tours
 
+
  resources :feedbacks, :except => [:edit, :update]
 
   # The priority is based upon order of creation:
