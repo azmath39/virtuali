@@ -33,9 +33,6 @@ class ToursController < ApplicationController
         end
         $ids = []
         session[:painting] = nil
-        #session.delete(:painting)
-        #session[:painting]=nil
-        #session.data.delete :painting
         flash[:notice] = "Tour was created successfully."
         redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
       else
@@ -47,10 +44,10 @@ class ToursController < ApplicationController
     @tour = Tour.find(params[:id])
   end
   def update
-    @tour = Tour.find(params[:tour][:id])
+    @tour = Tour.find(params[:id])
     if @tour.update_attributes(params[:tour])
-      flash[:notice] = 'Tour updated successfully.'
-      redirect_to :action => 'index'
+        flash[:notice] = "Tour was updated successfully."
+        redirect_to tours_path
     else
       render 'edit'
     end

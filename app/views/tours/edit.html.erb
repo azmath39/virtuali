@@ -1,5 +1,85 @@
-<%= form_for @tour, {:url => '/tours/update'} do |f| %>
-  <%= f.hidden_field :id   %>
+<h1>Edit Tour</h1>
+<%#*<div class="span12">%>
+<%#= form_for Painting.new do |f| %>
+<%#*<div class="fileupload btn btn-warning">%>
+  <%#= f.label :image, "+ Add Images", :style => 'margin-top: 5px;'%>
+  <%#= f.file_field :image, multiple: true, name: "painting[image]" %>
+<%# end %>
+<%#*</div>%>
+
+<%#*<div id="paintings">%>
+  <%#= render 'paintings/painting', :target => @paintings %>
+<%#*</div>%>
+<%#*<div class="clear">%>
+<%#*</div>%>
+<%#*<br/>%>
+<%#*</div>%>
+
+<div class="span12">
+
+<%= form_for @tour, :html =>{:class => "form-horizontal"}  do |f| %>
+ <h3><legend>Tour Details:</legend></h3>
+<div style="float:left;">
+
+<div class="control-group">
+  <%= f.label :name, :html => {:class => 'control-label'} %>
   <%= f.text_field :name %>
-  <%= f.submit "update" %>
+  <%= label_tag "tour[category]", nil, :html => {:class => 'cotrol-label'} %>
+  <%= text_field_tag :category %>
+</div>
+<div class ="control-group">
+  <%= f.label :state, :html => {:class => 'control-label'} %>
+  <%= f.text_field :state %>
+</div>
+<div class ="control-group">
+  <%= f.label :city, :html => {:class => 'control-label'} %>
+  <%= f.text_field :city %>
+</div>
+<div class ="control-group">
+  <%= f.label :zip, "Zip Code:", :html => {:class => 'control-label'} %>
+  <%= f.text_field :zip %>
+</div>
+<div class ="control-group">
+  <%= f.label :subdivision, :html => {:class => 'control-label'} %>
+  <%= f.text_field :subdivision %>
+</div>
+
+</div>
+<div class="span1"></div>
+<div style="float:left; ">
+<div class="control-group">
+  <%= f.label :price %>
+  <%= f.text_field :price %>
+</div>
+<div class="control-group">
+  <%= f.label :square_footage %>
+  <%= f.text_field :square_footage %>
+</div>
+<div class="control-group">
+  <%= f.label :bed_rooms %>
+  <%= f.text_field :bed_rooms %>
+</div>
+<div class="control-group">
+  <%= f.label :bath_rooms %>
+  <%= f.text_field :bath_rooms %>
+</div>
+</div>
+<div style="float:left;margin-top: 10px;width: 550px; clear: both;">
+<div class="contol-group" style="width:550px;">
+  <%= f.label :description %>
+  <%= f.text_area :description,:cols => 20, :rows => 10 %>
+</div>
+</div>
+<div style="float:left;margin-top: 10px;clear: both;">
+<div>
+  <%= f.submit :class => 'btn btn-large btn-primary' %>
+</div>
 <% end %>
+</div>
+</div>
+<script id="template-upload" type="text/x-tmpl">
+<%#*<div class="upload">%>
+  <%#*{%=o.name%}%>
+  <%#*<div class="progress"><div class="bar" style="width: 0%"></div></div>%>
+<%#*</div>%>
+</script>
