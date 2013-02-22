@@ -1,12 +1,22 @@
 ---
 Jcrop.gif: Jcrop.gif
 Jcrop/index.gif: Jcrop.gif
+bg.jpg: bg.jpg
+bg/index.jpg: bg.jpg
+bg2.jpg: bg2.jpg
+bg2/index.jpg: bg2.jpg
+bg2.png: bg2.png
+bg2/index.png: bg2.png
 classic-loader.gif: classic-loader.gif
 classic-loader/index.gif: classic-loader.gif
 classic-map.png: classic-map.png
 classic-map/index.png: classic-map.png
+feedback.jpg: feedback.jpg
+feedback/index.jpg: feedback.jpg
 gridbg.gif: gridbg.gif
 gridbg/index.gif: gridbg.gif
+hide-this.jpg: hide-this.jpg
+hide-this/index.jpg: hide-this.jpg
 icon-money.png: icon-money.png
 icon-money/index.png: icon-money.png
 rails.png: rails.png

@@ -5,12 +5,17 @@
   To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
   =require twitter-bootstrap-static/fontawesome
   */
-
+  body{
+      background: url(bg.jpg);
+      background-repeat:repeat;
+      font-family: fantasy;
+      height: 100%;
+}
   .navbar-inner {
     background-color: none;
-    background-image: linear-gradient(to bottom, black, black);
+    background: url(bg.jpg);
     background-repeat: no-repeat;
-    border: 1px solid yellow;
+    border-bottom: 15px solid #bd5b15;
     border-radius: 4px 4px 4px 4px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
     min-height: 40px;
@@ -37,11 +42,10 @@
 }
  footer {
 color: #666;
-background: #222;
-padding: 17px 0 18px 0;
-border-top: 1px solid #000;
-border-radius: 4px 4px 4px 4px;
-margin: 100px 160px 0 160px;
+padding: 17px 0 0px 0;
+border-top: 1px solid #bd5b15;
+float: right;
+width: 600px;
 }
 footer a {
 color: #999;
@@ -50,7 +54,6 @@ footer a:hover {
 color: #efefef;
 }
 .dropdown-menu a{
-      margin: 0px 0 0 20px;
+      float: right;
       text-decoration: none;
 }
-
