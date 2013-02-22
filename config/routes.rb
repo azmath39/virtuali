@@ -1,8 +1,9 @@
 VirtualTour::Application.routes.draw do
   #get "home/index"
    get "packages/show"
-   match '/tours/view_map' => 'tours#view_map'
- 
+   
+ match '/tours/view_map' => 'tours#view_map'
+ match '/tours/status_change' => 'tours#status_change'
 
   ActiveAdmin.routes(self)
 
@@ -11,6 +12,7 @@ VirtualTour::Application.routes.draw do
   devise_for :users,:controllers => { :registrations => "Registrations" }
  resources :paintings
  resources :tours
+ 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

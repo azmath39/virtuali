@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130221063521) do
+ActiveRecord::Schema.define(:version => 20130221114437) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -117,8 +117,8 @@ ActiveRecord::Schema.define(:version => 20130221063521) do
     t.string   "state"
     t.string   "description"
     t.integer  "user_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.string   "city"
     t.string   "zip"
     t.string   "subdivision"
@@ -130,9 +130,10 @@ ActiveRecord::Schema.define(:version => 20130221063521) do
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "gmaps"
-    t.string   "status"
     t.string   "slug"
     t.text     "address"
+    t.integer  "status"
+    t.integer  "selected_package_id"
   end
 
   add_index "tours", ["slug"], :name => "index_tours_on_cached_slug"

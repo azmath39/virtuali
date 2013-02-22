@@ -14,6 +14,7 @@ class PaintingsController < ApplicationController
     @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil)
     @painting = Painting.new
     @tour = Tour.new
+     @selected_pkgs=selected_pkgs_without_tour
   end
 
   def create
@@ -51,5 +52,15 @@ class PaintingsController < ApplicationController
     if @painting.destroy
       redirect_to paintings_url, :notice=> "Image was successfully deleted."
     end
+  end
+
+  private
+  def selected_pkgs_without_tour
+   pkgs= current_user.selected_packages.select do|spkg|
+        
+      spkg if spkg.tour.nil?
+      
+    end
+    return pkgs
   end
 end

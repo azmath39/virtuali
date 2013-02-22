@@ -1,0 +1,26 @@
+<script>
+  function change_status(tour)
+  {
+    sts=$("#"+tour).val();
+    $.ajax({
+      type: 'GET',
+      url: "/tours/status_change",
+
+      data: {
+        'id' : tour,
+        'status': sts
+      }
+
+    }).done(function(text) {
+  $("."+tour).text(text);
+});
+  }
+  </script>
+<table class="table table-striped table-bordered">
+  <tr><th>Set Status</th><th>Current Status</th><th>Tour Name</th></tr>
+<%@selected_pkgs.each do |spkg|%>
+  <tr><td><%=select_tag "#{spkg.tour.id}", options_for_select([['Active', 1], ['Pending', 0  ],['Sold', 3]]),:prompt=>"Set Status",:onchange=>"change_status(#{spkg.tour.id})"%></td><td><span class="<%=spkg.tour.id%>"><%=spkg.tour_status%></td></td><td><%=spkg.tour.name%>&nbsp;(<%=spkg.name%>)</td></tr>
+
+<%end%>
+  </table>
+
