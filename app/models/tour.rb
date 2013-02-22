@@ -22,6 +22,7 @@
 #  gmaps          :boolean
 #  status         :string(255)
 #  slug           :string(255)
+#  address        :text
 #
 
 class Tour < ActiveRecord::Base

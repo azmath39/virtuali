@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: feedbacks
+#
+#  id                  :integer          not null, primary key
+#  satisfaction_status :string(255)
+#  content             :text
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  user_id             :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  satisfaction_status: MyString
+  content: MyText
+
+two:
+  satisfaction_status: MyString
+  content: MyText

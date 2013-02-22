@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
   has_many :packages, :through => :selected_packages
   has_many :selected_packages
   has_one :card
+  has_many :feedbacks, :dependent => :destroy
 
 
 

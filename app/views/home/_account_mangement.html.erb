@@ -1,4 +1,7 @@
 <div style="float: right; margin: 10px 60px 0 0;">
   <%= link_to "Create New tour", '/paintings/new', :class => 'btn btn-primary btn-large' %>
   <%= link_to "Display tours", tours_path, :class => 'btn btn-primary btn-large' %>
+  <%= render 'feedback_form', :target => @feedback %>
+  <%#*<a data-toggle="modal" href="#example" class="btn btn-primary btn-large">Feedback</a>%>
+  <%= link_to "Feedback", "#example", "data-toggle" => "modal", :class => "btn btn-primary btn-large" %>
 </div>
