@@ -13,3 +13,12 @@
  *= require galleria.classic
  *= require_tree .
  */
+#feedback a{
+display:block;
+position:fixed;
+top:350px;
+left:-1px;
+}
+#feedback a:hover{
+    background-position:-41px 0px;
+}

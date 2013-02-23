@@ -2,11 +2,6 @@
   <%= link_to "Create New tour", '/paintings/new', :class => 'btn btn-success' %>
   <%= link_to "Display tours", tours_path, :class => 'btn btn-inverse ' %>
 
-  <%= render 'feedback_form', :target => @feedback %>
-  <%#*<a data-toggle="modal" href="#example" class="btn btn-inverse btn-large">Feedback</a>%>
-  <%= link_to "Feedback", "#example", "data-toggle" => "modal", :class => "btn btn-inverse"  %>
-
-
 <%=button_tag "Buy New Package",:class=>"btn btn-danger",:onclick=>"buy_new_package()"%>
 <%unless current_user.card.nil?%>
   <%=button_tag "Change Card Details",:class=>"btn btn-inverse",:onclick=>"change_card()"%>
