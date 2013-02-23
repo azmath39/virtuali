@@ -12,12 +12,8 @@
       height: 100%;
 }
   .navbar-inner {
-    background-color: none;
-    background: url(bg.jpg);
-    background-repeat: no-repeat;
-    border-bottom: 15px solid #bd5b15;
-    border-radius: 4px 4px 4px 4px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+    background: url(bg2.png);
+    background-repeat: repeat;
     min-height: 40px;
     padding-left: 20px;
     padding-right: 20px;
@@ -34,26 +30,41 @@
 }
 .navbar .nav > li > a:hover {
     background-color: transparent;
-    color: white;
+    color: black;
     text-decoration: none;
 }
 .btn [class^="icon-"], .nav [class^="icon-"], .btn [class*=" icon-"], .nav [class*=" icon-"]{
     line-height: 2.9em;
 }
  footer {
-color: #666;
-padding: 17px 0 0px 0;
-border-top: 1px solid #bd5b15;
-float: right;
-width: 600px;
+     height: 100px;
+     width: 100%;
+     background: url(bg2.png);
+     background-repeat: repeat;
+     color: #666;
+     padding: 17px 0 0px 0;
+     border-top: 4px solid #b1d1c9;
+     margin-top: 20px;
+
 }
 footer a {
 color: #999;
 }
+footer p{
+    text-align: center;
+}
 footer a:hover {
-color: #efefef;
+  background-color: transparent;
+  color: black;
+  text-decoration: none;
 }
 .dropdown-menu a{
-      float: right;
+      margin: 0px 0 0 20px;
       text-decoration: none;
+}
+.row .span2{
+    border: solid 1px #CCC;
+    padding: 10px;
+    border-radius: 4px;
+    width: 200px;
 }

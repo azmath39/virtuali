@@ -6,7 +6,7 @@ class ToursController < ApplicationController
       @search = Tour.search(params[:q])
       if params[:q].nil?
         #@tours = Tour.all
-        @tours = Tour.paginate(:page => params[:page], :per_page => 5)
+        @tours = Tour.paginate(:page => params[:page], :per_page => 3)
       else
         @tours = @search.result.paginate(:page => params[:page], :per_page => 5)
         
