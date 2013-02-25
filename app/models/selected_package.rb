@@ -15,10 +15,11 @@ class SelectedPackage < ActiveRecord::Base
   attr_accessible :package_id, :price, :user_id,:status
   belongs_to :user
   belongs_to :package
-  after_initialize :asign_status
+  before_create :asign_status
   has_one :tour
   def asign_status
-    self.status||=0
+   # puts "S"*25
+    self.status ||=0
   end
   
   def name

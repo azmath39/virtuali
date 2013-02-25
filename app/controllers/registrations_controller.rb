@@ -6,7 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     build_resource
     @token = params[:stripeToken]
-    @total_amount = (params[:total_amount].to_f*100).to_i
+    @amount = (params[:total_amount].to_f*100).to_i
     @email= params[:user][:email]
     if params[:type_of_transaction] == "1"
       stripe_charge

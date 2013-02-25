@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def stripe_charge
     @charge = Stripe::Charge.create(
-      :amount => @total_amount, # amount in cents, again
+      :amount => @amount, # amount in cents, again
       :currency => "usd",
       :card => @token,
       :description => @email
@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
 
   def subscription
   plan= Stripe::Plan.create(
-  :amount => @total_amount,
+  :amount => @amount,
   :interval => 'month',
   :name => @email,
   :currency => 'usd',
@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
     )
     save_stripe_customer_id(@user, @customer.id)
     @charge = Stripe::Charge.create(
-      :amount => @total_amount, # in cents
+      :amount => @amount, # in cents
       :currency => "usd",
       :customer => @customer.id
     )
@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
 
   def use_previous_card
     @charge = Stripe::Charge.create(
-      :amount => @total_amount, # in cents
+      :amount => @amount, # in cents
       :currency => "usd",
       :customer => get_stripe_customer_id
     )
