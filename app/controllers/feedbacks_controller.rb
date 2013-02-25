@@ -3,7 +3,7 @@ class FeedbacksController < ApplicationController
     @feedbacks = Feedback.all
   end
   def new
-    @feedback = Feedback.new
+    #@feedback = Feedback.new
   end
   def create
     @feedback = Feedback.new(params[:feedback])
@@ -11,6 +11,8 @@ class FeedbacksController < ApplicationController
     if @feedback.save
       flash[:success] = "Thanks for your feedback. We look forward to serve better!"
       redirect_to root_path
+    else
+      render :text => "Not saved feedback"
     end
   end
   def destroy

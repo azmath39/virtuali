@@ -1,6 +1,4 @@
 ---
-Jcrop.gif: Jcrop.gif
-Jcrop/index.gif: Jcrop.gif
 bg.jpg: bg.jpg
 bg/index.jpg: bg.jpg
 bg2.jpg: bg2.jpg
@@ -11,6 +9,8 @@ classic-loader.gif: classic-loader.gif
 classic-loader/index.gif: classic-loader.gif
 classic-map.png: classic-map.png
 classic-map/index.png: classic-map.png
+fdback.png: fdback.png
+fdback/index.png: fdback.png
 feedback.jpg: feedback.jpg
 feedback/index.jpg: feedback.jpg
 gridbg.gif: gridbg.gif

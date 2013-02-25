@@ -5,7 +5,7 @@
   <h3>Feedback</h3>
 </div>
 <div class="modal-body">
-  <%= form_for :target do |f| %>
+  <%= form_for :feedback,:url=>"feedbacks/create" do |f| %>
   <%= f.label :satisfaction_status, "Are you satisfied with our service?" %>
   <%= f.radio_button(:satisfaction_status, "yes", :checked => true) %>&nbsp;Yes<br />
   <%= f.radio_button(:satisfaction_status, "no") %>&nbsp;No<br /><br />
