@@ -12,7 +12,7 @@ class HomeController < ApplicationController
   end
   def create_direct_debit
     @token = params[:stripeToken]
-    @total_amount = (current_user.packages.sum(:price)*100).to_i
+    @amount = (current_user.selected_packages.sum(:price,:conditions=>{:status=>(0..2)}).to_f*100).to_i
     @email = current_user.email
     subscription
   
@@ -35,7 +35,7 @@ class HomeController < ApplicationController
   def make_payment
     @token = params[:stripeToken]
     @selected_pkg=SelectedPackage.find(params[:pkg_id].to_i)
-    @total_amount = (@selected_pkg.price.to_f*100).to_i
+    @amount = (@selected_pkg.price.to_f*100).to_i
     @email= current_user.email
     stripe_charge
     if @selected_pkg.update_attributes(:status=>1)

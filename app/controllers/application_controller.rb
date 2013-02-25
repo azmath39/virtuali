@@ -67,7 +67,7 @@ class ApplicationController < ActionController::Base
     )
     save_stripe_customer_id(@user, @customer.id)
     @charge = Stripe::Charge.create(
-      :amount => @total_amount, # in cents
+      :amount => @amount, # in cents
       :currency => "usd",
       :customer => @customer.id
     )
