@@ -1,0 +1,35 @@
+<div id="contact" class="modal hide fade in" style="display: none; ">
+<div class="modal-header">
+  <a class="close" data-dismiss="modal">X</a>
+  <h3>Contact Me</h3>
+</div>
+<div class="modal-body">
+  <%= form_for @message, :url => contact_path do |form| %>
+  <fieldset class="fields">
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= form.label :email %>
+      <%= form.text_field :email %>
+    </div>
+    <div class="field">
+      <%= form.label :subject %>
+      <%= form.text_field :subject %>
+    </div>
+
+    <div class="field">
+      <%= form.label :body %>
+      <%= form.text_area :body %>
+    </div>
+  </fieldset>
+  <div class="modal-footer">
+  <a href="#" class="btn" data-dismiss="modal">Close</a>
+  <%= f.submit "Send Mail", :class => 'btn btn-primary' %>
+</div>
+<% end %>
+</div>
+
+</div>
