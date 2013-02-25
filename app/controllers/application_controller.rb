@@ -10,7 +10,7 @@ end
 
   def stripe_charge
     @charge = Stripe::Charge.create(
-      :amount => @total_amount, # amount in cents, again
+      :amount => @amount, # amount in cents, again
       :currency => "usd",
       :card => @token,
       :description => @email
@@ -27,7 +27,7 @@ end
 
   def subscription
   plan= Stripe::Plan.create(
-  :amount => @total_amount,
+  :amount => @amount,
   :interval => 'month',
   :name => @email,
   :currency => 'usd',
@@ -75,7 +75,7 @@ end
 
   def use_previous_card
     @charge = Stripe::Charge.create(
-      :amount => @total_amount, # in cents
+      :amount => @amount, # in cents
       :currency => "usd",
       :customer => get_stripe_customer_id
     )

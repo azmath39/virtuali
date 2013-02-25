@@ -29,10 +29,24 @@ class HomeController < ApplicationController
     @selected_pkg=SelectedPackage.find(params[:id])
     @selected_pkg.tour.update_attributes(:status=>2)
     @selected_pkg.update_attributes(:status=>3)
-    @amount=(current_user.selected_packages.sum(:price,:conditions=>{:status=>(0..2)}).to_f*1000).to_i
+    @amount=(current_user.selected_packages.sum(:price,:conditions=>{:status=>(0..2)}).to_f*100).to_i
     render :text=>cancel_payment()
   end
-  
+  def make_payment
+    @token = params[:stripeToken]
+    @selected_pkg=SelectedPackage.find(params[:pkg_id].to_i)
+    @total_amount = (@selected_pkg.price.to_f*100).to_i
+    @email= current_user.email
+    stripe_charge
+    if @selected_pkg.update_attributes(:status=>1)
+      flash[:notice]="sucessfully renewed"
+    else
+     flash[:error]= "Unable to update at this movement, Try some other time. Sorry for the inconvience."
+    index
+    render 'index'
+    end
+
+  end
 
   private
 
@@ -68,8 +82,10 @@ class HomeController < ApplicationController
       :currency => 'usd',
       :id => plan_id)
     cu.plan=plan.id
-    cu.save
-    "ok"
+    if cu.save
+      "unsubscribed"
+    end
+   
     #    plan=Stripe::Plan.retrieve(cu.subscription.plan.id)
     #    plan.delete
     #
