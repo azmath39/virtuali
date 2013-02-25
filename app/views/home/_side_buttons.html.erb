@@ -7,6 +7,7 @@
   <%= link_to "Feedback", "#example", "data-toggle" => "modal", :class => "btn btn-inverse"  %>
 
 
+
   <%=button_tag "Buy New Package",:class=>"btn btn-danger",:onclick=>"buy_new_package()"%>
   <%unless current_user.card.nil?%>
     <%= render 'card_change_form' %>
@@ -19,6 +20,7 @@
     <%= link_to "Create Direct Debit", "#direct_debit", "data-toggle" => "modal", :class => "btn btn-danger"  %>
   <%end%>
 </div>
+
 <script>
   function cancel_direct_debit()
   { if (confirm("Are You Sure, to cancel your Direct Debit. After this you need to make manual payments."))
