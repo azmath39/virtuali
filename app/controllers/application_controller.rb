@@ -13,7 +13,7 @@ end
       :amount => @total_amount, # amount in cents, again
       :currency => "usd",
       :card => @token,
-      :description => params[:user][:email]
+      :description => @email
     )
   end
 
@@ -29,14 +29,15 @@ end
   plan= Stripe::Plan.create(
   :amount => @total_amount,
   :interval => 'month',
-  :name => params[:user][:email],
+  :name => @email,
   :currency => 'usd',
   :id => @token)
 
    @customer = Stripe::Customer.create(
       :card => @token,
       :plan => plan.id,
-      :email => params[:user][:email] )
+      :email => @email )
+     save_stripe_customer_id(current_user, @customer.id) unless current_user.nil?
 
   end
 
@@ -61,7 +62,7 @@ end
   def save_card_reuse
     @customer = Stripe::Customer.create(
       :card => @token,
-      :description => params[:user][:email]
+      :description => @email
     )
     save_stripe_customer_id(@user, @customer.id)
     @charge = Stripe::Charge.create(

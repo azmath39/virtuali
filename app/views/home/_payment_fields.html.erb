@@ -1,0 +1,30 @@
+<div id="payment">
+
+    <div class = "payment-errors">
+    </div>
+
+
+
+    <div class="field" style="padding:20px 0px;">
+     <%=radio_button_tag "type_of_transaction", 1%> <%= "Card Pay" %>  <%=radio_button_tag "type_of_transaction", 2%> <%="Direct Debit Setup" %>
+    </div>
+    <div class="field">
+
+    </div>
+    <div class="field">
+      <%= label_tag :card_number, "Credit Card Number" %>
+      <%= text_field_tag "card-number", nil, name: nil %>
+    </div>
+    <div class="field">
+      <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+      <%= text_field_tag "card-cvc", nil, name: nil %>
+    </div>
+    <div>
+      <%= label_tag :card_month, "Card Expiration" %>
+      <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
+      <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
+    </div>
+    <div id="next_btn">
+      <%=submit_tag "Submit",  :class=>"btn-large btn-danger", :disable_with => "Please wait.." %>
+    </div>
+  </div>

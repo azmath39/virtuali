@@ -1,0 +1,14 @@
+
+<div id="direct_debit" class="modal hide fade in" style="display: none; ">
+<div class="modal-header">
+  <a class="close" data-dismiss="modal">X</a>
+  <h3>Direct Debit SetUp</h3>
+</div>
+  <div class="modal-body">
+<%=form_tag "home/create_direct_debit", :id=>'payment-form' do%>
+<%=render 'payment_fields'%>
+<%end%>
+
+</div>
+
+</div>

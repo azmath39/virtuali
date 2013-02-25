@@ -24,8 +24,9 @@
                 </div><div class="span5">
               Number of Pictures <%=pictures%>
                 </div><div class="span5">
+                  <div id="alert_message"></div>
               <%unless current_user.card.nil?%>
-                <%=button_tag "Unsubsribe",:class=>"btn btn-danger",:onclick=>"Unsubsribe()"%>
+                <%=button_tag "Unsubsribe",:class=>"btn btn-danger",:onclick=>"unsubsribe(#{pkg.id})"%>
               <%else%>
                 <%=button_tag "Renew",:class=>"btn btn-success",:onclick=>"renew()"%>
               <%end%>
@@ -43,3 +44,20 @@
 
 <%else%>
 <%end%>
+<script>
+  function unsubsribe(id)
+  {
+    
+    $.ajax({
+      type: 'GET',
+      url: "/home/unsubsribe_package",
+
+      data: {
+        'id' : id
+      }
+
+    }).done(function(text) {
+  $("#alert_message").append(text);
+});
+  }
+  </script>

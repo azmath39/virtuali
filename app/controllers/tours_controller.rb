@@ -46,6 +46,10 @@ class ToursController < ApplicationController
   end
   def edit
     @tour = Tour.find(params[:id])
+    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour)
+    @painting = Painting.new
+    @tour = Tour.new
+    
   end
   def update
     @tour = Tour.find(params[:tour][:id])

@@ -12,7 +12,7 @@
 #
 
 class SelectedPackage < ActiveRecord::Base
-  attr_accessible :package_id, :price, :user_id
+  attr_accessible :package_id, :price, :user_id,:status
   belongs_to :user
   belongs_to :package
   after_initialize :asign_status
@@ -34,7 +34,7 @@ class SelectedPackage < ActiveRecord::Base
     when 2
       "Expired"
     when 3
-      "Deleted"
+      "Unsubscribed"
     end
   end
    def tour_status
