@@ -15,12 +15,12 @@
     <%= render 'shared/flash_messages' %>
     <%= yield %>
     <%= yield :scripts %>
-    <%# if current_user %>
-    <%#= render 'feedbacks/feedback_form' %>
-    <%#*<div id="feedback">%>
-      <%#= link_to image_tag('fdback.png'), "#example", "data-toggle" => "modal"%>
-    <%#*</div>%>
-    <%# end %>
+    <% if current_user %>
+    <%= render 'feedbacks/feedback_form' %>
+    <div id="feedback">
+      <%= link_to image_tag('fdback.png'), "#example", "data-toggle" => "modal"%>
+    </div>
+    <% end %>
   </div>
      <%= render 'layouts/footer' %>
  </body>

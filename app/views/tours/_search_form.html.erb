@@ -1,7 +1,7 @@
 
 <div class ="span3" style="margin: 0 1px 0 0px; float: left;position: fixed;">
   <h2 style="margin: -45px 0 0px 0px;float: left;">Search</h2>
-  <%= search_form_for @search, :class => 'well form-inline' do |f| %>
+  <%= search_form_for @search, :class => 'well form-inline', :id => 'img_bg' do |f| %>
     <%= f.label :state_cont, "State" %>
     <%= f.text_field :state_cont %><br />
     <%= f.label :city_cont, "City" %>

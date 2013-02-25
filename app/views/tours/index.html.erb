@@ -2,7 +2,7 @@
 <% if current_user %>
 <h2 style="margin: 0 0 10px 300px;">List of Tours</h2>
 
-<div class="span6 well" style="margin: 0px 0 0 300px;padding: 10px 10px 0 10px; border-radius: 2px;">
+<div class="span6 well" id = 'img_bg' style="margin: 0px 0 0 300px;padding: 10px 10px 0 10px; border-radius: 2px;">
   <% @tours.each do |tour| %>
   <div>
     <%#= t.paintings %>
@@ -37,7 +37,7 @@
 <% end %>
 <div class="span6" style="margin: 0 0 0 270px;">
 <% @tours.each do |tour| %>
-<div class="span6 well" style="margin: 0 0 1px 10px;">
+<div class="span6 well" id = 'img_bg' style="margin: 0 0 1px 10px;">
   <div>
     <%#= t.paintings %>
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>

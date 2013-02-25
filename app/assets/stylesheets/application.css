@@ -22,3 +22,7 @@ left:-1px;
 #feedback a:hover{
     background-position:-41px 0px;
 }
+#img_bg{
+background-image: url(bg2.jpg);
+    background-repeat: repeat;
+}
