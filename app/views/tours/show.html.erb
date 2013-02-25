@@ -1,5 +1,5 @@
 <div class="span10" id="final_tour">
-  <div style="height: 400px; width: 650px; margin: 30px 0 0 30px;">
+  <div style="height: 400px; width: 675px; margin: 30px 0px 0px 30px;">
     <% @objs = [] %>
     <% @tour.paintings.each do |img|%>
 
@@ -20,26 +20,25 @@
     </div>
 
   </div>
-  <div style="height: 210px; width: 150px; float: right;margin: -400px 60px 0 30px; text-align: center;">
+  <div id="user_img">
     <% if signed_in? %>
     <%= image_tag(current_user.image_url(:medium)) %>
     <strong><%= current_user.name %></strong><br />
-    (+91) <%= current_user.phno %><br />
-    <u><%= current_user.email %></u>
     <% else %>
     <%= image_tag(@tour.user.image_url(:medium)) %>
     <strong><%= @tour.user.name %></strong><br />
-    (+91) <%= @tour.user.phno %><br />
-    <u><%= @tour.user.email %></u>
     <% end %>
   </div>
   <div style="float: right; height: 150px; width: 200px;border: 1px solid red;margin: -150px 30px 0 30px;">
     image1
   </div>
-  <div style="float: right; height: 50px; width: 200px;margin: 150px -230px 0px 30px;text-align: center;">
-    <h4><%= link_to "Click for Tour", {:controller => 'tours', :action => 'slide_show', :id => @tour.id }, :class=> 'brn btn-large btn-primary'%></h4>
+  <div style="float: right; height: 50px; width: 200px;margin: 80px -230px 0px 30px;text-align: center;">
+    <% if !current_user %>
+      <%= button_to "Request for Info",{:controller => 'tours', :action => 'slide_show', :id => @tour.id }, :class => 'btn btn-large btn-success'%>
+    <% end %>
+    <h4><%= button_to "&nbsp;Click for Tour&nbsp&nbsp;".html_safe, {:controller => 'tours', :action => 'slide_show', :id => @tour.id }, :class=> 'brn btn-large btn-primary'%></h4>
   </div>
-  <div style="height: 200px; width: 650px; margin: 10px 0 0 30px;">
+  <div style="height: 200px; width: 650px; margin: 50px 0 0 30px;">
     <table>
       <tr>
         <th>Address</th>

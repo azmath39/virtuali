@@ -1,20 +1,27 @@
-
 <style>
     /* Prevent the slideshow from flashing on load */
+    #box {
+border-radius: 5px;
+-webkit-box-shadow: 2px 5px 12px #555;
+padding: 20px;
+width: 80%;
+}
+#box {
+background-color: white;
+color: black;
+font-size: 10pt;
+line-height: 18px;
+margin: auto;
+max-width: 750px;
+min-width: 200px;
+padding: 5px;
+}
     #slides {
-      display: none;
-      margin: 100px;
-      padding: 10px 100px 100px 100px;
-      border: 20px black solid;
-      border-radius:30px;
-      background-color:#ccffcc;
-      overflow: scroll;
-
-    }
+   }
 
     /* Center the slideshow */
     .container {
-      margin: 10px;
+      margin: 10px 100px 10px 100px;
       
     }
 
@@ -27,17 +34,13 @@
     #next_btn{
       float :right;
      
-      margin-right: 20px;
+      margin-right: 500px;
 }
   
     body {
       -webkit-font-smoothing: antialiased;
       font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
       color: #232525;
-    }
-
-    #slides {
-      display: block;
     }
 
     #slides .slidesjs-navigation {
@@ -52,7 +55,6 @@
     #slides .slidesjs-next {
       margin-right: 5px;
       float: left;
-   
     }
 
     .slidesjs-pagination {
@@ -95,18 +97,21 @@
     #slides a:active {
       color: #9e2020
     }
+    #personal_info{
+      margin: 30px 0 10px 200px;
+}
 .money{background:url(../images/icon-money.png)  11px  11px no-repeat #fff; padding-left:40px;width: 50px; }
-
-    
+   
   </style>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :id => 'payment-form', :multipart => true })  do |f| %>
   <%= devise_error_messages! %>
   <%#= render 'shared/error_messages', :target => @user %>
  
-    <div id="slides">
+    <div class ="well" id="slides">
   <div id="personal_info">
      <h3>Personal Information</h3>
+     <hr></hr>
     <div>
       <%= f.label :name %>
       <%= f.text_field :name %>
@@ -134,10 +139,11 @@
      <div id="next_btn">
      <%=button_tag "next", :class => "slidesjs-next slidesjs-navigation btn-large btn-danger", :id=>"btn_personal",:onclick=>"button()" %>
      </div>
-       
+
   </div>
-  <div id="product_select">
+  <div id="product_select" style="margin:30px 0 10px 200px;">
     <h3>Product Selection</h3>
+    <hr></hr>
     <%@i=0%>
     <% Product.all.each do |x| %>
       <div>
@@ -151,7 +157,7 @@
       <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
     </div>
   </div>
-      <div id ="package_info">
+      <div id ="package_info" style="margin:30px 0 10px 200px;">
   <div id="packages">
 
   </div>
@@ -160,8 +166,9 @@
       <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
     </div>
     </div>
-  <div id="payment">
+  <div id="payment" style="margin:30px 0 10px 200px;">
     <h3>Payment Process</h3>
+    <hr></hr>
     <div class = "payment-errors">
     </div>
     <div class="field" >Total Payable Amount : <%= hidden_field_tag "total_amount","",:class=> "money" %>
@@ -196,8 +203,6 @@
       <%#= link_to "pre",'#', :class =>"slidesjs-previous slidesjs-navigation" %>
       <%#= link_to "next",'#',  :class => "slidesjs-next slidesjs-navigation" %>
         </div>
-
-
 <% end %>
 <%#= render "devise/shared/links" %>
  <%= javascript_include_tag "jquery.slides.min" %>
@@ -207,8 +212,8 @@
     //$('#btn_personal').prop('disabled', true);
     
     $('#slides').slidesjs({
-      width: 940,
-      height: 700,
+      width: 500,
+      height: 300,
       navigation: false
     
     });
