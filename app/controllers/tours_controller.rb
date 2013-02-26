@@ -2,8 +2,10 @@ class ToursController < ApplicationController
   def index
     if signed_in?
       @tours = current_user.tours.paginate(:page => params[:page], :per_page => 5)
+
       render :layout=>false
     else
+
       @search = Tour.search(params[:q])
       if params[:q].nil?
         #@tours = Tour.all
@@ -15,7 +17,9 @@ class ToursController < ApplicationController
       
     end
 
+
   end
+
   def show
     @tour = Tour.find(params[:id])
     if request.path != tour_path(@tour)

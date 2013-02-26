@@ -60,5 +60,20 @@ module VirtualTour
     config.assets.version = '1.0'
     #config.assets.precompile += %w( active_admin.css active_admin.js active_admin/print.css )
     config.assets.initialize_on_precompile = false
+    
+    #Contact Mailer configuration
+      config.action_mailer.smtp_settings = {
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :domain               => "localhost",
+  :user_name            => "git.venkat@gmail.com",
+  :password             => "venkat_123",
+  :authentication       => :plain,
+  :enable_starttls_auto => true
+}
+
+config.action_mailer.default_url_options = {
+  :host => "localhost:3000"
+}
   end
 end

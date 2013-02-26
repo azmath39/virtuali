@@ -1,0 +1,28 @@
+<div id="contact" class="modal hide fade in" style="display: none;">
+<div class="modal-header" style="margin-left: 30px;">
+  <a class="close" data-dismiss="modal"><i class="icon-remove"></i></a>
+  <h3>Contact Me</h3>
+</div>
+<div class="modal-body" style="max-height: 800px;margin-left: 30px;">
+  <%= form_for :message, :url => '/contact/create' do |form| %>
+      <%= hidden_field_tag :tour_id, @tour.id %>
+      <%= form.label :name %>
+      <%= form.text_field :name %><br />
+ 
+      <%= form.label :email %>
+      <%= form.text_field :email %><br />
+ 
+      <%= form.label :subject %>
+      <%= form.text_field :subject %><br />
+  
+      <%= form.label :body, "What you would like to ask for?" %>
+      <%= form.text_area :body, :cols => 20, :rows => 10 %><br />
+  
+  <div class="modal-footer">
+  <a href="#" class="btn" data-dismiss="modal">Close</a>
+  <%= form.submit "Send Mail", :class => 'btn btn-primary' %>
+</div>
+<% end %>
+</div>
+
+</div>

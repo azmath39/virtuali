@@ -1,7 +1,10 @@
 
 <% if current_user %>
 <h2 style="margin: 0 0 10px 300px;">List of Tours</h2>
-
+<%= render 'search_form'%>
+<% if @tours.blank? %>
+  <p style="color:red;margin-left:280px;">No Tours found, Please try again!</p>
+<% end %>
 <div class="span6 well" id = 'img_bg' style="margin: 0px 0 0 300px;padding: 10px 10px 0 10px; border-radius: 2px;">
   <% @tours.each do |tour| %>
   <div>

@@ -1,3 +1,4 @@
+
 <div class="span10" id="final_tour">
   <div style="height: 400px; width: 675px; margin: 30px 0px 0px 30px;">
     <% @objs = [] %>
@@ -22,22 +23,26 @@
   </div>
   <div id="user_img">
     <% if signed_in? %>
-    <%= image_tag(current_user.image_url(:medium)) %>
-    <strong><%= current_user.name %></strong><br />
+    <%= image_tag(@tour.user.image_url(:medium)) %>
+    <strong><%= @tour.user.email %></strong><br />
     <% else %>
     <%= image_tag(@tour.user.image_url(:medium)) %>
     <strong><%= @tour.user.name %></strong><br />
-    <% end %>
+  <% end %>
   </div>
   <div style="float: right; height: 150px; width: 200px;border: 1px solid red;margin: -150px 30px 0 30px;">
     image1
   </div>
-  <div style="float: right; height: 50px; width: 200px;margin: 80px -230px 0px 30px;text-align: center;">
-    <% if !current_user %>
-      <%= button_to "Request for Info",{:controller => 'tours', :action => 'slide_show', :id => @tour.id }, :class => 'btn btn-large btn-success'%>
+  <div  style="float: right; height: 50px; width: 200px;margin: 80px -230px 0px 30px;">
+    <% if !current_user || current_user.id != @tour.user.id %>
+      <%= render 'contact/contact_form' %>
+        <%= link_to "Request for Info", "#contact", "data-toggle" => "modal", :class => 'btn btn-large btn-success'%>
+    <% elsif %>
+    <h5 style="margin:0 0 0 35px; color: green;">Your Tour</h5>
     <% end %>
-    <h4><%= button_to "&nbsp;Click for Tour&nbsp&nbsp;".html_safe, {:controller => 'tours', :action => 'slide_show', :id => @tour.id }, :class=> 'brn btn-large btn-primary'%></h4>
+    <h4><%= button_to "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click for Tour&nbsp;&nbsp;&nbsp;&nbsp;".html_safe, {:controller => 'tours', :action => 'slide_show', :id => @tour.id }, :class=> 'brn btn-large btn-primary'%></h4>
   </div>
+
   <div style="height: 200px; width: 650px; margin: 50px 0 0 30px;">
     <table>
       <tr>
