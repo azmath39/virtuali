@@ -1,30 +1,15 @@
+
+<%= render 'search_form' %>
 <div id="map-div">
   <h1>Tour Map</h1>
+  <div style="float: right;margin: -30px 200px 0 0;">
+    <% @owner = Product.find_by_name "Product1" %>
+    <% @realtor = Product.find_by_name "Realtor" %>
+    <%= link_to "All Tours", {:controller => 'tours', :action => 'view_map'} , :class=> 'btn btn-mini btn-primary'%>&nbsp;<%= link_to "By Owner", {:controller => 'tours', :action => 'view_map', :id => @owner.id },:class=> 'btn btn-mini btn-primary' %>&nbsp;<%= link_to "By Realtor", {:controller => 'tours', :action => 'view_map', :id => @realtor.id }, :class=> 'btn btn-mini btn-primary' %>
+  </div>
   <%= gmaps({
   "map_options" => {"auto_zoom" => true, "auto_adjust" => false, "zoom" => 4, "center_latitude" => 38, "center_longitude" => -97 },
   "markers" => {"data" => @json }
-})
-%>
-  <%#= gmaps4rails(@json) %>
-  <%  @i = 1 %>
-  <div class="container-fluid">
-    <div class="accordion" id="accordion2">
-      <% @us_states.each do |state| %>
-    <div class="accordion-group">
-      <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= @i %>" style="text-decoration: none;">
-          <% @count = Tour.where( :state => state).count %>
-          <%= state %>&nbsp;(<%= @count %>)
-        </a>
-      </div>
-      <div id="collapse<%= @i %>" class="accordion-body collapse" style="height: 0px; ">
-        <div class="accordion-inner">
-        
-        </div>
-      </div>
-    </div>
-    <% @i += 1  %>
-  <% end %>
-    </div> 
-</div>
+   })%>
+  
 </div>
