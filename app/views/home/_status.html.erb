@@ -17,9 +17,9 @@
   }
   </script>
 <table class="table table-striped table-bordered">
-  <tr><th>Set Status</th><th>Current Status</th><th>Tour Name</th></tr>
+  <tr><th>Tour Name</th><th>Current Status</th><th>Set Status</th></tr>
 <%@selected_pkgs.each do |spkg|%>
-  <tr><td><%=select_tag "#{spkg.tour.id}", options_for_select([['Active', 1], ['Pending', 0  ],['Sold', 3]]),:prompt=>"Set Status",:onchange=>"change_status(#{spkg.tour.id})"%></td><td><span class="<%=spkg.tour.id%>"><%=spkg.tour_status%></td></td><td><%=spkg.tour.name%>&nbsp;(<%=spkg.name%>)</td></tr>
+  <tr><td><%=spkg.tour.name%>&nbsp;(<%=spkg.name%>)</td><td><span class="<%=spkg.tour.id%>"><%=spkg.tour_status%></span></td><td><%=select_tag "#{spkg.tour.id}", options_for_select([['Active', 1], ['Pending', 0  ],['Sold', 3]]),:prompt=>"Set Status",:onchange=>"change_status(#{spkg.tour.id})"%></td></tr>
 
 <%end%>
   </table>

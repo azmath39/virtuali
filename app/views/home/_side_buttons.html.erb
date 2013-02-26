@@ -15,7 +15,7 @@
     <%= link_to "Change Card Details", "#card_change", "data-toggle" => "modal", :class => "btn btn-danger"  %>
 
     <%#=button_tag "Change Card Details",:class=>"btn btn-inverse",:onclick=>"change_card()"%>
-    <%=button_tag "Cancel Direct Debit",:class=>"btn btn-inverse",:onclick=>"cancel_direct_debit()"%>
+    <%=button_tag "Cancel Complete Subscription",:class=>"btn btn-inverse",:onclick=>"cancel_complete_subscription()"%>
   <%else%>
     <%= render 'payment_form' %>
     <%= link_to "Create Direct Debit", "#direct_debit", "data-toggle" => "modal", :class => "btn btn-danger"  %>
@@ -23,7 +23,7 @@
 </div>
 
 <script>
-  function cancel_direct_debit()
+  function cancel_complete_subscription()
   { if (confirm("Are You Sure, to cancel your Direct Debit. After this you need to make manual payments."))
     {
       $.ajax({

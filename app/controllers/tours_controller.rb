@@ -2,6 +2,7 @@ class ToursController < ApplicationController
   def index
     if signed_in?
       @tours = current_user.tours.paginate(:page => params[:page], :per_page => 5)
+      render :layout=>false
     else
       @search = Tour.search(params[:q])
       if params[:q].nil?
@@ -11,7 +12,9 @@ class ToursController < ApplicationController
         @tours = @search.result.paginate(:page => params[:page], :per_page => 5)
         
       end
+      
     end
+
   end
   def show
     @tour = Tour.find(params[:id])
@@ -40,7 +43,7 @@ class ToursController < ApplicationController
         flash[:notice] = "Tour was created successfully."
         redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
       else
-        render 'new'
+        render 'paintings/new'
       end
       
   end
@@ -64,10 +67,10 @@ class ToursController < ApplicationController
     @tour = Tour.find(params[:id])
     if @tour.destroy
       flash[:notice] = "Tour was deleted."
-      redirect_to :action => 'index'
+      redirect_to :action => 'index',:controller=>"home"
     else
       flash[:error] = "Tour can't be deleted."
-      redirect_to :action => 'index'
+      redirect_to :action => 'index',:controller=>"home"
     end
   end
   def final_tour

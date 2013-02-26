@@ -46,7 +46,7 @@ class Tour < ActiveRecord::Base
   end
 
 def set_status
-  self.status ||= 0
+  self.status ||= 1
 end
 def set_address
   self.address = "#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"

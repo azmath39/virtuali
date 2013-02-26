@@ -15,11 +15,14 @@ class SelectedPackage < ActiveRecord::Base
   attr_accessible :package_id, :price, :user_id,:status
   belongs_to :user
   belongs_to :package
-  before_create :asign_status
+  before_create :asign_status, :set_expire_date
   has_one :tour
   def asign_status
    # puts "S"*25
     self.status ||=0
+  end
+  def set_expire_date
+    self.expire_date ||=Date.today+30
   end
   
   def name

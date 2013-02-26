@@ -1,58 +1,62 @@
 <% if current_user %>
-
+<div class="container-fluid">
+<table class="table  table-striped">
+    <tr><th> Name </th><th>Status:</th><th>  Price:</th><th><%10.times do %>&nbsp;<%end%>
+              </th></tr></table></div>
   <%current_user.selected_packages.each do |pkg|%>
     <%initiate(pkg)%>
+
     <div class="container-fluid">
       <div class="accordion" id="accordion2">
-        <div class="accordion-group">
+        <div >
           <div class="accordion-heading">
-            <%=pkg.name%> <%20.times do %>&nbsp;<%end%>Status: <%=pkg.status_info%> <%20.times do %>&nbsp;<%end%> Price: $<%=pkg.price%>
-            <%=link_to "view","##{pkg.id}",:class=>"accordion-toggle", "data-toggle"=>"collapse" %>
+            <table class="table table-condensed">
+            <tr><td> <%=pkg.name%> </td><td> <%=pkg.status_info%></td><td> $<%=pkg.price%></td><th>
+<%=link_to "view","##{pkg.id}", "data-toggle"=>"collapse", :class=>"btn btn-link"%></th></tr>
 
-
-<%@pkg_id=pkg.id%>
+ </table>
+            <%@pkg_id=pkg.id%>
 
           </div>
           <div id="<%=pkg.id%>" class="accordion-body collapse" style="height: 0px; ">
-            <div class="accordion-inner">
-              <div class="row-fluid">
+            <div>
 
-                <div class="span6">
-                  Start Date: <%=start_date%>
-                </div><div class="span6">
-                  Expires on: <%=end_date%>
-                </div><div class="span5">
-                  Number of Pictures <%=pictures%>
-                </div><div class="span5">
+<table class="table table-bordered">
+  <tr><td>Start Date:<%20.times do %>&nbsp;<%end%> <%=start_date%></td>
 
-                  <%unless current_user.card.nil?%>
-                    <div id="alert_message"> <%unless pkg.status==3%>
-                     
-                        <%=button_tag "Unsubsribe",:class=>"btn btn-danger",:onclick=>"unsubsribe(#{pkg.id})"%>
-                      <%else%>
-                      
-                        Unsubscribed 
-                      <%end%>
-                    </div>
+    <td>Expires on:<%20.times do %>&nbsp;<%end%> <%=end_date%></td></tr>
+
+           <tr><td>   Number of Pictures: <%20.times do %>&nbsp;<%end%><%=pictures%></td>
+
+
+              <td><%unless current_user.card.nil?%>
+                <div id="alert_message"> <%unless pkg.status==3%>
+
+                    <%=button_tag "Unsubsribe",:class=>"btn btn-info",:onclick=>"unsubsribe(#{pkg.id})"%>
                   <%else%>
-                  <%= render 'renew_form' %>
-    <%= link_to "Renew", "#renew", "data-toggle" => "modal", :class=>"btn btn-success"  %>
 
-                    <%#=button_tag "Renew",:class=>"btn btn-success",:onclick=>"renew()"%>
+                    Unsubscribed
                   <%end%>
-
                 </div>
-              </div>
+              <%else%>
+                <%= render 'renew_form' %>
+                <%= link_to "Renew", "#renew", "data-toggle" => "modal", :class=>"btn btn-info"  %>
+
+      <%#=button_tag "Renew",:class=>"btn btn-success",:onclick=>"renew()"%>
+              <%end%></td></tr>
+</table>
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
-  <%end%>
 
+
+
+  <%end%>
+ 
 <%else%>
+
 <%end%>
 <script>
   function unsubsribe(id)
@@ -71,3 +75,8 @@
     });
   }
 </script>
+<style>
+  th,td{
+    width:200px;
+}
+</style>

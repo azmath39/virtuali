@@ -1,15 +1,34 @@
-<%= render 'side_buttons'%>
-<div class="row" style="float: left;padding-right:30px;padding-bottom:30px;width:900px;height:780px;margin-left:10%;margin-top:2%;  ">
-<div class="span9">
-<ul class="nav nav-tabs">
+<%#= render 'side_buttons'%>
+<script>
+  $(document).ready(function(){
+      $.ajax({
+        type: 'GET',
+        url: '/tours'
 
-  <li class="active"><%= link_to "Status", '#div_status', "data-toggle" => "tab"%> </li>
-  <li><%= link_to "Billing", '#div_billing', "data-toggle" => "tab" %></li>
-  <li><%= link_to "How to?", '#div_how', "data-toggle" => "tab"%> </li>
-  <li><%= link_to "Profile", '#div_profile', "data-toggle" => "tab" %></li>
+      }).done(function(html) {
+        $("#user_tours").html(html);
+      });
+  });
+  </script>
+  <div class="navbar navbar-inverse" style="margin-top:5%;">
+  <div class="navbar-inner"style="border-radius:30px;">
+<ul class="nav">
+<li class="active tab"><%= link_to "Dashboard", "#div_dashboard", "data-toggle" => "tab"%> </li>
+  <li class="tab"><%= link_to "Status", '#div_status', "data-toggle" => "tab"%> </li>
+  <li class="tab"><%= link_to "Billing", '#div_billing', "data-toggle" => "tab" %></li>
+  <li class="tab"><%#= link_to "How to?", '#div_how', "data-toggle" => "tab"%> </li>
+  <li class="tab"><%= link_to "Profile", '#div_profile', "data-toggle" => "tab" %></li>
 
 </ul>
+  </div></div>
   <%=render "tab_content"%>
-</div>
-</div>
 
+
+<style>
+  .tab{
+    font-size:20px;
+}
+.tab > a:hover{
+  color: white !important;
+}
+</style>

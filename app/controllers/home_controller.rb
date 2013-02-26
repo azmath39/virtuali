@@ -48,6 +48,20 @@ class HomeController < ApplicationController
 
   end
 
+  def state_cities
+    state=State.find_by_name(params[:state])
+    @cities= City.find(:all,:conditions=>{:code=>state.code}) unless state.nil?
+    @str=""
+    unless @cities.empty?
+    @str +="'<option value="">Select city</option>"
+
+  @cities.each do |c|
+      @str += "<option value=#{c.name}>#{c.name}</option>"
+      end
+      @str +="'"
+    end
+    render :text=>@str
+  end
   private
 
   def selected_pkgs_with_tour

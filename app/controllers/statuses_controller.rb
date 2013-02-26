@@ -6,28 +6,34 @@ class StatusesController < ApplicationController
   def webhooks_status
     @type = params["type"]
     if params["data"]["object"].has_key? "customer"
-
-      puts "direct_debit payment" * 10
-      #@customer = Card.find_by_customer_stripe_id(params["data"]["object"]["customer"])
-
+      @card = Card.find_by_customer_stripe_id(params["data"]["object"]["customer"])
+      @customer=@card.user unless @card.nil?
       case @type
       when "invoice.payment_succeeded"
-        puts "invoice.payment_succeeded"*10
+        @customer.selected_packages.where(:status=>(0..2)).each do |select_pkg|
+          select_pkg.update_attributes(:status=>1,:expire_date=> select_pkg.expire_date + 30)
+          select_pkg.tour.update_attributes(:status=>1)
+        end
         #puts @customer
       when "invoice.payment_failed"
-        puts "invoice.payment_failed"*10
+        @customer.selected_packages.where(:status=>(0..2)).each do |select_pkg|
+          select_pkg.update_attributes(:status=>2)
+          select_pkg.tour.update_attributes(:status=>2)
+        end
         #puts @customer
       when "customer.subscription.created"
-        puts "customer.subscription.created"*10
+        #puts "customer.subscription.created"*10
         #puts @customer
       when "customer.subscription.deleted"
-        puts "customer.subscription.deleted"*10
+        @customer.selected_packages.each do |select_pkg|
+          select_pkg.update_attributes(:status=>2)
+          select_pkg.tour.update_attributes(:status=>2)
+        end
         #puts @customer
-      end
-   
+      end unless @customer.nil?
 
-    else
-      puts "card payment" * 100
+    #else
+     # puts "card payment" * 100
     end
     render :nothing
   end
