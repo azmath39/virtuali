@@ -6,6 +6,7 @@
   =require twitter-bootstrap-static/fontawesome
   */
   body{
+      padding-bottom: 40px;
       background: url(bg.jpg);
       background-repeat:repeat;
       font-family: fantasy;
@@ -29,35 +30,28 @@
     text-shadow:none;
 }
 .navbar .nav > li > a:hover {
+    font-size: 20px;
     background-color: transparent;
-    color: black;
+    color: white;
+    text-shadow: whitesmoke 0.01em 0.01em 0.1em;
     text-decoration: none;
 }
 .btn [class^="icon-"], .nav [class^="icon-"], .btn [class*=" icon-"], .nav [class*=" icon-"]{
     line-height: 2.9em;
 }
- footer {
-     height: 100px;
-     width: 100%;
-     background: url(bg2.png);
-     background-repeat: repeat;
-     color: #666;
-     padding: 17px 0 0px 0;
-     border-top: 1px solid #ccc;
-     margin-top: 20px;
 
+/*Footer styles*/
+#push,
+      #footer {
+        height: 60px;
+        width: 100%;
+        text-align: center;
+      }
+      #footer p{
+          margin-top: 20px;
 }
-footer a {
-color: #999;
-}
-footer p{
-    text-align: center;
-}
-footer a:hover {
-  background-color: transparent;
-  color: black;
-  text-decoration: none;
-}
+/*end of footer*/
+
 .dropdown-menu a{
       margin: 0px 0 0 20px;
       text-decoration: none;
@@ -68,3 +62,115 @@ footer a:hover {
     border-radius: 4px;
     width: 200px;
 }
+
+
+/*Carasoul overriding*/
+.carousel {
+      margin-bottom: 60px;
+    }
+
+    .carousel .container {
+      position: relative;
+      z-index: 9;
+    }
+
+    .carousel-control {
+      height: 80px;
+      margin-top: 0;
+      font-size: 120px;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      background-color: transparent;
+      border: 0;
+      z-index: 10;
+    }
+    .carousel-inner{
+        height: 550px;
+        box-shadow: 10px 10px 5px #888888;
+        margin-top: 15px;
+}
+    .carousel .item {
+      height: 500px;
+    }
+    .carousel img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      height: 550px;
+    }
+
+    .carousel-caption {
+      background-color: transparent;
+      position: static;
+      max-width: 550px;
+      padding: 0 20px;
+      margin-top: 200px;
+    }
+    .carousel-caption h1,
+    .carousel-caption .lead {
+      margin: 0;
+      line-height: 1.25;
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+    }
+    .carousel-caption .btn {
+      margin-top: 10px;
+    }
+
+     /* MARKETING CONTENT
+    -------------------------------------------------- */
+
+    /* Center align the text within the three columns below the carousel */
+    .marketing .span4 {
+      text-align: center;
+    }
+    .marketing h2 {
+      font-weight: normal;
+    }
+    .marketing .span4 p {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    /* Featurettes
+    ------------------------- */
+
+    .featurette-divider {
+      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette {
+      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
+      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+    }
+    .featurette-image {
+      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+    }
+
+    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
+    .featurette-image.pull-left {
+      margin-right: 40px;
+    }
+    .featurette-image.pull-right {
+      margin-left: 40px;
+    }
+
+    /* Thin out the marketing headings */
+    .featurette-heading {
+      font-size: 50px;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+     .pricing_grid .span3{
+        background: url(bg2.jpg);
+        background-repeat: repeat;
+        border: 2px solid #ccc;
+        padding: 30px;
+}
+.pricing_grid .span3 img{
+    margin-left: 50px;
+}
+
+    /* end of Featurettes
+    ------------------------- */
+   
