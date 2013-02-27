@@ -30,10 +30,10 @@
     text-shadow:none;
 }
 .navbar .nav > li > a:hover {
-    font-size: 20px;
+    font-size: 14px;
     background-color: transparent;
     color: white;
-    text-shadow: whitesmoke 0.01em 0.01em 0.1em;
+    text-shadow: whitesmoke 0.01em 0.01em 0.01em;
     text-decoration: none;
 }
 .btn [class^="icon-"], .nav [class^="icon-"], .btn [class*=" icon-"], .nav [class*=" icon-"]{
