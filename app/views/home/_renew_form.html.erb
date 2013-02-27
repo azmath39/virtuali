@@ -8,9 +8,10 @@
     
 <%=form_tag "home/make_payment", :id=>'payment-form' do%>
     <%#unless  pkg.nil?%>
+    <%= text_field_tag "operation_type", nil, name: nil %>
   <%=hidden_field_tag "pkg_id",@pkg_id%>
   <%#end%>
-<%=render 'payment_fields'%>
+<%#=render 'payment_fields'%>
 <%end%>
 
 </div>

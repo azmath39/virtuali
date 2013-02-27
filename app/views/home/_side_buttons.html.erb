@@ -1,11 +1,11 @@
 <div style="float: right; margin: 0px 60px 0 0;">
-  <%= link_to "Create New Tour", '/paintings/new', :class => 'btn btn-success' %>
-  <%= link_to "My Tours", tours_path, :class => 'btn btn-inverse ' %>
+  <%#= link_to "Create New Tour", '/paintings/new', :class => 'btn btn-success' %>
+  <%#= link_to "My Tours", tours_path, :class => 'btn btn-inverse ' %>
 
 
-  <%#= render 'feedback_form', :target => @feedback %>
+<%#= render 'feedback_form', :target => @feedback %>
 <%#*<a data-toggle="modal" href="#example" class="btn btn-inverse btn-large">Feedback</a>%>
-  <%#= link_to "Feedback", "#example", "data-toggle" => "modal", :class => "btn btn-inverse"  %>
+<%#= link_to "Feedback", "#example", "data-toggle" => "modal", :class => "btn btn-inverse"  %>
 
 
 
@@ -14,11 +14,11 @@
     <%= render 'card_change_form' %>
     <%= link_to "Change Card Details", "#card_change", "data-toggle" => "modal", :class => "btn btn-danger"  %>
 
-    <%#=button_tag "Change Card Details",:class=>"btn btn-inverse",:onclick=>"change_card()"%>
+  <%#=button_tag "Change Card Details",:class=>"btn btn-inverse",:onclick=>"change_card()"%>
     <%=button_tag "Cancel Complete Subscription",:class=>"btn btn-inverse",:onclick=>"cancel_complete_subscription()"%>
   <%else%>
-    <%= render 'payment_form' %>
-    <%= link_to "Create Direct Debit", "#direct_debit", "data-toggle" => "modal", :class => "btn btn-danger"  %>
+
+    <%= link_to "Create Direct Debit", "#card_details", "data-toggle" => "modal", :class => "btn btn-danger", :onclick=>"create_direct_debit()"  %>
   <%end%>
 </div>
 
@@ -36,6 +36,12 @@
     }else{
       return false;
     }
+  }
+  function create_direct_debit()
+  {
+    $("#pkg_id").val(null );
+    $("#operation_type").val(2);
+    $("#type_of_transaction").val(2);
   }
  
 </script>

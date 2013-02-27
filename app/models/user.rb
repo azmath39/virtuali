@@ -41,7 +41,7 @@ class User < ActiveRecord::Base
   has_many :selected_packages
   has_one :card
   has_many :feedbacks, :dependent => :destroy
-
+has_many :paintings, :dependent=>:destroy
 
 
   def package=(pkg)

@@ -21,16 +21,16 @@ class PaintingsController < ApplicationController
     @painting = Painting.create(params[:painting])
     @painting.user_id= current_user.id
     @painting.save
-    puts "***********************"
-    p @painting
-    
-    $ids << @painting.id
-    session[:painting] = $ids
-    puts "**********************"
-    
-    puts "*****************session******"
-    p session[:painting].flatten()
-  puts "***********************"
+#    puts "***********************"
+#    p @painting
+#
+#    $ids << @painting.id
+#    session[:painting] = $ids
+#    puts "**********************"
+#
+#    puts "*****************session******"
+#    p session[:painting].flatten()
+#  puts "***********************"
  #p session[:painting]=nil
   end
 

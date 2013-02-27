@@ -39,8 +39,8 @@
                   <%end%>
                 </div>
               <%else%>
-                <%= render 'renew_form' %>
-                <%= link_to "Renew", "#renew", "data-toggle" => "modal", :class=>"btn btn-info"  %>
+                <%#= render 'renew_form' %>
+                <%= link_to "Renew", "#card_details", "data-toggle" => "modal", :class=>"btn btn-info",:onclick=>"renew(#{pkg.id})"  %>
 
       <%#=button_tag "Renew",:class=>"btn btn-success",:onclick=>"renew()"%>
               <%end%></td></tr>
@@ -73,6 +73,12 @@
     }).done(function(text) {
       $("#alert_message").append(text);
     });
+  }
+  function renew(id)
+  {
+  $("#pkg_id").val(id);
+  $("#operation_type").val(1);
+  $("#type_of_transaction").val(1);
   }
 </script>
 <style>
