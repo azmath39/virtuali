@@ -3,14 +3,13 @@
     <div class = "payment-errors">
     </div>
 
-
-
     <div class="field" style="padding:20px 0px;">
      <%=radio_button_tag "type_of_transaction", 1%> <%= "Card Pay" %>  <%=radio_button_tag "type_of_transaction", 2%> <%="Direct Debit Setup" %>
+    <%= hidden_field_tag "operation_type", nil %>
+    <%=hidden_field_tag "pkg_id",nil%>
+      <%#=hidden_field_tag "type_of_transaction",nil, name: nil%>
     </div>
-    <div class="field">
-
-    </div>
+    
     <div class="field">
       <%= label_tag :card_number, "Credit Card Number" %>
       <%= text_field_tag "card-number", nil, name: nil %>

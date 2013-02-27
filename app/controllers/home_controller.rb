@@ -10,15 +10,26 @@ class HomeController < ApplicationController
     mess= unsubscribe
     render :text=>mess
   end
-  def create_direct_debit
+
+  def make_payment
     @token = params[:stripeToken]
-    @amount = (current_user.selected_packages.sum(:price,:conditions=>{:status=>(0..2)}).to_f*100).to_i
-    @email = current_user.email
-    subscription
-  
+    @email= current_user.email
+    if params[:operation_type].to_i==1 then
+      @pkg_id = params[:pkg_id].to_i
+      renew
+
+    elsif params[:operation_type].to_i==2 then
+      create_direct_debit
+    else
+      flash[:error]="Opps! Unknown Operation"
+    end
     index
     render 'index'
   end
+
+
+
+
   def change_card_details
     @token = params[:stripeToken]
     change_card
@@ -32,31 +43,19 @@ class HomeController < ApplicationController
     @amount=(current_user.selected_packages.sum(:price,:conditions=>{:status=>(0..2)}).to_f*100).to_i
     render :text=>cancel_payment()
   end
-  def make_payment
-    @token = params[:stripeToken]
-    @selected_pkg=SelectedPackage.find(params[:pkg_id].to_i)
-    @amount = (@selected_pkg.price.to_f*100).to_i
-    @email= current_user.email
-    stripe_charge
-    if @selected_pkg.update_attributes(:status=>1)
-      flash[:notice]="sucessfully renewed"
-    else
-     flash[:error]= "Unable to update at this movement, Try some other time. Sorry for the inconvience."
-    index
-    render 'index'
-    end
+  
 
-  end
+  
 
   def state_cities
     state=State.find_by_name(params[:state])
     @cities= City.find(:all,:conditions=>{:code=>state.code}) unless state.nil?
     @str=""
     unless @cities.empty?
-    @str +="'<option value="">Select city</option>"
+      @str +="'<option value="">Select city</option>"
 
-  @cities.each do |c|
-      @str += "<option value=#{c.name}>#{c.name}</option>"
+      @cities.each do |c|
+        @str += "<option value=#{c.name}>#{c.name}</option>"
       end
       @str +="'"
     end
@@ -104,6 +103,23 @@ class HomeController < ApplicationController
     #    plan.delete
     #
     # render :text=>plan.amount
+  end
+
+  def renew
+    @selected_pkg=SelectedPackage.find(@pkg_id)
+    @amount = (@selected_pkg.price.to_f*100).to_i
+    stripe_charge
+    if @selected_pkg.update_attributes(:status=>1)
+      flash[:notice]="sucessfully renewed"
+    else
+      flash[:error]= "Unable to update at this movement, Try some other time. Sorry for the inconvience."
+
+    end
+  end
+  def create_direct_debit
+    @amount = (current_user.selected_packages.sum(:price,:conditions=>{:status=>(0..2)}).to_f*100).to_i
+    subscription
+
   end
 
 end

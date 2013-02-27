@@ -22,35 +22,42 @@ class ToursController < ApplicationController
     @tour = Tour.new(params[:tour])
     if @tour.save
       current_user.tours << @tour
-        session[:painting].each do |id|
-        @painting = Painting.find_by_id(id)
-        @painting.tour_id = @tour.id
-        @painting.save
-        end
-        $ids = []
-        session[:painting] = nil
-        #session.delete(:painting)
-        #session[:painting]=nil
-        #session.data.delete :painting
-        flash[:notice] = "Tour was created successfully."
-        redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
-      else
-        render 'paintings/new'
-      end
+      @paintings=current_user.paintings.where(:tour_id=>nil)
+      @paintings.each do |pic|
+        @tour.paintings<<pic
+      end unless @paintings.empty?
+
+      #session.delete(:painting)
+      #session[:painting]=nil
+      #session.data.delete :painting
+      flash[:notice] = "Tour was created successfully."
+      redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
+    else
+      render 'paintings/new'
+    end
       
   end
   def edit
     @tour = Tour.find(params[:id])
-    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour)
+    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id  )
     @painting = Painting.new
-    @tour = Tour.new
     
+
+
+
   end
   def update
     @tour = Tour.find(params[:tour][:id])
     if @tour.update_attributes(params[:tour])
+      @paintings=current_user.paintings.where(:tour_id=>nil)
+      @paintings.each do |pic|
+        @tour.paintings<<pic
+      end unless @paintings.empty?
       flash.now[:notice] = 'Tour updated successfully.'
+       redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
     else
+      flash.now[:error] = 'Sorry,Unable to update Tour.'
+      edit
       render 'edit'
     end
   end
@@ -72,11 +79,11 @@ class ToursController < ApplicationController
   end
   def view_map
     @gmapsoptions = {
-     "map_options" => {"center_latitude" => 0, "center_longitude" => 0, "detect_location" => true, "center_on_user" => true,
-                       "auto_adjust" => true,
-                       "auto_zoom" => true,
-                       "zoom" => 20 }
-                 }
+      "map_options" => {"center_latitude" => 0, "center_longitude" => 0, "detect_location" => true, "center_on_user" => true,
+        "auto_adjust" => true,
+        "auto_zoom" => true,
+        "zoom" => 20 }
+    }
     @search = Tour.search(params[:q])
     if params.has_key? :id
       @tours = []
@@ -86,15 +93,18 @@ class ToursController < ApplicationController
           @tours << sel_pkg.tour
         end
       end
+
       if @tours.empty?
         flash.now[:notice] = "No tours were found!"
       end
       @tours.compact!
        @json = @tours.to_gmaps4rails do |tour, marker|
+
         marker.infowindow("#{tour.name}<br />" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
         marker.title("#{tour.city}")
        end
     else
+
         @tours = Tour.all
         if !params[:q].nil?
          @tours = @search.result
@@ -104,6 +114,7 @@ class ToursController < ApplicationController
         marker.title("#{tour.city}")
       end
     end
+
   end
   def status_change
     tour = Tour.find(params[:id].to_i)

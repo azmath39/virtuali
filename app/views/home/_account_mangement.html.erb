@@ -18,9 +18,11 @@
   <li class="tab"><%= link_to "Billing", '#div_billing', "data-toggle" => "tab" %></li>
   <li class="tab"><%#= link_to "How to?", '#div_how', "data-toggle" => "tab"%> </li>
   <li class="tab"><%= link_to "Profile", '#div_profile', "data-toggle" => "tab" %></li>
+    <li class="tab"><%= link_to "Manage Account", '#div_manage', "data-toggle" => "tab"%> </li>
 
 </ul>
   </div></div>
+<%= render 'payment_form' %>
   <%=render "tab_content"%>
 
 
