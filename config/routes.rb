@@ -1,21 +1,23 @@
 VirtualTour::Application.routes.draw do
   #get "home/index"
-   get "packages/show"
+  get "packages/show"
    
- match '/tours/view_map' => 'tours#view_map'
- match '/tours/status_change' => 'tours#status_change'
+  match '/tours/view_map' => 'tours#view_map'
+  match '/tours/status_change' => 'tours#status_change'
   match '/tours/update' => 'tours#update'
+  match '/tours/user_tours'=>'tours#user_tours'
+
 
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   devise_for :users,:controllers => { :registrations => "Registrations" }
- resources :paintings
- resources :tours
+  resources :paintings
+  resources :tours
 
 
- resources :feedbacks, :except => [:edit, :update]
+  resources :feedbacks, :except => [:edit, :update]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -66,11 +68,11 @@ VirtualTour::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => 'home#index'
+  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-   match ':controller(/:action(/:id))(.:format)'
+  match ':controller(/:action(/:id))(.:format)'
 end

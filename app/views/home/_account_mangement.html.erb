@@ -3,7 +3,7 @@
   $(document).ready(function(){
       $.ajax({
         type: 'GET',
-        url: '/tours'
+        url: '/tours/user_tours'
 
       }).done(function(html) {
         $("#user_tours").html(html);

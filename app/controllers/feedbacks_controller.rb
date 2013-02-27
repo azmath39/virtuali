@@ -10,7 +10,7 @@ class FeedbacksController < ApplicationController
     @feedback.user_id = current_user.id
     if @feedback.save
       flash[:success] = "Thanks for your feedback. We look forward to serve better!"
-      redirect_to root_path
+      redirect_to :back
     else
       render :text => "Not saved feedback"
     end
