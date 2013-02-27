@@ -4,6 +4,7 @@ VirtualTour::Application.routes.draw do
    
  match '/tours/view_map' => 'tours#view_map'
  match '/tours/status_change' => 'tours#status_change'
+ match '/tours/user_tours'=>'tours#user_tours'
 
   ActiveAdmin.routes(self)
 

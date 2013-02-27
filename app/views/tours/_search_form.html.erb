@@ -3,17 +3,18 @@
   <h2 style="margin: -45px 0 0px 0px;float: left;">Search</h2>
   <%= search_form_for @search, :class => 'well form-inline', :id => 'img_bg' do |f| %>
     <%= f.label :state_cont, "State" %>
-  <%=f.select :state_cont, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
-
+    <%=f.select :state_cont, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
     <%#= f.text_field :state_cont %><br />
     <%= f.label :city_cont, "City" %>
     <%=f.select :city_cont, {},:prompt=>"Select City"%>
     <%#= f.text_field :city_cont %><br />
-    <%= f.label :price_gteq, "Price Between" %><br />
-    <%= f.text_field :price_gteq, :style=> 'width: 94px;' %>&nbsp;<%= f.text_field :price_lteq, :style=> 'width: 94px;' %><br /><br />
-<center><%= f.submit "Search", :class => 'btn btn-medium btn-success' %></center>
+    <%#= f.label :price_gteq, "Price Between" %>
+    <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %><%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
+    <br/>
+<%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
   <% end %>
 </div>
+
 <script>
  function state_city()
   {

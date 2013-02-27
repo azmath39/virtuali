@@ -1,23 +1,11 @@
 class ToursController < ApplicationController
   def index
-    if signed_in?
-      @tours = current_user.tours.paginate(:page => params[:page], :per_page => 5)
-
-      render :layout=>false
-    else
-
       @search = Tour.search(params[:q])
       if params[:q].nil?
-        #@tours = Tour.all
         @tours = Tour.paginate(:page => params[:page], :per_page => 3)
       else
         @tours = @search.result.paginate(:page => params[:page], :per_page => 5)
-
-        
       end
-      
-    end
-
   end
 
   def show
@@ -90,59 +78,43 @@ class ToursController < ApplicationController
                        "zoom" => 20 }
                  }
     @search = Tour.search(params[:q])
-    if params[:id].to_i == 1
-      @owner_tours = []
-      @p = Product.find_by_id(params[:id])
-      @p.packages.each do |pkg|
-
-        pkg.selected_packages.each do |sel_pkg|
-          @owner_tours << sel_pkg.tour
-        end
-      end
-      @owner_tours.compact!
-       @json = @owner_tours.to_gmaps4rails do |tour, marker|
-        marker.infowindow("#{tour.name}<br />" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
-        marker.title("#{tour.city}")
-       end
-    elsif params[:id].to_i == 2
-      @realtor_tours = []
+    if params.has_key? :id
+      @tours = []
       @p = Product.find_by_id(params[:id])
       @p.packages.each do |pkg|
         pkg.selected_packages.each do |sel_pkg|
-          @realtor_tours << sel_pkg.tour
+          @tours << sel_pkg.tour
         end
       end
-       @realtor_tours.compact!
-       if @realtor_tours.empty?
-         flash[:notice] = "No tours were found!"
-         
-       end
-       @json = @realtor_tours.to_gmaps4rails do |tour, marker|
-         marker.infowindow("#{tour.name}<br />" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
-        marker.title("#{tour.city}")
-       end
-    else
-    
-      if signed_in?
-      @current_user_tours = current_user.tours
-      @json = @current_user_tours.to_gmaps4rails do |tour, marker|
+      if @tours.empty?
+        flash.now[:notice] = "No tours were found!"
+      end
+      @tours.compact!
+       @json = @tours.to_gmaps4rails do |tour, marker|
         marker.infowindow("#{tour.name}<br />" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
         marker.title("#{tour.city}")
-      end
+       end
     else
-      @all_tours = Tour.all
-      @json = @all_tours.to_gmaps4rails do |tour, marker|
+        @tours = Tour.all
+        if !params[:q].nil?
+         @tours = @search.result
+        end
+        @json = @tours.to_gmaps4rails do |tour, marker|
         marker.infowindow("#{tour.name}<br />" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
         marker.title("#{tour.city}")
       end
     end
-    end
-    #@us_states= ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District Of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"]
   end
   def status_change
     tour = Tour.find(params[:id].to_i)
     tour.update_attributes(:status=>params[:status].to_i)
     render :text=>tour.tour_status
+  end
+  def user_tours
+    if signed_in?
+      @tours = current_user.tours
+    render :partial=>'list_of_tours'
+    end
   end
 
   private

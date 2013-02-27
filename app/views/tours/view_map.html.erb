@@ -1,12 +1,50 @@
-<%= render 'search_form' %>
+<br /><br />
+<%#= render 'search_form' %>
+<div class ="span3" style="margin: 0 1px 0 0px; float: left;position: fixed;">
+  <h2 style="margin: -45px 0 0px 0px;float: left;">Search</h2>
+  <%= search_form_for @search, :url => '/tours/view_map', :class => 'well form-inline', :id => 'img_bg' do |f| %>
+    <%= f.label :state_cont, "State" %>
+    <%=f.select :state_cont, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
+    <%= f.label :city_cont, "City" %>
+    <%=f.select :city_cont, {}, :prompt=>"Select City"%>
+    <%#= f.label :price_gteq, "Price Between" %>
+    <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %><%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
+    <br/>
+<%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
+  <% end %>
+</div>
+
 <div id="map-div">
   <h1>Tour Map</h1>
   <div style="float: right;margin: -30px 200px 0 0;">
     
-    <%= link_to "All Tours", {:controller => 'tours', :action => 'view_map'} , :class=> 'btn btn-mini btn-primary'%>&nbsp;<%Product.all.each do|p|%><%@product=p%><%= link_to @product.name, {:controller => 'tours', :action => 'view_map', :id => @product.id },:class=> 'btn btn-mini btn-primary' %>&nbsp;<%end%><%#= link_to "By Realtor", {:controller => 'tours', :action => 'view_map', :id => @realtor.id }, :class=> 'btn btn-mini btn-primary' %>
+    <%= link_to "All Tours", {:controller => 'tours', :action => 'view_map'} , :class=> 'btn btn-mini btn-primary'%>&nbsp;
+    <%  Product.all.each do |p| %>
+      <%@product=p%>
+      <%= link_to @product.name, {:controller => 'tours', :action => 'view_map', :id => @product.id },:class=> 'btn btn-mini btn-primary' %>&nbsp;
+    <%  end %>
   </div>
-  <%= gmaps({
+  <%#= gmaps({
   "map_options" => {"auto_zoom" => true, "auto_adjust" => false, "zoom" => 4, "center_latitude" => 38, "center_longitude" => -97 },
   "markers" => {"data" => @json }
    })%>
+<%#*</div>%>
+
+  <%= gmaps4rails(@json)%>
 </div>
+<script>
+ function state_city()
+  {
+    $.ajax({
+      type: 'GET',
+      url: "/home/state_cities",
+
+      data: {
+        'state' :  $("#q_state_cont").val()
+      }
+    }).done(function(text) {
+
+  $('#q_city_cont').empty().append(text);
+    });
+  }
+</script>
