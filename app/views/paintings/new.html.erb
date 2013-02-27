@@ -2,6 +2,7 @@
 <h1>Create a Tour</h1>
 <div class="span12">
 <%= form_for Painting.new do |f| %>
+  <%@serial_no=0%>
 <div class="fileupload btn btn-warning">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>

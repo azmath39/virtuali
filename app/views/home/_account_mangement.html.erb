@@ -10,15 +10,15 @@
       });
   });
   </script>
-  <div class="navbar navbar-inverse" style="margin-top:5%;">
-  <div class="navbar-inner"style="border-radius:30px;">
-<ul class="nav">
+  <div class="navbar " style="margin-top:3%;">
+  <div>
+<ul class="nav" style="height:100px;margin-left: 200px;">
 <li class="active tab"><%= link_to "Dashboard", "#div_dashboard", "data-toggle" => "tab"%> </li>
   <li class="tab"><%= link_to "Status", '#div_status', "data-toggle" => "tab"%> </li>
   <li class="tab"><%= link_to "Billing", '#div_billing', "data-toggle" => "tab" %></li>
   <li class="tab"><%#= link_to "How to?", '#div_how', "data-toggle" => "tab"%> </li>
   <li class="tab"><%= link_to "Profile", '#div_profile', "data-toggle" => "tab" %></li>
-    <li class="tab"><%= link_to "Manage Account", '#div_manage', "data-toggle" => "tab"%> </li>
+    <li class="tab"><%#= link_to "Manage Account", '#div_manage', "data-toggle" => "tab"%> </li>
 
 </ul>
   </div></div>
@@ -27,10 +27,12 @@
 
 
 <style>
-  .tab{
+  .tab > a{
     font-size:20px;
+    line-height: 4;
+    box-shadow:10px 10px 5px #888888;
 }
 .tab > a:hover{
-  color: white !important;
+  color: black !important;
 }
 </style>
