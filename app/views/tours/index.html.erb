@@ -1,15 +1,15 @@
 <h2 style="margin: 0 0 10px 280px;">List of Tours</h2>
 <div class="span6">
 <% @tours.each do |tour| %>
-<div class="span6 well" id = 'img_bg' style="margin: 0 0 1px 300px;">
+<div class="span6 well" id = 'img_bg' style="margin: 0 0 0px 300px;">
   <div>
     <%#= t.paintings %>
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
-  <div style ="float: right; margin: 0 310px 0 0">
-    <%= tour.state %><br />
-    <%= tour.bed_rooms %> Beds / <%= tour.bath_rooms %> Baths<br />
-    &#36; <%= tour.price %><br />
-    <%= link_to "More information....", tour %><br />
+  <div style ="float: right; margin: -6px 100px 0 0; height:120px; width: 350px;">
+    <b><%= tour.state %></b><br />
+    <i>Beds:</i> <%= tour.bed_rooms %> / <i>Baths:</i><%= tour.bath_rooms %><br />
+    <strong>&#36; <%= tour.price %></strong><br />
+    <%=raw truncate(tour.description, :length => -70, :omission => link_to( "&nbsp;More...".html_safe, tour)) %>
     <p>Virtual Tour Available</p>
   </div>
   </div>
