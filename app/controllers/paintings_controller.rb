@@ -1,5 +1,5 @@
 class PaintingsController < ApplicationController
-  $ids = []
+  
   def index
     #@painting = Painting.new
     @paintings = Painting.all
@@ -41,7 +41,7 @@ class PaintingsController < ApplicationController
   def update
     @painting = Painting.find(params[:id])
     if @painting.update_attributes(params[:painting])
-      redirect_to new_painting_url, :notice=> "Image was successfully updated."
+      redirect_to :back, :notice=> "Image was successfully updated."
     else
       render :edit
     end
@@ -50,7 +50,8 @@ class PaintingsController < ApplicationController
   def destroy
     @painting = Painting.find(params[:id])
     if @painting.destroy
-      redirect_to paintings_url, :notice=> "Image was successfully deleted."
+      redirect_to :back
+     # redirect_to paintings_url, :notice=> "Image was successfully deleted."
     end
   end
 

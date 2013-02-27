@@ -12,6 +12,7 @@
       font-family: fantasy;
       height: 100%;
 }
+
   .navbar-inner {
     background: url(bg2.png);
     background-repeat: repeat;
@@ -33,12 +34,19 @@
     text-shadow:none;
 }
 .navbar .nav > li > a:hover {
+
     font-size: 15px;
+
     background-color: transparent;
     color: white;
     text-shadow: whitesmoke 0.01em 0.01em 0.01em;
     text-decoration: none;
 }
+.navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
+
+    box-shadow:10px 10px 5px #888888;
+}
+
 .btn [class^="icon-"], .nav [class^="icon-"], .btn [class*=" icon-"], .nav [class*=" icon-"]{
     line-height: 2.9em;
 }

@@ -1,22 +1,44 @@
 <div class="span6">
 <% @tours.each do |tour| %>
-<div class="span6 well" id = 'img_bg' style="margin: 0 30px 0px -300px;">
+
+<div class="span6 well" id = 'img_bg' style="margin: 0 30px 1px 0px;">
   <div>
     <%#= t.paintings %>
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
-  <div style ="float: right; margin: -6px 100px 0 0; height:120px; width: 350px;">
-    <b><%= tour.state %></b><br />
-    <i>Beds:</i><%= tour.bed_rooms %> / <i>Baths:</i><%= tour.bath_rooms %><br />
-    <strong>&#36; <%= tour.price %></strong><br />
-    <% if !tour.description.empty? %>
-      <%=raw truncate(tour.description, :length => -70, :omission => link_to( "More...", tour)) %>
-    <% end %>
+  <div style =" margin: 0 300px 0 0;float: right;">
+    <%= tour.state %><br />
+    <%= tour.bed_rooms %> Beds / <%= tour.bath_rooms %> Baths<br />
+    &#36; <%= tour.price %><br />
+    <%= link_to "More information....", tour %><br />
     <p>Virtual Tour Available</p>
   </div>
+
     <div style="float:right;margin: -15px 0px 10px 100px;">
-      <%=link_to "view", '#'%>&nbsp;|
-      <%=link_to "edit", '#'%>&nbsp;|
-      <%=link_to "delete", '#'%>
+   
+    <%#*<div style="float:right;margin: 10px 20px;">%>
+      <%=link_to "view", tour_path(tour.id)%>&nbsp;|
+      <%=link_to "edit", edit_tour_path(tour.id)%>&nbsp;|
+      <%=link_to "delete", tour_path(tour.id)%>
+<%#*=======%>
+<%#*<div class="span6 well" id = 'img_bg' style="margin: 0 30px 0px -300px;">%>
+  <%#*<div>%>
+    <%#= t.paintings %>
+    <%#= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
+  <%#*<div style ="float: right; margin: -6px 100px 0 0; height:120px; width: 350px;">%>
+    <%#*<b><%= tour.state %</b><br />%>
+    <%#*<i>Beds:</i><%= tour.bed_rooms % / <i>Baths:</i><%= tour.bath_rooms %<br />%>
+    <%#*<strong>&#36; <%= tour.price %</strong><br />%>
+    <%# if !tour.description.empty? %>
+      <%#=raw truncate(tour.description, :length => -70, :omission => link_to( "More...", tour)) %>
+    <%# end %>
+    <%#*<p>Virtual Tour Available</p>%>
+  <%#*</div>%>
+    <%#*<div style="float:right;margin: -15px 0px 0px 100px;">%>
+      <%#=link_to "view", '#'%&nbsp;|
+      <%#=link_to "edit", '#'%&nbsp;|
+      <%#=link_to "delete", '#'%>
+<%#*>>>>>>> b5a91990eabc07f4917eb0a218d156c04a1eb382%>
+>>>>>>> ef0656a2a94b6c490f16cfebe16c2335f31f1da9
     </div>
   </div>
 </div>
