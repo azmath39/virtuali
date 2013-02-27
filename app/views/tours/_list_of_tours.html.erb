@@ -1,7 +1,8 @@
-<div class="span6" style="margin: 0 0 0 0px;">
+<div class="span6">
 <% @tours.each do |tour| %>
-<div class="span6 well" id = 'img_bg' style="margin: 0px 0 1px -210px;">
+<div class="span6 well" id = 'img_bg' style="margin: 0 30px 1px -300px;">
   <div>
+    <%#= t.paintings %>
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
   <div style ="float: right; margin: 0 310px 0 0">
     <%= tour.state %><br />
@@ -10,7 +11,12 @@
     <%= link_to "More information....", tour %><br />
     <p>Virtual Tour Available</p>
   </div>
-  </div><br />
+    <div style="float:right;margin: -20px 0 0 0;">
+      <%=link_to "view", '#'%>&nbsp;|
+      <%=link_to "edit", '#'%>&nbsp;|
+      <%=link_to "delete", '#'%>
+    </div>
+  </div>
 </div>
 <% end %>
 </div>
