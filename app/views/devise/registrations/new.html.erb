@@ -140,7 +140,7 @@
         <div>
           <%= f.label :image, "Profile Picture" %>
           <%= f.file_field :image %>
-          <%#=text_field_tag :email_confirm,nil%>
+  <%#=text_field_tag :email_confirm,nil%>
         </div></div>
       <div id="next_btn">
         <%=button_tag "next", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_personal",:onclick=>"button()" %>
@@ -230,34 +230,34 @@
     
   });
 
- function email_validation(){
+  function email_validation(){
 
-   if(validEmail($("#email_id").val())){
-    $.ajax({
-          type: 'GET',
-          url:'/home/validate_email',
-          data:{
-            email:$("#email_id").val()
-          }
-        }).done(function(text){
+    if(validEmail($("#email_id").val())){
+      $.ajax({
+        type: 'GET',
+        url:'/home/validate_email',
+        data:{
+          email:$("#email_id").val()
+        }
+      }).done(function(text){
 
-          if(text==1){
-ec=1;
+        if(text==1){
+          ec=1;
          
 
-          }else {
+        }else {
 
-            $('#personal_info_error_email').append("* Email already exists <br/>");
+          $('#personal_info_error_email').append("* Email already exists <br/>");
           ec=0;
-          }
+        }
 
-        });
+      });
     }else{
-    $('#personal_info_error_email').append("* Enter valid Email address. <br/>");
+      $('#personal_info_error_email').append("* Enter valid Email address. <br/>");
     }
 
 
- }
+  }
 
   $('#btn_personal').click(function(event) {
     
@@ -281,14 +281,14 @@ ec=1;
     }
     
 
-      if(!validEmail($("#email_id").val())){
-        $('#personal_info_error_email').append("* Enter valid Email address. <br/>");
+    if(!validEmail($("#email_id").val())){
+      $('#personal_info_error_email').append("* Enter valid Email address. <br/>");
         
-      }
-      if (ec==0){
-        $('#personal_info_error_email').append("* Email already exists <br/>");
+    }
+    if (ec==0){
+      $('#personal_info_error_email').append("* Email already exists <br/>");
 
-      }
+    }
       
     
    
@@ -311,12 +311,12 @@ ec=1;
       $('#btn_personal').die( "click" );
     }
     if(!validEmail($("#email_id").val())){
-        $('#btn_personal').die( "click" );
-      }
-      if (ec==0){
+      $('#btn_personal').die( "click" );
+    }
+    if (ec==0){
         
-        $('#btn_personal').die( "click" );
-      }
+      $('#btn_personal').die( "click" );
+    }
   });
 
   $('#btn_product').click(function(event) {
