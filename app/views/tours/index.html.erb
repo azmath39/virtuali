@@ -6,11 +6,14 @@
     <%#= t.paintings %>
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
   <div style ="float: right; margin: -6px 100px 0 0; height:120px; width: 350px;">
-    <b><%= tour.state %></b><br />
-    <i>Beds:</i> <%= tour.bed_rooms %> / <i>Baths:</i><%= tour.bath_rooms %><br />
-    <strong>&#36; <%= tour.price %></strong><br />
-    <%=raw truncate(tour.description, :length => -70, :omission => link_to( "&nbsp;More...".html_safe, tour)) %>
-    <p>Virtual Tour Available</p>
+    <strong><%= tour.state %></strong><br />
+    <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
+    <strong>Price: </strong> <%= tour.price %><br />
+    <strong>Description:</strong>
+    <%= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%><br />
+    <% if tour.status == 1 %>
+    <p><strong>Status:</strong> Active</p>
+    <% end %>
   </div>
   </div>
 </div>

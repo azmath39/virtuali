@@ -5,12 +5,15 @@
   <div>
     <%#= t.paintings %>
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
-  <div style =" margin: 0 300px 0 0;float: right;">
-    <%= tour.state %><br />
-    <%= tour.bed_rooms %> Beds / <%= tour.bath_rooms %> Baths<br />
-    &#36; <%= tour.price %><br />
-    <%= link_to "More information....", tour %><br />
-    <p>Virtual Tour Available</p>
+  <div style =" margin: -100px 2px 0px 115px;float: left;">
+    <strong><%= tour.state %></strong><br />
+    <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
+    <strong>Price: </strong> <%= tour.price %><br />
+    <strong>Description:</strong>
+    <%= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%><br />
+    <% if tour.status == 1 %>
+      <p><strong>Status:</strong> Active</p>
+    <% end %>
   </div>
 
     <div style="float:right;margin: -15px 0px 10px 100px;">
@@ -38,7 +41,7 @@
       <%#=link_to "edit", '#'%&nbsp;|
       <%#=link_to "delete", '#'%>
 <%#*>>>>>>> b5a91990eabc07f4917eb0a218d156c04a1eb382%>
->>>>>>> ef0656a2a94b6c490f16cfebe16c2335f31f1da9
+
     </div>
   </div>
 </div>

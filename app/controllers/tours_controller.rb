@@ -1,8 +1,8 @@
 class ToursController < ApplicationController
   def index
-      @search = Tour.search(params[:q])
+      @search = Tour.where(:status => (0..1)).search(params[:q])
       if params[:q].nil?
-        @tours = Tour.paginate(:page => params[:page], :per_page => 3)
+        @tours = Tour.where(:status => (0..1)).paginate(:page => params[:page], :per_page => 3)
       else
         @tours = @search.result.paginate(:page => params[:page], :per_page => 5)
       end
@@ -22,29 +22,21 @@ class ToursController < ApplicationController
     @tour = Tour.new(params[:tour])
     if @tour.save
       current_user.tours << @tour
-      @paintings=current_user.paintings.where(:tour_id=>nil)
+      NotificationsMailer.tour_created_message(current_user, @tour).deliver
+      @paintings=current_user.paintings.where(:tour_id => nil)
       @paintings.each do |pic|
         @tour.paintings<<pic
       end unless @paintings.empty?
-
-      #session.delete(:painting)
-      #session[:painting]=nil
-      #session.data.delete :painting
-      flash[:notice] = "Tour was created successfully."
-      redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
-    else
-      render 'paintings/new'
-    end
-      
+        flash[:notice] = "Tour was created successfully."
+        redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
+      else
+        render 'paintings/new'
+      end
   end
   def edit
     @tour = Tour.find(params[:id])
     @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id  )
     @painting = Painting.new
-    
-
-
-
   end
   def update
     @tour = Tour.find(params[:tour][:id])
