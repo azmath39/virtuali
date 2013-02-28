@@ -46,17 +46,15 @@ has_many :paintings, :dependent=>:destroy
 
   def package=(pkg)
     unless pkg.nil?
-      pkg.each_value do |pk|
-        p=Package.find(pk.to_i)
+     
+        p=Package.find(pkg.to_i)
         self.selected_packages<<SelectedPackage.create(:package_id=>p.id,:price=>p.price)
-      end
+     
     end
   end
   def product=(pro)
     unless pro.nil?
-      pro.each_value do |pr|
-        self.selected_products<<SelectedProduct.create(:product_id=>pr.to_i)
-      end
+        self.selected_products<<SelectedProduct.create(:product_id=>pro.to_i)
     end
   end
 

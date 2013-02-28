@@ -1,4 +1,13 @@
 class HomeController < ApplicationController
+
+  def validate_email
+   user=User.find_by_email(params[:email])
+   if user.nil?
+     render :text=>1
+   else
+     render :text=>0
+   end
+  end
   def index
     if current_user
       @feedback = Feedback.new
