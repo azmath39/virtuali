@@ -1,18 +1,16 @@
 class PackagesController < ApplicationController
   def show
-    @arg= params["products"].split(",")
-    @products=[]
-    @arg.each do |a|
-      @products<<Product.find(a)
-    end
+    
+    product=Product.find(params["product"].to_i)
+    @packages= product.packages
+   
     render :layout => false
   end
   def total_value
-    @arg= params["packeges"].split(",")
-    @value=0
-    @arg.each do |a|
-      @value+=Package.find(a).price
-    end
+    
+    
+      @value = Package.find(params["package_id"].to_i).price
+  
    
     render :text=>@value
   end

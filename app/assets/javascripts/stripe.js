@@ -30,7 +30,7 @@ if (!$("input[name='type_of_transaction']:checked").val()) {
 function stripeResponseHandler(status, response) {
   if (response.error) {
     // Show the errors on the form
-    $('.payment-errors').text("response.error.message");
+    $('.payment-errors').text(response.error.message);
     $('.submit-button').prop('disabled', false);
   } else {
     var $form = $('#payment-form');

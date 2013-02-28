@@ -1,220 +1,384 @@
 <style>
-    /* Prevent the slideshow from flashing on load */
+  /* Prevent the slideshow from flashing on load */
 
-    #slides {
-      
-   }
+  #slides {
+    margin-top:100px;
+    margin-left: 20%;
+    -moz-box-shadow: 0 0 5px 5px #888;
+    -webkit-box-shadow: 0 0 5px 5px#888;
+    box-shadow: 0 0 5px 5px #888;
+    width:37% !important;
+    font-family:fantasy;
+    padding: 2%;
+    background: url(bg2.png);
+    background-repeat: repeat;
+    border-radius:20px;
 
-    /* Center the slideshow */
-    .container {
-      margin: 10px 100px 10px 100px;
-      
-    }
 
-    /* Show active item in the pagination */
-    .slidesjs-pagination .active {
-      color:red;
-    }
+  }
 
-    
-    #next_btn{
-      float :right;
-     
-      margin-right: 500px;
-}
-  
-    body {
-      -webkit-font-smoothing: antialiased;
-      font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-      color: #232525;
-    }
+  /* Center the slideshow */
+  .container {
+    margin: 10px 100px 10px 100px;
 
-    #slides .slidesjs-navigation {
-      margin-top:3px;
-    }
+  }
 
-    #slides .slidesjs-previous {
-      margin-right: 5px;
-      float: left;
-    }
+  /* Show active item in the pagination */
+  .slidesjs-pagination .active {
+    color:red;
+  }
 
-    #slides .slidesjs-next {
-      margin-right: 5px;
-      float: left;
-    }
+  #scont{
 
-    .slidesjs-pagination {
-      margin: 6px 0 0;
-      float: right;
-      list-style: none;
-    }
+    height: 500px;
+  }
+  #next_btn{
+    float :right;
 
-    .slidesjs-pagination li {
-      float: left;
-      margin: 0 1px;
-    }
+    margin-bottom: 50px;
+  }
 
-    .slidesjs-pagination li a {
-      display: block;
-      width: 13px;
-      height: 0;
-      padding-top: 13px;
-      background-image: url(/img/pagination.png);
-      background-position: 0 0;
-      float: left;
-      overflow: hidden;
-    }
+  body {
+    -webkit-font-smoothing: antialiased;
+    font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #232525;
+  }
 
-    .slidesjs-pagination li a.active,
-    .slidesjs-pagination li a:hover.active {
-      background-position: 0 -13px
-    }
+  #slides .slidesjs-navigation {
+    margin-top:3px;
+  }
 
-    .slidesjs-pagination li a:hover {
-      background-position: 0 -26px
-    }
+  #slides .slidesjs-previous {
+    margin-right: 5px;
+    float: left;
+  }
 
-    #slides a:link,
-    #slides a:visited {
-      color: #333
-    }
+  #slides .slidesjs-next {
+    margin-right: 5px;
+    float: left;
+  }
 
-    #slides a:hover,
-    #slides a:active {
-      color: #9e2020
-    }
-    #personal_info{
-      margin: 30px 0 10px 200px;
-}
-.money{background:url(../images/icon-money.png)  11px  11px no-repeat #fff; padding-left:40px;width: 50px; }
-   
-  </style>
+  .slidesjs-pagination {
+    margin: 6px 0 0;
+    float: right;
+    list-style: none;
+  }
+
+  .slidesjs-pagination li {
+    float: left;
+    margin: 0 1px;
+  }
+
+  .slidesjs-pagination li a {
+    display: block;
+    width: 13px;
+    height: 0;
+    padding-top: 13px;
+    background-image: url(/img/pagination.png);
+    background-position: 0 0;
+    float: left;
+    overflow: hidden;
+  }
+
+  .slidesjs-pagination li a.active,
+  .slidesjs-pagination li a:hover.active {
+    background-position: 0 -13px
+  }
+
+  .slidesjs-pagination li a:hover {
+    background-position: 0 -26px
+  }
+
+  #slides a:link,
+  #slides a:visited {
+    color: #333
+  }
+
+  #slides a:hover,
+  #slides a:active {
+    color: #9e2020
+  }
+  #payment,#package_info, #product_select, #personal_info{
+
+
+
+  }
+  .money{background:url(icon-money.png)  11px  11px no-repeat #fff; padding-left:40px;width: 50px; }
+
+</style>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :id => 'payment-form', :multipart => true })  do |f| %>
   <%= devise_error_messages! %>
   <%#= render 'shared/error_messages', :target => @user %>
- 
-    <div id="slides" style="background-image: url(bg2.jpg);background-repeat: repeat;">
+
+  <div id="slides" >
     <div id="personal_info">
-     <h3>Personal Information</h3>
-     <hr></hr>
-    <div>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-    </div>
-    <div>
-      <%= f.label :phno, "Mobile Number"%>
-      <%= f.text_field :phno %>
-    </div>
-    <div>
-      <%= f.label :email %>
-      <%= f.email_field :email, :autofocus => true %>
-    </div>
-    <div>
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-    </div>
-    <div>
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation %>
-    </div>
-    <div>
-      <%= f.label :image, "Profile Picture" %>
-      <%= f.file_field :image %>
-    </div>
-     <div id="next_btn">
-     <%=button_tag "next", :class => "slidesjs-next slidesjs-navigation btn-large btn-danger", :id=>"btn_personal",:onclick=>"button()" %>
-     </div>
-
-  </div>
-  <div id="product_select" style="margin:30px 0 10px 200px;">
-    <h3>Product Selection</h3>
-    <hr></hr>
-    <%@i=0%>
-    <% Product.all.each do |x| %>
-      <div>
-        <%= check_box_tag "user[product][#{@i}]", x.id %>&nbsp;<%=  x.name%>
-      </div><br/>
-      <% @i+=1 %>
-    <% end %><br />
-
-    <div id="next_btn">
-      <%=button_tag "next", :onclick=>"packages()",  :class => "slidesjs-next slidesjs-navigation btn-large btn-danger" %>
-      <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
-    </div>
-  </div>
-      <div id ="package_info" style="margin:30px 0 10px 200px;">
-  <div id="packages">
-
-  </div>
-    <div id="next_btn">
-      <%=button_tag "next",  :class => "slidesjs-next slidesjs-navigation btn-large btn-danger",:onclick=>"package_amount1()" %>
-      <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
-    </div>
-    </div>
-  <div id="payment" style="margin:30px 0 10px 200px;">
-    <h3>Payment Process</h3>
-    <hr></hr>
-    <div class = "payment-errors">
-    </div>
-    <div class="field" >Total Payable Amount : <%= hidden_field_tag "total_amount","",:class=> "money" %>
-    <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
-    
-    <div id="amount_label">
-
-    </div>
-    <div class="field" style="padding:20px 0px;">
-     <%=radio_button_tag "type_of_transaction", 1%> <%= "Card Pay" %>  <%=radio_button_tag "type_of_transaction", 2%> <%="Direct Debit Setup" %>
-    </div>
-    <div class="field">
-      
-    </div>
-    <div class="field">
-      <%= label_tag :card_number, "Credit Card Number" %>
-      <%= text_field_tag "card-number", nil, name: nil %>
-    </div>
-    <div class="field">
-      <%= label_tag :card_code, "Security Code on Card (CVV)" %>
-      <%= text_field_tag "card-cvc", nil, name: nil %>
-    </div>
-    <div>
-      <%= label_tag :card_month, "Card Expiration" %>
-      <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
-      <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
-    </div>
-    <div id="next_btn">
-      <%= f.submit "Sign up",  :class=>"btn-large btn-danger", :disable_with => "Please wait.." %>
-    </div>
-  </div>
-      <%#= link_to "pre",'#', :class =>"slidesjs-previous slidesjs-navigation" %>
-      <%#= link_to "next",'#',  :class => "slidesjs-next slidesjs-navigation" %>
+      <span id="personal_info_error" style="color:red;"></span>
+      <div id="scont">
+        <h3>Personal Information</h3>
+        <hr></hr>
+        <div>
+          <%= f.label :name %>
+          <%= f.text_field :name %><span id="personal_info_error_name" style="color:red;"></span>
         </div>
+        <div>
+          <%= f.label :phno, "Mobile Number"%>
+          <%= f.text_field :phno %>
+        </div>
+        <div>
+          <%= f.label :email %>
+          <%= f.email_field :email, :autofocus => true,:id=>"email_id",:onblur=>"email_validation()" %><span id="personal_info_error_email" style="color:red;"></span>
+        </div>
+        <div>
+          <%= f.label :password %>
+          <%= f.password_field :password, :id=>"password" %><span id="personal_info_password" style="color:red;"></span>
+        </div>
+        <div>
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation,:id=>"password_confirmation" %><span id="personal_info_error_cpassword" style="color:red;"></span>
+        </div>
+        <div>
+          <%= f.label :image, "Profile Picture" %>
+          <%= f.file_field :image %>
+          <%#=text_field_tag :email_confirm,nil%>
+        </div></div>
+      <div id="next_btn">
+        <%=button_tag "next", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_personal",:onclick=>"button()" %>
+      </div>
+
+    </div>
+    <div id="product_select" >
+      <span id="product_error" style="color:red;"></span>
+      <div id="scont">
+        <h3>Product Selection</h3>
+        <hr></hr>
+        <%@i=0%>
+        <% Product.all.each do |x| %>
+          <div>
+            <%= radio_button_tag "user[product]", x.id,nil,:id=>"product" %>&nbsp;<%=  x.name%>
+          </div><br/>
+          <% @i+=1 %>
+        <% end %><br />
+      </div>
+      <div id="next_btn">
+        <%=button_tag "next",:class => "slidesjs-next slidesjs-navigation btn-large btn-danger",:id=>"btn_product" %>
+  <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
+      </div>
+    </div>
+    <div id ="package_info">
+      <span id="package_error" style="color:red;"></span>
+      <div id="scont">
+        <div id="packages">
+
+        </div></div>
+      <div id="next_btn">
+        <%=button_tag "next",  :class => "slidesjs-next slidesjs-navigation btn-large btn-danger",:id=>"btn_package"%>
+  <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
+      </div>
+    </div>
+    <div id="payment">
+      <div id="scont">
+        <h3>Payment Process</h3>
+        <hr></hr>
+        <div class = "payment-errors">
+        </div>
+        <div class="field" >Total Payable Amount : <%= hidden_field_tag "total_amount","",:class=> "money" %>
+          <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
+
+
+        <div class="field" style="padding:20px 0px;">
+          <%=radio_button_tag "type_of_transaction", 1%> <%= "Card Pay" %>  <%=radio_button_tag "type_of_transaction", 2%> <%="Direct Debit Setup" %>
+        </div>
+        <div class="field">
+
+        </div>
+        <div class="field">
+          <%= label_tag :card_number, "Credit Card Number" %>
+          <%= text_field_tag "card-number", nil, name: nil %>
+        </div>
+        <div class="field">
+          <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+          <%= text_field_tag "card-cvc", nil, name: nil %>
+        </div>
+        <div>
+          <%= label_tag :card_month, "Card Expiration" %>
+          <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
+          <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
+        </div></div>
+      <div id="next_btn">
+        <%= f.submit "Sign up",  :class=>"btn-large btn-danger", :disable_with => "Please wait.." %>
+      </div>
+    </div>
+  <%#= link_to "pre",'#', :class =>"slidesjs-previous slidesjs-navigation" %>
+  <%#= link_to "next",'#',  :class => "slidesjs-next slidesjs-navigation" %>
+  </div>
 <% end %>
 <%#= render "devise/shared/links" %>
- <%= javascript_include_tag "jquery.slides.min" %>
-
+<%= javascript_include_tag "jquery.slides.min" %>
 <script>
+  var ec=0;
   $(function() {
-    //$('#btn_personal').prop('disabled', true);
+    
     
     $('#slides').slidesjs({
       width: 500,
-      height: 300,
-      navigation: false
+      height: 580,
+     
+      navigation: true
     
     });
+    
   });
-   function package_amount1(){
-      //alert(price);
-      var packages = new Array();
+
+ function email_validation(){
+
+   if(validEmail($("#email_id").val())){
+    $.ajax({
+          type: 'GET',
+          url:'/home/validate_email',
+          data:{
+            email:$("#email_id").val()
+          }
+        }).done(function(text){
+
+          if(text==1){
+ec=1;
+         
+
+          }else {
+
+            $('#personal_info_error_email').append("* Email already exists <br/>");
+          ec=0;
+          }
+
+        });
+    }else{
+    $('#personal_info_error_email').append("* Enter valid Email address. <br/>");
+    }
+
+
+ }
+
+  $('#btn_personal').click(function(event) {
+    
+    $('#personal_info_error').html("");
+    if($("#user_name").val()==""){
+      $('#personal_info_error_name').append("* Required field Name <br/>");
+    }
+   
+    if($("#password").val()==""){
+      $('#personal_info_error_password').append("* Required field Password <br/>");
+    }
+    if(($("#password").val()).length<8){
+      $('#personal_info_error_password').append("* Password should be more than 6 characters <br/>");
+    }
+
+    if($("#password_confirmation").val()==""){
+      $('#personal_info_error_cpassword').append("* Required field Password_Confirmation <br/>");
+    }
+    if($("#password_confirmation").val()!=$("#password").val()){
+      $('#personal_info_error_cpassword').append("* Password and Password_Confirmation should match. <br/>");
+    }
+    
+
+      if(!validEmail($("#email_id").val())){
+        $('#personal_info_error_email').append("* Enter valid Email address. <br/>");
+        
+      }
+      if (ec==0){
+        $('#personal_info_error_email').append("* Email already exists <br/>");
+
+      }
+      
+    
+   
+    if($("#user_name").val()==""){
+      $('#btn_personal').die( "click" );
+    }
+    if($("#email_id").val()==""){
+      $('#btn_personal').die( "click" );
+    }
+    if($("#password").val()==""){
+      $('#btn_personal').die( "click" );
+    }
+    if($("#password").val().length<8){
+      $('#btn_personal').die( "click" );
+    }
+    if($("#password_confirmation").val()==""){
+      $('#btn_personal').die( "click" );
+    }
+    if($("#password_confirmation").val()!=$("#password").val()){
+      $('#btn_personal').die( "click" );
+    }
+    if(!validEmail($("#email_id").val())){
+        $('#btn_personal').die( "click" );
+      }
+      if (ec==0){
+        
+        $('#btn_personal').die( "click" );
+      }
+  });
+
+  $('#btn_product').click(function(event) {
+   
+    if (!$("input[name='user[product]']:checked").val())
+    {
+      $('#product_error').append("* Select any Product to continue..... <br/>")
+      $('#btn_product').die( "click" );
+    }else{
+      //alert($("input[name='user[product]']:checked").val());
+      $.ajax({
+        type: 'GET',
+        url: '/packages/show',
+        data:{
+          product:$("input[name='user[product]']:checked").val()
+        }
+
+      }).done(function(html) {
+        $("#packages").html(html);
+      });
+    }
+  });
+
+
+  $('#btn_package').click(function(event) {
+
+    if (!$("input[name='user[package]']:checked").val())
+    {
+      $('#package_error').append("* Select any Package  to continue..... <br/>")
+      $('#btn_package').die( "click" );
+    }else{
+      //alert($("input[name='user[package]']:checked").val());
+      $.ajax({
+        type: 'GET',
+        url: '/packages/total_value',
+        data:{
+          package_id:$("input[name='user[package]']:checked").val()
+        }
+
+      }).done(function(text) {
+        $("#total_amount").val(text);
+        $('#total_amount1').val(text);
+      });
+    }
+  });
+
+  function validEmail(v) {
+    var r = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+    return (v.match(r) == null) ? false : true;
+  }
+
+  /*function package_amount1(){
+    //alert(price);
+    var packages = new Array();
     var i=0;
-      $("input[type='radio']:checked").each(function(){
-        packages[i]=$(this).val();
-        i++;
-        //$(this).attr('checked',false);
-         //alert(packages);
+    $("input[type='radio']:checked").each(function(){
+      packages[i]=$(this).val();
+      i++;
+      //$(this).attr('checked',false);
+      //alert(packages);
     });
-   var xmlhttp;
+    var xmlhttp;
     if (window.XMLHttpRequest)
     { // code for IE7+, Firefox, Chrome, Opera, Safari
       xmlhttp=new XMLHttpRequest();
@@ -229,16 +393,16 @@
       {
         document.getElementById("total_amount").value=xmlhttp.responseText;
 
- $('#total_amount1').val($('#total_amount').val());
+        $('#total_amount1').val($('#total_amount').val());
       }
     }
     xmlhttp.open("GET","/packages/total_value?packeges="+packages,true);
     xmlhttp.send();
-      //var total=parseFloat($('#total_amount')).val()||0;
+    //var total=parseFloat($('#total_amount')).val()||0;
 
-  //$('#total_amount').val(price+total);
-  //$("#amount_label").text(price+total);
+    //$('#total_amount').val(price+total);
+    //$("#amount_label").text(price+total);
 
  
-  }
+  }*/
 </script>

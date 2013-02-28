@@ -1,25 +1,36 @@
 <%# render :layout => false %>
-<% unless @products.nil? %>
+<%# unless @products.nil? %>
 <h3>Package Selection</h3>
 <hr></hr>
-  <% @products.each do |p| %>
-<strong><%= p.name %>:</strong> <br/>
-    <div style = "border-bottom:2px solid #ccc;padding:10px;width: 400px;">
-    <% p.packages.each do |pkg| %>
+  <%# @products.each do |p| %>
+<%#*<strong><%= p.name %:</strong> <br/>%>
+    <%#*<div style = "border-bottom:2px solid #ccc;padding:10px;width: 400px;">%>
+    <%# p.packages.each do |pkg| %>
  
-      <div>
+      <%#*<div>%>
         <%#= check_box_tag "product[package][#{@i}]", pkg.price %>
-       <%=radio_button_tag "user[package][#{p.id}]",pkg.id,:id=>"package"%> <%= pkg.name %>&nbsp;<%#= link_to "Select", '#', :onclick=>"package_amount(#{pkg.price})", :class => 'btn btn-mini' %>
+       <%#=radio_button_tag "user[package][#{p.id}]",pkg.id,:id=>"package"% <%= pkg.name %&nbsp;<%#= link_to "Select", '#', :onclick=>"package_amount(#{pkg.price})", :class => 'btn btn-mini' %>
         
         <%#*Price: $ <%=pkg.price%%>
         <%#*Pictures For Tour:<%=pkg.pictures_for_tour%<br/>%>
-      </div><br />
-    <% end %>
-    </div>
-    <%end%>
+      <%#*</div><br />%>
+    <%# end %>
+    <%#*</div>%>
+    <%#end%>
     <%#*<div>%>
       <%#= link_to "Ok", '#', :onclick=>"package_amount()", :class => 'btn' %>
     <%#*</div>%>
-<%end%>
+<%#end%>
     <%#= link_to "next",'#',  :class => "slidesjs-next slidesjs-navigation" %>
-       
+
+
+
+<div style = "border-bottom:2px solid #ccc;padding:10px;width: 400px;">
+    <% @packages.each do |pkg| %>
+
+      <div>
+        
+       <%=radio_button_tag "user[package]",pkg.id,nil,:id=>"package"%> <%= pkg.name %>
+      </div><br />
+    <% end %>
+    </div>
