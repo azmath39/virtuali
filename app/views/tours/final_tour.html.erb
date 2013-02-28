@@ -1,5 +1,7 @@
 
+
 <div class="span10" id="final_tour" style="margin-top: 8%; margin-left: 9%">
+
   <div style="height: 400px; width: 650px; margin: 30px 0 0 30px;">
     <% @objs = [] %>
     <% @tour.paintings.each do |img|%>
@@ -8,7 +10,7 @@
     <% end %>
     
     <div id="myCarousel" class="carousel slide">
-      <div class="carousel-inner">
+      <div class="carousel-inner" style="height: 420px;">
         <div class="active item"><%= image_tag(@objs[0].image_url(:large))%> </div>
         <div class="item"><%= image_tag(@objs[1].image_url(:large))%></div>
         <div class="item"><%= image_tag(@objs[2].image_url(:large)) %></div>
