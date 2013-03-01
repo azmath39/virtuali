@@ -24,6 +24,7 @@ gem 'rails', '3.2.11'
   gem 'yaml_db'
   gem 'friendly_id'
   gem 'ransack'
+  gem 'rubyzip', :require => 'zip/zip'
   
 # Gems used only for assets and not required
 # in production environments by default.
