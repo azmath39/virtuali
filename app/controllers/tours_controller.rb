@@ -124,7 +124,7 @@ class ToursController < ApplicationController
     @tour = Tour.find(params[:id])
     image_list = @tour.paintings
     if !image_list.blank?
-      file_name = "pictures.zip"
+      file_name = "#{@tour.user.name}_tour_pictures_#{@tour.created_at.strftime("%d-%b-%Y_%H:%M")}.zip"
       t = Tempfile.new("my-temp-filename-#{Time.now}")
       Zip::ZipOutputStream.open(t.path) do |z|
         image_list.each do |img|
