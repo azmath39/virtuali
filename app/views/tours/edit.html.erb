@@ -3,11 +3,14 @@
 <div class="span12">
 <%= form_for Painting.new do |f| %>
   <%$serial_no=0%>
+  <%=hidden_field_tag :count,@count%>
 <div class="fileupload btn btn-warning">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
+  
 <% end %>
 </div>
+  <span id="painting_error"></span>
 <div id="paintings">
   <%= render @paintings %>
 </div>

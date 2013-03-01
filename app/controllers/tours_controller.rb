@@ -36,6 +36,9 @@ class ToursController < ApplicationController
   def edit
     @tour = Tour.find(params[:id])
     @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id  )
+    @count=@paintings.count unless @paintings.nil?
+    @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil)
+    @paintings.flatten!
     @painting = Painting.new
   end
   def update
