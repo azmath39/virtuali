@@ -39,7 +39,7 @@ class ToursController < ApplicationController
     @painting = Painting.new
   end
   def update
-    @tour = Tour.find(params[:id])
+    @tour = Tour.find(params[:tour][:id])
     if @tour.update_attributes(params[:tour])
 
       @paintings=current_user.paintings.where(:tour_id=>nil)

@@ -20,28 +20,9 @@
    
     <%#*<div style="float:right;margin: 10px 20px;">%>
       <%=link_to "view", tour_path(tour.id)%>&nbsp;|
-      <%=link_to "download", :controller => 'tours', :action => 'download_zip', :id => tour.id %>&nbsp;|
       <%=link_to "edit", edit_tour_path(tour.id)%>&nbsp;|
+      <%=link_to "download", :controller => 'tours', :action => 'download_zip', :id => tour.id %>&nbsp;|
       <%=link_to "delete", tour_path(tour.id)%>
-<%#*=======%>
-<%#*<div class="span6 well" id = 'img_bg' style="margin: 0 30px 0px -300px;">%>
-  <%#*<div>%>
-    <%#= t.paintings %>
-    <%#= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
-  <%#*<div style ="float: right; margin: -6px 100px 0 0; height:120px; width: 350px;">%>
-    <%#*<b><%= tour.state %</b><br />%>
-    <%#*<i>Beds:</i><%= tour.bed_rooms % / <i>Baths:</i><%= tour.bath_rooms %<br />%>
-    <%#*<strong>&#36; <%= tour.price %</strong><br />%>
-    <%# if !tour.description.empty? %>
-      <%#=raw truncate(tour.description, :length => -70, :omission => link_to( "More...", tour)) %>
-    <%# end %>
-    <%#*<p>Virtual Tour Available</p>%>
-  <%#*</div>%>
-    <%#*<div style="float:right;margin: -15px 0px 0px 100px;">%>
-      <%#=link_to "view", '#'%&nbsp;|
-      <%#=link_to "edit", '#'%&nbsp;|
-      <%#=link_to "delete", '#'%>
-<%#*>>>>>>> b5a91990eabc07f4917eb0a218d156c04a1eb382%>
 
     </div>
   </div>
