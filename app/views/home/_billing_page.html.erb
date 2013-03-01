@@ -3,7 +3,7 @@
 <table class="table  table-striped">
     <tr><th> Name </th><th>Status:</th><th>  Price:</th><th><%10.times do %>&nbsp;<%end%>
               </th></tr></table></div>
-  <%current_user.selected_packages.each do |pkg|%>
+  <%pkg=current_user.selected_package %>
     <%initiate(pkg)%>
 
     <div class="container-fluid">
@@ -53,7 +53,7 @@
 
 
 
-  <%end%>
+ 
  
 <%else%>
 

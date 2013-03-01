@@ -11,7 +11,8 @@ class HomeController < ApplicationController
   def index
     if current_user
       @feedback = Feedback.new
-      @selected_pkgs = selected_pkgs_with_tour
+      @tours= current_user.tours
+      #@selected_pkgs = selected_pkgs_with_tour
     end
   end
 
@@ -72,12 +73,12 @@ class HomeController < ApplicationController
   end
   private
 
-  def selected_pkgs_with_tour
-    pkgs= current_user.selected_packages.select do|spkg|
-      spkg unless spkg.tour.nil?
-    end
-    return pkgs
-  end
+#  def selected_pkgs_with_tour
+#    pkgs= current_user.selected_packages.select do|spkg|
+#      spkg unless spkg.tour.nil?
+#    end
+#    return pkgs
+#  end
   def change_card
     cu = Stripe::Customer.retrieve(get_stripe_customer_id)
     cu.card=@token

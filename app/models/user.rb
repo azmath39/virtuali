@@ -35,10 +35,10 @@ class User < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
   has_many :tours, :dependent => :destroy
-  has_many :products, :through => :selected_products
-  has_many :selected_products
-  has_one :packages, :through => :selected_packages
-  has_one :selected_packages
+  has_one :product, :through => :selected_product
+  has_one :selected_product
+  has_one :package, :through => :selected_package
+  has_one :selected_package
   has_one :card
   has_many :feedbacks, :dependent => :destroy
 has_many :paintings, :dependent=>:destroy
@@ -48,13 +48,13 @@ has_many :paintings, :dependent=>:destroy
     unless pkg.nil?
      
         p=Package.find(pkg.to_i)
-        self.selected_packages<<SelectedPackage.create(:package_id=>p.id,:price=>p.price)
+        self.selected_package=SelectedPackage.create(:package_id=>p.id,:price=>p.price)
      
     end
   end
   def product=(pro)
     unless pro.nil?
-        self.selected_products<<SelectedProduct.create(:product_id=>pro.to_i)
+        self.selected_product=SelectedProduct.create(:product_id=>pro.to_i)
     end
   end
 

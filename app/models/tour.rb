@@ -45,14 +45,17 @@ class Tour < ActiveRecord::Base
     "#{state}, #{city}"
   end
 
-def set_status
-  self.status ||= 1
-end
-def set_address
-  self.address = "#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
-end
+  def set_status
+    self.status ||= 1
+  end
+  def set_address
+    self.address = "#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
+  end
+  def tour_name
+    "#{self.zip} #{self.state}"
+  end
 
-def tour_status
+  def tour_status
 
     case status
     when 1

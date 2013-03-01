@@ -9,7 +9,7 @@ class PackagesController < ApplicationController
   def total_value
     
     
-      @value = Package.find(params["package_id"].to_i).price
+      @value = Package.find(params["package_id"].to_i).yearly_price
   
    
     render :text=>@value
