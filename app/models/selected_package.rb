@@ -16,7 +16,7 @@ class SelectedPackage < ActiveRecord::Base
   belongs_to :user
   belongs_to :package
   before_create :asign_status, :set_expire_date
-  has_one :tour
+  has_many :tour
   def asign_status
    # puts "S"*25
     self.status ||=0

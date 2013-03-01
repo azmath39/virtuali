@@ -30,8 +30,14 @@
     <% @packages.each do |pkg| %>
 
       <div>
-        
-       <%=radio_button_tag "user[package]",pkg.id,nil,:id=>"package"%> <%= pkg.name %>
+        <table class="table table-bordered">
+          <tr> <td><%=radio_button_tag "user[package]",pkg.id,nil,:id=>"package"%></td><td><%=pkg.name%></td></tr>
+       <tr> <td> Price:</td><td> <%=pkg.price%></td></tr>
+       <tr> <td> No Of Tours:</td><td> <%=pkg.max_tours%></td></tr>
+       <tr> <td> Pictures per Tour: </td><td><%=pkg.pictures_for_tour%></td></tr>
+       <tr> <td> Template size:</td><td> 600x400</td></tr>
+
+        </table>
       </div><br />
     <% end %>
     </div>

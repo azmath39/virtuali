@@ -37,8 +37,8 @@ class User < ActiveRecord::Base
   has_many :tours, :dependent => :destroy
   has_many :products, :through => :selected_products
   has_many :selected_products
-  has_many :packages, :through => :selected_packages
-  has_many :selected_packages
+  has_one :packages, :through => :selected_packages
+  has_one :selected_packages
   has_one :card
   has_many :feedbacks, :dependent => :destroy
 has_many :paintings, :dependent=>:destroy
