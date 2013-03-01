@@ -19,7 +19,7 @@
 //= require galleria.classic
 //= require stripe
 //= require_tree .
-function packages(){
+/*function packages(){
     var products = new Array();
     var i=0;
     $("input:checked").each(function(){
@@ -85,8 +85,6 @@ function packages(){
   //$("#amount_label").text(price+total);
 
   $('#total_amount1').val($('#total_amount').val());
-  }
+  }*/
 
-
-  //menu handling
-  
+ 

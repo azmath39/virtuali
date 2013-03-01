@@ -1,3 +1,4 @@
+<%#= javascript_include_tag "registration" %>
 <style>
   /* Prevent the slideshow from flashing on load */
 
@@ -113,10 +114,11 @@
 
   <div id="slides" >
     <div id="personal_info">
-      <span id="personal_info_error" style="color:red;"></span>
+      
       <div id="scont">
         <h3>Personal Information</h3>
         <hr></hr>
+        <span id="personal_info_error" style="color:red;"></span>
         <div>
           <%= f.label :name %>
           <%= f.text_field :name %><span id="personal_info_error_name" style="color:red;"></span>
@@ -131,7 +133,7 @@
         </div>
         <div>
           <%= f.label :password %>
-          <%= f.password_field :password, :id=>"password" %><span id="personal_info_password" style="color:red;"></span>
+          <%= f.password_field :password, :id=>"password" %><span id="personal_info_error_password" style="color:red;"></span>
         </div>
         <div>
           <%= f.label :password_confirmation %>
@@ -148,10 +150,12 @@
 
     </div>
     <div id="product_select" >
-      <span id="product_error" style="color:red;"></span>
+      
       <div id="scont">
         <h3>Product Selection</h3>
+        <span id="product_error" style="color:red;"></span>
         <hr></hr>
+        <span id="product_error" style="color:red;"></span>
         <%@i=0%>
         <% Product.all.each do |x| %>
           <div>
@@ -161,18 +165,18 @@
         <% end %><br />
       </div>
       <div id="next_btn">
-        <%=button_tag "next",:class => "slidesjs-next slidesjs-navigation btn-large btn-danger",:id=>"btn_product" %>
+        <%=button_tag "next",:class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_product" %>
   <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
       </div>
     </div>
     <div id ="package_info">
-      <span id="package_error" style="color:red;"></span>
+      
       <div id="scont">
         <div id="packages">
 
         </div></div>
       <div id="next_btn">
-        <%=button_tag "next",  :class => "slidesjs-next slidesjs-navigation btn-large btn-danger",:id=>"btn_package"%>
+        <%=button_tag "next",  :class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_package"%>
   <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
       </div>
     </div>
@@ -206,7 +210,7 @@
           <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
         </div></div>
       <div id="next_btn">
-        <%= f.submit "Sign up",  :class=>"btn-large btn-danger", :disable_with => "Please wait.." %>
+        <%= f.submit "Sign up",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
       </div>
     </div>
   <%#= link_to "pre",'#', :class =>"slidesjs-previous slidesjs-navigation" %>
@@ -214,24 +218,23 @@
   </div>
 <% end %>
 <%#= render "devise/shared/links" %>
-<%= javascript_include_tag "jquery.slides.min" %>
+<%#= javascript_include_tag "jquery.slides.min" %>
 <script>
-  var ec=0;
-  $(function() {
-    
-    
+ 
+var ec=0;
+  $(document).ready(function() {
     $('#slides').slidesjs({
       width: 500,
       height: 580,
-     
+
       navigation: true
-    
+
     });
-    
+
   });
 
   function email_validation(){
-
+$('#personal_info_error_email').html("");
     if(validEmail($("#email_id").val())){
       $.ajax({
         type: 'GET',
@@ -240,32 +243,50 @@
           email:$("#email_id").val()
         }
       }).done(function(text){
-
         if(text==1){
           ec=1;
-         
-
         }else {
+          $('#personal_info_error_email').append("<br/>* Email already exists. ");
+          ec=0; }
+      });}else{
+      $('#personal_info_error_email').append(" <br/>* Enter valid Email address. ");
+    } }
 
-          $('#personal_info_error_email').append("* Email already exists <br/>");
-          ec=0;
-        }
+ $("#user_name").blur(function(event){
 
-      });
-    }else{
-      $('#personal_info_error_email').append("* Enter valid Email address. <br/>");
+ //alert("ok");
+ $('#personal_info_error_name').html("");
+  if($("#user_name").val()==""){
+      $('#personal_info_error_name').append("<br/>* Required field Name.");
     }
 
+ });
+  $("#password").blur(function(event){
+ $('#personal_info_error_password').html("");
+  if($("#password").val()==""){
+      $('#personal_info_error_password').append("<br/>* Required field password.");
+    }else if($("#password").val().length<8){
+      $('#personal_info_error_password').append("<br/>* Password should be more than 8 characters. ");
+    }
 
-  }
+ });
+
+$("#password_confirmation").blur(function(event){
+   $('#personal_info_error_cpassword').html("");
+   if($("#password_confirmation").val()==""){
+      $('#personal_info_error_cpassword').append("<br/>* Required field Password_Confirmation.");
+    }else if($("#password_confirmation").val()!=$("#password").val()){
+      $('#personal_info_error_cpassword').append("<br/>* Password and Password_Confirmation should match.");
+    }
+});
 
   $('#btn_personal').click(function(event) {
-    
-    $('#personal_info_error').html("");
+
+   /* $('#personal_info_error').html("");
     if($("#user_name").val()==""){
       $('#personal_info_error_name').append("* Required field Name <br/>");
     }
-   
+
     if($("#password").val()==""){
       $('#personal_info_error_password').append("* Required field Password <br/>");
     }
@@ -279,19 +300,19 @@
     if($("#password_confirmation").val()!=$("#password").val()){
       $('#personal_info_error_cpassword').append("* Password and Password_Confirmation should match. <br/>");
     }
-    
+
 
     if(!validEmail($("#email_id").val())){
       $('#personal_info_error_email').append("* Enter valid Email address. <br/>");
-        
+
     }
     if (ec==0){
       $('#personal_info_error_email').append("* Email already exists <br/>");
 
-    }
-      
-    
-   
+    }*/
+
+
+
     if($("#user_name").val()==""){
       $('#btn_personal').die( "click" );
     }
@@ -314,13 +335,13 @@
       $('#btn_personal').die( "click" );
     }
     if (ec==0){
-        
+
       $('#btn_personal').die( "click" );
     }
   });
 
   $('#btn_product').click(function(event) {
-   
+
     if (!$("input[name='user[product]']:checked").val())
     {
       $('#product_error').append("* Select any Product to continue..... <br/>")
@@ -367,7 +388,8 @@
     var r = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
     return (v.match(r) == null) ? false : true;
   }
-
+  //menu handling
+  
   /*function package_amount1(){
     //alert(price);
     var packages = new Array();
