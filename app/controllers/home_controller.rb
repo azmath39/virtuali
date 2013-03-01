@@ -1,5 +1,4 @@
 class HomeController < ApplicationController
-
   def validate_email
    user=User.find_by_email(params[:email])
    if user.nil?
@@ -35,9 +34,6 @@ class HomeController < ApplicationController
     index
     render 'index'
   end
-
-
-
 
   def change_card_details
     @token = params[:stripeToken]

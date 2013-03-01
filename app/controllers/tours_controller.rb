@@ -122,6 +122,27 @@ class ToursController < ApplicationController
     end
   end
 
+  def download_zip
+    @tour = Tour.find(params[:id])
+    image_list = @tour.paintings
+    if !image_list.blank?
+      file_name = "#{@tour.user.name}_tour_pictures_#{@tour.created_at.strftime("%d-%b-%Y_%H:%M")}.zip"
+      t = Tempfile.new("my-temp-filename-#{Time.now}")
+      Zip::ZipOutputStream.open(t.path) do |z|
+        image_list.each do |img|
+          title = img.name
+          #title += ".jpg" unless title.end_with?(".jpg")
+          z.put_next_entry(title)
+          z.print IO.read(img.image.path)
+        end
+      end
+    end
+    send_file t.path, :type => 'application/zip',
+                             :disposition => 'attachment',
+                             :filename => file_name
+      t.close
+  end
+
   private
   def selected_pkgs_without_tour
     current_user.selected_packages.select do|spkg|
