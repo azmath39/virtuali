@@ -1,10 +1,10 @@
-<div style="margin: 0 0 0 70px;">
+<div style="margin: 0 0 0 15%;">
 <h1>Displaying Photos</h1>
-<script src="/root/rails_project/sample_app/app/assets/javascript/galleria-1.2.9.min.js"></script>
+
 <div id="abc" style="height: 550px; width: 850px;border: 1px solid #CCC;padding: 10px;border-radius: 2px;">
 <% @tour.paintings.each do |p| %>
     <span class="content">
-      <%= image_tag p.image_url(:large) %>
+      <%=image_tag p.image_url(:large) %>
     </span>
 <% end %>
 </div>

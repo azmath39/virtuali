@@ -1,7 +1,5 @@
-<br /><br/>
-
-<div id="myCarousel1" class="carousel slide carousel-fade" style="margin-top:14px;box-shadow: 10px 10px 5px #888888;">
-     <div class="carousel-inner" style="height: 550px;">
+<div id="myCarousel1" class="carousel slide carousel-fade">
+     <div class="carousel-inner">
         <div class="active item"><%= image_tag("slide-01.jpg")%> </div>
         <div class="item"><%= image_tag("slide-02.jpg")%></div>
         <div class="item"><%= image_tag("slide-03.jpg")%></div>
@@ -15,8 +13,7 @@
   <div class="container marketing">
 
 <!-- START THE FEATURETTES -->
-      <div class="featurette">
-        
+     <div class="featurette">
         <%= image_tag("browser-icon-chrome.png", :class => "featurette-image pull-right") %>
         <h2 class="featurette-heading">First featurette headling. <span class="muted">It'll blow your mind.</span></h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
@@ -31,34 +28,36 @@
       </div>
 
       <hr class="featurette-divider">
-
       <div class="featurette">
-        
         <%= image_tag("browser-icon-safari.png", :class => "featurette-image pull-right") %>
         <h2 class="featurette-heading">And lastly, this one. <span class="muted">Checkmate.</span></h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
       </div>
       <!-- /END THE FEATURETTES -->
-
 <hr class="featurette-divider">
-
       <!-- Three columns of text below the carousel -->
       <div class="span12">
       <div class="pricing_grid row">
-        <div class="span3" style="margin-left: 80px;">
-          <img class="img-circle" data-src="holder.js/140x140">
+        <div class=" first-grid span3" style="margin-left: 80px;">
+          <%#*<img class="img-circle" data-src="holder.js/140x140">%>
+          <p id="price"><sup id="dollar-symb">$</sup>50<sub id ="per-month">/Month</sub></p>
+          <hr />
           <h2>Package1</h2>
           <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
           <p><a class="btn" href="#">View details &raquo;</a></p>
         </div><!-- /.span4 -->
-        <div class="span3" style="height: 430px;margin: -30px 0 0px 0px; padding: 40px;"><br />
-          <img class="img-circle" data-src="holder.js/140x140">
+        <div class="span3" id="long-landing" style="height: 430px;margin: -30px 0 0px 0px; padding: 40px;"><br />
+          <%#*<img class="img-circle" data-src="holder.js/140x140">%>
+          <p id="price"><sup id="dollar-symb">$</sup>50<sub id ="per-month">/Month</sub></p>
+          <hr />
           <h2>Package2</h2>
           <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <p><a class="btn" href="#">View details &raquo;</a></p>
         </div><!-- /.span4 -->
         <div class="span3" style="margin-left: 0px;">
-          <img class="img-circle" data-src="holder.js/140x140">
+          <%#*<img class="img-circle" data-src="holder.js/140x140">%>
+          <p id="price"><sup id="dollar-symb">$</sup>50<sub id ="per-month">/Month</sub></p>
+          <hr />
           <h2>Package3</h2>
           <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <p><a class="btn" href="#">View details &raquo;</a></p>

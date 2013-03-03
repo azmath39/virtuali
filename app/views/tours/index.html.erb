@@ -1,23 +1,24 @@
-
-<div style="margin-top: 8%;">
-
-<h2 style="margin: 0 0 10px 280px;">List of Tours</h2>
-<div class="span6">
-<% @tours.each do |tour| %>
-<div class="span6 well" id = 'img_bg' style="margin: 0 0 0px 300px;">
+<div class ="span3" id="map-search">
+  <p class="title-text">Search</p>
+  <%= render 'search_form' %>
+</div>
+<div class="span8" id ="tour-list">
+  <p class="title-text">List of Tours</p>
+ <% @tours.each do |tour| %>
+  <div class="span7 well" id = 'img_bg'>
   <div>
     <%#= t.paintings %>
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
-  <div style ="float: right; margin: -6px 100px 0 0; height:120px; width: 350px;">
+    <div style ="float: right; margin: -6px 200px 0 0; height:100px; width: 350px;">
     <strong><%= tour.state %></strong><br />
     <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
     <strong>Price: </strong> <%= tour.price %><br />
     <strong>Description:</strong>
     <%= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%><br />
     <% if tour.status == 1 %>
-    <p><strong>Status:</strong> Active</p>
+    <strong>Status:</strong> Active
     <% end %>
-  </div>
+   </div>
   </div>
 </div>
 <% end %>
@@ -25,10 +26,8 @@
 <% if @tours.blank? %>
   <p style="color:red;margin-left:280px;">No Tours found, Please try again!</p>
 <% end %>
-  <%= render 'search_form' %>
+  <%#= render 'search_form' %>
 <div class ="span4" style="margin: 0 0px 0 300px; float: left;">
   <%= will_paginate @tours, :renderer => BootstrapPagination::Rails %>
 </div>
-</div>
-
 </div>

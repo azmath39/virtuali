@@ -1,23 +1,19 @@
-<br /><br /><br /><br />
-<%#= render 'search_form' %>
-<div class ="span3" style="margin: 0 1px 0 0px; float: left;position: fixed;">
-  <h2 style="margin: -45px 0 0px 0px;float: left;">Search</h2>
+<div class ="span3" id="map-search">
+  <p class="title-text">Search</p>
   <%= search_form_for @search, :url => '/tours/view_map', :class => 'well form-inline', :id => 'img_bg' do |f| %>
     <%= f.label :state_cont, "State" %>
     <%=f.select :state_cont, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
     <%= f.label :city_cont, "City" %>
-    <%=f.select :city_cont, {}, :prompt=>"Select City"%>
+    <%=f.select :city_cont, {}, :prompt=>"Select City"%><br />
     <%#= f.label :price_gteq, "Price Between" %>
     <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %><%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
-    <br/><br /><br /><br /><br />
-<%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
+    <br/><%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
   <% end %>
 </div>
 
 <div id="map-div">
-  <h1>Tour Map</h1>
+  <p class="title-text">Tour Map</p>
   <div style="float: right;margin: -30px 200px 0 0;">
-    
     <%= link_to "All Tours", {:controller => 'tours', :action => 'view_map'} , :class=> 'btn btn-mini btn-primary'%>&nbsp;
     <%  Product.all.each do |p| %>
       <%@product=p%>
@@ -29,9 +25,9 @@
   "markers" => {"data" => @json }
    })%>
 <%#*</div>%>
-
   <%= gmaps4rails(@json)%>
 </div>
+
 <script>
  function state_city()
   {

@@ -104,7 +104,7 @@ class ToursController < ApplicationController
          @tours = @search.result
         end
         @json = @tours.to_gmaps4rails do |tour, marker|
-        marker.infowindow("#{tour.name}<br />" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
+        marker.infowindow("<b>#{tour.zip} #{tour.city}</b><br />" "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<hr>" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
         marker.title("#{tour.city}")
       end
     end
