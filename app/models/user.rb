@@ -45,12 +45,12 @@ class User < ActiveRecord::Base
   
 
   def package=(pkg)
-      p=Package.find(pkg[:id].to_i)
-      if pkg.include?:type_of_payment
+    p=Package.find(pkg[:id].to_i)
+    if pkg.include?:type_of_payment
       self.selected_package=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>pkg["type_of_payment"])
-      else
+    else
       self.selected_package=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour)
-      end
+    end
   end
   def product=(pro)
     unless pro.nil?
@@ -65,10 +65,10 @@ class User < ActiveRecord::Base
   end
   def ajust_amount(price)
     if self.card.nil?
-          price.to_f-unused_money(price)
+      price.to_f-unused_money(price)
   
     else
-    price
+      price
     end
 
   end
