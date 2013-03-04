@@ -9,14 +9,18 @@ class AdministratorsController < ApplicationController
     render :nothing=>true
   end
   def user_account_maintenance
+    puts "hdbhfb"*10
     disable_tours
     delete_tours
     inform_users
   end
   private
   def disable_tours
-    selected_pkgs= SelectedPackage.where(:renew_date=>Date.yesterday,:status=>[0,1])
+
+    #selected_pkgs= SelectedPackage.where(:renew_date=>Date.yesterday,:status=>[0,1])
+    selected_pkgs=SelectedPackage.all
     selected_pkgs.each do |s_pkg|
+      puts s_pkg
       s_pkg.tours_disable
     end unless selected_pkgs.empty?
   end

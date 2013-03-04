@@ -129,7 +129,7 @@
         </div>
         <div>
           <%= f.label "email*" %>
-          <%= f.email_field :email, :autofocus => true,:id=>"email_id",:onblur=>"email_validation()" %><span id="personal_info_error_email" style="color:red;"></span>
+          <%= f.email_field :email,:id=>"email_id",:onblur=>"email_validation()" %><span id="personal_info_error_email" style="color:red;"></span>
         </div>
         <div>
           <%= f.label "password*" %>

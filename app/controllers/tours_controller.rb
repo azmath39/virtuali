@@ -22,7 +22,7 @@ class ToursController < ApplicationController
     @tour = Tour.new(params[:tour])
     if @tour.save
       current_user.tours << @tour
-      NotificationsMailer.tour_created_message(current_user, @tour).deliver
+#      NotificationsMailer.tour_created_message(current_user, @tour).deliver
       @paintings=current_user.paintings.where(:tour_id => nil)
       @paintings.each do |pic|
         @tour.paintings<<pic
