@@ -1,29 +1,26 @@
-<div class="span6">
+<div class="span8">
 <% @tours.each do |tour| %>
-
-<div class="span6 well" id = 'img_bg' style="margin: 0 30px 1px 0px;">
+<div class="span7 well" id = 'img_bg' style="margin: 0px 30px 1px 0px;">
   <div>
     <%#= t.paintings %>
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
-  <div style =" margin: -100px 2px 0px 115px;float: left;">
+  <div style ="float: right; margin: -6px 200px 0 0; height:100px; width: 350px;">
     <strong><%= tour.state %></strong><br />
     <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
     <strong>Price: </strong> <%= tour.price %><br />
     <strong>Description:</strong>
     <%= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%><br />
     <% if tour.status == 1 %>
-      <p><strong>Status:</strong> Active</p>
+    <strong>Status:</strong> Active
     <% end %>
   </div>
 
-    <div style="float:right;margin: -15px 0px 10px 100px;">
-   
-    <%#*<div style="float:right;margin: 10px 20px;">%>
+    <div style="float:right;margin: -15px 0px 0px 10px;">
+      <%#*<div style="float:right;margin: 10px 20px;">%>
       <%=link_to "view", tour_path(tour.id)%>&nbsp;|
       <%=link_to "edit", edit_tour_path(tour.id)%>&nbsp;|
       <%=link_to "download", :controller => 'tours', :action => 'download_zip', :id => tour.id %>&nbsp;|
       <%=link_to "delete", tour_path(tour.id)%>
-
     </div>
   </div>
 </div>
