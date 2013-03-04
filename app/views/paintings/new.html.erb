@@ -1,23 +1,17 @@
-<%unless @selected_pkgs.empty?%>
+<%if verify_tours_allowed%>
 <h1>Create a Tour</h1>
 <div class="span12">
 <%= form_for Painting.new do |f| %>
-  <%@serial_no=0%>
+  <%$serial_no=0%>
 <div class="fileupload btn btn-warning">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
 <% end %>
 </div>
 
-<%#*<div style ="float: right;margin: -50px 220px 0 0">%>
-  <%#= link_to "Continue..", '/tours/new', :class => 'btn btn-small btn-primary' %>
-<%#*</div>%>
-
 <div id="paintings">
   <%= render @paintings %>
 </div>
-<%#*<div class="clear">%>
-<%#*</div>%>
 <br/>
 </div>
 
@@ -26,16 +20,6 @@
 <%= form_for @tour, :url => '/tours/create', :html =>{:class => "form-horizontal"}  do |f| %>
  <h3><legend>Tour Details:</legend></h3>
 <div style="float:left;">
- <div class="control-group">
-  <%= f.label :package, :html => {:class => 'control-label'} %>
-  <%= f.select :selected_package_id, @selected_pkgs.collect{|sp|[sp.name,sp.id]},:prompt=>"Select package" %>
-</div>
-<%#*<div class="control-group">%>
-  <%#€= f.label :name, :html => {:class => 'control-label'} %>
-  <%#= f.text_field :name %>
-  <%#= label_tag "tour[category]", nil, :html => {:class => 'cotrol-label'} %>
-  <%#= text_field_tag :category %>
-<%#*</div>%>
 <div class ="control-group">
   <%= f.label :state, :html => {:class => 'control-label'} %>
   <%#= f.text_field :state %>

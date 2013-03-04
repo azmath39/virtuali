@@ -36,19 +36,20 @@ class ToursController < ApplicationController
   def edit
     @tour = Tour.find(params[:id])
     @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id  )
+    @count=@paintings.count unless @paintings.nil?
+    @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil)
+    @paintings.flatten!
     @painting = Painting.new
   end
   def update
     @tour = Tour.find(params[:tour][:id])
     if @tour.update_attributes(params[:tour])
-
       @paintings=current_user.paintings.where(:tour_id=>nil)
       @paintings.each do |pic|
         @tour.paintings<<pic
       end unless @paintings.empty?
       flash.now[:notice] = 'Tour updated successfully.'
        redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
-
     else
       flash.now[:error] = 'Sorry,Unable to update Tour.'
       edit

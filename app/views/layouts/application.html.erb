@@ -20,7 +20,7 @@
       <%= render 'shared/flash_messages' %>
     <% end %>
     <%= yield %>
-    <%= yield :scripts %>
+    <%#= yield :scripts %>
     <% if current_user %>
     <%= render 'feedbacks/feedback_form' %>
     <div id="feedback">

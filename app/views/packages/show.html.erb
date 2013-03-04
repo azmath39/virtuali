@@ -1,37 +1,19 @@
-<%# render :layout => false %>
-<%# unless @products.nil? %>
 <h3>Package Selection</h3>
 <hr></hr>
 <span id="package_error" style="color:red;"></span>
-  <%# @products.each do |p| %>
-<%#*<strong><%= p.name %:</strong> <br/>%>
-    <%#*<div style = "border-bottom:2px solid #ccc;padding:10px;width: 400px;">%>
-    <%# p.packages.each do |pkg| %>
- 
-      <%#*<div>%>
-        <%#= check_box_tag "product[package][#{@i}]", pkg.price %>
-       <%#=radio_button_tag "user[package][#{p.id}]",pkg.id,:id=>"package"% <%= pkg.name %&nbsp;<%#= link_to "Select", '#', :onclick=>"package_amount(#{pkg.price})", :class => 'btn btn-mini' %>
-        
-        <%#*Price: $ <%=pkg.price%%>
-        <%#*Pictures For Tour:<%=pkg.pictures_for_tour%<br/>%>
-      <%#*</div><br />%>
-    <%# end %>
-    <%#*</div>%>
-    <%#end%>
-    <%#*<div>%>
-      <%#= link_to "Ok", '#', :onclick=>"package_amount()", :class => 'btn' %>
-    <%#*</div>%>
-<%#end%>
-    <%#= link_to "next",'#',  :class => "slidesjs-next slidesjs-navigation" %>
-
-
-
 <div style = "border-bottom:2px solid #ccc;padding:10px;width: 400px;">
-    <% @packages.each do |pkg| %>
-
-      <div>
-        
-       <%=radio_button_tag "user[package]",pkg.id,nil,:id=>"package"%> <%= pkg.name %>
-      </div><br />
-    <% end %>
-    </div>
+  <% @packages.each do |pkg| %>
+    <div>
+      <table class="table table-bordered">
+        <tr> <td><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package"%></td><td><%=pkg.name%></td></tr>
+        <tr> <td> Price:</td><td> <%=pkg.price%></td></tr>
+        <tr> <td> No Of Tours:</td><td> <%=pkg.max_tours%></td></tr>
+        <tr> <td> Pictures per Tour: </td><td><%=pkg.pictures_for_tour%></td></tr>
+        <tr> <td> Template size:</td><td> 600x400</td></tr>
+        <%unless pkg.monthly_price.nil?%>
+          <tr> <td> <%=radio_button_tag "user[package][type_of_payment]",1%> &nbsp;Monthly</td><td><%=radio_button_tag "user[package][type_of_payment]",2%> &nbsp;Yearly </td></tr>
+        <%end%>
+      </table>
+    </div><br />
+  <% end %>
+</div>

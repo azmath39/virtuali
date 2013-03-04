@@ -12,19 +12,29 @@
 #
 
 class SelectedPackage < ActiveRecord::Base
-  attr_accessible :package_id, :price, :user_id,:status
+  attr_accessible :package_id, :price, :user_id,:status,:pictures_for_tour,:payment_period_type
   belongs_to :user
   belongs_to :package
-  before_create :asign_status, :set_expire_date
-  has_one :tour
-  def asign_status
-   # puts "S"*25
+  after_initialize :assign_status_expire_date_payment_period_type
+  after_create :set_renew_date
+  has_many :tour
+  # == call back
+  def assign_status_expire_date_payment_period_type
+    # puts "S"*25
     self.status ||=0
+    self.expire_date ||=Date.today+365
+    self.payment_period_type ||=2
   end
-  def set_expire_date
-    self.expire_date ||=Date.today+30
+  def set_renew_date
+    if self.payment_period_type==1
+      self.renew_date ||= self.created_at.to_date+30
+    else
+      self.renew_date ||= self.created_at.to_date+365
+    end
+    self.save
   end
-  
+
+  # == Getters
   def name
     Package.find(package_id).name
   end
@@ -41,8 +51,8 @@ class SelectedPackage < ActiveRecord::Base
       "Unsubscribed"
     end
   end
-   def tour_status
-     status_tour = self.tour.status
+  def tour_status
+    status_tour = self.tour.status
     case status_tour
     when 1
       "Active"
@@ -53,6 +63,20 @@ class SelectedPackage < ActiveRecord::Base
     when 3
       "Sold"
     end
+  end
+  def tours_disable
+    self.update_attributes(:status=>2)
+    self.user.tours.each do |tour|
+      tour.update_attribute(:status=>2)
+    end
+  end
+  def tours_destroy
+    self.user.tours.each do |tour|
+      tour.destroy
+    end
+  end
+  def send_alert_message
+
   end
 
 end

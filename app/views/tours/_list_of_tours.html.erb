@@ -20,8 +20,8 @@
       <%=link_to "view", tour_path(tour.id)%>&nbsp;|
       <%=link_to "edit", edit_tour_path(tour.id)%>&nbsp;|
       <%=link_to "download", :controller => 'tours', :action => 'download_zip', :id => tour.id %>&nbsp;|
-      <%=link_to "delete", tour_path(tour.id)%>
-    </div>
+      <%=link_to "delete", tour_path(tour.id),:method=>:delete, :confirm => "Are you sure?"%>
+   </div>
   </div>
 </div>
 <% end %>

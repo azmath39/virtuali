@@ -1,9 +1,10 @@
 <% if current_user %>
+<div style="float:right;"><%= link_to "Upgrade Your Package", '/packages/upgrade_package', :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  %></div>
 <div class="container-fluid">
 <table class="table  table-striped">
     <tr><th> Name </th><th>Status:</th><th>  Price:</th><th><%10.times do %>&nbsp;<%end%>
               </th></tr></table></div>
-  <%current_user.selected_packages.each do |pkg|%>
+  <%pkg=current_user.selected_package %>
     <%initiate(pkg)%>
 
     <div class="container-fluid">
@@ -53,7 +54,7 @@
 
 
 
-  <%end%>
+ 
  
 <%else%>
 

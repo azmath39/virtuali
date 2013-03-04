@@ -17,7 +17,6 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require galleria-1.2.9.min
 //= require galleria.classic
-//= require stripe
 //= require_tree .
 /*function packages(){
     var products = new Array();

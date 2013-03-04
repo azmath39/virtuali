@@ -1,6 +1,10 @@
+<%if @painting.nil?%>
+$("#painting_error").html("<div class='alert'>Out of Package limit</div> ");
+<%else%>
 <% if @painting.new_record? %>
   alert("Failed to upload painting: <%= j @painting.errors.full_messages.join(', ').html_safe %>");
 <% else %>
   
   $("#paintings").append("<%= j render(@painting) %>");
 <% end %>
+<%end%>

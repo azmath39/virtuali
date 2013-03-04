@@ -1,41 +1,44 @@
 <%#= render 'side_buttons'%>
 <script>
   $(document).ready(function(){
-      $.ajax({
-        type: 'GET',
-        url: '/tours/user_tours'
 
-      }).done(function(html) {
-        $("#user_tours").html(html);
-      });
+    $.ajax({
+      type: 'GET',
+      url: '/tours/user_tours'
+
+    }).done(function(html) {
+      $("#user_tours").html(html);
+    });
+    
   });
-  </script>
-  <div class="navbar">
+
+</script>
+<div class="navbar">
   <div>
-<ul class="nav" style="height:100px;margin-left: 14%;width:68%">
-<li class="active tab"><%= link_to "Dashboard", "#div_dashboard", "data-toggle" => "tab"%> </li>
-  <li class="tab"><%= link_to "Status", '#div_status', "data-toggle" => "tab"%> </li>
-  <li class="tab"><%= link_to "Billing", '#div_billing', "data-toggle" => "tab" %></li>
-  <li class="tab"><%#= link_to "How to?", '#div_how', "data-toggle" => "tab"%> </li>
-  <li class="tab"><%= link_to "Profile", '#div_profile', "data-toggle" => "tab" %></li>
-    <li class="tab"><%#= link_to "Manage Account", '#div_manage', "data-toggle" => "tab"%> </li>
-</ul>
-</div></div>
+    <ul class="nav" style="height:100px;margin-left: 14%;width:68%">
+      <li class="active tab"><%= link_to "Dashboard", "#div_dashboard", "data-toggle" => "tab"%> </li>
+      <li class="tab"><%= link_to "Status", '#div_status', "data-toggle" => "tab"%> </li>
+      <li class="tab"><%= link_to "Billing", '#div_billing', "data-toggle" => "tab" %></li>
 
-<%= render 'payment_form' %>
+      <li class="tab"><%= link_to "Profile", '#div_profile', "data-toggle" => "tab" %></li>
+      <li class="tab"><%#= link_to "Manage Account", '#div_manage', "data-toggle" => "tab"%> </li>
+     <li class="tab"><%#= link_to "Upgrade Account", '#div_upgrade', "data-toggle" => "tab"%> </li>
+    </ul>
+
+  </div></div>
+<%#= render 'payment_form' %>
 <%=render "tab_content"%>
-
 <style>
   .tab{
     width:25%;
     text-align:center;
-}
+  }
   .tab > a{
     font-size:20px;
     line-height: 4;
     box-shadow:10px 10px 5px #888888;
-}
-.tab > a:hover{
-  color: black !important;
-}
+  }
+  .tab > a:hover{
+    color: black !important;
+  }
 </style>

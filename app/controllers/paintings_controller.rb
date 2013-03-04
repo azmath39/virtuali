@@ -14,24 +14,27 @@ class PaintingsController < ApplicationController
     @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil)
     @painting = Painting.new
     @tour = Tour.new
-     @selected_pkgs=selected_pkgs_without_tour
+    # @selected_pkgs=selected_pkgs_without_tour
   end
 
   def create
-    @painting = Painting.create(params[:painting])
-    @painting.user_id= current_user.id
-    @painting.save
-#    puts "***********************"
-#    p @painting
-#
-#    $ids << @painting.id
-#    session[:painting] = $ids
-#    puts "**********************"
-#
-#    puts "*****************session******"
-#    p session[:painting].flatten()
-#  puts "***********************"
- #p session[:painting]=nil
+    @previous_count=params[:count] if params.include?"count"
+    if verify_no_image then
+      @painting = Painting.create(params[:painting])
+      @painting.user_id= current_user.id
+      @painting.save
+    end
+    #    puts "***********************"
+    #    p @painting
+    #
+    #    $ids << @painting.id
+    #    session[:painting] = $ids
+    #    puts "**********************"
+    #
+    #    puts "*****************session******"
+    #    p session[:painting].flatten()
+    #  puts "***********************"
+    #p session[:painting]=nil
   end
 
   def edit
@@ -51,17 +54,35 @@ class PaintingsController < ApplicationController
     @painting = Painting.find(params[:id])
     if @painting.destroy
       redirect_to :back
-     # redirect_to paintings_url, :notice=> "Image was successfully deleted."
+      # redirect_to paintings_url, :notice=> "Image was successfully deleted."
     end
   end
 
   private
-  def selected_pkgs_without_tour
-   pkgs= current_user.selected_packages.select do|spkg|
-        
-      spkg if spkg.tour.nil?
-      
+  #  def selected_pkgs_without_tour
+  #   pkgs= current_user.selected_packages.select do|spkg|
+  #
+  #      spkg if spkg.tour.nil?
+  #
+  #    end
+  #    return pkgs
+  #  end
+  def verify_no_image
+    existing_images=0
+    current_nil_image=current_user.paintings.where(:tour_id=>nil)
+    limit = current_user.selected_package.pictures_for_tour
+    existing_images+=@previous_count.to_i unless @previous_count.nil?
+    existing_images += current_nil_image.count unless current_nil_image.nil?
+    puts "=-" * 20
+    puts existing_images
+    puts limit
+    puts existing_images< limit
+    puts "=-" * 20
+
+    if existing_images< limit
+      return true
+    else
+      return false
     end
-    return pkgs
   end
 end
