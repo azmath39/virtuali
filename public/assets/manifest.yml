@@ -23,6 +23,12 @@ gridbg.gif: gridbg.gif
 gridbg/index.gif: gridbg.gif
 hide-this.jpg: hide-this.jpg
 hide-this/index.jpg: hide-this.jpg
+home_image1.png: home_image1.png
+home_image1/index.png: home_image1.png
+home_image2.png: home_image2.png
+home_image2/index.png: home_image2.png
+home_image3.png: home_image3.png
+home_image3/index.png: home_image3.png
 icon-money.png: icon-money.png
 icon-money/index.png: icon-money.png
 rails.png: rails.png

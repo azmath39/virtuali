@@ -92,10 +92,10 @@ class ToursController < ApplicationController
         flash.now[:notice] = "No tours were found!"
       end
       @json = @tours.to_gmaps4rails do |tour, marker|
-      marker.infowindow("<b>#{tour.zip} #{tour.city}</b><br />" "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<hr>" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
-      marker.title("#{tour.city}")
-    end
-   end
+        marker.infowindow("<b>#{tour.zip} #{tour.city}</b><br />" "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<hr>" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
+        marker.title("#{tour.city}")
+      end
+ end
   def status_change
     tour = Tour.find(params[:id].to_i)
     tour.update_attributes(:status=>params[:status].to_i)
