@@ -19,4 +19,11 @@ end
   def pictures
 @selected_pkg.package.pictures_for_tour
   end
+  def verify_renew_date
+    if @selected_pkg.renew_date<Date.today+15
+      true
+    else
+      false
+    end
+  end
 end

@@ -33,15 +33,15 @@
               <td><%unless current_user.card.nil?%>
                 <div id="alert_message"> <%unless pkg.status==3%>
 
-                    <%=button_tag "Unsubsribe",:class=>"btn btn-info",:onclick=>"unsubsribe(#{pkg.id})"%>
+                    <%#=button_tag "Unsubsribe",:class=>"btn btn-info",:onclick=>"unsubsribe(#{pkg.id})"%>
                   <%else%>
 
-                    Unsubscribed
+                    <%#*Unsubscribed%>
                   <%end%>
                 </div>
               <%else%>
                 <%#= render 'renew_form' %>
-                <%= link_to "Renew", "#card_details", "data-toggle" => "modal", :class=>"btn btn-info",:onclick=>"renew(#{pkg.id})"  %>
+                <%= link_to "Renew", "#card_details", "data-toggle" => "modal", :class=>"btn btn-info",:onclick=>"renew(#{pkg.id})" if verify_renew_date %>
 
       <%#=button_tag "Renew",:class=>"btn btn-success",:onclick=>"renew()"%>
               <%end%></td></tr>

@@ -16,7 +16,7 @@ class SelectedPackage < ActiveRecord::Base
   belongs_to :user
   belongs_to :package
   after_initialize :assign_status_expire_date_payment_period_type
-  after_create :set_renew_date
+  after_create :set_renew_date_and_package_price
   has_many :tour
   # == call back
   def assign_status_expire_date_payment_period_type
@@ -25,11 +25,13 @@ class SelectedPackage < ActiveRecord::Base
     self.expire_date ||=Date.today+365
     self.payment_period_type ||=2
   end
-  def set_renew_date
+  def set_renew_date_and_package_price
     if self.payment_period_type==1
       self.renew_date ||= self.created_at.to_date+30
+      self.price=self.package.monthly_price
     else
       self.renew_date ||= self.created_at.to_date+365
+      self.price=self.package.yearly_price
     end
     self.save
   end
@@ -77,6 +79,13 @@ class SelectedPackage < ActiveRecord::Base
   end
   def send_alert_message
 
+  end
+  def subscribed_days
+    if self.payment_period_type==1
+      30
+    else
+      365
+    end
   end
 
 end

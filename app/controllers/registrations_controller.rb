@@ -28,7 +28,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
   def payment()
-    if params[:user][:package].include?(:type_of_payment) and params[:user][:package][:type_of_payment]==2
+    if params[:user][:package].include?(:type_of_payment) and params[:user][:package][:type_of_payment].to_i==1
       if params[:type_of_transaction] == "1"
         stripe_charge
       elsif params[:type_of_transaction] == "2"

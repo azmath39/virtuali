@@ -1,5 +1,5 @@
 
-<%=form_for :package ,:url=>"packages/upgrade",:html => { :id => 'payment-form'} do|f|%>
+<%=form_for :package ,:url=>"upgrade",:html => { :id => 'payment-form'} do|f|%>
 
   <div id ="package_info">
     <h3>Package Selection</h3>
@@ -14,9 +14,9 @@
             <tr> <td> No Of Tours:</td><td> <%=pkg.max_tours%></td></tr>
             <tr> <td> Pictures per Tour: </td><td><%=pkg.pictures_for_tour%></td></tr>
             <tr> <td> Template size:</td><td> 600x400</td></tr>
-            <%unless pkg.monthly_price.nil?%>
-              <tr> <td> <%=radio_button_tag "package[type_of_payment]",1%> &nbsp;Monthly</td><td><%=radio_button_tag "user[package][type_of_payment]",2%> &nbsp;Yearly </td></tr>
-            <%end%>
+            <%#unless pkg.monthly_price.nil?%>
+              <%#*<tr> <td> <%=radio_button_tag "package[type_of_payment]",1% &nbsp;Monthly</td><td><%=radio_button_tag "user[package][type_of_payment]",2% &nbsp;Yearly </td></tr>%>
+            <%#end%>
           </table>
         </div><br />
       <% end %>
@@ -80,8 +80,8 @@ var payment_type= $("input[name='package[type_of_payment]']:checked").val() || 2
         type: 'GET',
         url: '/packages/total_value',
         data:{
-          package_id:$("input[name='package[id]']:checked").val(),
-          type_of_payment:payment_type
+          package_id:$("input[name='package[id]']:checked").val()
+          
         }
 
       }).done(function(text) {

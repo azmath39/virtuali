@@ -6,35 +6,68 @@ class PackagesController < ApplicationController
   end
   def total_value
     pkg=Package.find(params["package_id"].to_i)
-   if params["type_of_payment"].to_i==1 and !pkg.nil?
-     @value = pkg.monthly_price
-   else
+    payment_type=choose_payment_type.to_i
+
+    if payment_type==1 and !pkg.nil?
+      @value = pkg.monthly_price
+    else
       @value = pkg.yearly_price
-   end
+    end
+
     render :text=>@value
   end
   def upgrade_package
-    @packages=current_user.selected_product.product.packages
+    @packages=current_user.packages_for_upgarde
   end
   def upgrade
-   @token = params[:stripeToken]
-    @amount = (params[:total_amount].to_f*100).to_i
+    @token = params[:stripeToken]
+
+    @amount =(current_user.ajust_amount(params[:total_amount]).to_f*100).to_i
     @email= current_user.email
     payment()
-  current_user.upgrade_package(params[:package])
-  redirect_to root_url
+    current_user.upgrade_package(params[:package])
+    redirect_to root_url
   end
+  
+  
   private
+
   def payment()
-    if params[:package].include?(:type_of_payment) and params[:package][:type_of_payment]==2
-      if params[:type_of_transaction] == "1"
+    if current_user.selected_package.payment_period_type==1
+      if current_user.card.nil?
         stripe_charge
-      elsif params[:type_of_transaction] == "2"
-        subscription
-        save_stripe_customer_id(resource, @customer.id)
+      else
+        change_plan
+        
       end
     else
       stripe_charge
     end
   end
+  def change_plan
+
+    cu = Stripe::Customer.retrieve(get_stripe_customer_id)
+#    plan_id=cu.subscription.plan.id
+    plan= Stripe::Plan.create(
+      :amount => @amount,
+      :interval => 'month',
+      :name => @email,
+      :currency => 'usd',
+      :id => @token)
+    cu.subscription.plan.delete
+    cu.description = "Customer for test@example.com"
+    cu.plan=plan # obtained with Stripe.js
+    cu.save
+   
+  end
+  def choose_payment_type
+    if params.include?"type_of_payment"
+      params["type_of_payment"]
+    elsif !current_user.nil?
+      current_user.selected_package.payment_period_type
+    else
+      2
+    end
+  end
+
 end

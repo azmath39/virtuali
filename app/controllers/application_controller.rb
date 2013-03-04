@@ -53,14 +53,6 @@ class ApplicationController < ActionController::Base
       "For some reason, we are unable to cancel your Direct Debit. Try some other time. Sorry for inconvience. "
     end
   end
-
-   def change_plan
-      cu = Stripe::Customer.retrieve(get_stripe_customer_id)
-      cu.description = "Customer for test@example.com"
-      cu.plan='xxxx' # obtained with Stripe.js
-      cu.save
-    end
-
   def save_card_reuse
     @customer = Stripe::Customer.create(
       :card => @token,
