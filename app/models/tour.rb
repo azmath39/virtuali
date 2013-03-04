@@ -53,9 +53,7 @@ class Tour < ActiveRecord::Base
   def tour_name
     "#{self.zip} #{self.state}"
   end
-
   def tour_status
-
     case status
     when 1
       "Active"
@@ -67,5 +65,4 @@ class Tour < ActiveRecord::Base
       "Sold"
     end
   end
-
 end

@@ -121,7 +121,7 @@
         <span id="personal_info_error" style="color:red;"></span>
         <div>
           <%= f.label "full_Name*" %>
-          <%= f.text_field :name %><span id="personal_info_error_name" style="color:red;"></span>
+          <%= f.text_field :name,:autofocus=>true%><span id="personal_info_error_name" style="color:red;"></span>
         </div>
         <div>
           <%= f.label :phno, "Mobile Number"%>

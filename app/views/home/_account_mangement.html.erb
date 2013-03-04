@@ -11,12 +11,11 @@
     });
     
   });
+
 </script>
-<div class="navbar " style="margin-top:3%;">
+<div class="navbar">
   <div>
-
-    <ul class="nav" style="height:100px;margin-left: 14%;width:68%">
-
+    <ul class="nav" style="height:100px;margin-left: 14%;margin-top:2%;width:68%">
       <li class="active tab"><%= link_to "Dashboard", "#div_dashboard", "data-toggle" => "tab"%> </li>
       <li class="tab"><%= link_to "Status", '#div_status', "data-toggle" => "tab"%> </li>
       <li class="tab"><%= link_to "Billing", '#div_billing', "data-toggle" => "tab" %></li>
@@ -27,7 +26,6 @@
     </ul>
 
   </div></div>
-
 <%= render 'payment_form' %>
 <%=render "tab_content"%>
 <style>
