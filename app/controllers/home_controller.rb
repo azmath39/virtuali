@@ -1,16 +1,17 @@
 class HomeController < ApplicationController
   def validate_email
-   user=User.find_by_email(params[:email])
-   if user.nil?
-     render :text=>1
-   else
-     render :text=>0
-   end
+    user=User.find_by_email(params[:email])
+    if user.nil?
+      render :text=>1
+    else
+      render :text=>0
+    end
   end
   def index
     if current_user
       @feedback = Feedback.new
       @tours= current_user.tours
+      @packages= Package.all
       #@selected_pkgs = selected_pkgs_with_tour
     end
   end
@@ -58,8 +59,7 @@ class HomeController < ApplicationController
     @cities= City.find(:all,:conditions=>{:code=>state.code}) unless state.nil?
     @str=""
     unless @cities.empty?
-      @str +="'<option value="">Select city</option>"
-
+      @str +="'<option value="">Select City</option>"
       @cities.each do |c|
         @str += "<option value=#{c.name}>#{c.name}</option>"
       end
@@ -69,12 +69,12 @@ class HomeController < ApplicationController
   end
   private
 
-#  def selected_pkgs_with_tour
-#    pkgs= current_user.selected_packages.select do|spkg|
-#      spkg unless spkg.tour.nil?
-#    end
-#    return pkgs
-#  end
+  #  def selected_pkgs_with_tour
+  #    pkgs= current_user.selected_packages.select do|spkg|
+  #      spkg unless spkg.tour.nil?
+  #    end
+  #    return pkgs
+  #  end
   def change_card
     cu = Stripe::Customer.retrieve(get_stripe_customer_id)
     cu.card=@token

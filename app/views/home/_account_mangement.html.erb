@@ -1,6 +1,7 @@
 <%#= render 'side_buttons'%>
 <script>
   $(document).ready(function(){
+
     $.ajax({
       type: 'GET',
       url: '/tours/user_tours'
@@ -8,6 +9,7 @@
     }).done(function(html) {
       $("#user_tours").html(html);
     });
+    
   });
 </script>
 <div class="navbar " style="margin-top:3%;">
@@ -21,12 +23,12 @@
 
       <li class="tab"><%= link_to "Profile", '#div_profile', "data-toggle" => "tab" %></li>
       <li class="tab"><%#= link_to "Manage Account", '#div_manage', "data-toggle" => "tab"%> </li>
-
+     <li class="tab"><%#= link_to "Upgrade Account", '#div_upgrade', "data-toggle" => "tab"%> </li>
     </ul>
 
   </div></div>
 
-<%= render 'payment_form' %>
+<%#= render 'payment_form' %>
 <%=render "tab_content"%>
 <style>
   .tab{

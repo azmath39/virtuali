@@ -3,9 +3,7 @@ var ec=0;
     $('#slides').slidesjs({
       width: 500,
       height: 580,
-
-      navigation: true
-
+      navigation: false
     });
 
   });
@@ -140,8 +138,8 @@ $("#password_confirmation").blur(function(event){
 
 
   $('#btn_package').click(function(event) {
-
-    if (!$("input[name='user[package]']:checked").val())
+var payment_type= $("input[name='user[package][type_of_payment]']:checked").val() || 2;
+    if (!$("input[name='user[package][id]']:checked").val())
     {
       $('#package_error').append("* Select any Package  to continue..... <br/>")
       $('#btn_package').die( "click" );
@@ -151,7 +149,8 @@ $("#password_confirmation").blur(function(event){
         type: 'GET',
         url: '/packages/total_value',
         data:{
-          package_id:$("input[name='user[package]']:checked").val()
+          package_id:$("input[name='user[package][id]']:checked").val(),
+          type_of_payment:payment_type
         }
 
       }).done(function(text) {

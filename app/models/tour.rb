@@ -31,7 +31,7 @@
 class Tour < ActiveRecord::Base
   extend FriendlyId
   attr_accessible :gmaps, :state, :description, :name, :city, :zip, :subdivision, :price, :square_footage, :bed_rooms, :bath_rooms,:selected_package_id,:status
-  
+  acts_as_paranoid
   after_initialize :set_status
   before_create :set_address
   friendly_id :address, use: :slugged
@@ -40,7 +40,6 @@ class Tour < ActiveRecord::Base
   has_many :paintings, :dependent => :destroy
   belongs_to :category
   belongs_to :selected_package
-  
   def gmaps4rails_address
     "#{state}, #{city}"
   end

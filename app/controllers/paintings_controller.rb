@@ -70,7 +70,7 @@ class PaintingsController < ApplicationController
   def verify_no_image
     existing_images=0
     current_nil_image=current_user.paintings.where(:tour_id=>nil)
-    limit = current_user.selected_package.package.pictures_for_tour
+    limit = current_user.selected_package.pictures_for_tour
     existing_images+=@previous_count.to_i unless @previous_count.nil?
     existing_images += current_nil_image.count unless current_nil_image.nil?
     puts "=-" * 20

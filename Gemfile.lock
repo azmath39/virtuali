@@ -108,6 +108,8 @@ GEM
     multi_json (1.6.1)
     mysql2 (0.3.11)
     orm_adapter (0.4.0)
+    paranoia (1.2.0)
+      activerecord (>= 3.0.0)
     pg (0.14.1)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -197,6 +199,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mysql2
+  paranoia
   pg
   rails (= 3.2.11)
   ransack

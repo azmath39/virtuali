@@ -1,0 +1,96 @@
+
+<%=form_for :package ,:url=>"packages/upgrade",:html => { :id => 'payment-form'} do|f|%>
+
+  <div id ="package_info">
+    <h3>Package Selection</h3>
+    <hr></hr>
+    <span id="package_error" style="color:red;"></span>
+    <div style = "border-bottom:2px solid #ccc;padding:10px;width: 400px;">
+      <% @packages.each do |pkg| %>
+        <div>
+          <table class="table table-bordered">
+            <tr> <td><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%></td><td><%=pkg.name%></td></tr>
+            <tr> <td> Price:</td><td> <%=pkg.price%></td></tr>
+            <tr> <td> No Of Tours:</td><td> <%=pkg.max_tours%></td></tr>
+            <tr> <td> Pictures per Tour: </td><td><%=pkg.pictures_for_tour%></td></tr>
+            <tr> <td> Template size:</td><td> 600x400</td></tr>
+            <%unless pkg.monthly_price.nil?%>
+              <tr> <td> <%=radio_button_tag "package[type_of_payment]",1%> &nbsp;Monthly</td><td><%=radio_button_tag "user[package][type_of_payment]",2%> &nbsp;Yearly </td></tr>
+            <%end%>
+          </table>
+        </div><br />
+      <% end %>
+    </div>
+    <%=link_to "next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_package" %>
+
+  </div>
+  <div id="payment_info">
+    <div id="scont">
+      <h3>Payment Process</h3>
+      <hr></hr>
+      <div class = "payment-errors">
+      </div>
+      <div class="field" >Total Payable Amount : <%= hidden_field_tag "total_amount","",:class=> "money" %>
+        <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
+
+
+      <div class="field" style="padding:20px 0px;">
+        <%=radio_button_tag "type_of_transaction", 1%> <%= "Card Pay" %>  <%=radio_button_tag "type_of_transaction", 2%> <%="Direct Debit Setup" %>
+      </div>
+      <div class="field">
+
+      </div>
+      <div class="field">
+        <%= label_tag :card_number, "Credit Card Number" %>
+        <%= text_field_tag "card-number", nil, name: nil %>
+      </div>
+      <div class="field">
+        <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+        <%= text_field_tag "card-cvc", nil, name: nil %>
+      </div>
+      <div>
+        <%= label_tag :card_month, "Card Expiration" %>
+        <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
+        <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
+      </div></div>
+    <div id="next_btn">
+      <%= f.submit "upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
+    </div>
+  </div>
+
+<%end%>
+<script>
+   $(document).ready(function(){
+    
+      $("#payment_info").hide();
+   });
+
+   $("#btn_package").click(function(event) {
+
+    
+var payment_type= $("input[name='package[type_of_payment]']:checked").val() || 2;
+    if (!$("input[name='package[id]']:checked").val())
+    {
+      $('#package_error').append("* Select any Package  to continue..... <br/>")
+      $('#btn_package').die( "click" );
+    }else{
+
+      //alert($("input[name='user[package]']:checked").val());
+      $.ajax({
+        type: 'GET',
+        url: '/packages/total_value',
+        data:{
+          package_id:$("input[name='package[id]']:checked").val(),
+          type_of_payment:payment_type
+        }
+
+      }).done(function(text) {
+        $("#total_amount").val(text);
+        $('#total_amount1').val(text);
+       
+      });
+      $("#package_info").hide();
+      $("#payment_info").show();
+    }
+  });
+</script>

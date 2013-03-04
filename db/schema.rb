@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130301085013) do
+ActiveRecord::Schema.define(:version => 20130302205618) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -118,10 +118,13 @@ ActiveRecord::Schema.define(:version => 20130301085013) do
     t.integer  "user_id"
     t.integer  "package_id"
     t.float    "price"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
     t.integer  "status"
     t.date     "expire_date"
+    t.integer  "pictures_for_tour"
+    t.integer  "payment_period_type"
+    t.date     "renew_date"
   end
 
   create_table "selected_products", :force => true do |t|
@@ -160,6 +163,7 @@ ActiveRecord::Schema.define(:version => 20130301085013) do
     t.text     "address"
     t.integer  "status"
     t.integer  "selected_package_id"
+    t.datetime "deleted_at"
   end
 
   add_index "tours", ["slug"], :name => "index_tours_on_cached_slug"
