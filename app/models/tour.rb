@@ -41,7 +41,7 @@ class Tour < ActiveRecord::Base
   belongs_to :category
   belongs_to :selected_package
   def gmaps4rails_address
-    "#{state}, #{city}, #{zip}, #{subdivision}"
+    "#{state}, #{city}"
   end
 
   def set_status

@@ -15,7 +15,7 @@
   <div class ="container">
     <%= render 'shared/flash_messages' %>
     <%= yield %>
-    <%#= yield :scripts %>
+    <%= yield :scripts %>
     <% if current_user %>
     <%= render 'feedbacks/feedback_form' %>
     <div id="feedback">

@@ -73,44 +73,29 @@ class ToursController < ApplicationController
     @tour = Tour.find(params[:id])
   end
   def view_map
-    @gmapsoptions = {
-      "map_options" => {"center_latitude" => 0, "center_longitude" => 0, "detect_location" => true, "center_on_user" => true,
-        "auto_adjust" => true,
-        "auto_zoom" => true,
-        "zoom" => 20 }
-    }
-    @search = Tour.search(params[:q])
     if params.has_key? :id
       @tours = []
-      @p = Product.find_by_id(params[:id])
-      @p.packages.each do |pkg|
-        pkg.selected_packages.each do |sel_pkg|
-          @tours << sel_pkg.tour
-        end
+      @products=SelectedProduct.where(:product_id=>params[:id].to_i)
+      @products.each do |product|
+          @tours << product.user.tours
       end
-
+      @tours.compact!
+      @tours.flatten!
+    else
+        @tours = Tour.all
+    end
+      @search = Tour.search(params[:q])
+      if !params[:q].nil?
+        @tours = @search.result
+      end
       if @tours.empty?
         flash.now[:notice] = "No tours were found!"
       end
-      @tours.compact!
-       @json = @tours.to_gmaps4rails do |tour, marker|
-
-        marker.infowindow("#{tour.name}<br />" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
-        marker.title("#{tour.city}")
-       end
-    else
-
-        @tours = Tour.all
-        if !params[:q].nil?
-         @tours = @search.result
-        end
-        @json = @tours.to_gmaps4rails do |tour, marker|
-        marker.infowindow("<b>#{tour.zip} #{tour.city}</b><br />" "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<hr>" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
-        marker.title("#{tour.city}")
-      end
+      @json = @tours.to_gmaps4rails do |tour, marker|
+      marker.infowindow("<b>#{tour.zip} #{tour.city}</b><br />" "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<hr>" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
+      marker.title("#{tour.city}")
     end
-
-  end
+   end
   def status_change
     tour = Tour.find(params[:id].to_i)
     tour.update_attributes(:status=>params[:status].to_i)

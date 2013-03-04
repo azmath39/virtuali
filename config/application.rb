@@ -67,7 +67,7 @@ module VirtualTour
   :port                 => 587,
   :domain               => "localhost",
   :user_name            => "git.venkat@gmail.com",
-  :password             => "venkat_123",
+  :password             => "gitvenkat_123",
   :authentication       => :plain,
   :enable_starttls_auto => true
 }
