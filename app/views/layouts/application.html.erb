@@ -12,13 +12,8 @@
 <body>
   <%= render 'layouts/navbar' %>
   <div id="wrap">
-  <div class ="container" style="">
-    
-    <% if flash[:signed_out] != nil %>
-      
-    <%else%>
-      <%= render 'shared/flash_messages' %>
-    <% end %>
+  <div class ="container">
+    <%= render 'shared/flash_messages' %>
     <%= yield %>
     <%#= yield :scripts %>
     <% if current_user %>
