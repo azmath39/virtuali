@@ -68,13 +68,20 @@ class SelectedPackage < ActiveRecord::Base
   end
   def tours_disable
     self.update_attributes(:status=>2)
-    self.user.tours.each do |tour|
-      tour.update_attribute(:status=>2)
+    tours=self.user.tours
+    unless tours.empty?
+
+      tours.each do |tour|
+        tour.update_attributes(:status=>2)
+      end
     end
   end
   def tours_destroy
-    self.user.tours.each do |tour|
-      tour.destroy
+    tours=self.user.tours
+    unless tours.empty?
+      self.user.tours.each do |tour|
+        tour.destroy
+      end
     end
   end
   def send_alert_message

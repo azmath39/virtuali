@@ -60,10 +60,11 @@ class PaintingsController < ApplicationController
   def set_name
     painting= Painting.find(params[:id])
     painting.update_attributes(:name=>params[:name])
-  if params.include?:tour_id
-   str = "#{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bed room").count}, #{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bath room").count}"
+  if params.include?"tour_id"
+    puts "------"*10
+   str = "#{current_user.paintings.find(:all,:condition=>{:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bed room"}).count}, #{current_user.paintings.find(:all,:condition=>{:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bath room"}).count}"
   else
-   str = "#{current_user.paintings.where(:tour_id=>nil,:name=>"Bed room").count}, #{current_user.paintings.where(:tour_id=>nil,:name=>"Bath room").count}"
+   str = "#{current_user.paintings.find(:all,:condition=>{:tour_id=>nil,:name=>"Bed room"}).count}, #{current_user.paintings.find(:all,:condition=>{:tour_id=>nil,:name=>"Bath room"}).count}"
   end
     render :text=>str
   end

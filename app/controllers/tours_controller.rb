@@ -23,9 +23,9 @@ class ToursController < ApplicationController
     if @tour.save
       current_user.tours << @tour
 #      NotificationsMailer.tour_created_message(current_user, @tour).deliver
-      @paintings=current_user.paintings.where(:tour_id => nil)
+      @paintings=current_user.paintings.where("tour_id" => nil)
       @paintings.each do |pic|
-        @tour.paintings<<pic
+        @tour.paintings << pic
       end unless @paintings.empty?
         flash[:notice] = "Tour was created successfully."
         redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
@@ -75,7 +75,7 @@ class ToursController < ApplicationController
   def view_map
     if params.has_key? :id
       @tours = []
-      @products=SelectedProduct.where(:product_id=>params[:id].to_i)
+      @products=SelectedProduct.find(:all,:condition=>{:product_id=>params[:id].to_i})
       @products.each do |product|
           @tours << product.user.tours
       end

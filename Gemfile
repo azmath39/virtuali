@@ -11,6 +11,7 @@ gem 'rails', '3.2.11'
   group :production do
     gem 'pg'
   end
+  gem 'whenever', :require => false
   gem 'devise'
   gem 'activeadmin'
   gem 'annotate'

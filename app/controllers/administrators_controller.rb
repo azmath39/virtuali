@@ -1,4 +1,5 @@
 class AdministratorsController < ApplicationController
+  
   def webhooks_handling
     @type = params["type"]
     if params["data"]["object"].has_key? "customer"
@@ -13,16 +14,19 @@ class AdministratorsController < ApplicationController
     disable_tours
     delete_tours
     inform_users
+    render :nothing=>true
   end
   private
   def disable_tours
 
-    selected_pkgs= SelectedPackage.where(:renew_date=>Date.yesterday,:status=>[0,1])
-    #selected_pkgs=SelectedPackage.all
+    #selected_pkgs= SelectedPackage.where(:renew_date=>Date.yesterday,:status=>[0,1])
+    selected_pkgs=SelectedPackage.all
+    unless selected_pkgs.empty?
     selected_pkgs.each do |s_pkg|
       puts s_pkg
       s_pkg.tours_disable
-    end unless selected_pkgs.empty?
+    end
+    end
   end
   def delete_tours
     selected_pkgs= SelectedPackage.where(:renew_date=>Date.yesterday-15,:status=>[2,3])
