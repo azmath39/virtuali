@@ -17,8 +17,8 @@ class AdministratorsController < ApplicationController
   private
   def disable_tours
 
-    #selected_pkgs= SelectedPackage.where(:renew_date=>Date.yesterday,:status=>[0,1])
-    selected_pkgs=SelectedPackage.all
+    selected_pkgs= SelectedPackage.where(:renew_date=>Date.yesterday,:status=>[0,1])
+    #selected_pkgs=SelectedPackage.all
     selected_pkgs.each do |s_pkg|
       puts s_pkg
       s_pkg.tours_disable

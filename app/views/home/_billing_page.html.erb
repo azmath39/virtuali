@@ -1,13 +1,21 @@
 <% if current_user %>
+<%pkg=current_user.selected_package %>
+    <%initiate(pkg)%>
 <div style="float:right;margin-right: 50px; margin-bottom: 20px;" >
+<%if !current_user.card.nil?%>
+    <%= render 'card_change_form' %>
+    <%= link_to "Change Card Details", "#card_change", "data-toggle" => "modal", :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  %>
+<%elsif check_payment_type%>
+ <%= link_to "Create Direct Debit", "#card_details", "data-toggle" => "modal", :class => "btn btn-danger", :onclick=>"create_direct_debit()"  %>
+  <%end%>
+
   <%= link_to "Upgrade Your Package", '/packages/upgrade_package', :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  %>
   </div>
 <div class="container-fluid">
 <table class="table  table-striped">
     <tr><th> Name </th><th>Status:</th><th>  Price:</th><th><%10.times do %>&nbsp;<%end%>
               </th></tr></table></div>
-  <%pkg=current_user.selected_package %>
-    <%initiate(pkg)%>
+  
 
     <div class="container-fluid">
       <div class="accordion" id="accordion2">

@@ -4,6 +4,7 @@
 <%= form_for Painting.new do |f| %>
   <%$serial_no=0%>
   <%=hidden_field_tag :count,@count%>
+   <%#  =hidden_field_tag :tour_id,@tour%>
 <div class="fileupload btn btn-warning">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
@@ -102,5 +103,25 @@
     });
 
 
+  }
+  function set_image_name(id)
+  {var name= $("#"+id).val();
+    $.ajax({
+      type: "GET",
+      url:"/paintings/set_name",
+      data:{
+        id: id,
+        name: name,
+        tour_id : $("#tour_id").val()
+      }
+
+
+    }).done(function(text){
+
+     text = text.split(',');
+//alert(text);
+          $("#tour_bed_rooms").val(text[0]);
+          $("#tour_bath_rooms").val(text[1]);
+    });
   }
 </script>

@@ -2,11 +2,12 @@
   <%= image_tag(painting.image_url(:thumb))%>
   <div class="name">
     <%#= painting.name %>
-    <% @names= ["Living Rm", "Kitchen", "Den", "Great Rm", "Dinning Rm", "Bath Rm", "Master Batch", "Half Batch", "Master Bed Rm", "Bed Rm1", "Bed Rm2", "Bed Rm3", "Bed Rm4", "Bonus Rm"] %>
-    <%= select_tag "Name", options_for_select(@names), :id => 'image_name' %>
+    <%# @names= ["Living Rm", "Kitchen", "Den", "Great Rm", "Dinning Rm", "Bath Rm", "Master Batch", "Half Batch", "Master Bed Rm", "Bed Rm1", "Bed Rm2", "Bed Rm3"] %>
+<%@names=["Living Room", "Kitchen", "Den", "Great Room", "Dinning Room","Bath Room", "Bed Room"]%>
+<%= select_tag "Name", options_for_select(@names), :id => painting.id,:onchange=>"set_image_name(#{painting.id})" ,:prompt=>painting.name%>
   </div>
   <div class="actions">
     <%= link_to "edit", edit_painting_path(painting) %>  |
-    <%= link_to "remove", painting, :method => :delete %> <span class="badge badge-info" style="float:right; font-weight: bold"><%#=$serial_no +=1%></span>
+    <%= link_to "remove", painting, :method => :delete %> <span class="badge badge-info" style="float:right; font-weight: bold"><%=$serial_no +=1%></span>
   </div>
 </div>

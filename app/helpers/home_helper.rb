@@ -26,4 +26,11 @@ end
       false
     end
   end
+  def check_payment_type
+    if @selected_pkg.payment_period_type==1
+      true
+    else
+      false
+    end
+  end
 end

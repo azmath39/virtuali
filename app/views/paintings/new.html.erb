@@ -8,7 +8,7 @@
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
 <% end %>
 </div>
-
+<span id="painting_error"></span>
 <div id="paintings">
   <%= render @paintings %>
 </div>
@@ -105,5 +105,24 @@ You have already published Sufficient Tours. To create more tours upgrade your S
     });
 
    
+  }
+  function set_image_name(id)
+  {var name= $("#"+id).val();
+    $.ajax({
+      type: "GET",
+      url:"/paintings/set_name",
+      data:{
+        id: id,
+        name: name
+      }
+
+
+    }).done(function(text){
+    
+     text = text.split(',');
+    
+          $("#tour_bed_rooms").val(text[0]);
+          $("#tour_bath_rooms").val(text[1]);
+    });
   }
 </script>

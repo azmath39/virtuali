@@ -57,6 +57,16 @@ class PaintingsController < ApplicationController
       # redirect_to paintings_url, :notice=> "Image was successfully deleted."
     end
   end
+  def set_name
+    painting= Painting.find(params[:id])
+    painting.update_attributes(:name=>params[:name])
+  if params.include?:tour_id
+   str = "#{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bed room").count}, #{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bath room").count}"
+  else
+   str = "#{current_user.paintings.where(:tour_id=>nil,:name=>"Bed room").count}, #{current_user.paintings.where(:tour_id=>nil,:name=>"Bath room").count}"
+  end
+    render :text=>str
+  end
 
   private
   #  def selected_pkgs_without_tour
