@@ -1,19 +1,19 @@
 <h3>Package Selection</h3>
 <hr></hr>
 <span id="package_error" style="color:red;"></span>
-<div style = "border-bottom:2px solid #ccc;padding:10px;width: 400px;">
+<div style = "padding:10px;width: 400px;">
   <% @packages.each do |pkg| %>
     <div>
-      <table class="table table-bordered">
-        <tr> <td><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package"%></td><td><%=pkg.name%></td></tr>
-        <tr> <td> Price:</td><td> <%=pkg.price%></td></tr>
-        <tr> <td> No Of Tours:</td><td> <%=pkg.max_tours%></td></tr>
-        <tr> <td> Pictures per Tour: </td><td><%=pkg.pictures_for_tour%></td></tr>
-        <tr> <td> Template size:</td><td> 600x400</td></tr>
+      <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
+      <p><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package"%>&nbsp;<b><%=pkg.name%></b></p>
+      <p><b>Price:</b>&nbsp;<%=pkg.price%></p>
+      <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
+      <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
+      <p><b>Template size:</b>&nbsp;600x400</p>
         <%unless pkg.monthly_price.nil?%>
-          <tr> <td> <%=radio_button_tag "user[package][type_of_payment]",1%> &nbsp;Monthly</td><td><%=radio_button_tag "user[package][type_of_payment]",2%> &nbsp;Yearly </td></tr>
+      <p><b>Subscription Period</b>:&nbsp;<%=radio_button_tag "user[package][type_of_payment]",1%> &nbsp;Monthly&nbsp;<%=radio_button_tag "user[package][type_of_payment]",2%> &nbsp;Yearly</p>
         <%end%>
-      </table>
-    </div><br />
+    </div>
+  <hr />
   <% end %>
 </div>

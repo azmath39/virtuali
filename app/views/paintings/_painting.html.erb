@@ -1,6 +1,5 @@
 <!-- Load Feather code -->
 <script type="text/javascript" src="http://feather.aviary.com/js/feather.js"></script>
-
 <!-- Instantiate Feather -->
 <script type='text/javascript'>
    var featherEditor = new Aviary.Feather({
@@ -25,39 +24,33 @@
       return false;
    }
 
-//Painting name others jquery
-   $(function(){
-  // hide by default
-  $('#other').css('display', 'none');
-
-  $('#image_name').change(function(){
-   if ($(this).val() === 'Others') {
-     $('#other').css('display', 'block');
-   }
-   else
-      $('#other').css('display', 'none');
+ //Others name text field
+   $(function() {
+    var
+    jqDdl = $('#image_name'),
+    onChange = function(event) {
+        if ($(this).val() === 'Others') {
+            $('#other-name<%= painting.id %>').append("<%= escape_javascript(render :partial => 'other_name') %>");
+        } else {
+            $('#other-name<%= painting.id %>').hide();
+        }
+    };
  });
-});
 </script>
-
 <div id='injection_site'></div>
-
 <div class="painting">
   <%= image_tag(painting.image_url(:thumb), :id => painting.id)%>
   <div class="name">
     <%#= painting.name %>
     <% @names= ["Living Rm", "Kitchen", "Den", "Great Rm", "Dinning Rm", "Bath Rm", "Master Batch", "Half Batch", "Master Bed Rm", "Bed Rm1", "Bed Rm2", "Bed Rm3", "Bed Rm4", "Bonus Rm", "Others"] %>
     <%= select_tag "Name", options_for_select(@names), :id => 'image_name' %><br />
-    <input type="text" id="other" />
   </div>
+  <div id="other-name<%=painting.id%>">
+
+  </div>
+  
   <div class="actions">
-    <p><input type='image' src='http://images.aviary.com/images/edit-photo.png' value='Edit photo' onclick="return launchEditor('<%=painting.id%>', 'http://sheltered-meadow-1295.herokuapp.com/<%=  painting.image_url%>');" /></p>
-    <%#= link_to "edit", edit_painting_path(painting) %>
+    <%= link_to "edit", '#', :onclick=>"return launchEditor('#{painting.id}', 'http://sheltered-meadow-1295.herokuapp.com/#{@painting.image_url(:large)}');" %> |
     <%= link_to "remove", painting, :method => :delete %> <span class="badge badge-info" style="float:right; font-weight: bold"><%#=$serial_no +=1%></span>
   </div>
-  <%= form_for @painting, :html => {:multipart => true} do |f| %>
-  <%=f.hidden_field "id"%>
-  <%=f.hidden_field "remote_image_url"%>
-  <%= f.submit "Done", :class=>"btn-small btn-success"%>
-<%end%>
 </div>

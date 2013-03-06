@@ -224,7 +224,6 @@ filter: alpha(opacity=50);
      .pricing_grid .span3{
         background: url(bg2.jpg);
         background-repeat: repeat;
-        border: 2px solid #ccc;
         padding: 30px;
 }
 .pricing_grid .span3 img{

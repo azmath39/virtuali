@@ -1,8 +1,8 @@
 var ec=0;
   $(document).ready(function() {
     $('#slides').slidesjs({
-      width: 500,
-      height: 580,
+      width: 600,
+      height: 1200,
       navigation: false
     });
 

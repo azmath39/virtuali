@@ -1,3 +1,12 @@
+<script>
+  $(document).ready(function(){
+    $('.carousel').carousel({
+    interval: 7000,
+    autoplay: true
+  })
+});
+</script>
+
 <div id="myCarousel1" class="carousel slide carousel-fade">
      <div class="carousel-inner">
         <div class="active item"><%= image_tag("slide-01.jpg")%> </div>
@@ -32,6 +41,7 @@
         <h2 class="featurette-heading">And lastly, this one. <span class="muted">Checkmate.</span></h2>
         <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
       </div>
+  </div>
       <!-- /END THE FEATURETTES -->
 <hr class="featurette-divider">
       <!-- Three columns of text below the carousel -->
@@ -68,7 +78,7 @@
           <hr></hr>
           <p><a class="btn" href="/users/sign_up">Sign up Now &raquo;</a></p>
         </div><!-- /.span4 -->
-        <div class="span3" style="margin-left: 0px;">
+        <div class=" last-grid span3" style="margin-left: 0px;">
           <%#*<img class="img-circle" data-src="holder.js/140x140">%>
           <br />
           <p id="price">
