@@ -16,7 +16,11 @@
 </div>
 <br/>
 </div>
-
+<%= form_for @painting,:url=>'/paintings/update', :html => {:multipart => true, :id=>"updated_image_form"} do |f| %>
+<%=f.hidden_field "id",:id=>"image_updated_id"%>
+<%=f.hidden_field "remote_image_url"%>
+<%#= f.submit "Done", :class=>"btn-small btn-success"%>
+<%end%>
 <div class="span12" style="margin-left: 15%;">
 
 <%= form_for @tour, :url => '/tours/update', :html =>{:class => "form-horizontal"}  do |f| %>
@@ -103,8 +107,35 @@
 
 
   }
-  function set_image_name(id)
-  {var name= $("#"+id).val();
+
+  function check_others(id)
+  { var name= $("#select"+id).val();
+    //alert(name);
+    if (name == 'Others') {
+      $('#other-name'+id).show();
+            $('#other-name'+id).append("<input type=text id='text"+id+"'name='name' onblur='text_field_data("+id+")'>");
+        } else {
+            $('#other-name'+id).hide();
+            set_image_name(name, id);
+        }
+  }
+  function text_field_data(id)
+  {
+    var name= $("#text"+id).val();
+    //alert(name);
+    if (name != "") {
+    set_image_name(name, id);
+    }
+    else{
+      alert("Name cant be empty")
+    }
+  }
+
+  function set_image_name(name, id)
+  {
+    //var name= $("#select"+id).attr('value');
+
+   //alert(name);
     $.ajax({
       type: "GET",
       url:"/paintings/set_name",

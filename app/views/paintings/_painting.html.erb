@@ -11,6 +11,8 @@
            var img = document.getElementById(imageID);
            img.src = newURL;
            $('#painting_remote_image_url  ').val(newURL);
+           $('#image_updated_id').val(imageID);
+           $('form#updated_image_form').submit();
        },
        onError: function(errorObj) {
            alert(errorObj.message);
@@ -24,18 +26,6 @@
       return false;
    }
 
- //Others name text field
-   $(function() {
-    var
-    jqDdl = $('#image_name'),
-    onChange = function(event) {
-        if ($(this).val() === 'Others') {
-            $('#other-name<%= painting.id %>').append("<%= escape_javascript(render :partial => 'other_name') %>");
-        } else {
-            $('#other-name<%= painting.id %>').hide();
-        }
-    };
- });
 </script>
 <div id='injection_site'></div>
 <div class="painting">
@@ -44,15 +34,15 @@
     <%#= painting.name %>
     <%# @names= ["Living Rm", "Kitchen", "Den", "Great Rm", "Dinning Rm", "Bath Rm", "Master Batch", "Half Batch", "Master Bed Rm", "Bed Rm1", "Bed Rm2", "Bed Rm3"] %>
 <%@names=["Living Room", "Kitchen", "Den", "Great Room", "Dinning Room","Bath Room", "Bed Room","Others"]%>
-<%= select_tag "Name", options_for_select(@names), :id => painting.id,:onchange=>"set_image_name(#{painting.id})" ,:prompt=>painting.name%>
+<%= select_tag "Name", options_for_select(@names), :id => "select#{painting.id}",:onchange=>"check_others(#{painting.id})" ,:prompt=>painting.name%>
   </div>
   <div id="other-name<%=painting.id%>">
 
   </div>
   
   <div class="actions">
-
-    <%= link_to "edit", '#', :onclick=>"return launchEditor('#{painting.id}', 'http://sheltered-meadow-1295.herokuapp.com/#{@painting.image_url(:large)}');" %> |
+    
+    <%= link_to "edit", '#', :onclick=>"return launchEditor('#{painting.id}', 'http://static.nextwallpapers.com/1920x1080/christmas_wallpapers_275_1920x1080.jpg');" %> |
     <%= link_to "remove", painting, :method => :delete %> <span class="badge badge-info" style="float:right; font-weight: bold"><%=$serial_no +=1%></span>
   </div>
 </div>
