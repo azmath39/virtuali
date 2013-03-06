@@ -1,13 +1,58 @@
+<!-- Load Feather code -->
+<script type="text/javascript" src="http://feather.aviary.com/js/feather.js"></script>
+<!-- Instantiate Feather -->
+<script type='text/javascript'>
+   var featherEditor = new Aviary.Feather({
+       apiKey: 'RvudU_oOFka2BrKDAVGXDQ',
+       apiVersion: 2,
+       tools: 'brightness,saturation,sharpness,contrast',
+       appendTo: '',
+       onSave: function(imageID, newURL) {
+           var img = document.getElementById(imageID);
+           img.src = newURL;
+           $('#painting_remote_image_url  ').val(newURL);
+       },
+       onError: function(errorObj) {
+           alert(errorObj.message);
+       }
+   });
+   function launchEditor(id, src) {
+       featherEditor.launch({
+           image: id,
+           url: src
+       });
+      return false;
+   }
+
+ //Others name text field
+   $(function() {
+    var
+    jqDdl = $('#image_name'),
+    onChange = function(event) {
+        if ($(this).val() === 'Others') {
+            $('#other-name<%= painting.id %>').append("<%= escape_javascript(render :partial => 'other_name') %>");
+        } else {
+            $('#other-name<%= painting.id %>').hide();
+        }
+    };
+ });
+</script>
+<div id='injection_site'></div>
 <div class="painting">
-  <%= image_tag(painting.image_url(:thumb))%>
+  <%= image_tag(painting.image_url(:thumb), :id => painting.id)%>
   <div class="name">
     <%#= painting.name %>
     <%# @names= ["Living Rm", "Kitchen", "Den", "Great Rm", "Dinning Rm", "Bath Rm", "Master Batch", "Half Batch", "Master Bed Rm", "Bed Rm1", "Bed Rm2", "Bed Rm3"] %>
-<%@names=["Living Room", "Kitchen", "Den", "Great Room", "Dinning Room","Bath Room", "Bed Room"]%>
+<%@names=["Living Room", "Kitchen", "Den", "Great Room", "Dinning Room","Bath Room", "Bed Room","Others"]%>
 <%= select_tag "Name", options_for_select(@names), :id => painting.id,:onchange=>"set_image_name(#{painting.id})" ,:prompt=>painting.name%>
   </div>
+  <div id="other-name<%=painting.id%>">
+
+  </div>
+  
   <div class="actions">
-    <%= link_to "edit", edit_painting_path(painting) %>  |
+
+    <%= link_to "edit", '#', :onclick=>"return launchEditor('#{painting.id}', 'http://sheltered-meadow-1295.herokuapp.com/#{@painting.image_url(:large)}');" %> |
     <%= link_to "remove", painting, :method => :delete %> <span class="badge badge-info" style="float:right; font-weight: bold"><%=$serial_no +=1%></span>
   </div>
 </div>

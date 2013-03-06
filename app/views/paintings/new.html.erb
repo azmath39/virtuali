@@ -1,6 +1,7 @@
-<%if verify_tours_allowed%>
-<h1>Create a Tour</h1>
-<div class="span12">
+<% if verify_tours_allowed %>
+<div class="span12" style="margin-left: 15%;">
+  <p class="title-text">Create a Tour</p>
+  <%= render 'shared/error_messages', :target => @tour  %>
 <%= form_for Painting.new do |f| %>
   <%$serial_no=0%>
 <div class="fileupload btn btn-warning">
@@ -15,8 +16,7 @@
 <br/>
 </div>
 
-<div class="span12">
-
+<div class="span12" style="margin-left:15%;">
 <%= form_for @tour, :url => '/tours/create', :html =>{:class => "form-horizontal"}  do |f| %>
  <h3><legend>Tour Details:</legend></h3>
 <div style="float:left;">
@@ -61,10 +61,10 @@
   <%= f.text_field :bath_rooms %>
 </div>
 </div>
-<div style="float:left;margin-top: 10px;width: 550px; clear: both;">
-<div class="contol-group" style="width:550px;">
+<div style="float:left;margin-top: 10px;width: 650px;">
+<div>
   <%= f.label :description %>
-  <%= f.text_area :description,:cols => 20, :rows => 10 %>
+  <%= f.text_area :description, :rows => 10, :style=>"width: 81%;"%>
 </div>
 </div>
 <div style="float:left;margin-top: 10px;clear: both;">

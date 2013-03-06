@@ -30,12 +30,11 @@
   }
 
   #scont{
-
-    height: 500px;
+    height: auto;
   }
+
   #next_btn{
     float :right;
-
     margin-bottom: 50px;
   }
 
@@ -112,7 +111,7 @@
   <%= devise_error_messages! %>
   <%#= render 'shared/error_messages', :target => @user %>
 
-  <div id="slides" >
+  <div id="slides">
     <div id="personal_info">
       
       <div id="scont">
@@ -164,8 +163,9 @@
           <% @i+=1 %>
         <% end %><br />
       </div>
+      <%= button_tag "<<pre", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
       <div id="next_btn">
-        <%=button_tag "next",:class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_product" %>
+        <%=button_tag "next>>",:class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_product" %>
   <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
       </div>
     </div>
@@ -173,10 +173,11 @@
       
       <div id="scont">
         <div id="packages">
-
-        </div></div>
+        </div>
+      </div>
+      <%= button_tag "<<pre", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
       <div id="next_btn">
-        <%=button_tag "next",  :class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_package"%>
+        <%=button_tag "next>>",  :class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_package"%>
   <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
       </div>
     </div>
@@ -209,6 +210,7 @@
           <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
           <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
         </div></div>
+      <%= button_tag "<<pre", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
       <div id="next_btn">
         <%= f.submit "Sign up",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
       </div>

@@ -27,10 +27,7 @@
 </script>
 
 <div id='injection_site'></div>
-
-<%= image_tag @painting.image_url,:id=>"image1" %>
-
-
+<%= image_tag @painting.image_url, :id=>"image1" %>
 <!-- Add an edit button, passing the HTML id of the image and the public URL of the image -->
 <p><input type='image' src='http://images.aviary.com/images/edit-photo.png' value='Edit photo' onclick="return launchEditor('image1', 'http://sheltered-meadow-1295.herokuapp.com/<%=@painting.image_url%>');" /></p>
         

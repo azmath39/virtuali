@@ -1,27 +1,77 @@
-<div class="span10" id="final_tour" style="margin-left: 15%;">
+<script>
+  $(document).ready(function(){
+    $('.carousel').carousel({
+    interval: 7000,
+    autoplay: true
+  })
+  var slider = $(".carousel-inner")
+       
+        .bind('slid', function() {
+            var index = $(this).find(".active").index();
+            $(this).find("a").removeClass('pager-active').eq(index).addClass('pager-active');
+        });
+    $(".slider-pager a").click(function(e){
+        var index = $(this).index();
+        slider.carousel(index);
+        e.preventDefault();
+    });
+});
+</script>
+<style>
+  .slider-pager{
+    margin-top: 10px;
+  }
 
-  <div style="height: 400px; width: 675px; margin: 30px 0px 0px 30px;">
+.slider-pager a.pager-active { background: #2c8571; }
+</style>
+<div class="span11" id="final_tour" style="margin-left: 8%;border: 40px solid #339999;border-radius:40px;">
+  <div style="height: 507px; width: 811px; margin: 10px 10px 10px 10px;">
     <% @objs = [] %>
     <% @tour.paintings.each do |img|%>
-
       <% @objs << img %>
     <% end %>
-
-    <div id="myCarousel2" class="carousel slide carousel-fade" style="box-shadow: 10px 10px 5px #888888;">
-      <div class="carousel-inner" style="height: 420px;">
+    <div id="myCarousel2" class="carousel slide carousel-fade" style="border: 1px solid #CCC;padding: 10px;">
+      <div class="carousel-inner" style="height: 507px;">
         <div class="active item"><%= image_tag(@objs[0].image_url(:large))%> </div>
         <div class="item"><%= image_tag(@objs[1].image_url(:large))%></div>
         <div class="item"><%= image_tag(@objs[2].image_url(:large)) %></div>
         <div class="item"><%= image_tag(@objs[3].image_url(:large)) %></div>
         <div class="item"><%= image_tag(@objs[4].image_url(:large)) %></div>
       </div>
-
-       <a class="carousel-control left" href="#myCarousel2" data-slide="prev">&lsaquo;</a>
-       <a class="carousel-control right" href="#myCarousel2" data-slide="next">&rsaquo;</a>
+       <%#*<a class="carousel-control left" href="#myCarousel2" data-slide="prev">&lsaquo;</a>%>
+       <%#*<a class="carousel-control right" href="#myCarousel2" data-slide="next">&rsaquo;</a>%>
     </div>
-
   </div>
-  <div id="user_img">
+
+  <div class="slider-pager" style="margin: 5% 0 0 20%;">
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%= @objs[0].name %></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%= @objs[1].name %></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%= @objs[2].name %></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%= @objs[3].name %></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%= @objs[4].name %></a>
+  </div>
+  <div style="float: right; margin: -600px 0px 0 250px; font-size: 12px;">
+    <table border="1">
+      <tr>
+        <th>Price</th>
+        <th>Bedrooms</th>
+        <th>Bathrooms</th>
+        <th>Sq.feets</th>
+      </tr>
+      <tr>
+        <td><%= @tour.price %> </td>
+        <td><%= @tour.bed_rooms %> </td>
+        <td><%= @tour.bath_rooms %> </td>
+        <td><%= @tour.square_footage %> </td>
+      </tr>
+    </table>
+  </div>
+  
+  <div style="float: right; margin: -520px 0px 0 830px; font-size: 12px;">
+    <b>Description:</b><br />
+    <%= @tour.description %>
+  </div>
+  <div id ="user_img" style="float: right; height: 200px; width: 150px;margin: -380px 70px -40px 30px;">
     <% if signed_in? %>
     <%= image_tag(@tour.user.image_url(:medium)) %>
     <strong><%= @tour.user.email %></strong><br />
@@ -30,41 +80,13 @@
     <strong><%= @tour.user.name %></strong><br />
   <% end %>
   </div>
-  <div style="float: right; height: 150px; width: 200px;border: 1px solid red;margin: -150px 30px 0 30px;">
-    image1
-  </div>
-  <div  style="float: right; height: 50px; width: 200px;margin: 80px -230px 0px 30px;">
+  <div  style="float: right; height: 50px; width: 200px;margin: -100px -20px 0px 0px;">
     <% if !current_user || current_user.id != @tour.user.id %>
       <%= render 'contact/contact_form' %>
-        <%= link_to "Request for Info", "#contact", "data-toggle" => "modal", :class => 'btn btn-large btn-success'%>
+        <%= link_to "Request for Info", "#contact", "data-toggle" => "modal", :class => 'btn btn-small btn-success'%>
     <% elsif %>
     <h5 style="margin:0 0 0 35px; color: green;">Your Tour</h5>
     <% end %>
-    <h4><%= button_to "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click for Tour&nbsp;&nbsp;&nbsp;&nbsp;".html_safe, {:controller => 'tours', :action => 'slide_show', :id => @tour.id }, :class=> 'brn btn-large btn-primary'%></h4>
-  </div>
-
-  <div style="height: 200px; width: 650px; margin: 50px 0 0 30px;">
-    <table>
-      <tr>
-        <th>Address</th>
-        <th>Price</th>
-        <th>Bedrooms</th>
-        <th>Bathrooms</th>
-        <th>Sq.feets</th>
-      </tr>
-      <tr>
-        <td><%= @tour.state %> </td>
-        <td><%= @tour.price %> </td>
-        <td><%= @tour.bed_rooms %> </td>
-        <td><%= @tour.bath_rooms %> </td>
-        <td><%= @tour.square_footage %> </td>
-      </tr>
-      <tr>
-        <td colspan="5">&nbsp;</td>
-      </tr>
-      <tr>
-        <td colspan="5"><%= @tour.description %> </td>
-      </tr>
-    </table>
+    <h4><%= button_to "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click for Tour&nbsp;&nbsp;&nbsp;&nbsp;".html_safe, {:controller => 'tours', :action => 'slide_show', :id => @tour.id }, :class=> 'brn btn-small btn-primary'%></h4>
   </div>
 </div>
