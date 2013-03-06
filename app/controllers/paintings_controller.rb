@@ -42,7 +42,7 @@ class PaintingsController < ApplicationController
   end
 
   def update
-    @painting = Painting.find(params[:id])
+    @painting = Painting.find(params[:painting][:id].to_i)
     if @painting.update_attributes(params[:painting])
       redirect_to :back, :notice=> "Image was successfully updated."
     else
