@@ -61,10 +61,10 @@ class PaintingsController < ApplicationController
     painting= Painting.find(params[:id])
     painting.update_attributes(:name=>params[:name])
   if params.include?"tour_id"
-    puts "------"*10
-   str = "#{current_user.paintings.find(:all,:condition=>{:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bed room"}).count}, #{current_user.paintings.find(:all,:condition=>{:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bath room"}).count}"
+   
+   str = "#{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bath Room").count}"
   else
-   str = "#{current_user.paintings.find(:all,:condition=>{:tour_id=>nil,:name=>"Bed room"}).count}, #{current_user.paintings.find(:all,:condition=>{:tour_id=>nil,:name=>"Bath room"}).count}"
+   str = "#{current_user.paintings.where(:tour_id=>nil,:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>nil,:name=>"Bath Room").count}"
   end
     render :text=>str
   end
@@ -84,12 +84,6 @@ class PaintingsController < ApplicationController
     limit = current_user.selected_package.pictures_for_tour
     existing_images+=@previous_count.to_i unless @previous_count.nil?
     existing_images += current_nil_image.count unless current_nil_image.nil?
-    puts "=-" * 20
-    puts existing_images
-    puts limit
-    puts existing_images< limit
-    puts "=-" * 20
-
     if existing_images< limit
       return true
     else

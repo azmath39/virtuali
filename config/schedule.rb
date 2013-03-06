@@ -21,6 +21,6 @@
 
 every 1.minutes do
 
-   rake "test_name"
+   #rake "test_name"
 
  end

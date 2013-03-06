@@ -2,16 +2,21 @@
 #
 # Table name: selected_packages
 #
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  package_id :integer
-#  price      :float
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  status     :integer
+#  id                  :integer          not null, primary key
+#  user_id             :integer
+#  package_id          :integer
+#  price               :float
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  status              :integer
+#  expire_date         :date
+#  pictures_for_tour   :integer
+#  payment_period_type :integer
+#  renew_date          :date
 #
 
 class SelectedPackage < ActiveRecord::Base
+  #require 'tours_jobs'
   attr_accessible :package_id, :price, :user_id,:status,:pictures_for_tour,:payment_period_type
   belongs_to :user
   belongs_to :package
@@ -35,6 +40,7 @@ class SelectedPackage < ActiveRecord::Base
     end
     self.save
   end
+  
 
   # == Getters
   def name
@@ -66,24 +72,51 @@ class SelectedPackage < ActiveRecord::Base
       "Sold"
     end
   end
+  def tours_enable
+    if self.update_attributes(:status=>1) then
+      tours=self.user.tours
+      unless tours.empty?
+        tours.each do |tour|
+          tour.update_attributes(:status=>1)
+        end
+        unless self.user.user_delay_job.nil? then
+          dl_job=self.user.user_delay_job.delayed_job
+          dl_job.destroy unless dl_job.nil?
+        end
+        self.user.set_auto_destroy_event
+      end
+      true
+    else
+      false
+    end
+  end
   def tours_disable
     self.update_attributes(:status=>2)
+    
     tours=self.user.tours
     unless tours.empty?
-
       tours.each do |tour|
         tour.update_attributes(:status=>2)
       end
+      d =Delayed::Job.enqueue TourDestroy.new(self.id),:priority=>0, :run_at=>15.day.from_now
+      self.user.user_delay_job.update_attributes(:delayed_job_id=>d.id)
+      #      #Delayed::Job.enqueue TourDestroy.new(self.id),0, 1.minute.from_now
+      #      Delayed::Job.enqueue TourDestroy.new(self.id),:priority=>0, :run_at=>self.validity
     end
   end
+ 
+
   def tours_destroy
+    #self.update_attributes(:status=>3)
     tours=self.user.tours
     unless tours.empty?
       self.user.tours.each do |tour|
         tour.destroy
       end
     end
+    self.user.user_delay_job.destroy
   end
+  
   def send_alert_message
 
   end
@@ -94,5 +127,11 @@ class SelectedPackage < ActiveRecord::Base
       365
     end
   end
-
+  def validity
+    if self.payment_period_type==1
+      30.days.from_now
+    else
+      365.days.from_now
+    end
+  end
 end

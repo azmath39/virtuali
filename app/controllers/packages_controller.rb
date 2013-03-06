@@ -18,6 +18,7 @@ class PackagesController < ApplicationController
   end
   def upgrade_package
     @packages=current_user.packages_for_upgarde
+    
   end
   def upgrade
     @token = params[:stripeToken]

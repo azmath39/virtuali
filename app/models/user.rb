@@ -18,6 +18,10 @@
 #  image                  :string(255)
 #  name                   :string(255)
 #  phno                   :string(255)
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -42,8 +46,9 @@ class User < ActiveRecord::Base
   has_one :card,:dependent => :destroy
   has_many :feedbacks, :dependent => :destroy
   has_many :paintings, :dependent=>:destroy
-  
-
+  has_one :delayed_job, :through=>:user_delay_job, :dependent=>:destroy
+  has_one :user_delay_job,  :dependent=>:destroy
+  after_create :set_auto_destroy_event
   def package=(pkg)
     p=Package.find(pkg[:id].to_i)
     if pkg.include?:type_of_payment
@@ -77,6 +82,15 @@ class User < ActiveRecord::Base
     price=pkg.yearly_price
     Package.where("product_id=:product_id AND yearly_price > :price",{:product_id=>pkg.product_id,:price=>price})
     #self.selected_product.product.packages
+  end
+  def set_auto_destroy_event
+    #puts "dsfb"
+    #Delayed::Job.enqueue NewsletterJob.new('lorem ipsum...', Customers.find(:all).collect(&:email))
+    
+    d=Delayed::Job.enqueue ToursJobs.new(self.selected_package.id), :priority=>0, :run_at=>self.selected_package.validity
+    self.user_delay_job=UserDelayJob.create(:delayed_job_id=>d.id)
+
+
   end
   private
   def unused_money(price)

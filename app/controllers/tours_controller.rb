@@ -75,7 +75,7 @@ class ToursController < ApplicationController
   def view_map
     if params.has_key? :id
       @tours = []
-      @products=SelectedProduct.find(:all,:condition=>{:product_id=>params[:id].to_i})
+      @products=SelectedProduct.find(:all,:conditions=>{:product_id=>params[:id].to_i})
       @products.each do |product|
           @tours << product.user.tours
       end

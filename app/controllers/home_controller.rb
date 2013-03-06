@@ -115,7 +115,8 @@ class HomeController < ApplicationController
     @selected_pkg=SelectedPackage.find(@pkg_id)
     @amount = (@selected_pkg.price.to_f*100).to_i
     stripe_charge
-    if @selected_pkg.update_attributes(:status=>1)
+    if @selected_pkg.tours_enable
+      
       flash[:notice]="sucessfully renewed"
     else
       flash[:error]= "Unable to update at this movement, Try some other time. Sorry for the inconvience."
