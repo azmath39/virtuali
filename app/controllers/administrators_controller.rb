@@ -2,18 +2,16 @@ class AdministratorsController < ApplicationController
   
   def webhooks_handling
     @type = params["type"]
-    puts "========"
-    puts "params"
-    puts "=========="
+   
     if params["data"]["object"].has_key? "customer"
       @card = Card.find_by_customer_stripe_id(params["data"]["object"]["customer"])
       @customer=@card.user unless @card.nil?
-      unless @customer.nil?
-      update_selected_package_status(@type,@customer)
-      else
-        update_selected_package_status(@type)
+     if  !@customer.nil?
+      update_selected_package_status(@type,@customer)  
+     elsif !current_user.nil?
+       update_selected_package_status(@type,current_user)
+     end
       end
-    end
     render :nothing=>true
   end
   #  def user_account_maintenance
@@ -54,7 +52,7 @@ class AdministratorsController < ApplicationController
       #        select_pkg.update_attributes(:status=>1,:expire_date=> select_pkg.expire_date + 30)
       #        select_pkg.tour.update_attributes(:status=>1)
       #end
-      customer.save_payment_details(params[:charge],2,@charge[:total])
+      customer.save_payment_details(params["data"]["object"]["charge"],2,params["data"]["object"]["total"])
       customer.selected_packages.tour_enable
      
       #puts @customer
@@ -79,19 +77,4 @@ class AdministratorsController < ApplicationController
       #puts @customer
     end
   end
-  def update_selected_package_status(type)
-    case type
-    when "invoice.payment_succeeded"
-     
-      resource.save_payment_details(params[:charge],2,@charge[:total])
-     
-
-      #puts @customer
-    when "invoice.payment_failed"
-    when "customer.subscription.created"
-    when "customer.subscription.deleted"
-
-    end
-  end
-
 end
