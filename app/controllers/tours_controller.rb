@@ -37,7 +37,7 @@ class ToursController < ApplicationController
   end
   def edit
     @tour = Tour.find(params[:id])
-    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id  )
+    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id).order('created_at ASC')
     @count=@paintings.count unless @paintings.nil?
     @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil)
     @paintings.flatten!
@@ -94,7 +94,7 @@ class ToursController < ApplicationController
         flash.now[:notice] = "No tours were found!"
       end
       @json = @tours.to_gmaps4rails do |tour, marker|
-        marker.infowindow("<b>#{tour.zip} #{tour.city}</b><br />" "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<hr>" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
+        marker.infowindow("<b>#{tour.zip} #{tour.state} #{tour.city}</b><br />" "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<hr>" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
         marker.title("#{tour.city}")
       end
  end

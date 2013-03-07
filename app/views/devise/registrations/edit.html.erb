@@ -1,14 +1,13 @@
+<%= devise_error_messages! %>
 <div class ="edit_form_div" id="signin_div">
 <h2>Edit Your Account</h2>
 <hr />
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
 
   <div><%= f.label :email %>
   <%= f.email_field :email, :autofocus => true %>
-  <div>
-    <%= f.label :image, "Profile Picture" %>
-    
+  <div class="fileupload btn-mini btn-warning" style="width:130px;">
+    <%= f.label :image, "Change Profile Picture", :style=>'margin-top: 5px;' %>
     <%= f.file_field :image %>
     <%#= image_tag(@user.image_url(:small)) if @user.image? %>
     <%#*<p style="margin-left: 300px;"><%= link_to "remove", '#' %</p>%>
@@ -32,7 +31,7 @@
 
 
 <br />
-<p>Unhappy? <%= link_to "Cancel my account!", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
+<p>Unhappy? <%= link_to "Cancel Your Account!", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
 
 <%= link_to "Back", :back %>
 </div>

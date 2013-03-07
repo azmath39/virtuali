@@ -16,7 +16,9 @@
     <strong>Description:</strong>
     <%= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%><br />
     <% if tour.status == 1 %>
-    <strong>Status:</strong> Active
+    <strong>Status:</strong> <%= tour.tour_status %>
+    <%  else %>
+    <strong>Status:</strong><%= tour.tour_status %>
     <% end %>
    </div>
   </div>

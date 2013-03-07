@@ -19,7 +19,7 @@
     min-height: 40px;
     padding-left: 20px;
     padding-right: 20px;
-    height: 53px;
+    height: 80px;
 }
 .navbar .nav>li>a{
     float:none;
@@ -233,5 +233,5 @@ filter: alpha(opacity=50);
     ------------------------- */
     .container{
         width:100%;
-        margin-top: 90px;
+        margin-top: 120px;
 }

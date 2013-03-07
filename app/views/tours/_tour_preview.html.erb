@@ -1,0 +1,90 @@
+<script>
+  $(document).ready(function(){
+    $('.carousel').carousel({
+    interval: 7000,
+    autoplay: true
+  })
+  var slider = $(".carousel-inner")
+
+        .bind('slid', function() {
+            var index = $(this).find(".active").index();
+            $(this).find("a").removeClass('pager-active').eq(index).addClass('pager-active');
+        });
+    $(".slider-pager a").click(function(e){
+        var index = $(this).index();
+        slider.carousel(index);
+        e.preventDefault();
+    });
+});
+</script>
+<style>
+  .slider-pager{
+    margin-top: 10px;
+  }
+
+.slider-pager a.pager-active { background: #2c8571; }
+</style>
+<p class="title-text" style="margin:2% 0 10px 10%;">Initial Tour Preview</p>
+<div class="span11" id="final_tour" style="margin-left: 8%;border: 40px solid #339999;border-radius:40px; color: whitesmoke;">
+  <div style="height: 507px; width: 811px; margin: 10px 10px 10px 10px;">
+    <% @objs = [] %>
+    <% @tour.paintings.each do |img|%>
+      <% @objs << img %>
+    <% end %>
+    <div id="myCarousel2" class="carousel slide carousel-fade" style="background: none repeat scroll 0% 0% rgb(255, 255, 255);
+  padding: 12px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);">
+      <div class="carousel-inner" style="height: 507px;">
+        <div class="active item"><%= image_tag(@objs[0].image_url(:large))%> </div>
+        <div class="item"><%= image_tag(@objs[1].image_url(:large))%></div>
+        <div class="item"><%= image_tag(@objs[2].image_url(:large)) %></div>
+        <div class="item"><%= image_tag(@objs[3].image_url(:large)) %></div>
+        <div class="item"><%= image_tag(@objs[4].image_url(:large)) %></div>
+      </div>
+       <%#*<a class="carousel-control left" href="#myCarousel2" data-slide="prev">&lsaquo;</a>%>
+       <%#*<a class="carousel-control right" href="#myCarousel2" data-slide="next">&rsaquo;</a>%>
+    </div>
+  </div>
+
+  <div class="slider-pager" style="margin: 5% 0 0 20%;">
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%= @objs[0].name %></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%= @objs[1].name %></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%= @objs[2].name %></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%= @objs[3].name %></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%= @objs[4].name %></a>
+  </div>
+  <div style="float: right; margin: -580px -9px 0 200px; font-size: 12px;">
+    <table border="1">
+      <tr>
+        <th>Price</th>
+        <th>Bedrooms</th>
+        <th>Bathrooms</th>
+        <th>Sq.feets</th>
+      </tr>
+      <tr>
+        <td><%= @tour.price %> </td>
+        <td><%= @tour.bed_rooms %> </td>
+        <td><%= @tour.bath_rooms %> </td>
+        <td><%= @tour.square_footage %> </td>
+      </tr>
+    </table>
+  </div>
+
+  <div style="float: right; margin: -510px 1px 0 825px; font-size: 12px;">
+    <b>Description:</b><br />
+    <%= @tour.description %>
+  </div>
+  <div id ="user_img" style="float: right; height: 200px; width: 150px;margin: -320px 70px -40px 30px;">
+    <%= image_tag(@tour.user.image_url(:medium)) %>
+    <strong><%= @tour.user.name %></strong><br />
+  </div>
+  <div  style="float: right; height: 50px; width: 200px;margin: -40px -20px 0px 0px;">
+    <% if !current_user || current_user.id != @tour.user.id %>
+      <%= render 'contact/contact_form' %>
+        <%= link_to "Request for Info", "#contact", "data-toggle" => "modal", :class => 'btn btn-small btn-success'%>
+    <% elsif %>
+    <h5 style="margin:0 0 0 35px; color: green;">Your Tour</h5>
+    <% end %>
+    <h4><%= button_to "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click for Tour&nbsp;&nbsp;&nbsp;&nbsp;".html_safe, {:controller => 'tours', :action => 'slide_show', :id => @tour.id }, :class=> 'brn btn-small btn-primary'%></h4>
+  </div>
+</div>
