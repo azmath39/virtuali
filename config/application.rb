@@ -67,7 +67,7 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
   :port                 => 587,
   :domain               => "localhost",
   :user_name            => "git.venkat@gmail.com",
-  :password             => "venkat123",
+  :password             => "mypassword",
   :authentication       => :plain,
   :enable_starttls_auto => true
 }
