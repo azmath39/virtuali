@@ -1,17 +1,20 @@
 <% if current_user %>
+
 <%pkg=current_user.selected_package %>
     <%initiate(pkg)%>
 <div style="float:right;margin-right: 50px; margin-bottom: 20px;" >
 <%if !current_user.card.nil?%>
     <%= render 'card_change_form' %>
-    <%= link_to "Change Card Details", "#card_change", "data-toggle" => "modal", :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  %>
+    <%= link_to "Change Card Details", "#card_change", "data-toggle" => "modal", :class => 'btn btn-primary'%>
 <%elsif check_payment_type%>
  <%= link_to "Create Direct Debit", "#card_details", "data-toggle" => "modal", :class => "btn btn-danger", :onclick=>"create_direct_debit()"  %>
   <%end%>
 
-  <%= link_to "Upgrade Your Package", '/packages/upgrade_package', :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  %>
+  <%= link_to "Upgrade Your Package", '/packages/upgrade_package', :class => 'btn btn-primary' %>
   </div>
+
 <div class="container-fluid">
+  <h3> Package Details</h3>
 <table class="table  table-striped">
     <tr><th> Name </th><th>Status:</th><th>  Price:</th><th><%10.times do %>&nbsp;<%end%>
               </th></tr></table></div>
@@ -23,7 +26,7 @@
           <div class="accordion-heading">
             <table class="table table-condensed">
             <tr><td> <%=pkg.name%> </td><td> <%=pkg.status_info%></td><td> $<%=pkg.price%></td><th>
-<%=link_to "view","##{pkg.id}", "data-toggle"=>"collapse", :class=>"btn btn-link"%></th></tr>
+<%=link_to "view","##{pkg.id}", "data-toggle"=>"collapse", :class=>"btn btn-link"%><%#=link_to "Payment History","##{pkg.id}payment_history", "data-toggle"=>"collapse", :class=>"btn btn-link"%></th></tr>
 
  </table>
             <%@pkg_id=pkg.id%>
@@ -58,12 +61,13 @@
 </table>
             </div>
           </div>
+          
         </div>
       </div>
     </div>
 
 
-
+<%=render "payment_history"%>
  
  
 <%else%>
@@ -90,6 +94,12 @@
   $("#pkg_id").val(id);
   $("#operation_type").val(1);
   $("#type_of_transaction").val(1);
+  }
+   function create_direct_debit()
+  {
+    $("#pkg_id").val(null );
+    $("#operation_type").val(2);
+    $("#type_of_transaction").val(2);
   }
 </script>
 <style>

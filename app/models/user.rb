@@ -49,6 +49,7 @@ class User < ActiveRecord::Base
   has_one :delayed_job, :through=>:user_delay_job, :dependent=>:destroy
   has_one :user_delay_job,  :dependent=>:destroy
   after_create :set_auto_destroy_event
+  has_many :payments, :dependent=> :destroy
   def package=(pkg)
     p=Package.find(pkg[:id].to_i)
     if pkg.include?:type_of_payment
@@ -86,10 +87,13 @@ class User < ActiveRecord::Base
   def set_auto_destroy_event
     #puts "dsfb"
     #Delayed::Job.enqueue NewsletterJob.new('lorem ipsum...', Customers.find(:all).collect(&:email))
-    
     d=Delayed::Job.enqueue ToursJobs.new(self.selected_package.id), :priority=>0, :run_at=>self.selected_package.validity
     self.user_delay_job=UserDelayJob.create(:delayed_job_id=>d.id)
-
+  end
+  def save_payment_details(reference,type,amount)
+   
+   a= amount.to_i/100
+   self.payments<< Payment.create(:reference=>reference,:amount=>a,:payment_type=>type)
 
   end
   private

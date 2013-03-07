@@ -12,6 +12,7 @@ class HomeController < ApplicationController
       @feedback = Feedback.new
       @tours= current_user.tours
       @packages= Package.all
+      @payments=current_user.payments
       #@selected_pkgs = selected_pkgs_with_tour
     end
   end

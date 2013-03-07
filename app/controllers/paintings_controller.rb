@@ -30,7 +30,7 @@ class PaintingsController < ApplicationController
     #    session[:painting] = $ids
     #    puts "**********************"
     #
-    #    puts "*****************session******"
+    #    puts "*****************#session******"
     #    p session[:painting].flatten()
     #  puts "***********************"
     #p session[:painting]=nil
