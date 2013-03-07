@@ -138,13 +138,13 @@
           <%= f.label "password_confirmation*" %>
           <%= f.password_field :password_confirmation,:id=>"password_confirmation" %><span id="personal_info_error_cpassword" style="color:red;"></span>
         </div>
-        <div>
-          <%= f.label :image, "Profile Picture" %>
+        <div class="fileupload btn-small btn btn-warning">
+          <%= f.label :image, "Profile Picture", :style=>'margin-top: 5px;' %>
           <%= f.file_field :image %>
-  <%#=text_field_tag :email_confirm,nil%>
-        </div></div>
+        </div>
+      </div>
       <div id="next_btn">
-        <%=button_tag "next", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_personal",:onclick=>"button()" %>
+        <%=button_tag "Next", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_personal",:onclick=>"button()" %>
       </div>
 
     </div>
@@ -163,9 +163,9 @@
           <% @i+=1 %>
         <% end %><br />
       </div>
-      <%= button_tag "<<pre", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
+      <%= button_tag "Previous", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
       <div id="next_btn">
-        <%=button_tag "next>>",:class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_product" %>
+        <%=button_tag "Next",:class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_product" %>
   <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
       </div>
     </div>
@@ -175,9 +175,9 @@
         <div id="packages">
         </div>
       </div>
-      <%= button_tag "<<pre", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
+      <%= button_tag "Previous", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
       <div id="next_btn">
-        <%=button_tag "next>>",  :class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_package"%>
+        <%=button_tag "Next",  :class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_package"%>
   <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
       </div>
     </div>
@@ -210,7 +210,7 @@
           <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
           <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
         </div></div>
-      <%= button_tag "<<pre", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
+      <%= button_tag "Previous", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
       <div id="next_btn">
         <%= f.submit "Sign up",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
       </div>

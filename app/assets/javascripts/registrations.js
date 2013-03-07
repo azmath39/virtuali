@@ -32,14 +32,14 @@ $('#personal_info_error_email').html("");
 
  $('#personal_info_error_name').html("");
   if($("#user_name").val()==""){
-      $('#personal_info_error_name').append("<br/>* Required field Name.");
+      $('#personal_info_error_name').append("<br/>* Full Name Can't be empty.");
     }
 
  });
   $("#password").blur(function(event){
  $('#personal_info_error_password').html("");
   if($("#password").val()==""){
-      $('#personal_info_error_password').append("<br/>* Required field password.");
+      $('#personal_info_error_password').append("<br/>* Password can't be empty.");
     }else if($("#password").val().length<8){
       $('#personal_info_error_password').append("<br/>* Password should be more than 8 characters. ");
     }
@@ -49,9 +49,9 @@ $('#personal_info_error_email').html("");
 $("#password_confirmation").blur(function(event){
    $('#personal_info_error_cpassword').html("");
    if($("#password_confirmation").val()==""){
-      $('#personal_info_error_cpassword').append("<br/>* Required field Password_Confirmation.");
+      $('#personal_info_error_cpassword').append("<br/>* Password Confirmation should not be empty.");
     }else if($("#password_confirmation").val()!=$("#password").val()){
-      $('#personal_info_error_cpassword').append("<br/>* Password and Password_Confirmation should match.");
+      $('#personal_info_error_cpassword').append("<br/>* Password and Password Confirmation should match.");
     }
 });
 

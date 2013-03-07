@@ -15,6 +15,8 @@ classic-loader.gif: classic-loader.gif
 classic-loader/index.gif: classic-loader.gif
 classic-map.png: classic-map.png
 classic-map/index.png: classic-map.png
+cut.png: cut.png
+cut/index.png: cut.png
 fdback.png: fdback.png
 fdback/index.png: fdback.png
 feedback.jpg: feedback.jpg

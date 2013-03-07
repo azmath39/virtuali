@@ -1,19 +1,21 @@
-<div style="margin: 0 0 0 15%;">
-<h1>Displaying Photos</h1>
-
-<div id="abc" style="height: 550px; width: 850px;border: 1px solid #CCC;padding: 10px;border-radius: 2px;">
+<p class="title-text" style="margin:2% 0 10px 12%;">Displaying Photos</p>
+<div class="span11" style="margin-left: 10%;border: 40px solid #339999;border-radius:40px; width:auto;padding:0px;">
+<div>
+<div id="abc" style="">
 <% @tour.paintings.each do |p| %>
-    <span class="content">
-      <%=image_tag p.image_url(:large) %>
-    </span>
+  <%=image_tag p.image_url(:large) %>
 <% end %>
+</div>
 </div>
 </div>
 <script>
         Galleria.loadTheme("<%= javascript_path('galleria.classic.js') %>");
         Galleria.configure({
-          transition: 'fade'
+          transition: 'fade',
+          transitionSpeed:1000,
+          showInfo: false
         });
+        
         Galleria.run('#abc', {
           autoplay: 6000
         });

@@ -10,8 +10,7 @@ class PaintingsController < ApplicationController
   end
   
   def new
-    
-    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil)
+    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil).order('created_at ASC')
     @painting = Painting.new
     @tour = Tour.new
     # @selected_pkgs=selected_pkgs_without_tour
@@ -44,7 +43,9 @@ class PaintingsController < ApplicationController
   def update
     @painting = Painting.find(params[:painting][:id].to_i)
     if @painting.update_attributes(params[:painting])
-      redirect_to :back, :notice=> "Image was successfully updated."
+#      redirect_to :back, :notice=> "Image was successfully updated."
+       flash[:success] = "Image was updated!"
+       redirect_to :back
     else
       render :edit
     end

@@ -8,8 +8,8 @@ class ContactController < ApplicationController
     $receiver_email = Tour.find_by_id(params[:tour_id]).user.email
     if @message.valid?
       NotificationsMailer.new_message(@message).deliver
-        
-      redirect_to(tours_path, :notice => "Message was successfully sent!")
+      flash[:notice] = "Message sent successfully!"
+      redirect_to :back
     else
       flash.now.alert = "Please fill all fields."
       render :new
