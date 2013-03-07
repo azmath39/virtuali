@@ -93,7 +93,7 @@ class User < ActiveRecord::Base
   def save_payment_details(reference,type,amount)
    
    a= amount.to_i/100
-   self.payments<< Payment.create(:reference=>reference,:amount=>a,:type=>type)
+   self.payments<< Payment.create(:reference=>reference,:amount=>a,:payment_type=>type)
 
   end
   private
