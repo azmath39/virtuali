@@ -42,7 +42,7 @@
   
   <div class="actions">
     
-    <%= link_to "edit", '#', :onclick=>"return launchEditor('#{painting.id}', 'http://static.nextwallpapers.com/1920x1080/christmas_wallpapers_275_1920x1080.jpg');" %> |
+    <%= link_to "edit", '#', :onclick=>"return launchEditor('#{painting.id}', 'http://sheltered-meadow-1295.herokuapp.com#{painting.image_url(:large)}');"%> |
     <%= link_to "remove", painting, :method => :delete %> <span class="badge badge-info" style="float:right; font-weight: bold"><%=$serial_no +=1%></span>
   </div>
 </div>
