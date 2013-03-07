@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
       :card => @token,
       :description => @email
     )
+    current_user.save_payment_details(@charge["id"],1,@charge[:amount]) unless current_user.nil?
   end
 
   def save_stripe_customer_id(user, customer)

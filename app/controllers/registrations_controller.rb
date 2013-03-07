@@ -31,12 +31,15 @@ class RegistrationsController < Devise::RegistrationsController
     if params[:user][:package].include?(:type_of_payment) and params[:user][:package][:type_of_payment].to_i==1
       if params[:type_of_transaction] == "1"
         stripe_charge
+        resource.save_payment_details(@charge["id"],1,@charge[:amount])
       elsif params[:type_of_transaction] == "2"
         subscription
         save_stripe_customer_id(resource, @customer.id)
+        resource.save_payment_details(nil,3,@amount)
       end
     else
       stripe_charge
+      resource.save_payment_details(@charge["id"],1,@charge[:amount])
     end
   end
 end
