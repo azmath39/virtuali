@@ -2,6 +2,9 @@ class AdministratorsController < ApplicationController
   
   def webhooks_handling
     @type = params["type"]
+    puts "========"
+    puts "params"
+    puts "=========="
     if params["data"]["object"].has_key? "customer"
       @card = Card.find_by_customer_stripe_id(params["data"]["object"]["customer"])
       @customer=@card.user unless @card.nil?
