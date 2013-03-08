@@ -5,7 +5,7 @@
   clear: both;
 }
 #paintings{
-  height: 10px;
+  height: auto;
   width: 100%;
   display: inline;
 }
@@ -15,7 +15,7 @@ position: relative;
   padding: 10px;
   float: left;
   margin-right: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
 
   .name {
     padding-top: 5px;

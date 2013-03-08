@@ -10,12 +10,12 @@
     <strong>Price($): </strong> <%= tour.price %><br />
     <strong>Description:</strong>
     <%=truncate(tour.description, :length => 20)%><% if tour.description.length > 20 %> <%=link_to "[More]",tour%><%end%>
-
     <%#= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%><br />
     <% if tour.status == 1 %>
     <strong>Status:</strong> <%= tour.tour_status %>
     <%  else %>
     <strong>Status:</strong><%= tour.tour_status %>
+    
     <% end %>
    </div>
   </div>

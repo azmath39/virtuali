@@ -29,6 +29,7 @@ gem 'rails', '3.2.11'
   gem 'paranoia'
   gem 'delayed_job_active_record'
   gem "daemons"
+  gem 'bootstrap-wysihtml5-rails'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

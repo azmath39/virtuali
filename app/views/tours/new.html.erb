@@ -40,7 +40,7 @@
 <div style="float:left;margin-top: 10px;width: 650px;border:1px solid red;">
 <div class="contol-group" style="width:550px;">
   <%= f.label :description %>
-  <%= f.text_area :description,:cols => 20, :rows => 10 %>
+  <%= f.text_area :description, :cols => 20, :rows => 10, :class=>'wysihtml5' %>
 </div>
 </div>
 <div style="float:left;margin-top: 10px;clear: both;">
@@ -49,3 +49,9 @@
 </div>
 <% end %>
 </div>
+
+<script type="text/javascript">
+  $('.wysihtml5').each(function(i, elem) {
+    $(elem).wysihtml5();
+  });
+</script>

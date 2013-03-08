@@ -17,7 +17,12 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require galleria-1.2.9.min
 //= require galleria.classic
+//= require bootstrap-button
+//= require bootstrap-wysihtml5
+//= require bootstrap-wysihtml5/locales
 //= require_tree .
+
+
 /*function packages(){
     var products = new Array();
     var i=0;

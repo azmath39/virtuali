@@ -144,9 +144,6 @@ class ToursController < ApplicationController
       render :partial => 'all_tours'
   end
  
-
- 
-
     private
     def selected_pkgs_without_tour
       current_user.selected_packages.select do|spkg|
