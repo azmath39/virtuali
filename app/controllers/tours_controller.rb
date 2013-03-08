@@ -1,11 +1,11 @@
 class ToursController < ApplicationController
   def index
-      @search = Tour.where(:status => (0..1)).search(params[:q])
-      if params[:q].nil?
-        @tours = Tour.where(:status => (0..1)).paginate(:page => params[:page], :per_page => 3)
-      else
-        @tours = @search.result.paginate(:page => params[:page], :per_page => 5)
-      end
+    @search = Tour.where(:status => (0..1)).search(params[:q])
+    if params[:q].nil?
+      @tours = Tour.where(:status => (0..1)).paginate(:page => params[:page], :per_page => 3)
+    else
+      @tours = @search.result.paginate(:page => params[:page], :per_page => 5)
+    end
   end
 
   def show
@@ -26,66 +26,65 @@ class ToursController < ApplicationController
       @paintings=current_user.paintings.where(:tour_id => nil)
       @paintings.each do |pic|
         @tour.paintings << pic
-      end unless @paintings.empty?
-        flash[:notice] = "Tour was created successfully."
-        redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
-     else
-      @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil)
+      end 
+      flash[:notice] = "Tour was created successfully."
+      redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
+    else
+      error_to_flash
+      redirect_to :action=>'new', :controller=>"paintings"
+    end
+  end
+    def edit
+      @tour = Tour.find(params[:id])
+      @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id).order('created_at ASC')
+      @count=@paintings.count unless @paintings.nil?
+      @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil)
+      @paintings.flatten!
       @painting = Painting.new
-        render '/paintings/new'
-     end
-  end
-  def edit
-    @tour = Tour.find(params[:id])
-    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id).order('created_at ASC')
-    @count=@paintings.count unless @paintings.nil?
-    @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil)
-    @paintings.flatten!
-    @painting = Painting.new
-  end
-  def update
-    @tour = Tour.find(params[:tour][:id])
-    if @tour.update_attributes(params[:tour])
-      @paintings=current_user.paintings.where(:tour_id=>nil)
-      @paintings.each do |pic|
-        @tour.paintings<<pic
-      end unless @paintings.empty?
-      flash.now[:notice] = 'Tour updated successfully.'
-       redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
-    else
-      flash.now[:error] = 'Sorry,Unable to update Tour.'
-      edit
-      render 'edit'
     end
-  end
-  def destroy
-    @tour = Tour.find(params[:id])
-    if @tour.destroy
-      flash[:notice] = "Tour was deleted."
-      redirect_to :action => 'index',:controller=>"home"
-    else
-      flash[:error] = "Tour can't be deleted."
-      redirect_to :action => 'index',:controller=>"home"
-    end
-  end
-  def final_tour
-    @tour = current_user.tours.last
-  end
-  def slide_show
-    @tour = Tour.find(params[:id])
-  end
-  def view_map
-    if params.has_key? :id
-      @tours = []
-      @products=SelectedProduct.find(:all,:conditions=>{:product_id=>params[:id].to_i})
-      @products.each do |product|
-          @tours << product.user.tours
+    def update
+      @tour = Tour.find(params[:tour][:id])
+      if @tour.update_attributes(params[:tour])
+        @paintings=current_user.paintings.where(:tour_id=>nil)
+        @paintings.each do |pic|
+          @tour.paintings<<pic
+        end unless @paintings.empty?
+        flash.now[:notice] = 'Tour updated successfully.'
+        redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
+      else
+        error_to_flash
+        
+        redirect_to edit_tour_path(@tour)
       end
-      @tours.compact!
-      @tours.flatten!
-    else
-        @tours = Tour.all
     end
+    def destroy
+      @tour = Tour.find(params[:id])
+      if @tour.destroy
+        flash[:notice] = "Tour was deleted."
+        redirect_to :action => 'index',:controller=>"home"
+      else
+        flash[:error] = "Tour can't be deleted."
+        redirect_to :action => 'index',:controller=>"home"
+      end
+    end
+    def final_tour
+      @tour = current_user.tours.last
+    end
+    def slide_show
+      @tour = Tour.find(params[:id])
+    end
+    def view_map
+      if params.has_key? :id
+        @tours = []
+        @products=SelectedProduct.find(:all,:conditions=>{:product_id=>params[:id].to_i})
+        @products.each do |product|
+          @tours << product.user.tours
+        end
+        @tours.compact!
+        @tours.flatten!
+      else
+        @tours = Tour.all
+      end
       @search = Tour.search(params[:q])
       if !params[:q].nil?
         @tours = @search.result
@@ -97,44 +96,50 @@ class ToursController < ApplicationController
         marker.infowindow("<b>#{tour.zip} #{tour.state} #{tour.city}</b><br />" "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<hr>" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
         marker.title("#{tour.city}")
       end
- end
-  def status_change
-    tour = Tour.find(params[:id].to_i)
-    tour.update_attributes(:status=>params[:status].to_i)
-    render :text=>tour.tour_status
-  end
-  def user_tours
-    if signed_in?
-      @tours = current_user.tours
-    render :partial=>'list_of_tours'
     end
-  end
-
-  def download_zip
-    @tour = Tour.find(params[:id])
-    image_list = @tour.paintings
-    if !image_list.blank?
-      file_name = "#{@tour.user.name}_tour_pictures_#{@tour.created_at.strftime("%d-%b-%Y_%H:%M")}.zip"
-      t = Tempfile.new("my-temp-filename-#{Time.now}")
-      Zip::ZipOutputStream.open(t.path) do |z|
-        image_list.each do |img|
-          title = img.name
-          #title += ".jpg" unless title.end_with?(".jpg")
-          z.put_next_entry(title)
-          z.print IO.read(img.image.path)
-        end
+    def status_change
+      tour = Tour.find(params[:id].to_i)
+      tour.update_attributes(:status=>params[:status].to_i)
+      render :text=>tour.tour_status
+    end
+    def user_tours
+      if signed_in?
+        @tours = current_user.tours
+        render :partial=>'list_of_tours'
       end
     end
-    send_file t.path, :type => 'application/zip',
-                             :disposition => 'attachment',
-                             :filename => file_name
-      t.close
-  end
 
-  private
-  def selected_pkgs_without_tour
-    current_user.selected_packages.select do|spkg|
-      spkg unless spkg.tour.nil?
+    def download_zip
+      @tour = Tour.find(params[:id])
+      image_list = @tour.paintings
+      if !image_list.blank?
+        file_name = "#{@tour.user.name}_tour_pictures_#{@tour.created_at.strftime("%d-%b-%Y_%H:%M")}.zip"
+        t = Tempfile.new("my-temp-filename-#{Time.now}")
+        Zip::ZipOutputStream.open(t.path) do |z|
+          image_list.each do |img|
+            title = img.name
+            #title += ".jpg" unless title.end_with?(".jpg")
+            z.put_next_entry(title)
+            z.print IO.read(img.image.path)
+          end
+        end
+      end
+      send_file t.path, :type => 'application/zip',
+        :disposition => 'attachment',
+        :filename => file_name
+      t.close
+    end
+
+    private
+    def selected_pkgs_without_tour
+      current_user.selected_packages.select do|spkg|
+        spkg unless spkg.tour.nil?
+      end
+    end
+    def error_to_flash
+      flash[:error] ||= []
+      @tour.errors.full_messages.each do |x|
+        flash[:error]<< x
+      end
     end
   end
-end

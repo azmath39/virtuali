@@ -66,6 +66,11 @@ class Tour < ActiveRecord::Base
   has_many :paintings, :dependent => :destroy
   belongs_to :category
   belongs_to :selected_package
+  after_create :set_name
+  def set_name
+    self.name="#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
+    self.save
+  end
   def gmaps4rails_address
     "#{state}, #{city}"
   end
@@ -77,7 +82,7 @@ class Tour < ActiveRecord::Base
     self.address = "#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
   end
   def tour_name
-    "#{self.zip} #{self.state}"
+    "#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
   end
   def tour_status
     case status

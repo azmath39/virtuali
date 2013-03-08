@@ -127,7 +127,7 @@ class HomeController < ApplicationController
   def create_direct_debit
     @amount = (current_user.selected_package.price.to_f*100).to_i
     subscription
-    current_user.save_payment_details(nil,3,@amount)
+    #current_user.save_payment_details(nil,3,@amount)
   end
 
 end
