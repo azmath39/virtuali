@@ -4,32 +4,28 @@
 </div>
 <div class="span8" id ="tour-list">
   <p class="title-text">List of Tours</p>
- <% @tours.each do |tour| %>
-  <div class="span7 well" id = 'img_bg'>
-  <div>
-    <%#= t.paintings %>
-    <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
-    <div style ="float: right; margin: -6px 200px 0 0; height:100px; width: 350px;">
-    <strong><%= tour.state %></strong><br />
-    <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
-    <strong>Price: </strong> <%= tour.price %><br />
-    <strong>Description:</strong>
-    <%= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%><br />
-    <% if tour.status == 1 %>
-    <strong>Status:</strong> <%= tour.tour_status %>
-    <%  else %>
-    <strong>Status:</strong><%= tour.tour_status %>
-    <% end %>
-   </div>
+  <div id="all_tour_render">
+    <%= render 'all_tours' %>
   </div>
-</div>
-<% end %>
-
-<% if @tours.blank? %>
-  <p style="color:red;margin-left:280px;">No Tours found, Please try again!</p>
-<% end %>
-  <%#= render 'search_form' %>
 <div class ="span4" style="margin: 0 0px 0 300px; float: left;">
   <%= will_paginate @tours, :renderer => BootstrapPagination::Rails %>
 </div>
 </div>
+<script>
+  function find_tours()
+  {
+    $.ajax({
+      type: 'GET',
+      url: "/tours/find_tours",
+
+      data: {
+        'id' :  $("#product").val()
+
+      }
+
+    }).done(function(html) {
+
+  $('#all_tour_render').html(html);
+    });
+  }
+</script>

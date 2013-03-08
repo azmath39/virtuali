@@ -25,6 +25,10 @@ gridbg.gif: gridbg.gif
 gridbg/index.gif: gridbg.gif
 hide-this.jpg: hide-this.jpg
 hide-this/index.jpg: hide-this.jpg
+home_default_image.png: home_default_image.png
+home_default_image/index.png: home_default_image.png
+home_default_image_thumb.jpg: home_default_image_thumb.jpg
+home_default_image_thumb/index.jpg: home_default_image_thumb.jpg
 home_image1.png: home_image1.png
 home_image1/index.png: home_image1.png
 home_image2.png: home_image2.png
@@ -55,6 +59,8 @@ slide4.jpg: slide4.jpg
 slide4/index.jpg: slide4.jpg
 slide5.jpg: slide5.jpg
 slide5/index.jpg: slide5.jpg
+user_default_image.gif: user_default_image.gif
+user_default_image/index.gif: user_default_image.gif
 application.js: application.js
 application/index.js: application.js
 application.css: application.css

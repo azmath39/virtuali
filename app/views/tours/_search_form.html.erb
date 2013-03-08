@@ -3,7 +3,7 @@
     <%=f.select :state_cont, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
     <%#= f.text_field :state_cont %><br />
     <%= f.label :city_cont, "City" %>
-    <%=f.select :city_cont, {},:prompt=>"Select City"%>
+    <%=f.select :city_cont, {},:prompt=>"Select City"%><br />
     <%#= f.text_field :city_cont %><br />
     <%#= f.label :price_gteq, "Price Between" %>
     <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %><%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>

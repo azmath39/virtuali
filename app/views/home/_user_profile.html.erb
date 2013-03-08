@@ -1,0 +1,5 @@
+<p class="title-text">My Profile</p><sub><%= link_to "edit", edit_user_registration_path(current_user) %></sub>
+<hr />
+<div style="float: right; height:200px;width: 100px;">
+  <%= image_tag current_user.image_url(:thumb) %>
+</div>

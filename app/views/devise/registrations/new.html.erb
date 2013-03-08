@@ -138,6 +138,26 @@
           <%= f.label "password_confirmation*" %>
           <%= f.password_field :password_confirmation,:id=>"password_confirmation" %><span id="personal_info_error_cpassword" style="color:red;"></span>
         </div>
+        <div>
+          <%= f.label :add1, "Address1*" %>
+          <%= f.text_field :add1 %><span id="personal_info_error_add1" style="color:red;"></span>
+        </div>
+        <div>
+          <%= f.label :add2, "Address2" %>
+          <%= f.text_field :add2 %><span id="personal_info_error_add2" style="color:red;"></span>
+        </div>
+        <div>
+          <%= f.label :state, "State*" %>
+          <%= f.text_field :state %><span id="personal_info_error_state" style="color:red;"></span>
+        </div>
+        <div>
+          <%= f.label :city, "City*" %>
+          <%= f.text_field :city %><span id="personal_info_error_city" style="color:red;"></span>
+        </div>
+        <div>
+          <%= f.label :zipcode, "ZIP Code*" %>
+          <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
+        </div>
         <div class="fileupload btn-small btn btn-warning">
           <%= f.label :image, "Profile Picture", :style=>'margin-top: 5px;' %>
           <%= f.file_field :image %>
@@ -146,8 +166,7 @@
       <div id="next_btn">
         <%=button_tag "Next", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_personal",:onclick=>"button()" %>
       </div>
-
-    </div>
+   </div>
     <div id="product_select" >
       
       <div id="scont">
@@ -187,7 +206,7 @@
         <hr></hr>
         <div class = "payment-errors">
         </div>
-        <div class="field" >Total Payable Amount : <%= hidden_field_tag "total_amount","",:class=> "money" %>
+        <div class="field" >Total Payable Amount($): <%= hidden_field_tag "total_amount","",:class=> "money" %>
           <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
 
 

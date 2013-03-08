@@ -6,7 +6,8 @@ VirtualTour::Application.routes.draw do
   match '/tours/status_change' => 'tours#status_change'
   match '/tours/update' => 'tours#update'
   match '/tours/user_tours'=>'tours#user_tours'
- match '/paintings/set_name'=>'paintings#set_name'
+  match '/paintings/set_name'=>'paintings#set_name'
+  match '/tours/find_tours' => 'tours#find_tours'
 
   ActiveAdmin.routes(self)
 

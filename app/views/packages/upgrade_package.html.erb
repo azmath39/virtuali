@@ -9,7 +9,7 @@
         <div>
           <table class="table table-bordered">
             <tr> <td><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%></td><td><%=pkg.name%></td></tr>
-            <tr> <td> Price:</td><td> <%=pkg.price%></td></tr>
+            <tr> <td> Price($):</td><td> <%=pkg.price%></td></tr>
             <tr> <td> No Of Tours:</td><td> <%=pkg.max_tours%></td></tr>
             <tr> <td> Pictures per Tour: </td><td><%=pkg.pictures_for_tour%></td></tr>
             <tr> <td> Template size:</td><td> 600x400</td></tr>
@@ -29,7 +29,7 @@
       <hr></hr>
       <div class = "payment-errors">
       </div>
-      <div class="field" >Total Payable Amount : <%= hidden_field_tag "total_amount","",:class=> "money" %>
+      <div class="field" >Total Payable Amount($) : <%= hidden_field_tag "total_amount","",:class=> "money" %>
         <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
 
 

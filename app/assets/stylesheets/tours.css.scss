@@ -26,8 +26,9 @@ text-align:center;
 #user_img img{
  background: none repeat scroll 0% 0% rgb(255, 255, 255);
   padding: 8px;
-  box-shadow: 0px 2px 4px #CCC;
-  border-radius: 2px;
+-webkit-box-shadow: 0 8px 6px -6px #CCC;
+	   -moz-box-shadow: 0 8px 6px -6px #CCC;
+	        box-shadow: 0 8px 6px -6px #CCC;
 }
 
 #map label { width: auto; display:inline; }

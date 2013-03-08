@@ -4,6 +4,7 @@
   <div>
     <%#= t.paintings %>
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
+    <%= link_to(image_tag('home_default_image_thumb.jpg'), tour) if tour.paintings.empty?  %>
   <div style ="float: right; margin: -6px 200px 0 0; height:100px; width: 350px;">
     <strong><%= tour.state %></strong><br />
     <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />

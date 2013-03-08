@@ -130,7 +130,19 @@ class ToursController < ApplicationController
                              :filename => file_name
       t.close
   end
-
+  def find_tours
+     @tours = []
+      @products=SelectedProduct.find(:all,:conditions=>{:product_id=>params[:id].to_i})
+      @products.each do |product|
+          @tours << product.user.tours
+      end
+      if params[:id] == ""
+        @tours = Tour.all
+      end
+      @tours.compact!
+      @tours.flatten!
+      render :partial => 'all_tours'
+  end
   private
   def selected_pkgs_without_tour
     current_user.selected_packages.select do|spkg|

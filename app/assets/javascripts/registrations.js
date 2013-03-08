@@ -5,7 +5,6 @@ var ec=0;
       height: 1200,
       navigation: false
     });
-
   });
 
   function email_validation(){
@@ -54,6 +53,34 @@ $("#password_confirmation").blur(function(event){
       $('#personal_info_error_cpassword').append("<br/>* Password and Password Confirmation should match.");
     }
 });
+
+$("#user_add1").blur(function(event){
+ $('#personal_info_error_add1').html("");
+  if($("#user_add1").val()==""){
+      $('#personal_info_error_add1').append("<br/>* Address1 can't be empty.");
+    }
+ });
+
+ $("#user_state").blur(function(event){
+ $('#personal_info_error_state').html("");
+  if($("#user_state").val()==""){
+      $('#personal_info_error_state').append("<br/>* State Can't be empty.");
+    }
+ });
+
+ $("#user_city").blur(function(event){
+ $('#personal_info_error_city').html("");
+  if($("#user_name").val()==""){
+      $('#personal_info_error_city').append("<br/>* City Can't be empty.");
+    }
+ });
+
+ $("#user_zipcode").blur(function(event){
+ $('#personal_info_error_zipcode').html("");
+  if($("#user_name").val()==""){
+      $('#personal_info_error_zipcode').append("<br/>* ZIP Code Can't be empty.");
+    }
+ });
 
   $('#btn_personal').click(function(event) {
 
@@ -104,6 +131,18 @@ $("#password_confirmation").blur(function(event){
       $('#btn_personal').die( "click" );
     }
     if($("#password_confirmation").val()!=$("#password").val()){
+      $('#btn_personal').die( "click" );
+    }
+    if($("#user_add1").val()==""){
+      $('#btn_personal').die( "click" );
+    }
+    if($("#user_state").val()==""){
+      $('#btn_personal').die( "click" );
+    }
+    if($("#user_city").val()==""){
+      $('#btn_personal').die( "click" );
+    }
+    if($("#user_zipcode").val()==""){
       $('#btn_personal').die( "click" );
     }
     if(!validEmail($("#email_id").val())){

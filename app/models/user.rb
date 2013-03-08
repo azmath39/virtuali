@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
 
-  attr_accessible :name, :phno, :email, :password, :password_confirmation, :remember_me, :image,:product,:package
+  attr_accessible :name, :phno, :email, :password, :password_confirmation, :add1, :add2, :state, :city, :zipcode, :remember_me, :image,:product,:package
 
 
   mount_uploader :image, ImageUploader
