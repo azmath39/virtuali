@@ -129,8 +129,7 @@ class ToursController < ApplicationController
         :disposition => 'attachment',
         :filename => file_name
       t.close
-<<<<<<< HEAD
-  end
+    end
   def find_tours
      @tours = []
       @products=SelectedProduct.find(:all,:conditions=>{:product_id=>params[:id].to_i})
@@ -144,12 +143,9 @@ class ToursController < ApplicationController
       @tours.flatten!
       render :partial => 'all_tours'
   end
-  private
-  def selected_pkgs_without_tour
-    current_user.selected_packages.select do|spkg|
-      spkg unless spkg.tour.nil?
-=======
-    end
+ 
+
+ 
 
     private
     def selected_pkgs_without_tour
@@ -162,6 +158,6 @@ class ToursController < ApplicationController
       @tour.errors.full_messages.each do |x|
         flash[:error]<< x
       end
->>>>>>> ace28ced0c6fadf9cbfa7f404b614c54409ee927
+
     end
   end

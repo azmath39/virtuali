@@ -9,7 +9,9 @@
     <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
     <strong>Price($): </strong> <%= tour.price %><br />
     <strong>Description:</strong>
-    <%= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%><br />
+    <%=truncate(tour.description, :length => 20)%><% if tour.description.length > 20 %> <%=link_to "[More]",tour%><%end%>
+
+    <%#= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%><br />
     <% if tour.status == 1 %>
     <strong>Status:</strong> <%= tour.tour_status %>
     <%  else %>
