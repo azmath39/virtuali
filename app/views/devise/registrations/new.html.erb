@@ -211,7 +211,8 @@
 
 
         <div class="field" style="padding:20px 0px;">
-          <%=radio_button_tag "type_of_transaction", 1%> <%= "Card Pay" %>  <%=radio_button_tag "type_of_transaction", 2%> <%="Direct Debit Setup" %>
+          <%=hidden_field_tag "type_of_transaction",1%>
+          <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
         </div>
         <div class="field">
 

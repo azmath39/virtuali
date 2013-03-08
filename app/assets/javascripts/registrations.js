@@ -177,7 +177,7 @@ $("#user_add1").blur(function(event){
 
 
   $('#btn_package').click(function(event) {
-var payment_type= $("input[name='user[package][type_of_payment]']:checked").val() || 2;
+var payment_type= $("#user_package_type_of_payment").val() || 2;
     if (!$("input[name='user[package][id]']:checked").val())
     {
       $('#package_error').append("* Select any Package  to continue..... <br/>")

@@ -4,9 +4,9 @@
     </div>
 
     <div class="field" style="padding:20px 0px;">
-     <%=radio_button_tag "type_of_transaction", 1%> <%= "Card Pay" %>  <%=radio_button_tag "type_of_transaction", 2%> <%="Direct Debit Setup" %>
-    <%= hidden_field_tag "operation_type", nil %>
-    <%=hidden_field_tag "pkg_id",nil%>
+     <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
+    <%= hidden_field_tag "type_of_transaction", 1 %>
+
       <%#=hidden_field_tag "type_of_transaction",nil, name: nil%>
     </div>
     
@@ -24,6 +24,6 @@
       <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
     </div>
     <div id="next_btn">
-      <%=submit_tag "Submit",  :class=>"btn-large btn-danger", :disable_with => "Please wait.." %>
+      <%=submit_tag "Submit",  :class=>"btn btn-primary", :disable_with => "Please wait.." %>
     </div>
   </div>

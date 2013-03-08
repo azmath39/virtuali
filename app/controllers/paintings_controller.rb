@@ -1,5 +1,5 @@
 class PaintingsController < ApplicationController
-  
+  before_filter :verify_account_validity, :only=>["new"]
   def index
     #@painting = Painting.new
     @paintings = Painting.all

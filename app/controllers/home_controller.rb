@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+ before_filter :verify_account_validity, :only=>["index"]
   def validate_email
     user=User.find_by_email(params[:email])
     if user.nil?
@@ -68,6 +69,9 @@ class HomeController < ApplicationController
     end
     render :text=>@str
   end
+  def account_activation
+    @s_pkg=current_user.selected_package
+  end
   private
 
   #  def selected_pkgs_with_tour
@@ -125,9 +129,9 @@ class HomeController < ApplicationController
     end
   end
   def create_direct_debit
-    @amount = (current_user.selected_packages.sum(:price,:conditions=>{:status=>(0..2)}).to_f*100).to_i
+    @amount = (current_user.selected_package.price.to_f*100).to_i
     subscription
-
+    #current_user.save_payment_details(nil,3,@amount)
   end
 
 end

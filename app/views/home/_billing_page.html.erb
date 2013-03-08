@@ -3,14 +3,14 @@
 <%pkg=current_user.selected_package %>
     <%initiate(pkg)%>
 <div style="float:right;margin-right: 50px; margin-bottom: 20px;" >
-<%if !current_user.card.nil?%>
-    <%= render 'card_change_form' %>
-    <%= link_to "Change Card Details", "#card_change", "data-toggle" => "modal", :class => 'btn btn-primary'%>
-<%elsif check_payment_type%>
- <%= link_to "Create Direct Debit", "#card_details", "data-toggle" => "modal", :class => "btn btn-danger", :onclick=>"create_direct_debit()"  %>
-  <%end%>
+<%#if !current_user.card.nil?%>
+    <%#= render 'card_change_form' %>
+    <%#= link_to "Change Card Details", "#card_change", "data-toggle" => "modal", :class => 'btn btn-primary'%>
+<%#elsif check_payment_type%>
+ <%#= link_to "Create Direct Debit", "#card_details", "data-toggle" => "modal", :class => "btn btn-danger", :onclick=>"create_direct_debit()"  %>
+  <%#end%>
 
-  <%= link_to "Upgrade Your Package", '/packages/upgrade_package', :class => 'btn btn-primary' %>
+  
   </div>
 
 <div class="container-fluid">
@@ -57,7 +57,10 @@
                 <%= link_to "Renew", "#card_details", "data-toggle" => "modal", :class=>"btn btn-info",:onclick=>"renew(#{pkg.id})" if verify_renew_date %>
 
       <%#=button_tag "Renew",:class=>"btn btn-success",:onclick=>"renew()"%>
-              <%end%></td></tr>
+              <%end%>
+                <%= link_to "Destroy", "/packages/destroy_user_package", :class => 'btn-small btn-primary' %>
+                <%= link_to "Change Package", '/packages/upgrade_package', :class => 'btn-small btn-primary' %>
+              </td></tr>
 </table>
             </div>
           </div>

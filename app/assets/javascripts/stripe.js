@@ -7,12 +7,12 @@
      
     // Disable the submit button to prevent repeated clicks
     $('.submit-button').prop('disabled', true);
-if (!$("input[name='type_of_transaction']:checked").val()) {
+/*if (!$("input[name='type_of_transaction']:checked").val()) {
     
        $('.payment-errors').text("choose type of transaction ");
         return false;
     }
-    else {
+    else {*/
 
   
     Stripe.createToken({
@@ -24,7 +24,8 @@ if (!$("input[name='type_of_transaction']:checked").val()) {
 
     // Prevent the form from submitting with the default action
     return false;
-    } });
+    //}
+  });
 
 });
 function stripeResponseHandler(status, response) {

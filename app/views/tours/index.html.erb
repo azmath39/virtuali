@@ -4,8 +4,10 @@
 </div>
 <div class="span8" id ="tour-list">
   <p class="title-text">List of Tours</p>
+
   <div id="all_tour_render">
     <%= render 'all_tours' %>
+
   </div>
 <div class ="span4" style="margin: 0 0px 0 300px; float: left;">
   <%= will_paginate @tours, :renderer => BootstrapPagination::Rails %>

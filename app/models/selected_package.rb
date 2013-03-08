@@ -26,7 +26,7 @@ class SelectedPackage < ActiveRecord::Base
   # == call back
   def assign_status_expire_date_payment_period_type
     # puts "S"*25
-    self.status ||=0
+    self.status ||=1
     self.expire_date ||=Date.today+365
     self.payment_period_type ||=2
   end
@@ -36,7 +36,7 @@ class SelectedPackage < ActiveRecord::Base
       self.price=self.package.monthly_price
     else
       self.renew_date ||= self.created_at.to_date+365
-      self.price=self.package.yearly_price
+      self.price=self.package.yearly_price 
     end
     self.save
   end
@@ -98,7 +98,7 @@ class SelectedPackage < ActiveRecord::Base
       tours.each do |tour|
         tour.update_attributes(:status=>2)
       end
-      d =Delayed::Job.enqueue TourDestroy.new(self.id),:priority=>0, :run_at=>15.day.from_now
+      d =Delayed::Job.enqueue TourDestroy.new(self.id),:priority=>0, :run_at=>60.day.from_now
       self.user.user_delay_job.update_attributes(:delayed_job_id=>d.id)
       #      #Delayed::Job.enqueue TourDestroy.new(self.id),0, 1.minute.from_now
       #      Delayed::Job.enqueue TourDestroy.new(self.id),:priority=>0, :run_at=>self.validity
