@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+ before_filter :verify_account_validity, :only=>["index"]
   def validate_email
     user=User.find_by_email(params[:email])
     if user.nil?
@@ -67,6 +68,9 @@ class HomeController < ApplicationController
       @str +="'"
     end
     render :text=>@str
+  end
+  def account_activation
+    @s_pkg=current_user.selected_package
   end
   private
 

@@ -1,4 +1,5 @@
 class ToursController < ApplicationController
+  before_filter :verify_account_validity, :only=>["edit","user_tours"]
   def index
     @search = Tour.where(:status => (0..1)).search(params[:q])
     if params[:q].nil?

@@ -52,11 +52,19 @@ class User < ActiveRecord::Base
   has_many :payments, :dependent=> :destroy
   def package=(pkg)
     p=Package.find(pkg[:id].to_i)
-    if pkg.include?:type_of_payment
-      self.selected_package=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>pkg["type_of_payment"])
+    if pkg.include?:type_of_payment and !p.monthly_price.nil?
+
+      s_pkg=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>pkg["type_of_payment"])
+
     else
-      self.selected_package=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour)
+      s_pkg=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour)
     end
+    if !@prev_price.nil? and @prev_price > s_pkg.package.yearly_price
+      self.tours.each do|t|
+        t.destroy
+      end
+    end
+    self.selected_package=s_pkg
   end
   def product=(pro)
     unless pro.nil?
@@ -64,13 +72,16 @@ class User < ActiveRecord::Base
     end
   end
   def upgrade_package(pkg)
-    pkg.merge!(:type_of_payment=>self.selected_package.payment_period_type)
-    self.selected_package.destroy
-
+    #pkg.merge!(:type_of_payment=>self.selected_package.payment_period_type)
+    unless self.selected_package.nil?
+      @prev_price = self.selected_package.package.yearly_price
+      self.selected_package.destroy
+    end
     self.package=pkg
+    set_auto_destroy_event
   end
   def ajust_amount(price)
-    if self.card.nil?
+    if self.card.nil? and self.account_valid
       price.to_f-unused_money(price)
   
     else
@@ -79,10 +90,10 @@ class User < ActiveRecord::Base
 
   end
   def packages_for_upgarde
-    pkg=self.selected_package.package
-    price=pkg.yearly_price
-    Package.where("product_id=:product_id AND yearly_price > :price",{:product_id=>pkg.product_id,:price=>price})
-    #self.selected_product.product.packages
+    #pkg=self.selected_package.package
+    #price=pkg.yearly_price
+    #Package.where("product_id=:product_id AND yearly_price > :price",{:product_id=>pkg.product_id,:price=>price})
+    self.selected_product.product.packages
   end
   def set_auto_destroy_event
     #puts "dsfb"
@@ -92,9 +103,23 @@ class User < ActiveRecord::Base
   end
   def save_payment_details(reference,type,amount)
    
-   a= amount.to_i/100
-   self.payments<< Payment.create(:reference=>reference,:amount=>a,:payment_type=>type)
+    a= amount.to_i/100
+    self.payments<< Payment.create(:reference=>reference,:amount=>a,:payment_type=>type)
 
+  end
+  def account_valid
+    if self.selected_package.nil? or self.selected_package.status>1 or self.selected_package.renew_date < Date.today
+      return false
+    else
+      return true
+    end
+  end
+  def package_destroy
+    pkg=self.selected_package
+    unless pkg.nil?
+      pkg.tours_destroy
+      pkg.destroy
+    end
   end
   private
   def unused_money(price)

@@ -35,7 +35,7 @@ class Package < ActiveRecord::Base
     if self.monthly_price.nil?
       "#{self.yearly_price} per year"
     else
-      "#{self.monthly_price} per month  or  #{self.yearly_price} per year"
+      "#{self.monthly_price} per month"
     end
   end
 end

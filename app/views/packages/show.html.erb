@@ -10,8 +10,10 @@
       <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
       <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
       <p><b>Template size:</b>&nbsp;600x400</p>
+      
         <%unless pkg.monthly_price.nil?%>
-      <p><b>Subscription Period</b>:&nbsp;<%=radio_button_tag "user[package][type_of_payment]",1%> &nbsp;Monthly&nbsp;<%=radio_button_tag "user[package][type_of_payment]",2%> &nbsp;Yearly</p>
+      <%=hidden_field_tag "user[package][type_of_payment]",1%>
+      <%#*<p><b>Subscription Period</b>:&nbsp;<%=radio_button_tag "user[package][type_of_payment]",1% &nbsp;Monthly&nbsp;<%=radio_button_tag "user[package][type_of_payment]",2%&nbsp;Yearly</p>%>
         <%end%>
     </div>
   <hr />

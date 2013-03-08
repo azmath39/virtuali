@@ -1,0 +1,9 @@
+<div id="signin_div">
+  <h5 style="color: red;">Pay Account fee to continue......</h5>
+<%=form_tag "/home/make_payment", :id=>'payment-form' do%>
+    Amount Due : <%=@s_pkg.price%>
+    <%= hidden_field_tag "operation_type", 1 %>
+    <%=hidden_field_tag "pkg_id",@s_pkg.id%>
+    <%=render 'payment_fields'%>
+<%end%>
+</div>

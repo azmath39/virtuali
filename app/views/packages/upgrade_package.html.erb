@@ -13,9 +13,10 @@
             <tr> <td> No Of Tours:</td><td> <%=pkg.max_tours%></td></tr>
             <tr> <td> Pictures per Tour: </td><td><%=pkg.pictures_for_tour%></td></tr>
             <tr> <td> Template size:</td><td> 600x400</td></tr>
-            <%#unless pkg.monthly_price.nil?%>
+            <%unless pkg.monthly_price.nil?%>
+            <%=hidden_field_tag "package[type_of_payment]",1%>
               <%#*<tr> <td> <%=radio_button_tag "package[type_of_payment]",1% &nbsp;Monthly</td><td><%=radio_button_tag "user[package][type_of_payment]",2% &nbsp;Yearly </td></tr>%>
-            <%#end%>
+            <%end%>
           </table>
         </div><br />
       <% end %>
@@ -34,7 +35,9 @@
 
 
       <div class="field" style="padding:20px 0px;">
-        <%=radio_button_tag "type_of_transaction", 1%> <%= "Card Pay" %>  <%=radio_button_tag "type_of_transaction", 2%> <%="Direct Debit Setup" %>
+        <%=hidden_field_tag "type_of_transaction",1%>
+
+        <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
       </div>
       <div class="field">
 
@@ -68,7 +71,7 @@
    $("#btn_package").click(function(event) {
 
     
-var payment_type= $("input[name='package[type_of_payment]']:checked").val() || 2;
+var payment_type= $("#package_type_of_payment").val() || 2;
     if (!$("input[name='package[id]']:checked").val())
     {
       $('#package_error').append("* Select any Package  to continue..... <br/>")
@@ -80,8 +83,8 @@ var payment_type= $("input[name='package[type_of_payment]']:checked").val() || 2
         type: 'GET',
         url: '/packages/total_value',
         data:{
-          package_id:$("input[name='package[id]']:checked").val()
-          
+          package_id:$("input[name='package[id]']:checked").val(),
+          type_of_payment:payment_type
         }
 
       }).done(function(text) {
