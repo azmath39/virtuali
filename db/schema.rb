@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130308071341) do
+ActiveRecord::Schema.define(:version => 20130308185758) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -189,6 +189,8 @@ ActiveRecord::Schema.define(:version => 20130308071341) do
     t.integer  "status"
     t.integer  "selected_package_id"
     t.datetime "deleted_at"
+    t.string   "address1"
+    t.string   "address2"
   end
 
   add_index "tours", ["slug"], :name => "index_tours_on_cached_slug"

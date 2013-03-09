@@ -1,5 +1,9 @@
-<p class="title-text">My Profile</p><sub><%= link_to "edit", edit_user_registration_path(current_user) %></sub>
+<p><span class="title-text">My Profile</span>&nbsp;<b><%= link_to "edit", edit_user_registration_path(current_user),:class=>"btn btn-link" %></b></p>
 <hr />
 <div style="float: right; height:200px;width: 100px;">
+  <%if current_user.image?%>
   <%= image_tag current_user.image_url(:thumb) %>
+  <%else%>
+  <%= image_tag "user_default_image.gif" %>
+  <%end%>
 </div>

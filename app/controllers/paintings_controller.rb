@@ -43,9 +43,9 @@ class PaintingsController < ApplicationController
   def update
     @painting = Painting.find(params[:painting][:id].to_i)
     if @painting.update_attributes(params[:painting])
-#      redirect_to :back, :notice=> "Image was successfully updated."
-       flash[:success] = "Image was updated!"
-       redirect_to :back
+      #      redirect_to :back, :notice=> "Image was successfully updated."
+      flash[:success] = "Image was updated!"
+      redirect_to :back
     else
       render :edit
     end
@@ -61,12 +61,24 @@ class PaintingsController < ApplicationController
   def set_name
     painting= Painting.find(params[:id])
     painting.update_attributes(:name=>params[:name])
-  if params.include?"tour_id"
+    if params.include?"tour_id"
    
-   str = "#{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bath Room").count}"
-  else
-   str = "#{current_user.paintings.where(:tour_id=>nil,:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>nil,:name=>"Bath Room").count}"
+      str = "#{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bath Room").count}"
+    else
+      str = "#{current_user.paintings.where(:tour_id=>nil,:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>nil,:name=>"Bath Room").count}"
+    end
+    render :text=>str
   end
+  def count_rooms
+  
+    if params.include?"tour_id"
+
+      str = "#{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bath Room").count}"
+    else
+    
+      str = "#{current_user.paintings.where(:tour_id=>nil,:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>nil,:name=>"Bath Room").count}"
+    end
+ 
     render :text=>str
   end
 

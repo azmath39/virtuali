@@ -13,20 +13,29 @@
   
   </div>
 
-<div class="container-fluid">
+
   <h3> Package Details</h3>
-<table class="table  table-striped">
-    <tr><th> Name </th><th>Status:</th><th>  Price:</th><th><%10.times do %>&nbsp;<%end%>
-              </th></tr></table></div>
+
   
 
     <div class="container-fluid">
       <div class="accordion" id="accordion2">
         <div >
           <div class="accordion-heading">
-            <table class="table table-condensed">
-            <tr><td> <%=pkg.name%> </td><td> <%=pkg.status_info%></td><td> $<%=pkg.price%></td><th>
-<%=link_to "view","##{pkg.id}", "data-toggle"=>"collapse", :class=>"btn btn-link"%><%#=link_to "Payment History","##{pkg.id}payment_history", "data-toggle"=>"collapse", :class=>"btn btn-link"%></th></tr>
+            <table class="table  table-striped">
+              <tr><th> Name </th><th>Status:</th><th>  Price:</th><th>
+              </th></tr>
+              <tr><td> <%=pkg.name%> </td><td> <%=pkg.status_info%></td><td> $<%=pkg.price%></td><th style="width:476px;">
+<%=link_to "view","##{pkg.id}", "data-toggle"=>"collapse", :class=>"btn btn-link"%>|
+<%if verify_renew_date%>
+<%= link_to "Renew", "#card_details", "data-toggle" => "modal", :class=>"btn btn-link",:onclick=>"renew(#{pkg.id})"  %>|
+<%end%>
+      <%#=button_tag "Renew",:class=>"btn btn-success",:onclick=>"renew()"%>
+              <%#end%>
+                
+<%= link_to "Change Package", '/packages/upgrade_package', :class => "btn btn-link" %>|
+            <%= link_to "Destroy", "/packages/destroy_user_package", :class => "btn btn-link" %>
+<%#=link_to "Payment History","##{pkg.id}payment_history", "data-toggle"=>"collapse", :class=>"btn btn-link"%></th></tr>
 
  </table>
             <%@pkg_id=pkg.id%>
@@ -43,23 +52,19 @@
            <tr><td>   Number of Pictures: <%20.times do %>&nbsp;<%end%><%=pictures%></td>
 
 
-              <td><%unless current_user.card.nil?%>
-                <div id="alert_message"> <%unless pkg.status==3%>
+              <td><%#unless current_user.card.nil?%>
+                <div id="alert_message"> 
+                <%#unless pkg.status==3%>
 
                     <%#=button_tag "Unsubsribe",:class=>"btn btn-info",:onclick=>"unsubsribe(#{pkg.id})"%>
-                  <%else%>
+                  <%#else%>
 
                     <%#*Unsubscribed%>
-                  <%end%>
+                  <%#end%>
                 </div>
-              <%else%>
+              <%#else%>
                 <%#= render 'renew_form' %>
-                <%= link_to "Renew", "#card_details", "data-toggle" => "modal", :class=>"btn btn-info",:onclick=>"renew(#{pkg.id})" if verify_renew_date %>
-
-      <%#=button_tag "Renew",:class=>"btn btn-success",:onclick=>"renew()"%>
-              <%end%>
-                <%= link_to "Destroy", "/packages/destroy_user_package", :class => 'btn-small btn-primary' %>
-                <%= link_to "Change Package", '/packages/upgrade_package', :class => 'btn-small btn-primary' %>
+                
               </td></tr>
 </table>
             </div>

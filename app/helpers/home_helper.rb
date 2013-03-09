@@ -14,10 +14,10 @@ end
 @selected_pkg.created_at.to_date
   end
   def end_date
-(@selected_pkg.created_at.to_date)+30
+    @selected_pkg.renew_date
   end
   def pictures
-@selected_pkg.package.pictures_for_tour
+   @selected_pkg.pictures_for_tour
   end
   def verify_renew_date
     if @selected_pkg.renew_date<Date.today+15

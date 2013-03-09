@@ -5,7 +5,7 @@
       <%= content_tag :div, msg, :id => "flash_#{name}" %>
     </div>
   <%elsif msg.is_a?(Array)%>
-      <div class="alert alert-<%= name == :notice ? "success" : "error" %>" style ="width: 850px; margin: -20px 0 20px 200px; position: absolute;">
+      <div class="alert alert-<%= name == :notice ? "success" : "error" %>" style ="width: 850px; margin: -20px 0 20px 200px; position: relative;">
         <a class="close" data-dismiss="alert">&#215;</a>
         <%msg.each do |ms|%>
           <%= content_tag :div, ms, :id => "flash_#{name}" %>

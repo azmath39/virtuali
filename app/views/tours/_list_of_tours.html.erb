@@ -1,4 +1,6 @@
+
 <div class="span8">
+   <%= render 'shared/welcome_message' if @tours.empty? %>
 <% @tours.each do |tour| %>
 <div class="span7 well" id = 'img_bg' style="margin: 0px 30px 1px 90px;">
   <div>
@@ -15,6 +17,8 @@
     <%#= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%><br />
     <% if tour.status == 1 %>
     <strong>Status:</strong> Active
+    <%elsif tour.status == 2  %>
+    <strong>Status:</strong> Sold
     <% end %>
   </div>
 
