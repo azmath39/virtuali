@@ -4,10 +4,9 @@
     <%#= f.text_field :state_cont %><br />
     <%= f.label :city_cont, "City" %>
     <%=f.select :city_cont, {},:prompt=>"Select City"%><br />
-    <%#= f.text_field :city_cont %><br />
+<%#= f.text_field :city_cont %><br />
     <%#= f.label :price_gteq, "Price Between" %>
     <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %><%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
-    <br/>
 <%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
   <% end %>
 

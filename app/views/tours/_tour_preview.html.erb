@@ -94,7 +94,7 @@
 
   <div style="float: left; margin: -510px 1px 0 820px; font-size: 12px;">
     <b>Description:</b><br />
-    <%= @tour.description %>
+    <%= raw(@tour.description) %>
   </div>
   <div id ="user_img" style="float: right; height: 200px; width: 150px;margin: -320px 70px -40px 30px;">
     <%= image_tag(@tour.user.image_url(:medium)) if @tour.user.image? %>

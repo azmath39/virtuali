@@ -25,7 +25,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
     # create the charge on Stripe's servers - this will charge the user's card 
   end
-
+  
   private
   def payment()
     if params[:user][:package].include?(:type_of_payment) and params[:user][:package][:type_of_payment].to_i==1

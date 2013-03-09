@@ -3,7 +3,8 @@
 <div style="float: right; height:200px;width: 100px;">
   <%if current_user.image?%>
   <%= image_tag current_user.image_url(:thumb) %>
-  <%else%>
-  <%= image_tag "user_default_image.gif" %>
-  <%end%>
+  <% else %>
+  <%= image_tag 'user_default_image.gif' %>
+  <% end %>
+  <center><strong><%= current_user.name%> </strong></center>
 </div>

@@ -147,21 +147,43 @@
           <%= f.text_field :add2 %><span id="personal_info_error_add2" style="color:red;"></span>
         </div>
         <div>
-          <%= f.label :state, "State*" %>
-          <%= f.text_field :state %><span id="personal_info_error_state" style="color:red;"></span>
+          <%= f.label "state*" %>
+          <%= f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
         </div>
-        <div>
-          <%= f.label :city, "City*" %>
-          <%= f.text_field :city %><span id="personal_info_error_city" style="color:red;"></span>
+        <div class ="control-group">
+          <%= f.label "city*", :html => {:class => 'control-label'} %>
+          <%=f.select :city, {},:prompt=>"Select City"%>
         </div>
+        <%#*<div>%>
+          <%#= f.label :state, "State*" %>
+          <%#= f.text_field :state %><span id="personal_info_error_state" style="color:red;"></span>
+        <%#*</div>%>
+        <%#*<div>%>
+          <%#= f.label :city, "City*" %>
+          <%#= f.text_field :city %><span id="personal_info_error_city" style="color:red;"></span>
+        <%#*</div>%>
         <div>
           <%= f.label :zipcode, "ZIP Code*" %>
           <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
         </div>
-        <div class="fileupload btn-small btn btn-warning">
-          <%= f.label :image, "Profile Picture", :style=>'margin-top: 5px;' %>
+          <div class="fileupload fileupload-new" data-provides="fileupload">
+          <div class="input-append">
+          <div class="uneditable-input" >
+            <i class="icon-file fileupload-exists"></i>
+            <span class="fileupload-preview"></span>
+          </div>
+          <div class="btn-file btn" style="height:20px; width: 70px;">
+            <span class="fileupload-new">Select file</span>
+            <span class="fileupload-exists" style="height:20px; width: 70px;">Change</span>
           <%= f.file_field :image %>
-        </div>
+          </div>
+          <a href="#" class="btn fileupload-exists btn-danger" data-dismiss="fileupload">Remove</a>
+          </div>
+          </div>
+        <%#*<div class="fileupload btn-small btn btn-warning">%>
+          <%#= f.label :image, "Profile Picture", :style=>'margin-top: 5px;' %>
+          <%#= f.file_field :image %>
+        <%#*</div>%>
       </div>
       <div id="next_btn">
         <%=button_tag "Next", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_personal",:onclick=>"button()" %>
@@ -176,7 +198,7 @@
         <span id="product_error" style="color:red;"></span>
         <%@i=0%>
         <% Product.all.each do |x| %>
-          <div>
+          <div style="margin-left: 12px;">
             <%= radio_button_tag "user[product]", x.id,nil,:id=>"product" %>&nbsp;<%=  x.name%>
           </div><br/>
           <% @i+=1 %>
@@ -204,7 +226,7 @@
       <div id="scont">
         <h3>Payment Process</h3>
         <hr></hr>
-        <div class = "payment-errors">
+        <div class = "payment-errors" style="margin:0 0 20px 15px; color: red;">
         </div>
         <div class="field" >Total Payable Amount($): <%= hidden_field_tag "total_amount","",:class=> "money" %>
           <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
@@ -239,5 +261,19 @@
   </div>
 <% end %>
 <%= javascript_include_tag "registrations" %>
+<script>
+  function state_city()
+  {
+    $.ajax({
+      type: 'GET',
+      url: "/home/state_cities",
+      data: {
+        'state' :  $("#user_state").val()
+      }
+    }).done(function(text) {
+  $('#user_city').empty().append(text);
+    });
+  }
+</script>
 <%#= render "devise/shared/links" %>
 <%#= javascript_include_tag "jquery.slides.min" %>

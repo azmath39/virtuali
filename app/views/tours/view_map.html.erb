@@ -13,6 +13,7 @@
 
 <div id="map-div">
   <p class="title-text">Tour Map</p>
+  
   <div style="float: right;margin: -30px 200px 0 0;">
     <%= link_to "All Tours", {:controller => 'tours', :action => 'view_map'} , :class=> 'btn btn-mini btn-primary'%>&nbsp;
     <%  Product.all.each do |p| %>

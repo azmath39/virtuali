@@ -3,7 +3,7 @@ class ToursController < ApplicationController
   def index
     @search = Tour.where(:status => (0..1)).search(params[:q])
     if params[:q].nil?
-      @tours = Tour.where(:status => (0..1)).paginate(:page => params[:page], :per_page => 3)
+      @tours = Tour.where(:status => (0..1)).order('created_at DESC').paginate(:page => params[:page], :per_page => 5)
     else
       @tours = @search.result.paginate(:page => params[:page], :per_page => 5)
     end
@@ -54,7 +54,6 @@ class ToursController < ApplicationController
         redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
       else
         error_to_flash
-        
         redirect_to edit_tour_path(@tour)
       end
     end
@@ -105,7 +104,7 @@ class ToursController < ApplicationController
     end
     def user_tours
       if signed_in?
-        @tours = current_user.tours
+        @tours = current_user.tours.order('created_at DESC')
         render :partial=>'list_of_tours'
       end
     end
@@ -134,14 +133,18 @@ class ToursController < ApplicationController
      @tours = []
       @products=SelectedProduct.find(:all,:conditions=>{:product_id=>params[:id].to_i})
       @products.each do |product|
-          @tours << product.user.tours
+          @tours << product.user.tours.where(:status => (0..1)).order('created_at DESC')
       end
       if params[:id] == ""
-        @tours = Tour.all
+        @tours = Tour.where(:status => (0..1))
       end
       @tours.compact!
       @tours.flatten!
       render :partial => 'all_tours'
+  end
+  def sold_out_tours
+    @tours = Tour.where(:status => params[:status].to_i).order('created_at DESC')
+    render :partial => 'all_tours'
   end
  
     private
