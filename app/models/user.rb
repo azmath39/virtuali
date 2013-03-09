@@ -121,6 +121,14 @@ class User < ActiveRecord::Base
       pkg.destroy
     end
   end
+  def special_offer
+    if (Date.today-self.created_at.to_date).to_i > 183
+      return true
+    else
+      return false
+    end
+  end
+
   private
   def unused_money(price)
     s_pkg=self.selected_package
