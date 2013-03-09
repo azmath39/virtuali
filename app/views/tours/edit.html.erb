@@ -79,7 +79,7 @@
 <div style="float:left;margin-top: 10px;width: 650px;">
 <div>
   <%= f.label :description %>
-  <%= f.text_area :description, :rows => 10, :style=>"width: 81%;"%>
+  <%= f.text_area :description, :rows => 10, :style=>"width: 87%;",:class=>'wysihtml5'%>
 </div>
 </div>
 <div style="float:left;margin-top: 10px;clear: both;">
@@ -99,7 +99,9 @@
 
  <script>
    $(document).ready(function(){
-     
+     $('.wysihtml5').each(function(i, elem) {
+    $(elem).wysihtml5();
+     });
      $.ajax({
       type: "GET",
       url:"/paintings/count_rooms",

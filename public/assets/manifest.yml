@@ -69,6 +69,12 @@ loading.gif: loading.gif
 loading/index.gif: loading.gif
 progressbar.gif: progressbar.gif
 progressbar/index.gif: progressbar.gif
+bootstrap-wysihtml5.js: bootstrap-wysihtml5.js
+bootstrap-wysihtml5/index.js: bootstrap-wysihtml5.js
+bootstrap-wysihtml5.css: bootstrap-wysihtml5.css
+bootstrap-wysihtml5/index.css: bootstrap-wysihtml5.css
+bootstrap-wysihtml5/wysiwyg-color.css: bootstrap-wysihtml5/wysiwyg-color.css
+bootstrap-wysihtml5/wysiwyg-color/index.css: bootstrap-wysihtml5/wysiwyg-color.css
 fontawesome-webfont.eot: fontawesome-webfont.eot
 fontawesome-webfont/index.eot: fontawesome-webfont.eot
 fontawesome-webfont.ttf: fontawesome-webfont.ttf
