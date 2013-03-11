@@ -50,12 +50,16 @@ class User < ActiveRecord::Base
   has_one :user_delay_job,  :dependent=>:destroy
   after_create :set_auto_destroy_event
   has_many :payments, :dependent=> :destroy
+
+  def product=(pro)
+    unless pro.nil?
+      self.selected_product=SelectedProduct.create(:product_id=>pro.to_i)
+    end
+  end
   def package=(pkg)
     p=Package.find(pkg[:id].to_i)
     if pkg.include?:type_of_payment and !p.monthly_price.nil?
-
       s_pkg=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>pkg["type_of_payment"])
-
     else
       s_pkg=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour)
     end
@@ -66,10 +70,11 @@ class User < ActiveRecord::Base
     end
     self.selected_package=s_pkg
   end
-  def product=(pro)
-    unless pro.nil?
-      self.selected_product=SelectedProduct.create(:product_id=>pro.to_i)
-    end
+  def packages_for_upgarde
+    #pkg=self.selected_package.package
+    #price=pkg.yearly_price
+    #Package.where("product_id=:product_id AND yearly_price > :price",{:product_id=>pkg.product_id,:price=>price})
+    self.selected_product.product.packages
   end
   def upgrade_package(pkg)
     #pkg.merge!(:type_of_payment=>self.selected_package.payment_period_type)
@@ -78,6 +83,12 @@ class User < ActiveRecord::Base
       self.selected_package.destroy
     end
     self.package=pkg
+    set_auto_destroy_event
+  end
+  
+  def cancel_annual_plan
+    s_pkg=self.selected_package
+    s_pkg.updated_attributes(:renew_date=>estimate_renew_date(s_pkg.yearly_price,365),:payment_period_type=>1)
     set_auto_destroy_event
   end
   def ajust_amount(price)
@@ -89,13 +100,22 @@ class User < ActiveRecord::Base
     end
 
   end
-  def packages_for_upgarde
-    #pkg=self.selected_package.package
-    #price=pkg.yearly_price
-    #Package.where("product_id=:product_id AND yearly_price > :price",{:product_id=>pkg.product_id,:price=>price})
-    self.selected_product.product.packages
+  
+  
+  
+  
+  def package_destroy
+    pkg=self.selected_package
+    unless pkg.nil?
+      pkg.tours_destroy
+      pkg.destroy
+    end
   end
   def set_auto_destroy_event
+    unless self.user.user_delay_job.nil? then
+      dl_job=self.user.user_delay_job.delayed_job
+      dl_job.destroy unless dl_job.nil?
+    end
     #puts "dsfb"
     #Delayed::Job.enqueue NewsletterJob.new('lorem ipsum...', Customers.find(:all).collect(&:email))
     d=Delayed::Job.enqueue ToursJobs.new(self.selected_package.id), :priority=>0, :run_at=>self.selected_package.validity
@@ -109,29 +129,40 @@ class User < ActiveRecord::Base
   end
   def account_valid
     if self.selected_package.nil? or self.selected_package.status>1 or self.selected_package.renew_date < Date.today
-      return false
+      false
     else
+      true
+    end
+  end
+  def any_cash_back
+    if self.selected_package.validity> 213
       return true
+    else
+      return false
     end
   end
-  def package_destroy
-    pkg=self.selected_package
-    unless pkg.nil?
-      pkg.tours_destroy
-      pkg.destroy
-    end
-  end
+ 
   def special_offer
-    if (Date.today-self.created_at.to_date).to_i > 183
+    if (Date.today-self.selected_package.created_at.to_date).to_i > 183
       return true
     else
       return false
     end
   end
-
+  #  def change_to_montly_plan(pkg)
+  #     p=Package.find(pkg[:id].to_i)
+  #     unless p.monthly_price.nil?
+  #    self.packag=s_pkg=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>1,:renew_date=>estimate_renew_date(p.montly_price,30))
+  #     else
+  #      self.packag=s_pkg=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>2,:renew_date=>estimate_renew_date(p.yearly_price,365))
+  #     end
+  #  end
   private
   def unused_money(price)
     s_pkg=self.selected_package
-    (s_pkg.price.to_f/s_pkg.subscribed_days)*(s_pkg.renew_date-Date.today)
+    (s_pkg.price.to_f/s_pkg.subscribed_days)*(s_pkg.renew_date-Date.today).to_i
+  end
+  def estimate_renew_date(price,days)
+    Date.today +150*days/price
   end
 end

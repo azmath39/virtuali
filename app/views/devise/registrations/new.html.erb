@@ -166,24 +166,25 @@
           <%= f.label :zipcode, "ZIP Code*" %>
           <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
         </div>
-          <div class="fileupload fileupload-new" data-provides="fileupload">
-          <div class="input-append">
-          <div class="uneditable-input" >
-            <i class="icon-file fileupload-exists"></i>
-            <span class="fileupload-preview"></span>
-          </div>
-          <div class="btn-file btn" style="height:20px; width: 70px;">
-            <span class="fileupload-new">Select file</span>
-            <span class="fileupload-exists" style="height:20px; width: 70px;">Change</span>
-          <%= f.file_field :image %>
-          </div>
-          <a href="#" class="btn fileupload-exists btn-danger" data-dismiss="fileupload">Remove</a>
-          </div>
-          </div>
-        <%#*<div class="fileupload btn-small btn btn-warning">%>
-          <%#= f.label :image, "Profile Picture", :style=>'margin-top: 5px;' %>
+          <%#*<div class="fileupload fileupload-new" data-provides="fileupload">%>
+          <%#*<div class="input-append">%>
+          <%#*<div class="uneditable-input" >%>
+            <%#*<i class="icon-file fileupload-exists"></i>%>
+            <%#*<span class="fileupload-preview"></span>%>
+          <%#*</div>%>
+          <%#*<div class="btn-file btn" style="height:20px; width: 70px;">%>
+            <%#*<span class="fileupload-new">Select file</span>%>
+            <%#*<span class="fileupload-exists" style="height:20px; width: 70px;">Change</span>%>
           <%#= f.file_field :image %>
-        <%#*</div>%>
+          <%#*</div>%>
+          <%#*<a href="#" class="btn fileupload-exists btn-danger" data-dismiss="fileupload">Remove</a>%>
+          <%#*</div>%>
+          <%#*</div>%>
+          <%#= f.file_field :image,:class=>"fileupload btn btn-warning" %>
+        <div class="fileupload btn-small btn btn-warning">
+          <%= f.label :image, "Profile Picture", :style=>'margin-top: 5px;' %>
+          <%= f.file_field :image %>
+        </div>
       </div>
       <div id="next_btn">
         <%=button_tag "Next", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_personal",:onclick=>"button()" %>

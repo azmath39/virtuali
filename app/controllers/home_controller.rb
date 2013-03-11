@@ -13,7 +13,8 @@ class HomeController < ApplicationController
       @feedback = Feedback.new
       @tours= current_user.tours
       @packages= Package.all
-      @payments=current_user.payments
+      #@payments=current_user.payments.order('created_at DESC').paginate(:page => params[:page], :per_page => 5)
+      @payments=current_user.payments.order('created_at DESC')
       #@selected_pkgs = selected_pkgs_with_tour
     end
   end

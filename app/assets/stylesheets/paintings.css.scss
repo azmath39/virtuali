@@ -52,7 +52,7 @@ height:73px;
   width: 200px;
 }
 
-.fileupload1 {
+.fileupload {
     width: 100px;
     height: 30px;
     position: relative;
@@ -60,7 +60,7 @@ height:73px;
  //   background: green;
 }
 
-.fileupload1 input {
+.fileupload input {
     position: absolute;
     top: 0;
     right: 0; /* not left, because only the right part of the input seems to

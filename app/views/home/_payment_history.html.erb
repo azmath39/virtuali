@@ -6,4 +6,6 @@
 
   <tr><td><%=i+=1%></td><td><%=payment.created_at.strftime("%d-%M-%Y %H:%M")%></td><td><%=payment.reference%></td><td><%=payment.payment_type_info%> </td><td> $<%=payment.amount%></td></tr>
 <%end%>
+  
 </table>
+ <%#= will_paginate @payments, :renderer => BootstrapPagination::Rails %>

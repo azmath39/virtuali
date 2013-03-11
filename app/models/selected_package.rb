@@ -72,6 +72,8 @@ class SelectedPackage < ActiveRecord::Base
       "Sold"
     end
   end
+
+  
   def tours_enable
     if self.update_attributes(:status=>1) then
       tours=self.user.tours
@@ -79,10 +81,7 @@ class SelectedPackage < ActiveRecord::Base
         tours.each do |tour|
           tour.update_attributes(:status=>1)
         end
-        unless self.user.user_delay_job.nil? then
-          dl_job=self.user.user_delay_job.delayed_job
-          dl_job.destroy unless dl_job.nil?
-        end
+        
         self.user.set_auto_destroy_event
       end
       true
@@ -120,6 +119,9 @@ class SelectedPackage < ActiveRecord::Base
   def send_alert_message
 
   end
+#  def remaining_days
+#    (self.renew_date-Date.today).to_i
+#  end
   def subscribed_days
     if self.payment_period_type==1
       30
@@ -128,10 +130,7 @@ class SelectedPackage < ActiveRecord::Base
     end
   end
   def validity
-    if self.payment_period_type==1
-      30.days.from_now
-    else
-      365.days.from_now
-    end
+   (self.renew_date-Date.today).to_i
   end
+
 end
