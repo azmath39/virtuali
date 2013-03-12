@@ -1,37 +1,86 @@
 <%= devise_error_messages! %>
-<div class ="edit_form_div" id="signin_div">
-<h2>Edit Your Account</h2>
+<p class="title-text" style="margin-left: 32%;">Edit Your Account</p>
+<div class ="edit_form_div">
+  <h3>Personal Information?</h3>
 <hr />
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
 
-  <div><%= f.label :email %>
-  <%= f.email_field :email, :autofocus => true %>
-  <div class="fileupload btn-mini btn-warning" style="width:130px;">
+  <div>
+    
+    <%= f.label "full_Name*" %>
+    <%= f.text_field :name%><span id="personal_info_error_name" style="color:red;"></span>
+    <%#= f.label :email %>
+    <%#= f.email_field :email, :id=>"email_id", :autofocus => true %><span id="personal_info_error_email" style="color:red;"></span>
+    <%= f.label :phno, "Mobile Number"%>
+    <%= f.text_field :phno %>
+    <%= f.label :add1, "Address1*" %>
+    <%= f.text_field :add1 %><span id="personal_info_error_add1" style="color:red;"></span>
+    <%= f.label :add2, "Address2" %>
+    <%= f.text_field :add2 %><span id="personal_info_error_add2" style="color:red;"></span>
+    <%= f.label "state*" %>
+    <%= f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
+    <%= f.label "city*", :html => {:class => 'control-label'} %>
+    <%=f.select :city, {},:prompt=>"Select City"%>
+    <%= f.label :zipcode, "ZIP Code*" %>
+    <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
+    
     <%= f.label :image, "Change Profile Picture", :style=>'margin-top: 5px;' %>
-    <%= f.file_field :image %>
-    <%#= image_tag(@user.image_url(:small)) if @user.image? %>
-    <%#*<p style="margin-left: 300px;"><%= link_to "remove", '#' %</p>%>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <%= f.file_field :image, :id => 'user_file', :style => "display:none" %>
+    <div style="float:right;margin: -15px 100px 0 0px;height:60px; width:60px;">
+      <%= image_tag current_user.image_url(:thumb) %>
+    </div>
+    <div class="input-append">
+       <input id="photoCover" class="input-large" type="text">
+       <a class="btn btn-warning" onclick="$('input[id=user_file]').click();">Browse</a>
+    </div>
+     
+    <br />
+    <h3>Change Password?</h3>
+     <i>(Please Ignore it if you don't want to change your password!)</i>
+    <hr />
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div><%= f.label :password %>
+    <%= f.password_field :password, :autocomplete => "off" %></div>
+
+    <div><%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %></div>
+    <br />
+    <h3>Current Password?</h3>
+    <i>(we need your current password to confirm your changes)</i>
+    <hr />
+    <div><%= f.label :current_password %>
+    <%= f.password_field :current_password %></div>
+
+    <div><%= f.submit "Update", :class => 'btn btn-large btn-primary' %></div>
   <% end %>
-
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
-  <%= f.password_field :password, :autocomplete => "off" %></div>
-
-  <div><%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
-  <%= f.password_field :current_password %></div>
-
-  <div><%= f.submit "Update", :class => 'btn btn-small btn-primary' %></div>
-<% end %>
 
 
 <br />
+<hr />
 <p>Unhappy? <%= link_to "Cancel Your Account!", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
 
 <%= link_to "Back", :back %>
 </div>
+</div>
+<script>
+  function state_city()
+  {
+    $.ajax({
+      type: 'GET',
+      url: "/home/state_cities",
+      data: {
+        'state' :  $("#user_state").val()
+      }
+    }).done(function(text) {
+  $('#user_city').empty().append(text);
+    });
+  }
+
+  //file upload button
+  $('input[id=user_file]').change(function() {
+   $('#photoCover').val($(this).val());
+});
+</script>

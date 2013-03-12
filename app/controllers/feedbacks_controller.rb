@@ -17,8 +17,6 @@ class FeedbacksController < ApplicationController
   end
   def destroy
     @feedback = Feedback.find(params[:id])
-    if @feedback.destroy
-      render :text => "Feedback destroyed!"
-    end
+    @feedback.destroy
   end
 end

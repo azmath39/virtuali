@@ -1,7 +1,7 @@
 <script>
   $(document).ready(function(){
     $('.carousel').carousel({
-    interval: 7000,
+    interval: 4000,
     autoplay: true
   })
   var slider = $(".carousel-inner")
@@ -75,8 +75,8 @@
       <p style="margin: 0% 0 0 30%;">Please, <%= link_to "edit", edit_tour_path(@tour) %> tour! </p>
       <% end %>
   <% end %>
-  <div style="float: right; margin: -580px -9px 0 200px; font-size: 12px;">
-    <table border="1">
+  <div style="float: right; margin: -580px 0px 0 100px; font-size: 12px;">
+    <table border="1" style="margin-right:30px;">
       <tr>
         <th>Price($)</th>
         <th>Bedrooms</th>
@@ -92,7 +92,7 @@
     </table>
   </div>
 
-  <div style="float: left; margin: -510px 1px 0 820px; font-size: 12px;">
+  <div style="float: left; margin: -510px 1px 0 840px; font-size: 12px;">
     <b>Description:</b><br />
     <%= raw(@tour.description) %>
   </div>

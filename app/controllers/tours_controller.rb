@@ -74,16 +74,22 @@ class ToursController < ApplicationController
       @tour = Tour.find(params[:id])
     end
     def view_map
-      if params.has_key? :id
+      if params.has_key? "map_product"
+        if params["map_product"] == ""
+          @tours = Tour.all
+        else
         @tours = []
-        @products=SelectedProduct.find(:all,:conditions=>{:product_id=>params[:id].to_i})
+        @products=SelectedProduct.find(:all,:conditions=>{:product_id=>params[:map_product].to_i})
         @products.each do |product|
-          @tours << product.user.tours
+          @tours << product.user.tours.where(:status => 1)
+        end
         end
         @tours.compact!
         @tours.flatten!
+      elsif params.has_key? "status"
+        @tours = Tour.where(:status => params[:status].to_i)
       else
-        @tours = Tour.all
+        @tours = Tour.where(:status => 1)
       end
       @search = Tour.search(params[:q])
       if !params[:q].nil?
@@ -142,6 +148,7 @@ class ToursController < ApplicationController
       @tours.flatten!
       render :partial => 'all_tours'
   end
+  
   def sold_out_tours
     @tours = Tour.where(:status => params[:status].to_i).order('created_at DESC')
     render :partial => 'all_tours'
