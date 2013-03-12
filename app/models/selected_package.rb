@@ -33,7 +33,7 @@ class SelectedPackage < ActiveRecord::Base
   def set_renew_date_and_package_price
     self.renew_date ||= self.created_at.to_date+self.subscribed_days
     case self.payment_period_type
-    when 3
+    when 2
       self.price=self.package.special_price
     else
       self.price=self.package.regular_price
@@ -60,20 +60,17 @@ class SelectedPackage < ActiveRecord::Base
   def disable
    self.update_attributes(:status=>2)
    self.user.tours_disable
+   d =Delayed::Job.enqueue TourDestroy.new(self.user.id),:priority=>0, :run_at=>10.day.from_now
+
+      self.user.user_delay_job.update_attributes(:delayed_job_id=>d.id)
   end
 
   def package_destroy
-    #self.update_attributes(:status=>3)
-    tours=self.user.tours
-    unless tours.empty?
-      self.user.tours.each do |tour|
-        tour.destroy
-      end
-    end
-    unless self.status==1
+    self.update_attributes(:status=>2) unless self.status==2
+    self.user.tours_destroy
     d =Delayed::Job.enqueue UserDestroy.new(self.user.id),:priority=>0, :run_at=>30.day.from_now
-      self.user.user_delay_job.update_attributes(:delayed_job_id=>d.id)
-    end
+    self.user.user_delay_job.update_attributes(:delayed_job_id=>d.id)
+    self.destroy
    # self.user.destroy_delay_job
   end
   
@@ -89,15 +86,15 @@ class SelectedPackage < ActiveRecord::Base
     case self.payment_period_type
     when 1
       30
-    when 2
-      90
     when 3
+      90
+    when 2
       365
     end
   end
   def validity
 
-    (self.renew_date-Date.today).to_i+5.day.from_now
+    ((self.renew_date-Date.today).to_i+5).day.from_now
 
   end
  # == Getters

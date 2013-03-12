@@ -3,9 +3,9 @@
 
 
 
-class Dowgrade < Struct.new(:u_id, :s_pkg_id)
+class Dowgrade < Struct.new(:u_id, :pkg,:new_package_no_of_tours,:previous_package_no_of_tours)
   def perform
     user=User.find(u_id)
-    user.downgrade_package(s_pkg_id)
+    user.downgrade_package(pkg,new_package_no_of_tours,previous_package_no_of_tours)
   end
 end

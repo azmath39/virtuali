@@ -1,9 +1,8 @@
 # To change this template, choose Tools | Templates
 # and open the template in the editor.
-
-class TourDestroy < Struct.new(:u_id)
+class PackageDisable < Struct.new(:option)
   def perform
-    user=User.find(u_id)
-    user.tours_destroy
+     s_pkg=SelectedPackage.find(option)
+     s_pkg.disable
   end
 end

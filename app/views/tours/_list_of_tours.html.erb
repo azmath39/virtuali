@@ -18,11 +18,10 @@
       <%end%>
 
     <%#= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%><br />
-    <% if tour.status == 1 %>
-    <strong>Status:</strong> Active
-    <%elsif tour.status == 2  %>
-    <strong>Status:</strong> Sold
-    <% end %>
+    
+    <strong>Status:</strong> <%=tour.tour_status %>
+    
+    
   </div>
 
     <div style="float:right;margin: -15px 0px 0px 10px;">

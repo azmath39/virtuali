@@ -16,13 +16,20 @@
 });
   }
   </script>
-<%if @tours.empty?%>
+<%if @tours.empty? or current_user.validate_no_of_tours?%>
 <%=render "/shared/status_message"%>
 <%else%>
 <table class="table table-striped table-bordered">
   <tr><th>Tour Name</th><th>Current Status</th><th>Set Status</th></tr>
 <%@tours.each do |tour|%>
-  <tr><td><%=tour.tour_name%></td><td><span class="<%=tour.id%>"><%=tour.tour_status%></span></td><td><%=select_tag "#{tour.id}", options_for_select([['Active', 1], ['Sold', 3]]),:prompt=>"Set Status",:onchange=>"change_status(#{tour.id})"%></td></tr>
+  <tr><td><%=tour.tour_name%></td><td><span class="<%=tour.id%>"><%=tour.tour_status%></span></td>
+    <td>
+      <%if tour.validate_picture_count?%>
+   <%=select_tag "#{tour.id}", options_for_select([['Active', 1], ['Sold', 3]]),:prompt=>"Set Status",:onchange=>"change_status(#{tour.id})"%>
+    <%else%>
+      No of Pictures exceed the Your package limit. Kindly, ajust it.
+      <%end%>
+    </td></tr>
 
 <%end%>
   </table>

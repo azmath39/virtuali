@@ -8,17 +8,16 @@ class PackagesController < ApplicationController
     pkg=Package.find(params["package_id"].to_i)
     payment_type=choose_payment_type.to_i
 
-    if payment_type==1 and !pkg.nil? and !pkg.monthly_price.nil?
-      @value = pkg.monthly_price
+    if payment_type==2 and !pkg.nil? and !pkg.special_price.nil?
+      @value = pkg.special_price
     else
-      @value = pkg.yearly_price
+      @value = pkg.regular_price
     end
 
     render :text=>@value
   end
   def upgrade_package
     @packages=current_user.packages_for_upgarde
-    
   end
   def upgrade
 
@@ -28,7 +27,7 @@ class PackagesController < ApplicationController
       @email= current_user.email
 
       payment()
-      current_user.upgrade_package(params[:package])
+      current_user.change_package(params[:package])
 #    if current_user.selected_package.payment_period_type.to_i==2 then
 #      change_annual_plan
 #    else

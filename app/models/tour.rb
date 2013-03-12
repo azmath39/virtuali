@@ -94,9 +94,16 @@ class Tour < ActiveRecord::Base
       "expired"
     when 3
       "Sold"
-    end
+    
     when 4
        "In Active (Action needed)"
+    end
+  end
+  def validate_picture_count?
+    if self.paintings.count.to_i <= self.user.selected_package.pictures_for_tour.to_i
+      true
+    else
+      false
     end
   end
 end
