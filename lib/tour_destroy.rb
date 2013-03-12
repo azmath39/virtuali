@@ -3,7 +3,7 @@
 
 class TourDestroy < Struct.new(:option)
   def perform
-     s_pkg=SelectedPackage.find(option)
+     s_pkg=SelectedPackage.find_by_user_id(option)
      s_pkg.tours_destroy
 
   end

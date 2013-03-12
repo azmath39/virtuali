@@ -95,5 +95,8 @@ class Tour < ActiveRecord::Base
     when 3
       "Sold"
     end
+    when 4
+       "In Active (Action needed)"
+    end
   end
 end

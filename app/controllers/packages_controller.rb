@@ -43,7 +43,7 @@ class PackagesController < ApplicationController
     if current_user.any_cash_back
       current_user.cancel_annual_plan
 
-      flash[:notice]="Sucessfully nchanged to monthly pla"
+      flash[:notice]="Sucessfully nchanged to monthly plan"
     else
     current_user.package_destroy
      flash[:notice]="Sucessfully Deleted Your Package and Related Tours"

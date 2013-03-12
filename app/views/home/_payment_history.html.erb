@@ -4,7 +4,7 @@
 <tr><th>Serial No</th><th> Date Of Transaction</th><th> Reference</th><th> Type Of Payment</th><th> Amount</th></tr>
 <%@payments.each do |payment|%>
 
-  <tr><td><%=i+=1%></td><td><%=payment.created_at.strftime("%d-%M-%Y %H:%M")%></td><td><%=payment.reference%></td><td><%=payment.payment_type_info%> </td><td> $<%=payment.amount%></td></tr>
+  <tr><td><%=i+=1%></td><td><%=payment.created_at.strftime("%d-%b-%Y %H:%M")%></td><td><%=payment.reference%></td><td><%=payment.payment_type_info%> </td><td> $<%=payment.amount%></td></tr>
 <%end%>
   
 </table>

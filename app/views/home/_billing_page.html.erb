@@ -34,7 +34,7 @@
               <%#end%>
                 
 <%= link_to "Change Package", '/packages/upgrade_package', :class => "btn btn-link" %>|
-            <%= link_to "Destroy", "/packages/destroy_user_package", :class => "btn btn-link" %>
+            <%= link_to "Cancel", "/packages/destroy_user_package", :class => "btn btn-link",:confirm=>"Are You Sure, Your are about to delete your package." %>
 <%#=link_to "Payment History","##{pkg.id}payment_history", "data-toggle"=>"collapse", :class=>"btn btn-link"%></th></tr>
 
  </table>

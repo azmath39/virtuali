@@ -17,7 +17,7 @@
 
 class SelectedPackage < ActiveRecord::Base
   #require 'tours_jobs'
-  attr_accessible :package_id, :price, :user_id,:status,:pictures_for_tour,:payment_period_type
+  attr_accessible :package_id, :price, :user_id,:status,:pictures_for_tour,:payment_period_type,:renew_date,:created_at
   belongs_to :user
   belongs_to :package
   after_initialize :assign_status_expire_date_payment_period_type
@@ -52,7 +52,7 @@ class SelectedPackage < ActiveRecord::Base
     when 0
       "New"
     when 1
-      "Renwed"
+      "Active"
     when 2
       "Expired"
     when 3
@@ -70,13 +70,15 @@ class SelectedPackage < ActiveRecord::Base
       "expired"
     when 3
       "Sold"
+    when 4
+       "In Active (Action needed)"
     end
   end
 
   
   def tours_enable
     if self.update_attributes(:status=>1) then
-      tours=self.user.tours
+      tours=self.user.tours.where('status!=:status',:status=>1)
       unless tours.empty?
         tours.each do |tour|
           tour.update_attributes(:status=>1)
@@ -97,7 +99,7 @@ class SelectedPackage < ActiveRecord::Base
       tours.each do |tour|
         tour.update_attributes(:status=>2)
       end
-      d =Delayed::Job.enqueue TourDestroy.new(self.id),:priority=>0, :run_at=>60.day.from_now
+      d =Delayed::Job.enqueue TourDestroy.new(self.user.id),:priority=>0, :run_at=>10.day.from_now
       self.user.user_delay_job.update_attributes(:delayed_job_id=>d.id)
       #      #Delayed::Job.enqueue TourDestroy.new(self.id),0, 1.minute.from_now
       #      Delayed::Job.enqueue TourDestroy.new(self.id),:priority=>0, :run_at=>self.validity
@@ -113,15 +115,19 @@ class SelectedPackage < ActiveRecord::Base
         tour.destroy
       end
     end
-    self.user.user_delay_job.destroy
+    unless self.status==1
+    d =Delayed::Job.enqueue UserDestroy.new(self.user.id),:priority=>0, :run_at=>30.day.from_now
+      self.user.user_delay_job.update_attributes(:delayed_job_id=>d.id)
+    end
+   # self.user.destroy_delay_job
   end
   
   def send_alert_message
 
   end
-#  def remaining_days
-#    (self.renew_date-Date.today).to_i
-#  end
+  def remaining_days
+    (self.renew_date-Date.today).to_i
+  end
   def subscribed_days
     if self.payment_period_type==1
       30
@@ -130,7 +136,7 @@ class SelectedPackage < ActiveRecord::Base
     end
   end
   def validity
-   (self.renew_date-Date.today).to_i
+    (self.renew_date-Date.today).to_i+5.day.from_now
   end
 
 end

@@ -63,13 +63,25 @@ class User < ActiveRecord::Base
     else
       s_pkg=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour)
     end
+    #self.downgrade_package(s_pkg) if !@prev_price.nil? and @prev_price > s_pkg.package.yearly_price
     if !@prev_price.nil? and @prev_price > s_pkg.package.yearly_price
-      self.tours.each do|t|
-        t.destroy
-      end
-    end
+      destroy_delay_job
+      d =Delayed::Job.enqueue Dowgrade.new(self.id),:priority=>0, :run_at=>self.selected_package.validity
+      self.user_delay_job.update_attributes(:delayed_job_id=>d.id)
+      #self.downgrade_package(s_pkg)
+      #      self.tours.each do|t|
+      #        t.destroy
+      #      end
+    elsif !@prev_price.nil? and @prev_price < s_pkg.package.yearly_price
       self.selected_package=s_pkg
+      self.selected_package.tours_enable
+    else
+      self.selected_package=s_pkg
+      
     end
+    set_auto_destroy_event  if !@prev_price.nil?
+    
+  end
   def packages_for_upgarde
     #pkg=self.selected_package.package
     #price=pkg.yearly_price
@@ -80,12 +92,40 @@ class User < ActiveRecord::Base
     #pkg.merge!(:type_of_payment=>self.selected_package.payment_period_type)
     unless self.selected_package.nil?
       @prev_price = self.selected_package.package.yearly_price
-      self.selected_package.destroy
+    #self.selected_package.destroy
     end
     self.package=pkg
+    
+  end
+  def downgrade_package(s_pkg_id)
+    s_pkg=SelectedPackage.find(s_pkg_id)
+    if self.self.selected_package.package.no_of_tours== s_pkg.package.no_of_tours
+      self.tours_inactive
+     
+    else
+      self.disable_tours
+    end
+    self.selected_package=s_pkg
     set_auto_destroy_event
   end
-     
+  def tours_inactive
+    tours=self.tours
+    unless tours.empty?
+      tours.each do |tour|
+        tour.update_attributes(:status=>4)
+      end
+    end
+  end
+  def disable_tours
+    tours=self.tours
+    unless tours.empty?
+      tours.each do |tour|
+        tour.update_attributes(:status=>2)
+      end
+      d =Delayed::Job.enqueue TourDestroy.new(self.id),:priority=>0, :run_at=>10.day.from_now
+      self.user_delay_job.update_attributes(:delayed_job_id=>d.id)
+    end
+  end
   def cancel_annual_plan
     s_pkg=self.selected_package
     s_pkg.update_attributes(:renew_date=>estimate_renew_date(s_pkg.price,365),:payment_period_type=>1,:price=>s_pkg.package.monthly_price)
@@ -114,7 +154,7 @@ class User < ActiveRecord::Base
   def set_auto_destroy_event
     self. destroy_delay_job
     s_pkg=self.selected_package
-    d=Delayed::Job.enqueue ToursJobs.new(s_pkg.id), :priority=>0, :run_at=>s_pkg.validity
+    d=Delayed::Job.enqueue ToursJobs.new(s_pk.id), :priority=>0, :run_at=>s_pkg.validity
     self.user_delay_job=UserDelayJob.create(:delayed_job_id=>d.id)
   end
   def destroy_delay_job
