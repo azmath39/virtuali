@@ -11,4 +11,10 @@ class Payment < ActiveRecord::Base
          "1st Direct Debit"
      end
    end
+   def user_name
+     self.user.name
+   end
+   def user_email
+     self.user.email
+   end
 end

@@ -46,18 +46,5 @@
       $('#all_tour_render').html(html);
     });
   });
-  function sold_out_tours()
-  {
-    alert('ok');
-    $.ajax({
-      type: 'GET',
-      url: "/tours/sold_out_tours",
-
-      data: {
-        'status' : "3"
-      }
-    }).done(function(html){
-      $('#all_tour_renderer').html(html);
-    });
-  }
+  
 </script>
