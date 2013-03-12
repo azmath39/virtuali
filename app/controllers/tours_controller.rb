@@ -99,7 +99,11 @@ class ToursController < ApplicationController
     end
     def status_change
       tour = Tour.find(params[:id].to_i)
+      if tour.status == 2
+      current_user.enable_tour
+      else
       tour.update_attributes(:status=>params[:status].to_i)
+      end
       render :text=>tour.tour_status
     end
     def user_tours

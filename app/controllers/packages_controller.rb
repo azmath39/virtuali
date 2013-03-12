@@ -1,7 +1,7 @@
 class PackagesController < ApplicationController
   def show
     product=Product.find(params["product"].to_i)
-    @packages= product.packages
+    @packages= product.packages.order('regular_price ASC')
     render :layout => false
   end
   def total_value

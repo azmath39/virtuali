@@ -1,11 +1,39 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  email                  :string(255)      default(""), not null
+#  encrypted_password     :string(255)      default(""), not null
+#  reset_password_token   :string(255)
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0)
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :string(255)
+#  last_sign_in_ip        :string(255)
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  image                  :string(255)
+#  name                   :string(255)
+#  phno                   :string(255)
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string(255)
+#
 
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
 
   
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
 
-
+  # Setup accessible (or protected) attributes for your model
 
   attr_accessible :name, :phno, :email, :password, :password_confirmation, :add1, :add2, :state, :city, :zipcode, :remember_me, :image,:product,:package
 
@@ -109,6 +137,18 @@ class User < ActiveRecord::Base
       self.user_delay_job.update_attributes(:delayed_job_id=>d.id)
 
     end
+  end
+  def enable_tour
+    s_pkg=self.selected_package
+    s_pkg.update_attributes(:status=>1) unless s_pkg.status == 1
+    tours=self.tours.where('status!=:status',:status=>1)
+      unless tours.empty?
+        tours.each do |tour|
+          tour.update_attributes(:status=>1)
+        end
+
+        self.user.set_auto_destroy_event
+      end
   end
      
   def cancel_annual_plan

@@ -23,10 +23,11 @@ class Painting < ActiveRecord::Base
   belongs_to :user
   #belongs_to :paintable, :polymorphic => true
   mount_uploader :image, ImageUploader
-  #before_create :default_name
+  before_create :default_name
 
-
-
+ def default_name
+   self.name ||= "Living Room"
+ end
 
 
 
