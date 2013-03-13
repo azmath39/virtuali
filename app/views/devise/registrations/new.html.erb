@@ -176,7 +176,7 @@
     </div>
       </div>
       <div id="next_btn">
-        <%=button_tag "Next", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_personal",:onclick=>"button()" %>
+        <%=button_tag "Next", :class => "slidesjs-next slidesjs-navigation btn-large btn-info", :id=>"btn_personal",:onclick=>"button()" %>
       </div>
    </div>
     <div id="product_select" >
@@ -194,9 +194,9 @@
           <% @i+=1 %>
         <% end %><br />
       </div>
-      <%= button_tag "Previous", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
+      <%= button_tag "Previous", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-info" %>
       <div id="next_btn">
-        <%=button_tag "Next",:class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_product" %>
+        <%=button_tag "Next",:class => "slidesjs-next slidesjs-navigation btn-large btn-info",:id=>"btn_product" %>
   <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
       </div>
     </div>
@@ -206,9 +206,9 @@
         <div id="packages">
         </div>
       </div>
-      <%= button_tag "Previous", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
+      <%= button_tag "Previous", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-info" %>
       <div id="next_btn">
-        <%=button_tag "Next",  :class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_package"%>
+        <%=button_tag "Next",  :class => "slidesjs-next slidesjs-navigation btn-large btn-info",:id=>"btn_package"%>
   
       </div>
     </div>
@@ -242,9 +242,9 @@
           <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
           <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
         </div></div>
-      <%= button_tag "Previous", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
+      <%= button_tag "Previous", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-info" %>
       <div id="next_btn">
-        <%= f.submit "Sign up",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
+        <%= f.submit "Sign up",  :class=>"btn-large btn-info", :disable_with => "Please wait.." %>
       </div>
     </div>
  

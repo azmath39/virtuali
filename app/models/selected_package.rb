@@ -122,7 +122,7 @@ class SelectedPackage < ActiveRecord::Base
     when 0
       "Pending"
     when 2
-      "expired"
+      "Disabled"
     when 3
       "Sold"
     when 4

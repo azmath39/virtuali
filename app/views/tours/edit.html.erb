@@ -4,7 +4,7 @@
   <%$serial_no=0%>
   <%=hidden_field_tag :count,@count%>
    <%#  =hidden_field_tag :tour_id,@tour%>
-<div class="fileupload btn btn-warning">
+<div class="fileupload btn btn-info">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
   
@@ -84,7 +84,7 @@
 </div>
 <div style="float:left;margin-top: 10px;clear: both;">
 <div>
-  <%= f.submit :class => 'btn btn-large btn-primary' %>
+  <%= f.submit :class => 'btn btn-large btn-info' %>
 </div>
 <% end %>
 </div>
