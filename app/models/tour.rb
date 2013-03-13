@@ -55,6 +55,7 @@
 class Tour < ActiveRecord::Base
   extend FriendlyId
   attr_accessible :gmaps, :state, :description, :city, :zip, :subdivision, :price,:address1,:address2, :square_footage, :bed_rooms, :bath_rooms,:selected_package_id,:status
+  #attr_accessor :pro
   acts_as_paranoid
   validates :state, :city, :zip, :subdivision, :price, :address1,:address2,:square_footage, :presence => true
   validates :price, :numericality => {:greater_than => 0}
@@ -74,7 +75,9 @@ class Tour < ActiveRecord::Base
   def gmaps4rails_address
     "#{address1},#{address1},#{state}, #{city},#{zip}"
   end
-
+def pro
+  self.user.selected_product.product.name
+end
   def set_status
     self.status ||= 1
   end
