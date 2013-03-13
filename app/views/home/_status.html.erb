@@ -27,7 +27,7 @@
       <%if tour.validate_picture_count?%>
    <%=select_tag "#{tour.id}", options_for_select([['Active', 1], ['Sold', 3]]),:prompt=>"Set Status",:onchange=>"change_status(#{tour.id})"%>
     <%else%>
-      No of Pictures exceed the Your package limit. Kindly, ajust it.
+      <span style="color: red;"> No of Pictures exceed the Your package limit. Kindly, ajust it.</span>
       <%end%>
     </td></tr>
 

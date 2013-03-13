@@ -77,13 +77,13 @@ class User < ActiveRecord::Base
   end
   
   def change_package(pkg)
-    @new_package=Package.find(pkg[:id].to_i)
-    @previous_package=self.selected_package.package
-    if @new_package.regular_price >=@previous_package.regular_price
+    new_package=Package.find(pkg[:id].to_i)
+    previous_package=self.selected_package.package
+    if new_package.regular_price >=previous_package.regular_price
       package_upgrade(pkg)
     else
       destroy_delay_job
-      d =Delayed::Job.enqueue Dowgrade.new(self.id,pkg,@new_package.no_of_tours,@previous_package.no_of_tours),:priority=>0, :run_at=>self.selected_package.remaining_days.day.from_now
+      d =Delayed::Job.enqueue Dowgrade.new(self.id,pkg,new_package.no_of_tours,previous_package.no_of_tours),:priority=>0, :run_at=>self.selected_package.remaining_days.day.from_now
       self.user_delay_job=UserDelayJob.create(:delayed_job_id=>d.id)
       #downgrade_package(pkg,@new_package.no_of_tours,@previous_package.no_of_tours)
     end
