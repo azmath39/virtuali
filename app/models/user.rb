@@ -220,6 +220,10 @@ class User < ActiveRecord::Base
      false
     end
   end
+  def any_instructions?
+    puts "dfgjdhgjdfgjdfghfdghfkdhgkdfhgkdfhgkdfhgkhdfkghdf"
+    self.tours.any?{|tour| tour.status!=1}
+  end
   #  def change_to_montly_plan(pkg)
   #     p=Package.find(pkg[:id].to_i)
   #     unless p.monthly_price.nil?
