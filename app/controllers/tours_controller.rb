@@ -50,7 +50,7 @@ class ToursController < ApplicationController
         @paintings.each do |pic|
           @tour.paintings<<pic
         end unless @paintings.empty?
-        flash.now[:notice] = 'Tour updated successfully.'
+        flash[:notice] = 'Tour updated successfully.'
         redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
       else
         error_to_flash
