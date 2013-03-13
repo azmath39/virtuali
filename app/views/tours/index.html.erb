@@ -4,11 +4,11 @@
 </div>
 <div class="span8" id ="tour-list">
   <p class="title-text">List of Tours</p>
-  <div style="float: right;margin: -35px 35px -30px 0;">
-    <% @products = Product.all %>
-      Find Tours:    <%= select_tag :product, options_from_collection_for_select(@products, "id", "name"), :prompt => "All", :onchange => 'find_tours()' %>
-      <span><%=link_to "Sold Tours", '#', :value => "sold_tours", :id => "sold_tours",  :class => 'btn btn-small btn-primary'%></span>
-  </div>
+  <%#*<div style="float: right;margin: -35px 35px -30px 0;">%>
+    <%# @products = Product.all %>
+      <%#*Find Tours:    <%= select_tag :product, options_from_collection_for_select(@products, "id", "name"), :prompt => "All", :onchange => 'find_tours()' %%>
+      <%#*<span><%=link_to "Sold Tours", '#', :value => "sold_tours", :id => "sold_tours",  :class => 'btn btn-small btn-primary'%</span>%>
+  <%#*</div>%>
   <div id="all_tour_render">
     <%= render 'all_tours' %>
 

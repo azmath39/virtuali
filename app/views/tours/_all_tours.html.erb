@@ -1,5 +1,5 @@
 <% @tours.each do |tour| %>
-  <div class="span7 well" id = 'img_bg'>
+  <div class="span7 well" id = 'img_bg' style="margin-top:-10px;">
   <div>
     <%#= t.paintings %>
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>

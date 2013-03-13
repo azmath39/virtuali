@@ -1,13 +1,16 @@
   <%= search_form_for @search, :class => 'well form-inline', :id => 'img_bg' do |f| %>
     <%= f.label :state_cont, "State" %>
-    <%=f.select :state_cont, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
-    <%#= f.text_field :state_cont %><br />
+    <%=f.select :state_cont, State.all.collect {|s| [s.name, s.name]},{:include_blank => "Select State"},:onchange=>"state_city()"%><br />
     <%= f.label :city_cont, "City" %>
-    <%=f.select :city_cont, {},:prompt=>"Select City"%><br />
-<%#= f.text_field :city_cont %><br />
+    <%=f.select :city_cont, {}, :include_blank => "Select City"%><br />
+    <%= f.label :user_selected_product_product_name_cont, "Category" %>
+    <%= f.select :user_selected_product_product_name_cont,  Product.all.collect {|p| [ p.name, p.name ] }, {:include_blank => "All"}%><br />
+    <%= f.label :status_eq, "Status" %>
+    <%= f.select :status_eq, {"Active" => 1, "Sold" => 2}, :include_blank => "All"  %><br />
     <%#= f.label :price_gteq, "Price Between" %>
-    <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %><%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
-<%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
+    <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %>
+    <%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
+<br /><%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
   <% end %>
 
 <script>

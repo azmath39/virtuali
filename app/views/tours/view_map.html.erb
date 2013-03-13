@@ -1,37 +1,41 @@
 
-<div class ="span3" id="map-search" style="margin-top:2%;">
+<div class ="span3" id="map-search" style="margin-top:3%;">
   <p class="title-text">Search</p>
   <%= search_form_for @search, :url => '/tours/view_map', :class => 'well form-inline', :id => 'img_bg' do |f| %>
     <%= f.label :state_cont, "State" %>
-    <%=f.select :state_cont, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
+    <%=f.select :state_cont, State.all.collect {|s| [s.name,s.name]},{:include_blank=>"All"},:onchange=>"state_city()"%>
     <%= f.label :city_cont, "City" %>
-    <%=f.select :city_cont, {}, :prompt=>"Select City"%><br />
+    <%=f.select :city_cont, {}, :include_blank=>"All"%><br />
+    <%= f.label :user_selected_product_product_name_cont, "Category" %>
+    <%= f.select :user_selected_product_product_name_cont,  Product.all.collect {|p| [ p.name, p.name ] }, {:include_blank => "All"}%><br />
+    <%= f.label :status_eq, "Status" %>
+    <%= f.select :status_eq, {"Active" => 1, "Sold" => 2}, :include_blank => "All"  %><br />
     <%#= f.label :price_gteq, "Price Between" %>
-    <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %><%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
+    <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %<%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
     <br/><%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
   <% end %>
 </div>
 <div id="map-div" style="margin-top: 2%;">
   <p class="title-text">Tour Map</p>
-  <div class="span5" style="float: right; margin: -40px 80px 0 0px;">
-    <% @products = Product.all %>
-     <%= form_tag  '/tours/view_map',:id => 'map_tour_form' do %>
-       Find Tours: <%= select_tag :map_product, options_from_collection_for_select(@products, "id", "name"), :prompt => "All", :onchange => "find_map_tours()" %>
-       <%#= submit_tag "Go", :class => 'btn btn-primary' %>
-       <%=link_to "Sold Tours", {:controller => 'tours', :action => 'view_map', :status => 3},  :class => 'btn btn-small btn-primary'%>
-     <% end %>
-  </div>
-  <%#*<div style="float: right;margin: -30px 200px 0 0;">%>
-    <%#= link_to "All Tours", {:controller => 'tours', :action => 'view_map'} , :class=> 'btn btn-mini btn-primary'%>&nbsp;
-    <%#  Product.all.each do |p| %>
-      <%#@product=p%>
-      <%#= link_to @product.name, {:controller => 'tours', :action => 'view_map', :id => @product.id },:class=> 'btn btn-mini btn-primary' %>&nbsp;
-    <%#  end %>
-  <%#*</div>%>
+  <%#*<div class="span5" style="float: right; margin: -40px 80px 0 0px;">%
+    <%# @products = Product.all %
+     <%#= form_tag  '/tours/view_map',:id => 'map_tour_form' do %
+       <%#*Find Tours: <%= select_tag :map_product, options_from_collection_for_select(@products, "id", "name"), :prompt => "All", :onchange => "find_map_tours()" %%>
+       <%#= submit_tag "Go", :class => 'btn btn-primary' %
+       <%#=link_to "Sold Tours", {:controller => 'tours', :action => 'view_map', :status => 3},  :class => 'btn btn-small btn-primary'%
+     <%# end %
+  <%#*</div>%
+  <%#*<div style="float: right;margin: -30px 200px 0 0;">%
+    <%#= link_to "All Tours", {:controller => 'tours', :action => 'view_map'} , :class=> 'btn btn-mini btn-primary'%&nbsp;
+    <%#  Product.all.each do |p| %
+      <%#@product=p%
+      <%#= link_to @product.name, {:controller => 'tours', :action => 'view_map', :id => @product.id },:class=> 'btn btn-mini btn-primary' %&nbsp;
+    <%#  end %
+  <%#*</div>%
   <%#= gmaps({
   "map_options" => {"auto_zoom" => true, "auto_adjust" => false, "zoom" => 4, "center_latitude" => 38, "center_longitude" => -97 },
   "markers" => {"data" => @json }
-   })%>
+   })%
 <%#*</div>%>
 <%= gmaps4rails(@json)%>
 </div>
