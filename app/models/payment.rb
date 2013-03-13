@@ -12,9 +12,9 @@ class Payment < ActiveRecord::Base
      end
    end
    def user_name
-     self.user.name
+     self.user.name unless self.user.nil?
    end
    def user_email
-     self.user.email
+     self.user.email unless self.user.nil?
    end
 end

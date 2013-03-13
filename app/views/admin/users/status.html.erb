@@ -1,20 +1,25 @@
-<%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "twitter/bootstrap" %>
+ 
 
-<div>
-  <h1>What's going on?</h1>
-  <div class="container-fluid">
-    <div class="accordion" id="accordion2">
-    <div class="accordion-group">
-      <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-          Users (<%= @users.count %>)
-        </a>
-      </div>
-      <div id="collapseOne" class="accordion-body collapse" style="height: 0px; ">
-        <div class="accordion-inner">
 
-          <table class="table table-striped table-bordered table-condensed">
+<div class="navbar">
+  <div>
+    <ul class="nav unstyled" style="height:100px;margin-left: 10%;margin-top:2%;width:68%">
+      <li class="active tab"><%= link_to "Space Usage", '#div_usage', "data-toggle" => "tab" %></li>
+      <li class="tab"><%= link_to "Users ( #{@users.count})", "#div_user", "data-toggle" => "tab"%> </li>
+      <li class="tab"><%= link_to "Tours (#{@tours.count})", '#div_tours', "data-toggle" => "tab"%> </li>
+      <li class="tab"><%= link_to "Sales", '#div_sales', "data-toggle" => "tab" %></li>
+
+      
+    </ul>
+
+  </div></div>
+  <div class="tab-content" style="margin-left: 12%; width: 65%;height:600px;padding: 20px; float: left;">
+     <div class="tab-pane active" id="div_usage">
+       <div  style ="background-color:rgb(229, 229, 229); border-radius:10px;margin-top: 2%;padding:5% 0%;text-align: center; ">
+      <h3> Space Used : <%=@app_size%> MB.</h3>
+    </div>
+       </div>
+  <div class="tab-pane" id="div_user"><table class="table table-striped table-bordered table-condensed">
 
             <tr>
               <th>Name</th>
@@ -30,19 +35,9 @@
               <td>packages</td>
             </tr>
             <% end %>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="accordion-group">
-      <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-         Tours (<%= @tours.count %> )
-        </a>
-      </div>
-      <div id="collapseTwo" class="accordion-body collapse">
-        <div class="accordion-inner">
-          <table class="table table-striped table-bordered table-condensed">
+          </table></div>
+  <div class="tab-pane" id="div_tours">
+    <table class="table table-striped table-bordered table-condensed">
             <tr>
               <th>Name</th>
               <th>Status</th>
@@ -52,7 +47,7 @@
             <tr>
               <td><%= t.name.gsub(/%/, '-') %></td>
               <td style="color: green;"><%= t.tour_status %></td>
-              <% if t.status == 2  %>
+              <% if t.status != 1  %>
               <td><%= t.updated_at.strftime("%d-%b-%y, %A (%H:%M)")%>  </td>
               <% else %>
               <td>-</td>
@@ -60,58 +55,57 @@
             </tr>
             <% end %>
           </table>
-        </div>
-      </div>
-    </div>
-      <div class="accordion-group">
-      <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
-          Sales
-        </a>
-      </div>
-      <div id="collapseThree" class="accordion-body collapse">
-        <div class="accordion-inner">
-          <table class="table table-striped table-bordered table-condensed">
+  </div>
+  <div class="tab-pane" id="div_sales">
+    <table class="table table-striped table-bordered">
 
             <tr>
+              <th>Payment Date</th>
               <th>User Name</th>
               <th>User Email</th>
               <th>Amount($)</th>
-              <th>Payment Date</th>
+             
             </tr>
             <% @payments.each do |payment| %>
             <tr>
+              <td><%= payment.created_at.strftime("%d-%b-%y, %A") %></td>
               <td><%= payment.user_name %> </td>
               <td><%= payment.user_email %></td>
-              <td><%= payment.amount %> </td>
-              <td><%= payment.created_at.strftime("%d-%b-%y, %A") %></td>
+              <td>$<%= payment.amount %> </td>
+              
             </tr>
             <% end %>
             <tr>
-              <br />
-              <hr />
-            <b><td>Total Amount:</td></b>
-            <% amount = 0 %>
-            <% @payments.each {|p| amount += p.amount}%>
-            <td>&nbsp;</td>
-            <td><%= amount  %>  </td>
+              <td></td>
+              <td></td>
+            <th>Total Amount:</th>
+            <td> $<%=Payment.sum(:amount)%> </td>
             </tr>
           </table>
-        </div>
-      </div>
-    </div>
-    <div class="accordion-group">
-      <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFour">
-          Performance
-        </a>
-      </div>
-      <div id="collapseFour" class="accordion-body collapse">
-        <div class="accordion-inner">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-      </div>
-    </div>
   </div>
+
+ 
+   
+  
+
 </div>
-</div>
+<%= stylesheet_link_tag    "application", :media => "all" %>
+<%= javascript_include_tag "application" %>
+<style>
+  .tab{
+    width:25%;
+    text-align:center;
+  }
+  .tab > a{
+    font-size:20px;
+    font-weight: bold;
+    line-height: 4;
+    box-shadow:10px 10px 5px #888888;
+    color:black!important
+  }
+  .tab > a:hover{
+    color:#888888 !important;
+  }
+
+
+</style>

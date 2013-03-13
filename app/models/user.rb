@@ -232,6 +232,12 @@ class User < ActiveRecord::Base
   #      self.packag=s_pkg=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>2,:renew_date=>estimate_renew_date(p.yearly_price,365))
   #     end
   #  end
+  def self.appliction_size
+    require 'find'
+    size = 0
+    Find.find(Rails.root) { |f| size += File.size(f) if File.file?(f) }
+    size/(1024*1024)
+end
   private
   def unused_money(price)
     s_pkg=self.selected_package
