@@ -14,7 +14,7 @@
 }
 
   .navbar-inner {
-    background: url(bg2.png);
+    background: url(cut.png);
     background-repeat: repeat;
     min-height: 40px;
     padding-left: 20px;
@@ -24,7 +24,7 @@
 .navbar .nav>li>a{
     float:none;
     padding:16px 8px 0px;
-    color:#777777;
+    color: white;
     text-decoration:none;
     text-shadow:none;
     font-size: 15px;
@@ -32,13 +32,14 @@
 }
 .navbar .brand {
     text-shadow:none;
+    color: whitesmoke;
 }
 .navbar .nav > li > a:hover {
 
     font-size: 15px;
 
     background-color: transparent;
-    color: white;
+    color: wheat;
     text-shadow: whitesmoke 0.01em 0.01em 0.01em;
     text-decoration: none;
 }
@@ -50,7 +51,12 @@
 .btn [class^="icon-"], .nav [class^="icon-"], .btn [class*=" icon-"], .nav [class*=" icon-"]{
     line-height: 2.9em;
 }
-
+.navbar .nav li.dropdown > .dropdown-toggle .caret {
+border-top-color: whitesmoke;
+}
+.navbar .nav li.dropdown > .dropdown-toggle .caret > a:hover {
+    color: whitesmoke;
+}
 /*Footer styles*/
 #push,
       #footer {

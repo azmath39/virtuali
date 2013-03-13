@@ -37,6 +37,8 @@ home_image3.png: home_image3.png
 home_image3/index.png: home_image3.png
 icon-money.png: icon-money.png
 icon-money/index.png: icon-money.png
+menu_bg.png: menu_bg.png
+menu_bg/index.png: menu_bg.png
 rails.png: rails.png
 rails/index.png: rails.png
 slide-01.jpg: slide-01.jpg
