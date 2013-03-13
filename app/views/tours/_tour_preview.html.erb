@@ -61,11 +61,11 @@
   <div class="slider-pager" style="margin: 5% 0 0 20%;">
     <% if @objs.size >= 5 %>
     <% for image in @objs.first 5 %>
-      <a href="#main-slider" class="btn btn-mini btn-primary"><%= image.name%></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-info"><%= image.name%></a>&nbsp;&nbsp;
     <% end %>
     <% else %>
       <% for image in @objs %>
-      <a href="#main-slider" class="btn btn-mini btn-primary"><%= image.name%></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-info"><%= image.name%></a>&nbsp;&nbsp;
     <% end %>
     <% end %>
   </div>
@@ -109,7 +109,7 @@
     <h5 style="margin:0 0 0 35px; color: green;">Your Tour</h5>
     <% end %>
     <% if !@objs.empty? %>
-      <h4><%= button_to "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click for Tour&nbsp;&nbsp;&nbsp;&nbsp;".html_safe, {:controller => 'tours', :action => 'slide_show', :id => @tour.id }, :class=> 'brn btn-small btn-primary'%></h4>
+      <h4><%= button_to "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click for Tour&nbsp;&nbsp;&nbsp;&nbsp;".html_safe, {:controller => 'tours', :action => 'slide_show', :id => @tour.id }, :class=> 'brn btn-small btn-info'%></h4>
     <% end %>
   </div>
 </div>

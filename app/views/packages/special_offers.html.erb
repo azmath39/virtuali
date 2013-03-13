@@ -22,7 +22,7 @@
         </div><br />
       <% end %>
     </div><br />
-    <%=link_to "Next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_package" %>
+    <%=link_to "Next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-info", :id=>"btn_package" %>
 
   </div>
   <div id="payment_info">
@@ -57,7 +57,7 @@
         <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
       </div></div>
     <div id="next_btn">
-      <%= f.submit "Upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
+      <%= f.submit "Upgrade",  :class=>"btn-large btn-info", :disable_with => "Please wait.." %>
     </div>
   </div>
   </div>
