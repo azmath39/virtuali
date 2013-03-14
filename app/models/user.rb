@@ -52,6 +52,10 @@ class User < ActiveRecord::Base
   after_create :set_auto_destroy_event
   has_many :payments, :dependent=> :destroy
 
+  def address
+    "#{self.add1} #{self.add2}\n#{self.state} #{self.city}\n\n#{zipcode}"
+  end
+
   def product=(pro)
     unless pro.nil?
       self.selected_product=SelectedProduct.create(:product_id=>pro.to_i)

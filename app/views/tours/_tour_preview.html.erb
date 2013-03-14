@@ -94,9 +94,13 @@
   </div>
       
   <div id ="user_img" style="float: right; height: 200px; width: 150px;margin: -320px 70px -40px 30px;">
-    <%= image_tag(@tour.user.image_url(:medium)) if @tour.user.image? %>
+    <% if @tour.user.image? %>
+    <%= image_tag(@tour.user.image_url(:medium)) %>
+    <% else %>
     <%= image_tag('user_default_image.gif') unless @tour.user.image? %>
+    <% end %>
     <strong><%= @tour.user.name %></strong><br />
+    <%= @tour.user.address %>
   </div>
   <div  style="float: right; height: 50px; width: 200px;margin: -40px -20px 0px 0px;">
     <% if !current_user || current_user.id != @tour.user.id %>
