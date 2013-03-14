@@ -110,7 +110,7 @@
     <h5 style="margin:0 0 0 35px; color: green;">Your Tour</h5>
     <% end %>
     <% if !@objs.empty? %>
-      <h4><%= button_to "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click for Tour&nbsp;&nbsp;&nbsp;&nbsp;".html_safe, {:controller => 'tours', :action => 'slide_show', :id => @tour.id }, :class=> 'brn btn-small btn-primary'%></h4>
+      <h4><%= button_to "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click for Tour&nbsp;&nbsp;&nbsp;&nbsp;".html_safe, {:controller => 'tours', :action => 'slide_show', :id => @tour.slug }, :class=> 'brn btn-small btn-primary'%></h4>
     <% end %>
   </div>
 </div>

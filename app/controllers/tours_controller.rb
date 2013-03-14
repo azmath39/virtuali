@@ -51,7 +51,8 @@ class ToursController < ApplicationController
           @tour.paintings<<pic
         end unless @paintings.empty?
         flash[:notice] = 'Tour updated successfully.'
-        redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
+        #redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
+        redirect_to tour_path(@tour)
       else
         error_to_flash
         redirect_to edit_tour_path(@tour)
@@ -71,7 +72,7 @@ class ToursController < ApplicationController
       @tour = Tour.find(params[:id])
     end
     def slide_show
-      @tour = Tour.find(params[:id])
+      @tour = Tour.find_by_slug(params[:id])
     end
     def view_map
       if params.has_key? "map_product"
