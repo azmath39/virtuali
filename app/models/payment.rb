@@ -9,6 +9,8 @@ class Payment < ActiveRecord::Base
           "Direct Debit"
      when 3
          "1st Direct Debit"
+     when 4
+         "Refunded"
      end
    end
    def user_name

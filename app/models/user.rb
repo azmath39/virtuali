@@ -102,12 +102,16 @@ class User < ActiveRecord::Base
     if new_no_of_tours==0 or new_no_of_tours==pre_no_of_tours
       tours_inactive
       set_auto_destroy_event
+      msg="You have Dowgraded your package. All your tour are been Inactivated. Ajust your tour according to your package and then reset them to active mode."
     else
       tours_disable
-      
+      msg="You have Dowgraded your package. All your tour are been Disabled and will be deleted after 10 day from now. Immediatly, ajust your tour according to your package and then reset them to active mode."
+
       d =Delayed::Job.enqueue TourDestroy.new(self.id),:priority=>0, :run_at=>10.day.from_now
       self.user_delay_job.update_attributes(:delayed_job_id=>d.id)
     end
+
+   # send_message("Important Alert!",msg);
   end
   def tours_inactive
     tours=self.tours
@@ -135,12 +139,15 @@ class User < ActiveRecord::Base
     end
     unless self.selected_package.status==1
       set_auto_destroy_event
+      msg="All your tours are removed from virtuali. Login into your Account and create new tours. "
     else
       self.selected_package.destroy
       d =Delayed::Job.enqueue UserDestroy.new(self.id),:priority=>0, :run_at=>30.day.from_now
       self.user_delay_job.update_attributes(:delayed_job_id=>d.id)
+    msg="All your tours are removed from virtuali and Your account will deleted after 30 day from now. Login into your Account and Purchase any package, to keep your account live. "
 
     end
+    send_message("Important Alert!",msg);
   end
   def enable_tour
     s_pkg=self.selected_package
@@ -241,6 +248,9 @@ class User < ActiveRecord::Base
     size = 0
     Find.find(Rails.root) { |f| size += File.size(f) if File.file?(f) }
     size/(1024*1024)
+end
+def send_message(subject,message)
+ # NotificationsMailer.alert_message(self.email,subject, message).deliver
 end
   private
   def unused_money(price)

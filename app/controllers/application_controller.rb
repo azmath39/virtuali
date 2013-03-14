@@ -4,8 +4,15 @@ class ApplicationController < ActionController::Base
   
   
  rescue_from Stripe::CardError do |exception|
- render :text=>exception
+   #render :text=>exception.inspect
+ flash[:error]=exception.message
+ redirect_to :back
   end
+rescue_from Stripe::InvalidRequestError do |exception|
+  #render :text=> exception.inspect
+  flash[:error]= exception.message
+  redirect_to :back
+end
 
 def verify_account_validity
   unless current_user.nil?

@@ -11,4 +11,9 @@ class NotificationsMailer < ActionMailer::Base
     @tour = tour
     mail(:to => @user.email, :subject => "Tour Creation Message!")
   end
+  def alert_message(email,subject, message)
+  @message= message
+
+    mail(:to => email, :subject => subject)
+  end
 end
