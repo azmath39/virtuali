@@ -68,7 +68,7 @@ class ToursController < ApplicationController
       end
     end
     def final_tour
-      @tour = current_user.tours.last
+      @tour = Tour.find(params[:id])
     end
     def slide_show
       @tour = Tour.find(params[:id])

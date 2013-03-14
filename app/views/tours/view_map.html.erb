@@ -9,7 +9,7 @@
     <%= f.label :user_selected_product_product_name_cont, "Category" %>
     <%= f.select :user_selected_product_product_name_cont,  Product.all.collect {|p| [ p.name, p.name ] }, {:include_blank => "All"}%><br />
     <%= f.label :status_eq, "Status" %>
-    <%= f.select :status_eq, {"Active" => 1, "Sold" => 2}, :include_blank => "All"  %><br />
+    <%= f.select :status_eq, {"Active" => 1, "Sold" => 3}  %><br />
     <%#= f.label :price_gteq, "Price Between" %>
     <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %<%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
     <br/><%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
