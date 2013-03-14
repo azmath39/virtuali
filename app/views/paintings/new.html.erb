@@ -4,7 +4,7 @@
   <%= render 'shared/error_messages', :target => @tour  %>
 <%= form_for Painting.new do |f| %>
   <%$serial_no=0%>
-<div class="fileupload btn btn-info">
+<div class="fileupload btn btn-primary">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
 <% end %>
@@ -83,7 +83,7 @@
 </div>
 <div style="float:left;margin-top: 10px;clear: both;">
 <div>
-  <%= f.submit :class => 'btn btn-large btn-info' %>
+  <%= f.submit :class => 'btn btn-large btn-primary' %>
 </div>
 <% end %>
 </div>

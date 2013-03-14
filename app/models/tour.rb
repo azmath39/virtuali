@@ -94,7 +94,7 @@ end
     when 0
       "Pending"
     when 2
-      "expired"
+      "Disable"
     when 3
       "Sold"
     

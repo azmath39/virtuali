@@ -221,8 +221,8 @@ class User < ActiveRecord::Base
     end
   end
   def any_instructions?
-    puts "dfgjdhgjdfgjdfghfdghfkdhgkdfhgkdfhgkdfhgkhdfkghdf"
-    self.tours.any?{|tour| tour.status!=1}
+    
+    self.tours.any?{|tour| tour.status!=1 and tour.status!=3}
   end
   #  def change_to_montly_plan(pkg)
   #     p=Package.find(pkg[:id].to_i)

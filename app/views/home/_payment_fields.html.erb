@@ -24,6 +24,6 @@
       <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
     </div>
     <div id="next_btn">
-      <%=submit_tag "Submit",  :class=>"btn btn-info", :disable_with => "Please wait.." %>
+      <%=submit_tag "Submit",  :class=>"btn btn-primary", :disable_with => "Please wait.." %>
     </div>
   </div>
