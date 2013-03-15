@@ -17,7 +17,7 @@
 #
 
 class Package < ActiveRecord::Base
-  attr_accessible :name, :pictures_for_tour, :regular_price,:special_price,:no_of_tours, :product_id, :status,:subscription_period,:add_on
+  attr_accessible :name, :pictures_for_tour, :regular_price,:special_price,:no_of_tours, :product_id,:package_type, :status,:subscription_period,:add_on
   has_many :users, :through => :selected_packages
   has_many :selected_packages
   belongs_to :product

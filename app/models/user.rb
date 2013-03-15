@@ -72,6 +72,16 @@ class User < ActiveRecord::Base
       self.selected_package=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>3)
     end
   end
+    def subscribe_product
+    pkg=self.selected_package.package
+    a=[]
+    unless pkg.package_type==2
+    a<< self.selected_products.product
+    else
+     a<< Product.where(:category_id=>pkg.product.category_id)
+     a.flatten!
+    end
+  end
 
   def packages_for_upgarde
     #pkg=self.selected_package.package

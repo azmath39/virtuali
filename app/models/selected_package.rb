@@ -78,11 +78,6 @@ class SelectedPackage < ActiveRecord::Base
     msg="All your tours are removed from virtuali and Your account will deleted after 30 day from now. Login into your Account and Purchase any package, to keep your account live. "
     send_message("Important Alert!",msg);
   end
-  
-  def send_alert_message
-
-  end
-
   def remaining_days
     (self.renew_date-Date.today).to_i
   end

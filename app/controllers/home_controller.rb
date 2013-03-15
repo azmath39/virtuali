@@ -10,6 +10,9 @@ class HomeController < ApplicationController
   end
   def index
     if current_user
+      if current_user.subscribe_product.count>1
+        redirect_to :action=>:select_product_view
+      end
       @feedback = Feedback.new
       @tours= current_user.tours
       @packages= Package.all
@@ -19,6 +22,17 @@ class HomeController < ApplicationController
     end
   end
 
+  def select_product_view
+    if params.include?:product
+       @feedback = Feedback.new
+      @tours= current_user.tours.where(:product_id=>params[:product][:id])
+      @packages= Package.all
+      #@payments=current_user.payments.order('created_at DESC').paginate(:page => params[:page], :per_page => 5)
+      @payments=current_user.payments.order('created_at DESC')
+      render 'index'
+    end
+    @products=current_user.subscribe_product
+  end
   def cancel_direct_debit
     mess= unsubscribe
     render :text=>mess

@@ -1,0 +1,6 @@
+<%=form_for @products, :url=>"select_product_view" do |f|%>
+  <%@products.each do |product|%>
+    <%=f.radio_button :id, product.id%><%=product.name%>
+  <%end%>
+  <%=f.submit "continue"%>
+<%end%>

@@ -42,6 +42,7 @@ class ToursController < ApplicationController
       @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil)
       @paintings.flatten!
       @painting = Painting.new
+      @products = current_user.subscribe_product
     end
     def update
       @tour = Tour.find(params[:tour][:id])

@@ -54,10 +54,10 @@
 
 class Tour < ActiveRecord::Base
   extend FriendlyId
-  attr_accessible :gmaps, :state, :description, :city, :zip, :subdivision, :price,:address1,:address2, :square_footage, :bed_rooms, :bath_rooms,:selected_package_id,:status
+  attr_accessible :gmaps, :state, :description, :city, :zip, :subdivision, :price,:address1,:address2, :square_footage, :bed_rooms, :bath_rooms,:product_id,:selected_package_id,:status
   #attr_accessor :pro
   acts_as_paranoid
-  validates :state, :city, :zip, :subdivision, :price, :address1,:address2,:square_footage, :presence => true
+  validates :state, :city, :zip, :subdivision, :price, :address1,:address2,:square_footage,:category_id, :presence => true
   validates :price, :numericality => {:greater_than => 0}
   after_initialize :set_status
   before_create :set_address
@@ -65,9 +65,15 @@ class Tour < ActiveRecord::Base
   acts_as_gmappable
   belongs_to :user
   has_many :paintings, :dependent => :destroy
-  belongs_to :category
+  belongs_to :product
   belongs_to :selected_package
   after_create :set_name
+#  after_create :set_name, :set_product_id
+#  def set_product_id
+#    product=self.user.selected_package.package.product_id
+#    self.product_id ||= product unless product.nil?
+#    self.save
+#  end
   def set_name
     self.name="#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
     self.save
@@ -75,9 +81,7 @@ class Tour < ActiveRecord::Base
   def gmaps4rails_address
     "#{address1},#{address1},#{state}, #{city},#{zip}"
   end
-def pro
-  self.user.selected_product.product.name
-end
+
   def set_status
     self.status ||= 1
   end
@@ -99,7 +103,7 @@ end
       "Sold"
     
     when 4
-       "In Active (Action needed)"
+      "In Active (Action needed)"
     end
   end
   def validate_picture_count?

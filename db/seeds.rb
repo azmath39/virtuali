@@ -5,6 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, code: { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', code: city: cities.first)
+Category.create(name:"By Agent")
+Category.create(name:"By Owner")
 State.create(name:'Alaska', code: 'AK');
 State.create(name:'Alabama', code: 'AL');
 State.create(name:'Arkansas', code: 'AR');

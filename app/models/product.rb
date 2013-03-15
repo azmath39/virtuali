@@ -9,8 +9,10 @@
 #
 
 class Product < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :category_id
   has_many :users, :through => :selected_products
   has_many :selected_products
   has_many :packages
+  has_many :tours
+  belongs_to :category
 end

@@ -13,6 +13,7 @@ class PaintingsController < ApplicationController
     @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil).order('created_at ASC')
     @painting = Painting.new
     @tour = Tour.new
+    @products = current_user.subscribe_product
     # @selected_pkgs=selected_pkgs_without_tour
   end
 

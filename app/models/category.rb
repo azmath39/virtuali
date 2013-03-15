@@ -10,5 +10,5 @@
 
 class Category < ActiveRecord::Base
   attr_accessible :name
-  has_many :tours
+  has_many :products
 end

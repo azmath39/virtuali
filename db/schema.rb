@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130312060613) do
+ActiveRecord::Schema.define(:version => 20130315062248) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20130312060613) do
     t.float    "regular_price"
     t.float    "special_price"
     t.integer  "no_of_tours"
+    t.integer  "package_type"
   end
 
   create_table "paintings", :force => true do |t|
@@ -135,8 +136,9 @@ ActiveRecord::Schema.define(:version => 20130312060613) do
 
   create_table "products", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "category_id"
   end
 
   create_table "selected_packages", :force => true do |t|
@@ -180,7 +182,7 @@ ActiveRecord::Schema.define(:version => 20130312060613) do
     t.integer  "square_footage"
     t.integer  "bed_rooms"
     t.integer  "bath_rooms"
-    t.integer  "category_id"
+    t.integer  "product_id"
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "gmaps"
