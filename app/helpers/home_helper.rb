@@ -7,30 +7,35 @@ module HomeHelper
 #      "inactive"
 #    end
 #  end
-def initiate(pkg)
-  @selected_pkg=pkg
-end
+  def initiate(pkg)
+      @selected_pkg=pkg
+  end
   def start_date
-@selected_pkg.created_at.to_date
+      @selected_pkg.created_at.to_date
   end
   def end_date
-    @selected_pkg.renew_date
+      @selected_pkg.renew_date
   end
   def pictures
-   @selected_pkg.pictures_for_tour
+      @selected_pkg.pictures_for_tour
+  end
+  def description
+    description = "Name: #{@selected_pkg.package_name}<br />
+    No.of Tours: #{@selected_pkg.package_no_of_tours}<br />
+    Regular Price: $#{@selected_pkg.package_regular_price}<br />
+    Special Price: $#{@selected_pkg.package_special_price}<br />
+    Subscription Period: #{@selected_pkg.subscribed_days} Days"
+    description.html_safe
   end
   def verify_renew_date
-    if @selected_pkg.renew_date<Date.today+15
-      true
-    else
-      false
-    end
+     @selected_pkg.renew_date<Date.today+15  
   end
   def check_payment_type
-    if @selected_pkg.payment_period_type==1
-      true
-    else
-      false
-    end
+      @selected_pkg.payment_period_type==1  
+  end
+  def space20
+    str = String.new
+    20.times{ str += "&nbsp;"}
+    str.html_safe
   end
 end

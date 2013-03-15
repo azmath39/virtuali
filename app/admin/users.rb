@@ -11,4 +11,5 @@ ActiveAdmin.register User do
     end
      
    menu :label => "Status Report" ,:url=> '/admin/users/status/status'
+   
 end

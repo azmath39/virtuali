@@ -9,15 +9,8 @@
 <%#elsif check_payment_type%>
  <%#= link_to "Create Direct Debit", "#card_details", "data-toggle" => "modal", :class => "btn btn-danger", :onclick=>"create_direct_debit()"  %>
   <%#end%>
-
-  
   </div>
-
-
   <h3> Package Details</h3>
-
-  
-
     <div class="container-fluid">
       <div class="accordion" id="accordion2">
         <div >
@@ -45,27 +38,33 @@
             <div>
 
 <table class="table table-bordered">
-  <tr><td>Start Date:<%20.times do %>&nbsp;<%end%> <%=start_date%></td>
-
-    <td>Expires on:<%20.times do %>&nbsp;<%end%> <%=end_date%></td></tr>
-
-           <tr><td>   Number of Pictures: <%20.times do %>&nbsp;<%end%><%=pictures%></td>
-
-
-              <td><%#unless current_user.card.nil?%>
-                <div id="alert_message"> 
-                <%#unless pkg.status==3%>
-
-                    <%#=button_tag "Unsubsribe",:class=>"btn btn-primary",:onclick=>"unsubsribe(#{pkg.id})"%>
-                  <%#else%>
-
-                    <%#*Unsubscribed%>
-                  <%#end%>
-                </div>
-              <%#else%>
-                <%#= render 'renew_form' %>
-                
-              </td></tr>
+  <tr>
+    <td>Start Date:<%20.times do %>&nbsp;<%end%> <%=start_date%></td>
+    <td>Expires on:<%20.times do %>&nbsp;<%end%> <%=end_date%></td>
+  </tr>
+  <tr>
+    <td colspan="2" style="text-align:center;">
+      <h4>Description</h4>
+      <hr />
+      <ul class="unstyled">
+        <li>Number of Pictures:<%=  pictures %></li><br />
+        <li><%= description %></li>
+      </ul>
+      
+    </td>
+    <%#*<td>%>
+      <%#unless current_user.card.nil?%>
+      <%#*<div id="alert_message">%>
+      <%#unless pkg.status==3%>
+      <%#=button_tag "Unsubsribe",:class=>"btn btn-primary",:onclick=>"unsubsribe(#{pkg.id})"%>
+      <%#else%>
+      <%#*Unsubscribed%>
+      <%#end%>
+      <%#*</div>%>
+      <%#else%>
+      <%#= render 'renew_form' %>
+    <%#*</td>%>
+  </tr>
 </table>
             </div>
           </div>

@@ -24,6 +24,7 @@ class SelectedPackage < ActiveRecord::Base
   after_create :set_renew_date_and_package_price
   has_many :tour
   # == call back
+  delegate :name, :pictures_for_tour, :status, :subscription_period, :add_on, :regular_price, :special_price, :no_of_tours, :to => :package, :prefix => true
   def assign_status_expire_date_payment_period_type
     # puts "S"*25
     self.status ||=1

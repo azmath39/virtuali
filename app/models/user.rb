@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   has_many :payments, :dependent=> :destroy
 
   def address
-    "#{self.add1} #{self.add2}\n#{self.state} #{self.city}\n\n#{zipcode}"
+    "#{add1} #{add2}\n#{state} #{city}\n\n#{zipcode}"
   end
 
   def product=(pro)
@@ -264,6 +264,7 @@ class User < ActiveRecord::Base
   def send_message(subject,message)
     # NotificationsMailer.alert_message(self.email,subject, message).deliver
   end
+  
   private
   def unused_money(price)
     s_pkg=self.selected_package
