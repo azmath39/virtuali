@@ -74,10 +74,19 @@ class Tour < ActiveRecord::Base
 #    self.product_id ||= product unless product.nil?
 #    self.save
 #  end
-  def set_name
+
+ delegate :name, :address, :to => :user, :prefix => true
+ scope :active, where('status = ?' , 1)
+ scope :sold, where('status = ?', 3)
+
+ def self.tours_list_pagination(page)
+   order('created_at DESC').paginate(:page => page, :per_page => 5)
+ end
+ 
+ def set_name
     self.name="#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
     self.save
-  end
+ end
   def gmaps4rails_address
     "#{address1},#{address1},#{state}, #{city},#{zip}"
   end
@@ -106,6 +115,7 @@ class Tour < ActiveRecord::Base
       "In Active (Action needed)"
     end
   end
+ 
   def validate_picture_count?
     if self.paintings.count.to_i <= self.user.selected_package.pictures_for_tour.to_i
       true

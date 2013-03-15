@@ -3,9 +3,14 @@ class ToursController < ApplicationController
   def index
     @search = Tour.where(:status => (0..1)).search(params[:q])
     if params[:q].nil?
-      @tours = Tour.where(:status => (0..1)).order('created_at DESC').paginate(:page => params[:page], :per_page => 5)
+      @search = Tour.active.search(params[:q])
+      @tours = Tour.active.tours_list_pagination(params[:page])
+    elsif params[:q][:status_eq] == "3"
+      @search = Tour.sold.search(params[:q])
+      @tours = @search.result.tours_list_pagination(params[:page])
     else
-      @tours = @search.result.paginate(:page => params[:page], :per_page => 5)
+      @search = Tour.active.search(params[:q])
+      @tours = @search.result.tours_list_pagination(params[:page])
     end
   end
 
@@ -91,7 +96,7 @@ class ToursController < ApplicationController
       elsif params.has_key? "status"
         @tours = Tour.where(:status => params[:status].to_i)
       else
-        @tours = Tour.where(:status => 1)
+        @tours = Tour.active
       end
       @search = Tour.search(params[:q])
       if !params[:q].nil?
