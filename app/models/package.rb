@@ -32,7 +32,7 @@ class Package < ActiveRecord::Base
     end
   end
   def price
-    if !self.special_price.nil?
+    if !self.special_price.nil? or self.package_type==2
       "$#{self.regular_price}/month"
     else
       "$#{self.regular_price}/ 3 months"

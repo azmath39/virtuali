@@ -72,7 +72,7 @@ class SelectedPackage < ActiveRecord::Base
     self.user.tours_destroy
     d =Delayed::Job.enqueue UserDestroy.new(self.user.id),:priority=>0, :run_at=>30.day.from_now
     self.user.user_delay_job.update_attributes(:delayed_job_id=>d.id)
-    self.destroy
+    
     # self.user.destroy_delay_job
 
     msg="All your tours are removed from virtuali and Your account will deleted after 30 day from now. Login into your Account and Purchase any package, to keep your account live. "

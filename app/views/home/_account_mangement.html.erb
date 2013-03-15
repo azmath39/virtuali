@@ -11,7 +11,50 @@
     });
     
   });
+  function display_tours(){
+    $.ajax({
+      type: 'GET',
+      url: '/tours/user_tours',
+      data: {
+        product_id: $('#product_id').val()
+      }
+    }).done(function(html) {
+      $("#user_tours").html(html);
 
+    });
+
+  }
+  function display_tours_for_status(){
+    $.ajax({
+      type: 'GET',
+      url: '/home/user_tours_status_change',
+      data: {
+        product_id: $('#product_id_status').val()
+      }
+    }).done(function(html) {
+      $("#tour_status").html(html);
+
+    });
+
+  }
+  function change_status(tour)
+  {
+    
+    
+    sts=$("#"+tour).val();
+    $.ajax({
+      type: 'GET',
+      url: "/tours/status_change",
+
+      data: {
+        'id' : tour,
+        'status': sts
+      }
+
+    }).done(function(text) {
+      $("."+tour).text(text);
+    });
+  }
 </script>
 <div class="navbar">
   <div>
@@ -22,7 +65,7 @@
 
       <li class="tab"><%= link_to "Profile", '#div_profile', "data-toggle" => "tab" %></li>
       <li class="tab"><%#= link_to "Manage Account", '#div_manage', "data-toggle" => "tab"%> </li>
-     <li class="tab"><%#= link_to "Upgrade Account", '#div_upgrade', "data-toggle" => "tab"%> </li>
+      <li class="tab"><%#= link_to "Upgrade Account", '#div_upgrade', "data-toggle" => "tab"%> </li>
     </ul>
 
   </div></div>

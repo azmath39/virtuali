@@ -57,7 +57,7 @@ class Tour < ActiveRecord::Base
   attr_accessible :gmaps, :state, :description, :city, :zip, :subdivision, :price,:address1,:address2, :square_footage, :bed_rooms, :bath_rooms,:product_id,:selected_package_id,:status
   #attr_accessor :pro
   acts_as_paranoid
-  validates :state, :city, :zip, :subdivision, :price, :address1,:address2,:square_footage,:category_id, :presence => true
+  validates :state, :city, :zip, :subdivision, :price, :address1,:address2,:square_footage,:product_id, :presence => true
   validates :price, :numericality => {:greater_than => 0}
   after_initialize :set_status
   before_create :set_address

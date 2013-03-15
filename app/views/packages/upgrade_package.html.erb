@@ -15,7 +15,7 @@
             <tr> <td> Pictures per Tour: </td><td><%=pkg.pictures_for_tour%></td></tr>
             <tr> <td> Template size:</td><td> 600x400</td></tr>
              
-             <%if current_user.special_offer and !pkg.special_price.nil?%>
+             <%if current_user.special_offer and (!pkg.special_price.nil? or pkg.package_type==2)%>
              <tr> <td> <%=radio_button_tag "package[type_of_payment]",1,true%> &nbsp;Monthly</td><td><%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </td></tr>
 
            

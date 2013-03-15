@@ -114,9 +114,14 @@ class ToursController < ApplicationController
       end
       render :text=>tour.tour_status
     end
+    
     def user_tours
       if signed_in?
+        if params.include?:product_id and !params[:product_id].empty?
+         @tours = current_user.tours.where(:product_id=>params[:product_id].to_i).order('created_at DESC')
+        else
         @tours = current_user.tours.order('created_at DESC')
+        end
         render :partial=>'list_of_tours'
       end
     end

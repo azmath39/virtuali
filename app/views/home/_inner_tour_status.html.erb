@@ -1,21 +1,4 @@
-<script>
-  function change_status(tour)
-  {
-    sts=$("#"+tour).val();
-    $.ajax({
-      type: 'GET',
-      url: "/tours/status_change",
 
-      data: {
-        'id' : tour,
-        'status': sts
-      }
-
-    }).done(function(text) {
-  $("."+tour).text(text);
-});
-  }
-  </script>
 <%if @tours.empty? or current_user.validate_no_of_tours?%>
 <%=render "/shared/status_message"%>
 <%else%>

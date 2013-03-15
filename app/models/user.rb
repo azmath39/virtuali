@@ -66,20 +66,20 @@ class User < ActiveRecord::Base
   end
   def  assign_package(pkg)
     p=Package.find(pkg[:id].to_i)
-    if pkg.include?:type_of_payment and !p.special_price.nil?
+    if pkg.include?:type_of_payment and (!p.special_price.nil? or p.package_type==2)
       self.selected_package=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>pkg["type_of_payment"])
     else
       self.selected_package=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>3)
     end
   end
-    def subscribe_product
+  def subscribe_product
     pkg=self.selected_package.package
     a=[]
     unless pkg.package_type==2
-    a<< self.selected_products.product
+      a<< self.selected_product.product
     else
-     a<< Product.where(:category_id=>pkg.product.category_id)
-     a.flatten!
+      a<< Product.where(:category_id=>pkg.product.category_id)
+      a.flatten!
     end
   end
 
@@ -121,7 +121,7 @@ class User < ActiveRecord::Base
       self.user_delay_job.update_attributes(:delayed_job_id=>d.id)
     end
 
-   # send_message("Important Alert!",msg);
+    # send_message("Important Alert!",msg);
   end
   def tours_inactive
     tours=self.tours
@@ -151,10 +151,9 @@ class User < ActiveRecord::Base
       set_auto_destroy_event
       msg="All your tours are removed from virtuali. Login into your Account and create new tours. "
     else
-      self.selected_package.destroy
       d =Delayed::Job.enqueue UserDestroy.new(self.id),:priority=>0, :run_at=>30.day.from_now
       self.user_delay_job.update_attributes(:delayed_job_id=>d.id)
-    msg="All your tours are removed from virtuali and Your account will deleted after 30 day from now. Login into your Account and Purchase any package, to keep your account live. "
+      msg="All your tours are removed from virtuali and Your account will deleted after 30 day from now. Login into your Account and Purchase any package, to keep your account live. "
 
     end
     send_message("Important Alert!",msg);
@@ -163,13 +162,13 @@ class User < ActiveRecord::Base
     s_pkg=self.selected_package
     s_pkg.update_attributes(:status=>1) unless s_pkg.status == 1
     tours=self.tours.where('status!=:status',:status=>1)
-      unless tours.empty?
-        tours.each do |tour|
-          tour.update_attributes(:status=>1)
-        end
-
-        self.user.set_auto_destroy_event
+    unless tours.empty?
+      tours.each do |tour|
+        tour.update_attributes(:status=>1)
       end
+
+      self.user.set_auto_destroy_event
+    end
   end
      
   def cancel_annual_plan
@@ -187,11 +186,11 @@ class User < ActiveRecord::Base
 
   def package_destroy
     self.selected_package.package_destroy
-#    pkg=self.selected_package
-#    unless pkg.nil?
-#      pkg.tours_destroy
-#      pkg.destroy
-#    end
+    #    pkg=self.selected_package
+    #    unless pkg.nil?
+    #      pkg.tours_destroy
+    #      pkg.destroy
+    #    end
   end
   def set_auto_destroy_event
     destroy_delay_job
@@ -238,12 +237,15 @@ class User < ActiveRecord::Base
     if self.tours.count.to_i > 1 and self.selected_package.package.no_of_tours.to_i == 1
       true
     else
-     false
+      false
     end
   end
   def any_instructions?
     
     self.tours.any?{|tour| tour.status!=1 and tour.status!=3}
+  end
+  def multiple_products?
+    self.subscribe_product.count>1
   end
   #  def change_to_montly_plan(pkg)
   #     p=Package.find(pkg[:id].to_i)
@@ -258,10 +260,10 @@ class User < ActiveRecord::Base
     size = 0
     Find.find(Rails.root) { |f| size += File.size(f) if File.file?(f) }
     size/(1024*1024)
-end
-def send_message(subject,message)
- # NotificationsMailer.alert_message(self.email,subject, message).deliver
-end
+  end
+  def send_message(subject,message)
+    # NotificationsMailer.alert_message(self.email,subject, message).deliver
+  end
   private
   def unused_money(price)
     s_pkg=self.selected_package

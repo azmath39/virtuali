@@ -10,41 +10,22 @@ class HomeController < ApplicationController
   end
   def index
     if current_user
-      if current_user.subscribe_product.count>1
-        redirect_to :action=>:select_product_view
-      end
       @feedback = Feedback.new
       @tours= current_user.tours
       @packages= Package.all
-      #@payments=current_user.payments.order('created_at DESC').paginate(:page => params[:page], :per_page => 5)
       @payments=current_user.payments.order('created_at DESC')
-      #@selected_pkgs = selected_pkgs_with_tour
     end
-  end
-
-  def select_product_view
-    if params.include?:product
-       @feedback = Feedback.new
-      @tours= current_user.tours.where(:product_id=>params[:product][:id])
-      @packages= Package.all
-      #@payments=current_user.payments.order('created_at DESC').paginate(:page => params[:page], :per_page => 5)
-      @payments=current_user.payments.order('created_at DESC')
-      render 'index'
-    end
-    @products=current_user.subscribe_product
   end
   def cancel_direct_debit
     mess= unsubscribe
     render :text=>mess
   end
-
   def make_payment
     @token = params[:stripeToken]
     @email= current_user.email
     if params[:operation_type].to_i==1 then
       @pkg_id = params[:pkg_id].to_i
       renew
-
     elsif params[:operation_type].to_i==2 then
       create_direct_debit
     else
@@ -53,7 +34,6 @@ class HomeController < ApplicationController
     index
     render 'index'
   end
-
   def change_card_details
     @token = params[:stripeToken]
     change_card
@@ -67,10 +47,6 @@ class HomeController < ApplicationController
     @amount=(current_user.selected_packages.sum(:price,:conditions=>{:status=>(0..2)}).to_f*100).to_i
     render :text=>cancel_payment()
   end
-  
-
-  
-
   def state_cities
     state=State.find_by_name(params[:state])
     @cities= City.find(:all,:conditions=>{:code=>state.code}) unless state.nil?
@@ -87,6 +63,16 @@ class HomeController < ApplicationController
   def account_activation
     @s_pkg=current_user.selected_package
   end
+  def user_tours_status_change
+      if signed_in?
+        if params.include?:product_id and !params[:product_id].empty?
+         @tours = current_user.tours.where(:product_id=>params[:product_id].to_i).order('created_at DESC')
+        else
+        @tours = current_user.tours.order('created_at DESC')
+        end
+        render :partial=>'inner_tour_status'
+      end
+    end
   private
 
   #  def selected_pkgs_with_tour
@@ -107,8 +93,6 @@ class HomeController < ApplicationController
     #    end
   end
   def cancel_payment
-
-
 
     cu = Stripe::Customer.retrieve(get_stripe_customer_id)
     # render :text=>cu
