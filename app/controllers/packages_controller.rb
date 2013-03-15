@@ -17,7 +17,12 @@ class PackagesController < ApplicationController
     render :text=>@value
   end
   def upgrade_package
+    unless current_user.multiple_products?
     @packages=current_user.packages_for_upgarde
+    else
+      @products=current_user.subscribe_product
+      render :upgrade_combo_package
+    end
   end
   def upgrade
 
@@ -34,6 +39,17 @@ class PackagesController < ApplicationController
 #      change_montly_plan
 #    end
     redirect_to root_url
+  end
+  def upgrade_combo
+    @token = params[:stripeToken]
+      #@amount =(current_user.ajust_amount(params[:total_amount]).to_f*100).to_i
+      @amount =(params[:total_amount].to_f*100).to_i
+      @email= current_user.email
+
+      payment()
+      current_user.change_product(params[:user][:product])
+      current_user.change_package(params[:user][:package])
+       redirect_to root_url
   end
 
   

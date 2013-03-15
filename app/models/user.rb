@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
   end
   def  assign_package(pkg)
     p=Package.find(pkg[:id].to_i)
-    if pkg.include?:type_of_payment and (!p.special_price.nil? or p.package_type==2)
+    if pkg.include?:type_of_payment and !p.special_price.nil?
       self.selected_package=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>pkg["type_of_payment"])
     else
       self.selected_package=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>3)
@@ -89,7 +89,9 @@ class User < ActiveRecord::Base
     #Package.where("product_id=:product_id AND yearly_price > :price",{:product_id=>pkg.product_id,:price=>price})
     self.selected_product.product.packages
   end
-  
+  def change_product(pro)
+    self.selected_product.update_attributes(:product_id=>pro.to_i)
+  end
   def change_package(pkg)
     new_package=Package.find(pkg[:id].to_i)
     previous_package=self.selected_package.package
@@ -219,30 +221,21 @@ class User < ActiveRecord::Base
     end
   end
   def any_cash_back
-    if self.selected_package.remaining_days> 213 and self.selected_package.price>=300
-      return true
-    else
-      return false
-    end
+     self.selected_package.remaining_days> 213 and self.selected_package.price>=300 
   end
  
   def special_offer
-    if !self.selected_package.nil? and (Date.today-self.selected_package.created_at.to_date).to_i > 183 
-      return true
-    else
-      return false
-    end
+     !self.selected_package.nil? and (Date.today-self.selected_package.created_at.to_date).to_i > 183 
   end
   def validate_no_of_tours?
-    if self.tours.count.to_i > 1 and self.selected_package.package.no_of_tours.to_i == 1
-      true
-    else
-      false
-    end
+    self.tours.count.to_i > 1 and self.selected_package.package.no_of_tours.to_i == 1 
   end
   def any_instructions?
-    
     self.tours.any?{|tour| tour.status!=1 and tour.status!=3}
+  end
+  def check_tours_type?
+    pkg= self.selected_package.package
+    self.tours.any?{|tour| pkg.package_type!=2 and pkg.product.id!=tour.product_id}
   end
   def multiple_products?
     self.subscribe_product.count>1

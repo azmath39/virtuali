@@ -1,5 +1,5 @@
 
-<%if @tours.empty? or current_user.validate_no_of_tours?%>
+<%if @tours.empty? or current_user.validate_no_of_tours? or current_user.check_tours_type?%>
 <%=render "/shared/status_message"%>
 <%else%>
 <table class="table table-striped table-bordered">

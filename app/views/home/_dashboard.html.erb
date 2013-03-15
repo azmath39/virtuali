@@ -2,6 +2,6 @@
 </div>
 <div style="float:right;margin-right: 9%; margin-bottom: 3%;">
  <%= link_to "Create New Tour", '/paintings/new', :class => 'btn-large btn-primary',:style=>"border-radius:34px;" %></div>
-<%=render 'shared/package_change_instruction' if current_user.any_instructions?%>
+<%=render 'shared/package_change_instruction' if current_user.any_instructions? or current_user.check_tours_type?%>
 <div id="user_tours" style="float:left;">
 </div>
