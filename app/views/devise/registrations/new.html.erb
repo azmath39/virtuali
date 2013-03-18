@@ -121,28 +121,27 @@
         <hr></hr>
         <span id="personal_info_error" style="color:red;"></span>
         <div>
-          <%= f.label "full_Name*" %>
+          <%= f.label "full_Name", 'Full Name <span>*<span>'.html_safe %>
           <%= f.text_field :name%><span id="personal_info_error_name" style="color:red;"></span>
         </div>
-        
         <div>
-          <%= f.label "email*" %>
+          <%= f.label "email", "Email <span>*<span>".html_safe %>
           <%= f.email_field :email,:id=>"email_id",:onblur=>"email_validation()" %><span id="personal_info_error_email" style="color:red;"></span>
         </div>
         <div>
-          <%= f.label :phno, "Mobile Number"%>
-          <%= f.text_field :phno %>
-        </div>
-        <div>
-          <%= f.label "password*" %>
+          <%= f.label "password", "Password <span>*<span>".html_safe %>
           <%= f.password_field :password, :id=>"password" %><span id="personal_info_error_password" style="color:red;"></span>
         </div>
         <div>
-          <%= f.label "password_confirmation*" %>
+          <%= f.label "password_confirmation", "Password Confirmation <span>*<span>".html_safe %>
           <%= f.password_field :password_confirmation,:id=>"password_confirmation" %><span id="personal_info_error_cpassword" style="color:red;"></span>
         </div>
         <div>
-          <%= f.label :add1, "Address1*" %>
+          <%= f.label :phno, "Mobile Number" %>
+          <%= f.text_field :phno %>
+        </div>
+        <div>
+          <%= f.label :add1, "Address1 <span>*<span>".html_safe %>
           <%= f.text_field :add1 %><span id="personal_info_error_add1" style="color:red;"></span>
         </div>
         <div>
@@ -150,23 +149,17 @@
           <%= f.text_field :add2 %><span id="personal_info_error_add2" style="color:red;"></span>
         </div>
         <div>
-          <%= f.label "state*" %>
+          <%= f.label "state", "State <span>*<span>".html_safe %>
           <%= f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
+          <span id="personal_info_error_state" style="color:red;"></span>
         </div>
         <div class ="control-group">
-          <%= f.label "city*", :html => {:class => 'control-label'} %>
+          <%= f.label "city", "City <span>*<span>".html_safe, :html => {:class => 'control-label'} %>
           <%=f.select :city, {},:prompt=>"Select City"%>
+          <span id="personal_info_error_city" style="color:red;"></span>
         </div>
-        <%#*<div>%>
-          <%#= f.label :state, "State*" %>
-          <%#= f.text_field :state %><span id="personal_info_error_state" style="color:red;"></span>
-        <%#*</div>%>
-        <%#*<div>%>
-          <%#= f.label :city, "City*" %>
-          <%#= f.text_field :city %><span id="personal_info_error_city" style="color:red;"></span>
-        <%#*</div>%>
         <div>
-          <%= f.label :zipcode, "ZIP Code*" %>
+          <%= f.label :zipcode, "ZIP Code <span>*<span>".html_safe %>
           <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
         </div>
 <%= f.label :image, "Profile Picture" %>
@@ -235,15 +228,15 @@
           <div id='discounted_total'></div>
         </div>
         <div class="field">
-          <%= label_tag :card_number, "Credit Card Number" %>
+          <%= label_tag :card_number, "Credit Card Number <span>*<span>".html_safe %>
           <%= text_field_tag "card-number", nil, name: nil %>
         </div>
         <div class="field">
-          <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+          <%= label_tag :card_code, "Security Code on Card (CVV) <span>*<span>".html_safe %>
           <%= text_field_tag "card-cvc", nil, name: nil %>
         </div>
         <div>
-          <%= label_tag :card_month, "Card Expiration" %>
+          <%= label_tag :card_month, "Card Expiration <span>*<span>".html_safe %>
           <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
           <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
         </div></div>
@@ -292,3 +285,8 @@ function apply_discount()
 </script>
 <%#= render "devise/shared/links" %>
 <%#= javascript_include_tag "jquery.slides.min" %>
+<style>
+  span{
+    color: red;
+}
+</style>

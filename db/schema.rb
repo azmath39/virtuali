@@ -190,7 +190,7 @@ ActiveRecord::Schema.define(:version => 20130318080022) do
   create_table "tours", :force => true do |t|
     t.string   "name"
     t.string   "state"
-    t.string   "description"
+    t.text     "description"
     t.integer  "user_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false

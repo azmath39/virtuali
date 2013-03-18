@@ -43,6 +43,6 @@
   
   <div class="actions">
     <%= link_to "edit", '#', :onclick=>"return launchEditor('#{painting.id}', 'http://sheltered-meadow-1295.herokuapp.com#{painting.image_url(:large)}');"%> |
-    <%= link_to "remove", painting, :method => :delete %> <span class="badge badge-info" style="float:right; font-weight: bold"><%=$serial_no +=1%></span>
+    <%= link_to "remove", painting, :method => :delete, :confirm => "Are you sure?" %> <span class="badge badge-info" style="float:right; font-weight: bold"><%=$serial_no +=1%></span>
   </div>
 </div>

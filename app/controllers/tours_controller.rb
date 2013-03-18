@@ -1,7 +1,7 @@
 class ToursController < ApplicationController
   before_filter :verify_account_validity, :only=>["edit","user_tours"]
   def index
-    @search = Tour.where(:status => (0..1)).search(params[:q])
+    #@search = Tour.where(:status => (0..1)).search(params[:q])
     if params[:q].nil?
       @search = Tour.active.search(params[:q])
       @tours = Tour.active.tours_list_pagination(params[:page])
@@ -137,20 +137,25 @@ class ToursController < ApplicationController
       if !image_list.blank?
         file_name = "#{@tour.user.name}_tour_pictures_#{@tour.created_at.strftime("%d-%b-%Y_%H:%M")}.zip"
         t = Tempfile.new("my-temp-filename-#{Time.now}")
+        i = 1
         Zip::ZipOutputStream.open(t.path) do |z|
           image_list.each do |img|
-            title = img.name
-            #image_url = img.image.path
+            title = "#{i}.#{img.name}"
+            image_url = "#{Rails.root.to_s}/public#{img.image.url(:large)}"
             #title += ".jpg" unless title.end_with?(".jpg")
             z.put_next_entry(title)
-            z.print IO.read("#{Rails.root.to_s}/public#{img.image.url(:large)}")
+            z.print IO.read(image_url)
+            i += 1
           end
         end
-      end
-      send_file t.path, :type => 'application/zip',
+        send_file t.path, :type => 'application/zip',
         :disposition => 'attachment',
         :filename => file_name
-      t.close
+        t.close
+      else
+        flash[:error] = "Sorry, No images were found for this tour!"
+        redirect_to :back
+      end
     end
   def find_tours
      @tours = []
@@ -180,8 +185,12 @@ class ToursController < ApplicationController
     def error_to_flash
       flash[:error] ||= []
       @tour.errors.full_messages.each do |x|
+        if x == "Gmaps4rails address Address invalid"
+          x = "Not a Valid Address"
+        end
         flash[:error]<< x
       end
 
     end
   end
+ 

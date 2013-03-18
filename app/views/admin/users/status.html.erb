@@ -1,4 +1,3 @@
-
 <div class="navbar">
   <div>
     <ul class="nav unstyled" style="height:100px;margin-left: 10%;margin-top:2%;width:68%">
@@ -7,7 +6,6 @@
       <li class="tab"><%= link_to "Tours (#{@tours.count})", '#div_tours', "data-toggle" => "tab"%> </li>
       <li class="tab"><%= link_to "Sales", '#div_sales', "data-toggle" => "tab" %></li>
     </ul>
-
   </div></div>
   <div class="tab-content" style="margin-left: 12%; width: 65%;height:600px;padding: 20px; float: left;">
      <div class="tab-pane active" id="div_usage">
@@ -16,7 +14,6 @@
     </div>
        </div>
   <div class="tab-pane" id="div_user"><table class="index_table index">
-
             <tr>
               <th>Full Name</th>
               <th>Email</th>
@@ -40,7 +37,7 @@
           </table></div>
   <div class="tab-pane" id="div_tours">
     <table class="index_table index">
-            <tr>
+           <tr>
               <th>Name</th>
               <th>Status</th>
               <th>Inactive From</th>
@@ -50,25 +47,23 @@
               <td><%= t.name.gsub(/%/, '-') %></td>
               <td style="color: green;"><%= t.tour_status %></td>
               <% if t.status != 1  %>
-              <td><%= t.updated_at.strftime("%d-%b-%y, %A (%H:%M)")%>  </td>
+              <td><%= t.updated_at.strftime("%d-%b-%y, %A (%H:%M)")%> </td>
               <% else %>
               <td>-</td>
               <% end %>
             </tr>
             <% end %>
-          </table>
+       </table>
   </div>
   <div class="tab-pane" id="div_sales">
     <table class="index_table index">
-
-            <tr>
-              <th>Payment Date</th>
-              <th>User Name</th>
-              <th>User Email</th>
-              <th>Amount($)</th>
-             
-            </tr>
-            <% @payments.each do |payment| %>
+      <tr>
+         <th>Payment Date</th>
+         <th>User Name</th>
+         <th>User Email</th>
+         <th>Amount($)</th>
+      </tr>
+      <% @payments.each do |payment| %>
             <tr>
               <td><%= payment.created_at.strftime("%d-%b-%y, %A") %></td>
               <td><%= payment.user_name %> </td>
@@ -108,6 +103,4 @@
   .tab > a:hover{
     color:#888888 !important;
   }
-
-
 </style>
