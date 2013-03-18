@@ -32,6 +32,7 @@ class PackagesController < ApplicationController
       @email= current_user.email
 
       payment()
+      current_user.coupon=(params[:user][:coupon]) if params.include?:user
       current_user.change_package(params[:package])
 #    if current_user.selected_package.payment_period_type.to_i==2 then
 #      change_annual_plan
@@ -47,6 +48,7 @@ class PackagesController < ApplicationController
       @email= current_user.email
 
       payment()
+      current_user.coupon=(params[:user][:coupon]) if params.include?:user and params[:user].include?:coupon
       current_user.change_product(params[:user][:product])
       current_user.change_package(params[:user][:package])
        redirect_to root_url
@@ -105,6 +107,7 @@ def amount_to_charge
     #      stripe_charge
     #    end
     stripe_charge
+
   end
   def change_plan
 
