@@ -1,0 +1,7 @@
+
+<%=hidden_field_tag "user[coupon][id]", @coupon.id%>
+<%=hidden_field_tag "user[coupon][valid_date]", @coupon.valid_date%>
+<%=hidden_field_tag "user[coupon][amount]", @amount%>
+Discount Value($):&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<%=text_field_tag :value, @coupon.value, :disabled=>true,:class=> "money"%><br/>
+Amount After Discount($):<%=text_field_tag :amount, @amount, :disabled=>true,:class=> "money"%>

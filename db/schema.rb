@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315062248) do
+ActiveRecord::Schema.define(:version => 20130318080022) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -46,6 +46,14 @@ ActiveRecord::Schema.define(:version => 20130315062248) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
+  create_table "assigned_coupons", :force => true do |t|
+    t.integer  "coupon_id"
+    t.integer  "user_id"
+    t.date     "valid_date"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "cards", :force => true do |t|
     t.string   "customer_stripe_id"
     t.integer  "user_id"
@@ -64,6 +72,17 @@ ActiveRecord::Schema.define(:version => 20130315062248) do
     t.string   "code"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "coupons", :force => true do |t|
+    t.string   "code"
+    t.string   "company"
+    t.date     "expire_date"
+    t.date     "valid_date"
+    t.string   "company_email"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.float    "value"
   end
 
   create_table "delayed_jobs", :force => true do |t|

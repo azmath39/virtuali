@@ -45,9 +45,14 @@
 
         <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
       </div>
+      <%unless current_user.any_coupon?%>
       <div class="field">
 
-      </div>
+         <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
+          <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
+          <div id='discounted_total'></div>
+        </div>
+      <%end%>
       <div class="field">
         <%= label_tag :card_number, "Credit Card Number" %>
         <%= text_field_tag "card-number", nil, name: nil %>
@@ -102,4 +107,19 @@ var payment_type=  $("input[name='package[type_of_payment]']:checked").val()||$(
       $("#payment_info").show();
     }
   });
+  function apply_discount()
+  {
+    $.ajax({
+      type:'GET',
+      url: '/home/check_discount',
+      data:{
+        code: $('#coupon_id').val(),
+        amount:$('#total_amount').val()
+      }
+    }).done(function(html){
+
+      $('#discounted_total').html(html)
+
+    });
+  }
 </script>

@@ -55,6 +55,21 @@
       $("."+tour).text(text);
     });
   }
+  function apply_discount()
+  {
+    $.ajax({
+      type:'GET',
+      url: '/home/check_discount',
+      data:{
+        code: $('#coupon_id').val(),
+        amount:$('#total_amount').val()
+      }
+    }).done(function(html){
+
+      $('#discounted_total').html(html)
+
+    });
+  }
 </script>
 <div class="navbar">
   <div>

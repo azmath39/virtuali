@@ -9,7 +9,12 @@
 
       <%#=hidden_field_tag "type_of_transaction",nil, name: nil%>
     </div>
-    
+    <div class="field">
+
+         <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
+          <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
+          <div id='discounted_total'></div>
+        </div>
     <div class="field">
       <%= label_tag :card_number, "Credit Card Number" %>
       <%= text_field_tag "card-number", nil, name: nil %>

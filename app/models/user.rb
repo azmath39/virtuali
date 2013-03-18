@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
 
-  attr_accessible :name, :phno, :email, :password, :password_confirmation, :add1, :add2, :state, :city, :zipcode, :remember_me, :image,:product,:package
+  attr_accessible :name, :phno, :email, :password, :password_confirmation, :add1, :add2, :state, :city, :zipcode, :remember_me, :image,:product,:package,:coupon
 
 
   mount_uploader :image, ImageUploader
@@ -51,6 +51,8 @@ class User < ActiveRecord::Base
   has_one :user_delay_job,  :dependent=>:destroy
   after_create :set_auto_destroy_event
   has_many :payments, :dependent=> :destroy
+  has_one :coupon, :through=>:assigned_coupon
+  has_one :assigned_coupon, :dependent => :destroy
 
   def address
     "#{add1} #{add2}\n#{state} #{city}\n\n#{zipcode}"
@@ -63,6 +65,10 @@ class User < ActiveRecord::Base
   end
   def package=(pkg)
     assign_package(pkg)
+  end
+  def coupon=(c)
+    puts "coupon"*10
+    self.create_assigned_coupon(:coupon_id=>c[:id],:valid_date=>c[:valid_date])
   end
   def  assign_package(pkg)
     p=Package.find(pkg[:id].to_i)
@@ -81,6 +87,9 @@ class User < ActiveRecord::Base
       a<< Product.where(:category_id=>pkg.product.category_id)
       a.flatten!
     end
+  end
+  def price_after_discount(total)
+    total-self.assigned_coupon.coupon.value.to_f
   end
 
   def packages_for_upgarde
@@ -208,10 +217,8 @@ class User < ActiveRecord::Base
     end
   end
   def save_payment_details(reference,type,amount)
-   
     a= amount.to_i/100
     self.payments<< Payment.create(:reference=>reference,:amount=>a,:payment_type=>type)
-
   end
   def account_valid
     if self.selected_package.nil? or self.selected_package.status>1 or self.selected_package.renew_date < Date.today
@@ -240,6 +247,10 @@ class User < ActiveRecord::Base
   def multiple_products?
     self.subscribe_product.count>1
   end
+  def any_coupon?
+    !self.assigned_coupon.nil?
+  end
+
   #  def change_to_montly_plan(pkg)
   #     p=Package.find(pkg[:id].to_i)
   #     unless p.monthly_price.nil?
@@ -248,6 +259,7 @@ class User < ActiveRecord::Base
   #      self.packag=s_pkg=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>2,:renew_date=>estimate_renew_date(p.yearly_price,365))
   #     end
   #  end
+
   def self.appliction_size
     require 'find'
     size = 0

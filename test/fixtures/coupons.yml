@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  code: MyString
+  company: MyString
+  expire_date: 2013-03-18
+  valid: 2013-03-18
+  company_email: MyString
+
+two:
+  code: MyString
+  company: MyString
+  expire_date: 2013-03-18
+  valid: 2013-03-18
+  company_email: MyString

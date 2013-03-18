@@ -6,7 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     build_resource
     @token = params[:stripeToken]
-    @amount = (params[:total_amount].to_f*100).to_i
+    @amount = amount_to_charge
     @email= params[:user][:email]
     payment
     if resource.save
@@ -30,6 +30,13 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   private
+   def amount_to_charge
+    if params[:user].include?:coupon
+      (params[:user][:coupon][:amount].to_f*100).to_i
+    else
+      (params[:total_amount].to_f*100).to_i
+    end
+  end
   def payment()
     if params[:user][:package].include?(:type_of_payment) and params[:user][:package][:type_of_payment].to_i==1
       if params[:type_of_transaction] == "1"

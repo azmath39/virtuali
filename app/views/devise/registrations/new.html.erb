@@ -221,7 +221,7 @@
         <div class = "payment-errors" style="margin:0 0 20px 15px; color: red;">
         </div>
         <div class="field" >Total Payable Amount($): <%= hidden_field_tag "total_amount","",:class=> "money" %>
-          <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
+         &nbsp;&nbsp; <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
 
 
         <div class="field" style="padding:20px 0px;">
@@ -229,7 +229,10 @@
           <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
         </div>
         <div class="field">
-
+            
+         <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
+          <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
+          <div id='discounted_total'></div>
         </div>
         <div class="field">
           <%= label_tag :card_number, "Credit Card Number" %>
@@ -271,6 +274,21 @@
   $('input[id=user_file]').change(function() {
    $('#photoCover').val($(this).val());
 });
+function apply_discount()
+{
+  $.ajax({
+    type:'GET',
+    url: '/home/check_discount',
+    data:{
+      code: $('#coupon_id').val(),
+      amount:$('#total_amount').val()
+    }
+  }).done(function(html){
+    
+    $('#discounted_total').html(html)
+
+  });
+}
 </script>
 <%#= render "devise/shared/links" %>
 <%#= javascript_include_tag "jquery.slides.min" %>

@@ -28,7 +28,7 @@ class PackagesController < ApplicationController
 
      @token = params[:stripeToken]
       #@amount =(current_user.ajust_amount(params[:total_amount]).to_f*100).to_i
-      @amount =(params[:total_amount].to_f*100).to_i
+      @amount =amount_to_charge
       @email= current_user.email
 
       payment()
@@ -43,7 +43,7 @@ class PackagesController < ApplicationController
   def upgrade_combo
     @token = params[:stripeToken]
       #@amount =(current_user.ajust_amount(params[:total_amount]).to_f*100).to_i
-      @amount =(params[:total_amount].to_f*100).to_i
+      @amount =amount_to_charge
       @email= current_user.email
 
       payment()
@@ -82,6 +82,16 @@ class PackagesController < ApplicationController
 #  def change_annual_plan
 #      current_user.change_to_montly_plan(params[:package])
 #  end
+def amount_to_charge
+    if params.include?:user and params[:user].include?:coupon
+      (params[:user][:coupon][:amount].to_f*100).to_i
+      #current_user.coupon=(params[:user][:coupon])
+    elsif current_user.any_coupon?
+      ((current_user.price_after_discount(params[:total_amount].to_f))*100).to_i
+    else
+      (params[:total_amount].to_f*100).to_i
+    end
+  end
 
   def payment()
     #    if current_user.selected_package.payment_period_type==1

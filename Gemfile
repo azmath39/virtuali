@@ -30,6 +30,7 @@ gem 'rails', '3.2.11'
   gem 'delayed_job_active_record'
   gem "daemons"
   gem 'bootstrap-wysihtml5-rails'
+  gem 'uniquify-uuid'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

@@ -1,8 +1,8 @@
 
 <div id="packages-div">
-<%=form_for :package ,:url=>"upgrade_combo",:html => { :id => 'payment-form'} do|f|%>
+  <%=form_for :package ,:url=>"upgrade_combo",:html => { :id => 'payment-form'} do|f|%>
 
-  <div id="product_select" >
+    <div id="product_select" >
 
       <div id="scont">
         <h3>Product Selection</h3>
@@ -23,65 +23,70 @@
     </div>
 
 
-  <div id ="package_info">
-    <div id="packages">
-    </div><br />
-    <%=link_to "Next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_package" %>
-  </div>
-  <div id="payment_info">
-    <div id="scont">
-      <h3>Payment Process</h3>
-      <hr></hr>
-      <div class = "payment-errors" style="margin:0 0 20px 15px; color: red;">
-      </div>
-      <div class="field" >Total Payable Amount($) : <%= hidden_field_tag "total_amount","",:class=> "money" %>
-        <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
-
-
-      <div class="field" style="padding:20px 0px;">
-        <%=hidden_field_tag "type_of_transaction",1%>
-
-        <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
-      </div>
-      <div class="field">
-
-      </div>
-      <div class="field">
-        <%= label_tag :card_number, "Credit Card Number" %>
-        <%= text_field_tag "card-number", nil, name: nil %>
-      </div>
-      <div class="field">
-        <%= label_tag :card_code, "Security Code on Card (CVV)" %>
-        <%= text_field_tag "card-cvc", nil, name: nil %>
-      </div>
-      <div>
-        <%= label_tag :card_month, "Card Expiration" %>
-        <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
-        <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
-      </div></div>
-    <div id="next_btn">
-      <%= f.submit "Upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
+    <div id ="package_info">
+      <div id="packages">
+      </div><br />
+      <%=link_to "Next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_package" %>
     </div>
-  </div>
+    <div id="payment_info">
+      <div id="scont">
+        <h3>Payment Process</h3>
+        <hr></hr>
+        <div class = "payment-errors" style="margin:0 0 20px 15px; color: red;">
+        </div>
+        <div class="field" >Total Payable Amount($) : <%= hidden_field_tag "total_amount","",:class=> "money" %>
+          <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
+
+
+        <div class="field" style="padding:20px 0px;">
+          <%=hidden_field_tag "type_of_transaction",1%>
+
+  <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
+        </div>
+        <%unless current_user.any_coupon?%>
+          <div class="field">
+
+            <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
+            <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
+            <div id='discounted_total'></div>
+          </div>
+        <%end%>
+        <div class="field">
+          <%= label_tag :card_number, "Credit Card Number" %>
+          <%= text_field_tag "card-number", nil, name: nil %>
+        </div>
+        <div class="field">
+          <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+          <%= text_field_tag "card-cvc", nil, name: nil %>
+        </div>
+        <div>
+          <%= label_tag :card_month, "Card Expiration" %>
+          <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
+          <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
+        </div></div>
+      <div id="next_btn">
+        <%= f.submit "Upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
+      </div>
+    </div>
   </div>
 
 <%end%>
 <script>
-   $(document).ready(function(){
+  $(document).ready(function(){
 
-      $("#payment_info").hide();
-      $("#package_info").hide();
-   });
+    $("#payment_info").hide();
+    $("#package_info").hide();
+  });
 
-$('#btn_product').click(function(event) {
+  $('#btn_product').click(function(event) {
 
     if (!$("input[name='user[product]']:checked").val())
     {
       $('#product_error').append("* Select any Product to continue..... <br/>")
       $('#btn_product').die( "click" );
     }else{
-       $("#product_select").hide();
-       $("#package_info").show();
+      $("#product_select").hide();
+      $("#package_info").show();
 
       //alert($("input[name='user[product]']:checked").val());
       $.ajax({
@@ -98,10 +103,10 @@ $('#btn_product').click(function(event) {
   });
 
 
-   $("#btn_package").click(function(event) {
+  $("#btn_package").click(function(event) {
 
 
-var payment_type=  $("input[name='user[package][type_of_payment]']:checked").val()||$("#user_package_type_of_payment").val() ||2;
+    var payment_type=  $("input[name='user[package][type_of_payment]']:checked").val()||$("#user_package_type_of_payment").val() ||2;
     if (!$("input[name='user[package][id]']:checked").val())
     {
       $('#package_error').append("* Select any Package  to continue..... <br/>")
@@ -126,4 +131,19 @@ var payment_type=  $("input[name='user[package][type_of_payment]']:checked").val
       $("#payment_info").show();
     }
   });
+  function apply_discount()
+  {
+    $.ajax({
+      type:'GET',
+      url: '/home/check_discount',
+      data:{
+        code: $('#coupon_id').val(),
+        amount:$('#total_amount').val()
+      }
+    }).done(function(html){
+
+      $('#discounted_total').html(html)
+
+    });
+  }
 </script>
