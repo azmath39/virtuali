@@ -12,7 +12,7 @@ ActiveAdmin.register User do
     f.input   "zipcode"
     end
     f.actions
-  end 
+  end
  config.clear_action_items!
      member_action :status do
 

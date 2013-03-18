@@ -90,8 +90,8 @@
         <td><%= @tour.square_footage %> </td>
       </tr>
     </table><br />
-    <p style="float:right;"><%= raw(@tour.description) %></p>
   </div>
+  <p style = "float:right;height: 150px; width: 23%; margin: -500px 0 0 0; overflow-y: auto;overflow-x: hidden;"><%= raw(@tour.description) %></p>
       
   <div id ="user_img" style="float: right; height: 200px; width: 150px;margin: -320px 70px -40px 30px;">
     <% if @tour.user.image? %>
