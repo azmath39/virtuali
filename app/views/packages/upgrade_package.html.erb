@@ -61,16 +61,18 @@
                       </div>
 
                     <% end %>
-                  <%end%>
+                  
                 </div>
               </div>
 
             </div>
           </div>
         </div>
+          <%end%>
       </div><br />
+      <div id="next_btn">
       <%=link_to "Next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_package" %>
-
+      </div>
     </div>
     <div id="payment_info">
       <div id="scont">
@@ -112,9 +114,10 @@
         <%= f.submit "Upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
       </div>
     </div>
-  </div>
+  
 
 <%end%>
+</div>
 <script>
   $(document).ready(function(){
     

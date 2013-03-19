@@ -7,6 +7,7 @@ module ApplicationHelper
     end
     return true
   end
+
   def price(pkg)
     if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?
       "$#{pkg.regular_price}/month (or) $#{pkg.special_price}/year "
@@ -26,5 +27,13 @@ module ApplicationHelper
       "$#{pkg.regular_price/0.85}/ 3 months"
 
     end
+  end
+
+  def sortable(column, title=nil)
+    title ||= column.titleize
+    css_class = column == params[:sort] ? "current #{params[:direction]}" : nil
+    direction = column == params[:sort] && params[:direction] == "asc" ? "desc" : "asc"
+    link_to title, params.merge({:sort => column,  :direction => direction}), {:class => css_class}
+
   end
 end

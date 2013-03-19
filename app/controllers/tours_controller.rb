@@ -81,32 +81,34 @@ class ToursController < ApplicationController
       @tour = Tour.find_by_slug(params[:id])
     end
     def view_map
-      if params.has_key? "map_product"
-        if params["map_product"] == ""
-          @tours = Tour.all
-        else
-        @tours = []
-        @products=SelectedProduct.find(:all,:conditions=>{:product_id=>params[:map_product].to_i})
-        @products.each do |product|
-          @tours << product.user.tours.where(:status => 1)
-        end
-        end
-        @tours.compact!
-        @tours.flatten!
-      elsif params.has_key? "status"
-        @tours = Tour.where(:status => params[:status].to_i)
-      else
-        @tours = Tour.active
-      end
+#      if params.has_key? "map_product"
+#        if params["map_product"] == ""
+#          @tours = Tour.all
+#        else
+#        @tours = []
+#        @products=SelectedProduct.find(:all,:conditions=>{:product_id=>params[:map_product].to_i})
+#        @products.each do |product|
+#          @tours << product.user.tours.where(:status => 1)
+#        end
+#        end
+#        @tours.compact!
+#        @tours.flatten!
+#      elsif params.has_key? "status"
+#        @tours = Tour.where(:status => params[:status].to_i)
+#      else
+#        @tours = Tour.active
+#      end
       @search = Tour.search(params[:q])
       if !params[:q].nil?
         @tours = @search.result
+      else
+        @tours = Tour.active
       end
       if @tours.empty?
         flash.now[:notice] = "No tours were found!"
       end
       @json = @tours.to_gmaps4rails do |tour, marker|
-        marker.infowindow("<b>#{tour.zip} #{tour.state} #{tour.city}</b><br />" "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<hr>" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
+        marker.infowindow("<b>#{tour.zip} #{tour.state} #{tour.city}</b><br />" "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<br />Category: #{tour.product.name}<hr>" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
         marker.title("#{tour.city}")
       end
     end
