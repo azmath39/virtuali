@@ -1,21 +1,69 @@
 <h3>Package Selection</h3>
-<hr></hr>
+
 <span id="package_error" style="color:red;"></span>
-<div style = "padding:10px;width: 400px;">
-  <% @packages.each do |pkg| %>
+<div style = "padding:10px;width: 400px; overflow: auto;">
+  <% @regular_packages.each do |pkg| %>
+    <hr />
     <div>
-      <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
-      <p><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package"%>&nbsp;<b><%=pkg.name%></b></p>
-      <p><b>Price:</b>&nbsp;<%=pkg.price%></p>
+  <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
+      <p><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package"%>&nbsp;<b><span style="color:rgb(0, 136, 204);font-weight: bold;"><%=pkg.name%></span></b></p>
+      <p><b>Price:</b>&nbsp;<%=price(pkg)%></p>
       <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
       <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
       <p><b>Template size:</b>&nbsp;600x400</p>
-      
-        <%#unless pkg.monthly_price.nil?%>
-      <%=hidden_field_tag "user[package][type_of_payment]",1%>
-      <%#*<p><b>Subscription Period</b>:&nbsp;<%=radio_button_tag "user[package][type_of_payment]",1% &nbsp;Monthly&nbsp;<%=radio_button_tag "user[package][type_of_payment]",2%&nbsp;Yearly</p>%>
-        <%#end%>
+      <%if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?%>
+        <p> <%=radio_button_tag "user[package][type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </p>
+      <%elsif !pkg.special_price.nil?%>
+        <%=hidden_field_tag "user[package][type_of_payment]",1%>
+      <%end%>
+  <%#unless pkg.monthly_price.nil?%>
+  <%#=hidden_field_tag "user[package][type_of_payment]",1%>
+  <%#*<p><b>Subscription Period</b>:&nbsp;<%=radio_button_tag "user[package][type_of_payment]",1% &nbsp;Monthly&nbsp;<%=radio_button_tag "user[package][type_of_payment]",2%&nbsp;Yearly</p>%>
+  <%#end%>
     </div>
-  <hr />
+
   <% end %>
+  <%unless @combo_packages.empty?%>
+    <hr />
+    <div class="container-fluid">
+      <div class="accordion" id="accordion2">
+        <div >
+          <div class="accordion-heading">
+            <p><b><span style="color:rgb(0, 136, 204);font-weight: bold;">Combo Packages</span></b>
+              <%=link_to "view","#pack", "data-toggle"=>"collapse", :class=>"btn btn-link"%></p>
+
+          </div>
+          <div id="pack" class="accordion-body collapse" style="height: 0px; ">
+            <div>
+              <% @combo_packages.each do |pkg| %>
+                <hr />
+                <div>
+    <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
+                  <p><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package"%>&nbsp;<b><span style="color:rgb(0, 136, 204);font-weight: bold;"><%=pkg.name%></span></b></p>
+                  <p><b>Actual Price:</b>&nbsp;<%=actual_price(pkg)%></p>
+                  <p><b>Offer Price:</b>&nbsp;<%=price(pkg)%></p>
+                  <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
+                  <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
+                  <p><b>Template size:</b>&nbsp;600x400</p>
+
+                  <%if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?%>
+                    <p> <%=radio_button_tag "user[package][type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </p>
+                  <%elsif !pkg.special_price.nil?%>
+                    <%=hidden_field_tag "user[package][type_of_payment]",1%>
+                  <%end%>
+    <%#unless pkg.monthly_price.nil?%>
+    <%#=hidden_field_tag "user[package][type_of_payment]",1%>
+    <%#*<p><b>Subscription Period</b>:&nbsp;<%=radio_button_tag "user[package][type_of_payment]",1% &nbsp;Monthly&nbsp;<%=radio_button_tag "user[package][type_of_payment]",2%&nbsp;Yearly</p>%>
+    <%#end%>
+                </div>
+
+              <% end %>
+            <%end%>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 </div>

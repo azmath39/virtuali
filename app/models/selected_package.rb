@@ -94,9 +94,7 @@ class SelectedPackage < ActiveRecord::Base
     end
   end
   def validity
-
     ((self.renew_date-Date.today).to_i+5).day.from_now
-
   end
   # == Getters
   def name

@@ -1,88 +1,130 @@
 <div id="packages-div">
-<%=form_for :package ,:url=>"upgrade",:html => { :id => 'payment-form'} do|f|%>
+  <%=form_for :package ,:url=>"upgrade",:html => { :id => 'payment-form'} do|f|%>
 
-  <div id ="package_info">
-    <h3>Package Selection</h3>
-    <hr></hr>
-    <span id="package_error" style="color:red;"></span>
-    <div>
-      <% @packages.each do |pkg| %>
-        <div>
-          <table class="table table-bordered">
-            <tr> <td><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%></td><td><%=pkg.name%></td></tr>
-            <tr> <td> Price($):</td><td> <%=pkg.price%></td></tr>
-            <tr> <td> No Of Tours:</td><td> <%=pkg.max_tours%></td></tr>
-            <tr> <td> Pictures per Tour: </td><td><%=pkg.pictures_for_tour%></td></tr>
-            <tr> <td> Template size:</td><td> 600x400</td></tr>
-             
-             <%if current_user.special_offer and (!pkg.special_price.nil? or pkg.package_type==2)%>
-             <tr> <td> <%=radio_button_tag "package[type_of_payment]",1,true%> &nbsp;Monthly</td><td><%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </td></tr>
+    <div id ="package_info">
+      <h3>Package Selection</h3>
 
-           
-            
-            <%elsif !pkg.special_price.nil?%>
-               <%=hidden_field_tag "package[type_of_payment]",1%>
-            <%end%>
-          </table>
-        </div><br />
-      <% end %>
-    </div><br />
-    <%=link_to "Next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_package" %>
-
-  </div>
-  <div id="payment_info">
-    <div id="scont">
-      <h3>Payment Process</h3>
-      <hr></hr>
-      <div class = "payment-errors" style="margin:0 0 20px 15px; color: red;">
-      </div>
-      <div class="field" >Total Payable Amount($) : <%= hidden_field_tag "total_amount","",:class=> "money" %>
-        <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
-
-
-      <div class="field" style="padding:20px 0px;">
-        <%=hidden_field_tag "type_of_transaction",1%>
-
-        <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
-      </div>
-      <%unless current_user.any_coupon?%>
-      <div class="field">
-
-         <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
-          <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
-          <div id='discounted_total'></div>
-        </div>
-      <%end%>
-      <div class="field">
-        <%= label_tag :card_number, "Credit Card Number" %>
-        <%= text_field_tag "card-number", nil, name: nil %>
-      </div>
-      <div class="field">
-        <%= label_tag :card_code, "Security Code on Card (CVV)" %>
-        <%= text_field_tag "card-cvc", nil, name: nil %>
-      </div>
+      <span id="package_error" style="color:red;"></span>
       <div>
-        <%= label_tag :card_month, "Card Expiration" %>
-        <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
-        <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
-      </div></div>
-    <div id="next_btn">
-      <%= f.submit "Upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
+        <% @regular_packages.each do |pkg| %>
+          <div>
+           
+
+           <p><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%>&nbsp;<b><span style="color:rgb(0, 136, 204);font-weight: bold;"><%=pkg.name%></span></b></p>
+                        <p><b>Price:</b>&nbsp;<%=price(pkg)%></p>
+                        <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
+                        <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
+                        <p><b>Template size:</b>&nbsp;600x400</p>
+
+              <%if current_user.special_offer and !pkg.special_price.nil?%>
+                <p> <%=radio_button_tag "package[type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </p>
+
+
+
+              <%elsif !pkg.special_price.nil?%>
+                <%=hidden_field_tag "package[type_of_payment]",1%>
+              <%end%>
+            
+          </div><br />
+        <% end %>
+        <%unless @combo_packages.empty?%>
+          <hr />
+          <div class="container-fluid">
+            <div class="accordion" id="accordion2">
+              <div >
+                <div class="accordion-heading">
+                  <p><b><span style="color:rgb(0, 136, 204);font-weight: bold;">Combo Package</span></b>
+                    <%=link_to "view","#pack", "data-toggle"=>"collapse", :class=>"btn btn-link"%></p>
+
+                </div>
+                <div id="pack" class="accordion-body collapse" style="height: 0px; ">
+                  <div>
+                    <% @combo_packages.each do |pkg| %>
+                      <hr />
+                      <div>
+      <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
+                        <p><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%>&nbsp;<b><span style="color:rgb(0, 136, 204);font-weight: bold;"><%=pkg.name%></span></b></p>
+                        <p><b>Actual Price:</b>&nbsp;<%=actual_price(pkg)%></p>
+                  <p><b>Offer Price:</b>&nbsp;<%=price(pkg)%></p>
+                        <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
+                        <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
+                        <p><b>Template size:</b>&nbsp;600x400</p>
+
+                        <%if current_user.special_offer and !pkg.special_price.nil?%>
+                          <p> <%=radio_button_tag "package[type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </p>
+
+
+
+                        <%elsif !pkg.special_price.nil?%>
+                          <%=hidden_field_tag "package[type_of_payment]",1%>
+                        <%end%>
+                      </div>
+
+                    <% end %>
+                  <%end%>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div><br />
+      <%=link_to "Next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_package" %>
+
     </div>
-  </div>
+    <div id="payment_info">
+      <div id="scont">
+        <h3>Payment Process</h3>
+        <hr></hr>
+        <div class = "payment-errors" style="margin:0 0 20px 15px; color: red;">
+        </div>
+        <div class="field" >Total Payable Amount($) : <%= hidden_field_tag "total_amount","",:class=> "money" %>
+          <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
+
+
+        <div class="field" style="padding:20px 0px;">
+          <%=hidden_field_tag "type_of_transaction",1%>
+
+  <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
+        </div>
+        <%unless current_user.any_coupon?%>
+          <div class="field">
+
+            <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
+            <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
+            <div id='discounted_total'></div>
+          </div>
+        <%end%>
+        <div class="field">
+          <%= label_tag :card_number, "Credit Card Number" %>
+          <%= text_field_tag "card-number", nil, name: nil %>
+        </div>
+        <div class="field">
+          <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+          <%= text_field_tag "card-cvc", nil, name: nil %>
+        </div>
+        <div>
+          <%= label_tag :card_month, "Card Expiration" %>
+          <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
+          <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
+        </div></div>
+      <div id="next_btn">
+        <%= f.submit "Upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
+      </div>
+    </div>
   </div>
 
 <%end%>
 <script>
-   $(document).ready(function(){
+  $(document).ready(function(){
     
-      $("#payment_info").hide();
-   });
+    $("#payment_info").hide();
+  });
 
-   $("#btn_package").click(function(event) {
+  $("#btn_package").click(function(event) {
 
     
-var payment_type=  $("input[name='package[type_of_payment]']:checked").val()||$("#package_type_of_payment").val() ||2;
+    var payment_type=  $("input[name='package[type_of_payment]']:checked").val()||$("#package_type_of_payment").val() ||2;
     if (!$("input[name='package[id]']:checked").val())
     {
       $('#package_error').append("* Select any Package  to continue..... <br/>")
