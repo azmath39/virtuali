@@ -1,8 +1,8 @@
 class Coupon < ActiveRecord::Base
   
   attr_accessible :code, :company, :company_email, :expire_date, :valid_date,:value
-  has_one :user, :through=>:assigned_coupon
-  has_one :assigned_coupon, :dependent => :destroy
+  has_many :user, :through=>:assigned_coupons
+  has_many :assigned_coupons, :dependent => :destroy
   validate :code, :presence=>true, :uniqueness=>true
   #uniquify  :code
   #    uniquify :code do
