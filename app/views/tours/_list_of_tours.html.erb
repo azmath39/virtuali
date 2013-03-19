@@ -12,6 +12,7 @@
     <strong><%= tour.zip %>&nbsp;<%= tour.state %>&nbsp;<%= tour.city %></strong><br />
     <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
     <strong>Price: </strong> <%= tour.price %><br />
+    <strong>Category: </strong><%= tour.product.name %><br />
     <strong>Description:</strong>
     <span><%=  truncate(tour.description, :length => 20).html_safe%></span>
       <% if tour.description.length > 20 %>

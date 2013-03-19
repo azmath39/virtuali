@@ -1,18 +1,18 @@
 <div class="navbar">
   <div>
     <ul class="nav unstyled" style="height:100px;margin-left: 10%;margin-top:2%;width:68%">
-      <li class="active tab"><%= link_to "Space Usage", '#div_usage', "data-toggle" => "tab" %></li>
+      <li class="active tab"><%= link_to "Tours (#{@tours.count})", '#div_tours', "data-toggle" => "tab"%> </li>
       <li class="tab"><%= link_to "Users ( #{@users.count})", "#div_user", "data-toggle" => "tab"%> </li>
-      <li class="tab"><%= link_to "Tours (#{@tours.count})", '#div_tours', "data-toggle" => "tab"%> </li>
       <li class="tab"><%= link_to "Sales", '#div_sales', "data-toggle" => "tab" %></li>
+      <li class="tab"><%= link_to "Space Usage", '#div_usage', "data-toggle" => "tab" %></li>
     </ul>
   </div></div>
   <div class="tab-content" style="margin-left: 12%; width: 65%;height:600px;padding: 20px; float: left;">
-     <div class="tab-pane active" id="div_usage">
+     <div class="tab-pane" id="div_usage">
        <div  style ="background-color:rgb(229, 229, 229); border-radius:10px;margin-top: 2%;padding:5% 0%;text-align: center; ">
       <h3> Space Used : <%=@app_size%> MB.</h3>
     </div>
-       </div>
+    </div>
   <div class="tab-pane" id="div_user"><table class="index_table index">
             <tr>
               <th>Full Name</th>
@@ -34,12 +34,13 @@
               </td>
             </tr>
             <% end %>
-          </table></div>
-  <div class="tab-pane" id="div_tours">
+          </table>
+  </div>
+  <div class="tab-pane active" id="div_tours">
     <table class="index_table index">
            <tr>
               <th>Name</th>
-              <th>Status</th>
+              <th><%= sortable "status"%></th>
               <th>Inactive From</th>
             </tr>
             <% @tours.each do |t| %>
@@ -80,11 +81,6 @@
             </tr>
           </table>
   </div>
-
- 
-   
-  
-
 </div>
 <%= stylesheet_link_tag    "application", :media => "all" %>
 <%= javascript_include_tag "application" %>
@@ -103,4 +99,17 @@
   .tab > a:hover{
     color:#888888 !important;
   }
+  .tab-pane th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.tab-pane th .asc {
+  background-image: url(bg.jpg);
+}
+
+.tab-pane th .desc {
+  background-image:   url(bg.jpg);
+}
 </style>

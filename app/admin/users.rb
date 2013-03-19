@@ -15,15 +15,12 @@ ActiveAdmin.register User do
   end 
   config.clear_action_items!
   member_action :status do
-
     @users = User.all
-    @tours = Tour.all
+    @tours = Tour.order(params[:sort]+" "+params[:direction])
     @payments = Payment.find(:all,:order=>'created_at DESC')
     #@u = User.find(params[:id])
     @app_size= User::appliction_size
     # This will render app/views/admin/posts/comments.html.erb
   end
-     
   menu :label => "Status Report" ,:url=> '/admin/users/status/status'
-   
 end
