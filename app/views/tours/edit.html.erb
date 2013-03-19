@@ -29,7 +29,7 @@
 <div style="float:left;">
   <div class ="control-group">
   <%= f.label "Category*", :html => {:class => 'control-label'} %>
-  <%= f.select :product_id, @products.collect{|p| [p.name,p.id]},{:prompt=>"Select Category"} %>
+  <%= f.select :product_id, @products.collect{|p| [p.name,p.id]},:prompt=>@tour.product_name %>
   </div>
   <div class ="control-group">
   <%= f.label "Address1*", :html => {:class => 'control-label'} %>

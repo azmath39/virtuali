@@ -67,7 +67,6 @@ class User < ActiveRecord::Base
     assign_package(pkg)
   end
   def coupon=(c)
-    puts "coupon"*10
     self.create_assigned_coupon(:coupon_id=>c[:id],:valid_date=>c[:valid_date])
   end
   def  assign_package(pkg)
@@ -92,11 +91,11 @@ class User < ActiveRecord::Base
     total-self.assigned_coupon.coupon.value.to_f
   end
 
-  def packages_for_upgarde
+  def packages_for_upgarde(package_type)
     #pkg=self.selected_package.package
     #price=pkg.yearly_price
     #Package.where("product_id=:product_id AND yearly_price > :price",{:product_id=>pkg.product_id,:price=>price})
-    self.selected_product.product.packages
+    self.selected_product.product.packages.where(:package_type=>package_type)
   end
   def change_product(pro)
     self.selected_product.update_attributes(:product_id=>pro.to_i)
@@ -104,8 +103,9 @@ class User < ActiveRecord::Base
   def change_package(pkg)
     new_package=Package.find(pkg[:id].to_i)
     previous_package=self.selected_package.package
-    if new_package.regular_price >=previous_package.regular_price
+    if new_package.regular_price >=previous_package.regular_price 
       package_upgrade(pkg)
+      tours_inactive if  new_package.package_type.to_i==2 and  previous_package.package_type.to_i==1
     else
       destroy_delay_job
       d =Delayed::Job.enqueue Dowgrade.new(self.id,pkg,new_package.no_of_tours,previous_package.no_of_tours),:priority=>0, :run_at=>self.selected_package.remaining_days.day.from_now
@@ -248,7 +248,7 @@ class User < ActiveRecord::Base
     self.subscribe_product.count>1
   end
   def any_coupon?
-    !self.assigned_coupon.nil?
+    !self.assigned_coupon.nil? and self.assigned_coupon.valid_date>Date.today
   end
 
   #  def change_to_montly_plan(pkg)

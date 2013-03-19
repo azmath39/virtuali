@@ -7,4 +7,24 @@ module ApplicationHelper
     end
     return true
   end
+  def price(pkg)
+    if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?
+      "$#{pkg.regular_price}/month (or) $#{pkg.special_price}/year "
+  elsif !pkg.special_price.nil?
+      "$#{pkg.regular_price}/month"
+    else
+      "$#{pkg.regular_price}/ 3 months"
+
+    end
+  end
+  def actual_price(pkg)
+    if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?
+      "$#{pkg.regular_price/0.85}/month (or) $#{pkg.special_price/0.85}/year "
+  elsif !pkg.special_price.nil?
+      "$#{pkg.regular_price/0.85}/month"
+    else
+      "$#{pkg.regular_price/0.85}/ 3 months"
+
+    end
+  end
 end

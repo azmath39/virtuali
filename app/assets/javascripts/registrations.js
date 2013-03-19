@@ -2,7 +2,7 @@ var ec=0;
   $(document).ready(function() {
     $('#slides').slidesjs({
       width: 600,
-      height: 1200,
+      height: 1500,
       navigation: false
     });
   });

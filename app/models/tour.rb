@@ -76,6 +76,7 @@ class Tour < ActiveRecord::Base
 #  end
 
  delegate :name, :address, :to => :user, :prefix => true
+ delegate :name, :to => :product, :prefix => true
  scope :active, where('status = ?' , 1)
  scope :sold, where('status = ?', 3)
 
