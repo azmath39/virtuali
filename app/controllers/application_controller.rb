@@ -17,7 +17,7 @@ end
 def verify_account_validity
   unless current_user.nil?
     unless current_user.account_valid
-
+     flash[:error]="Your account as either exipered or cancled by You. Buy new package to continue..  "
       redirect_to :action=>"upgrade_package",:controller=>"packages"
     end
   end

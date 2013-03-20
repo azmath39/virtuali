@@ -65,7 +65,7 @@ class SelectedPackage < ActiveRecord::Base
 
     self.user.user_delay_job.update_attributes(:delayed_job_id=>d.id)
     msg="Your account Subscription as expired. All your tour are been Disabled and will be deleted after 10 day from now. Immediatly, renew your package  within 10 days to keep your tours safe."
-     send_message("Important Alert!",msg);
+     self.user.send_message("Important Alert!",msg);
   end
 
   def package_destroy
@@ -77,7 +77,7 @@ class SelectedPackage < ActiveRecord::Base
     # self.user.destroy_delay_job
 
     msg="All your tours are removed from virtuali and Your account will deleted after 30 day from now. Login into your Account and Purchase any package, to keep your account live. "
-    send_message("Important Alert!",msg);
+    self.user.send_message("Important Alert!",msg);
   end
   def remaining_days
     (self.renew_date-Date.today).to_i

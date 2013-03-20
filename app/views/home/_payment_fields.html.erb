@@ -1,34 +1,39 @@
 <div id="payment">
 
-    <div class = "payment-errors">
-    </div>
-
-    <div class="field" style="padding:20px 0px;">
-     <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
+  <div class = "payment-errors">
+  </div>
+  <div class="field" >
+    Total Payable Amount($) : <%= hidden_field_tag "total_amount",@package_price,:class=> "money" %>
+    <%= text_field_tag "total_amount1",@package_price,:class=> "money",:disabled=>true %>
+  </div>
+  <div class="field" style="padding:20px 0px;">
+<%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
     <%= hidden_field_tag "type_of_transaction", 1 %>
 
-      <%#=hidden_field_tag "type_of_transaction",nil, name: nil%>
-    </div>
+<%#=hidden_field_tag "type_of_transaction",nil, name: nil%>
+  </div>
+  <%unless current_user.any_coupon?%>
     <div class="field">
 
-         <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
-          <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
-          <div id='discounted_total'></div>
-        </div>
-    <div class="field">
-      <%= label_tag :card_number, "Credit Card Number" %>
-      <%= text_field_tag "card-number", nil, name: nil %>
+      <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
+      <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
+      <div id='discounted_total'></div>
     </div>
-    <div class="field">
-      <%= label_tag :card_code, "Security Code on Card (CVV)" %>
-      <%= text_field_tag "card-cvc", nil, name: nil %>
-    </div>
-    <div>
-      <%= label_tag :card_month, "Card Expiration" %>
-      <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
-      <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
-    </div>
-    <div id="next_btn">
-      <%=submit_tag "Submit",  :class=>"btn btn-primary", :disable_with => "Please wait.." %>
-    </div>
+  <%end%>
+  <div class="field">
+    <%= label_tag :card_number, "Credit Card Number" %>
+    <%= text_field_tag "card-number", nil, name: nil %>
   </div>
+  <div class="field">
+    <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+    <%= text_field_tag "card-cvc", nil, name: nil %>
+  </div>
+  <div>
+    <%= label_tag :card_month, "Card Expiration" %>
+    <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
+    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
+  </div>
+  <div id="next_btn">
+    <%=submit_tag "Submit",  :class=>"btn btn-primary", :disable_with => "Please wait.." %>
+  </div>
+</div>

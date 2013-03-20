@@ -1,29 +1,3 @@
-# == Schema Information
-#
-# Table name: users
-#
-#  id                     :integer          not null, primary key
-#  email                  :string(255)      default(""), not null
-#  encrypted_password     :string(255)      default(""), not null
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default(0)
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
-#  image                  :string(255)
-#  name                   :string(255)
-#  phno                   :string(255)
-#  confirmation_token     :string(255)
-#  confirmed_at           :datetime
-#  confirmation_sent_at   :datetime
-#  unconfirmed_email      :string(255)
-#
-
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -50,10 +24,13 @@ class User < ActiveRecord::Base
   has_one :delayed_job, :through=>:user_delay_job, :dependent=>:destroy
   has_one :user_delay_job,  :dependent=>:destroy
   after_create :set_auto_destroy_event
+  after_create :add_coupon_transaction, :if=> Proc.new { |user| !user.assigned_coupon.nil?}
   has_many :payments, :dependent=> :destroy
   has_one :coupon, :through=>:assigned_coupon
   has_one :assigned_coupon, :dependent => :destroy
-
+  has_many :coupons, :through=>:coupon_transactions
+  has_many :coupon_transactions
+  delegate :coupon_id, :to=>:assigned_coupon, :prefix=>true
   def address
     "#{add1} #{add2}\n#{state} #{city}\n\n#{zipcode}"
   end
@@ -68,6 +45,9 @@ class User < ActiveRecord::Base
   end
   def coupon=(c)
     self.create_assigned_coupon(:coupon_id=>c[:id],:valid_date=>c[:valid_date])
+  end
+  def add_coupon_transaction
+    self.coupon_transactions<<CouponTransaction.create(:coupon_id=>self.assigned_coupon_coupon_id, :email=>self.email,:name=>self.name)
   end
   def  assign_package(pkg)
     p=Package.find(pkg[:id].to_i)
@@ -89,6 +69,14 @@ class User < ActiveRecord::Base
   end
   def price_after_discount(total)
     total-self.assigned_coupon.coupon.value.to_f
+  end
+  def package_price
+    price = self.selected_package.price
+    if any_coupon?
+      price_after_discount(price)
+    else
+      price
+    end
   end
 
   def packages_for_upgarde(package_type)
@@ -228,11 +216,11 @@ class User < ActiveRecord::Base
     end
   end
   def any_cash_back
-     self.selected_package.remaining_days> 213 and self.selected_package.price>=300 
+    self.selected_package.remaining_days> 213 and self.selected_package.price>=300
   end
  
   def special_offer
-     !self.selected_package.nil? and (Date.today-self.selected_package.created_at.to_date).to_i > 183 
+    !self.selected_package.nil? and (Date.today-self.selected_package.created_at.to_date).to_i > 183
   end
   def validate_no_of_tours?
     self.tours.count.to_i > 1 and self.selected_package.package.no_of_tours.to_i == 1 

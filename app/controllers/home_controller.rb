@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
- before_filter :verify_account_validity, :only=>["index"]
+  before_filter :verify_account_validity, :only=>["index"]
   def validate_email
     user=User.find_by_email(params[:email])
     if user.nil?
@@ -11,8 +11,8 @@ class HomeController < ApplicationController
   def check_discount
     @coupon=Coupon.find_by_code(params[:code])
     unless @coupon.nil?
-    @amount= params[:amount].to_f-@coupon.value.to_f
-    render :partial=>'discount'
+      @amount= params[:amount].to_f-@coupon.value.to_f
+      render :partial=>'discount'
     else
       render :text=>"<p style='color:red;'>Coupon code Invalid</p>".html_safe
     end
@@ -21,7 +21,7 @@ class HomeController < ApplicationController
     if current_user
       @feedback = Feedback.new
       @tours= current_user.tours
-      @packages= Package.all
+      @package_price=current_user.package_price
       @payments=current_user.payments.order('created_at DESC')
     end
   end
@@ -35,6 +35,7 @@ class HomeController < ApplicationController
     if params[:operation_type].to_i==1 then
       @pkg_id = params[:pkg_id].to_i
       renew
+
     elsif params[:operation_type].to_i==2 then
       create_direct_debit
     else
@@ -73,15 +74,15 @@ class HomeController < ApplicationController
     @s_pkg=current_user.selected_package
   end
   def user_tours_status_change
-      if signed_in?
-        if params.include?:product_id and !params[:product_id].empty?
-         @tours = current_user.tours.where(:product_id=>params[:product_id].to_i).order('created_at DESC')
-        else
+    if signed_in?
+      if params.include?:product_id and !params[:product_id].empty?
+        @tours = current_user.tours.where(:product_id=>params[:product_id].to_i).order('created_at DESC')
+      else
         @tours = current_user.tours.order('created_at DESC')
-        end
-        render :partial=>'inner_tour_status'
       end
+      render :partial=>'inner_tour_status'
     end
+  end
   private
 
   #  def selected_pkgs_with_tour
@@ -126,8 +127,9 @@ class HomeController < ApplicationController
 
   def renew
     @selected_pkg=SelectedPackage.find(@pkg_id)
-    @amount = (@selected_pkg.price.to_f*100).to_i
+    @amount = amount_to_charge
     stripe_charge
+    add_coupon
     if @selected_pkg.tours_enable
       
       flash[:notice]="sucessfully renewed"
@@ -141,5 +143,20 @@ class HomeController < ApplicationController
     subscription
     #current_user.save_payment_details(nil,3,@amount)
   end
-
+  def amount_to_charge
+    if params.include?:user and params[:user].include?:coupon
+      (params[:user][:coupon][:amount].to_f*100).to_i
+      #current_user.coupon=(params[:user][:coupon])
+    else
+      (params[:total_amount].to_f*100).to_i
+    end
+  end
+  def add_coupon
+    if params.include?:user and params[:user].include?:coupon
+      current_user.coupon=(params[:user][:coupon])
+      current_user.add_coupon_transaction
+    elsif current_user.any_coupon?
+      current_user.add_coupon_transaction
+    end
+  end
 end

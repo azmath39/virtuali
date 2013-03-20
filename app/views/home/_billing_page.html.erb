@@ -18,7 +18,7 @@
             <table class="table  table-striped">
               <tr><th> Name </th><th>Status:</th><th>  Price:</th><th>
               </th></tr>
-              <tr><td> <%=pkg.name%> </td><td> <%=pkg.status_info%></td><td> $<%=pkg.price%></td><th style="width:476px;">
+              <tr><td> <%=pkg.name%> </td><td> <%=pkg.status_info%></td><td> $<%=pkg.price%></td><th style="width:576px;">
 <%=link_to "view","##{pkg.id}", "data-toggle"=>"collapse", :class=>"btn btn-link"%>|
 <%if verify_renew_date%>
 <%= link_to "Renew", "#card_details", "data-toggle" => "modal", :class=>"btn btn-link",:onclick=>"renew(#{pkg.id})"  %>|
