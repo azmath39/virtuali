@@ -105,6 +105,8 @@ class User < ActiveRecord::Base
     assign_package(pkg)
     self.selected_package.tours_enable
     set_auto_destroy_event
+    msg="Your have Successfully upgrade your package. Kindly, Login to your acount and check for any changes."
+    # send_message("Important Alert!",msg);
   end
   def downgrade_package(pkg,new_no_of_tours,pre_no_of_tours)
     assign_package(pkg)
@@ -136,7 +138,6 @@ class User < ActiveRecord::Base
       tours.each do |tour|
         tour.update_attributes(:status=>2)
       end
-      
     end
   end
   def tours_destroy
@@ -165,7 +166,6 @@ class User < ActiveRecord::Base
       tours.each do |tour|
         tour.update_attributes(:status=>1)
       end
-
       self.user.set_auto_destroy_event
     end
   end
