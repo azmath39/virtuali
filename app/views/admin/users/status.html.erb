@@ -54,7 +54,12 @@
               <% end %>
             </tr>
             <% end %>
-       </table>
+    </table><br />
+    <br />
+    <span class="label label-success"> &nbsp;<b>Tours Summary!</b>&nbsp; </span><br /><br />
+    <p class="text-info"><em> Number of Tours <b>Active</b> : </em><%= Tour.active.count %></p>
+    <p class="text-info"><em> Number of Tours <b>Inactive</b> : </em><%= Tour.inactive.count %></p>
+    <p class="text-info"><em> Number of Tours <b>Sold</b> : </em><%= Tour.sold.count %></p>
   </div>
   <div class="tab-pane" id="div_sales">
     <table class="index_table index">

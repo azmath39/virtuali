@@ -4,7 +4,7 @@ class NotificationsMailer < ActionMailer::Base
 
   def new_message(message)
     @message = message
-    mail(:to => $receiver_email, :subject => "[VirtualI Test] #{message.subject}")
+    mail(:to => $receiver_email, :subject => "[VirtualI] #{message.subject}")
   end
   def tour_created_message(user, tour)
     @user = user

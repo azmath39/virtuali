@@ -28,7 +28,7 @@ module HomeHelper
     description.html_safe
   end
   def verify_renew_date
-     @selected_pkg.renew_date<Date.today+15  
+     @selected_pkg.renew_date<Date.today+15
   end
   def check_payment_type
       @selected_pkg.payment_period_type==1  

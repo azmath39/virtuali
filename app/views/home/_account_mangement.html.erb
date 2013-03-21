@@ -74,11 +74,11 @@
 <div class="navbar">
   <div>
     <ul class="nav" style="height:100px;margin-left: 14%;margin-top:2%;width:68%">
-      <li class="active tab"><%= link_to "Dashboard", "#div_dashboard", "data-toggle" => "tab"%> </li>
-      <li class="tab"><%= link_to "Status", '#div_status', "data-toggle" => "tab"%> </li>
-      <li class="tab"><%= link_to "Billing", '#div_billing', "data-toggle" => "tab" %></li>
+      <li class="active tab"><%= link_to '<i class="icon-desktop"></i> Dashboard'.html_safe, "#div_dashboard", "data-toggle" => "tab"%> </li>
+      <li class="tab"><%= link_to '<i class="icon-eye-open"></i> Status'.html_safe, '#div_status', "data-toggle" => "tab"%> </li>
+      <li class="tab"><%= link_to '<i class="icon-money"></i> Billing'.html_safe, '#div_billing', "data-toggle" => "tab" %></li>
 
-      <li class="tab"><%= link_to "Profile", '#div_profile', "data-toggle" => "tab" %></li>
+      <li class="tab"><%= link_to '<i class="icon-edit"></i> Profile'.html_safe, '#div_profile', "data-toggle" => "tab" %></li>
       <li class="tab"><%#= link_to "Manage Account", '#div_manage', "data-toggle" => "tab"%> </li>
       <li class="tab"><%#= link_to "Upgrade Account", '#div_upgrade', "data-toggle" => "tab"%> </li>
     </ul>

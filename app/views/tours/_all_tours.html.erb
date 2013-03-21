@@ -1,11 +1,12 @@
 <% @tours.each do |tour| %>
-  <div class="span7 well" id = 'img_bg' style="margin-top:-10px;">
+  <div class="span7 well" id = 'img_bg'>
   <div>
     <%#= t.paintings %>
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
     <%= link_to(image_tag('home_default_image_thumb.jpg'), tour) if tour.paintings.compact.empty?  %>
     <div style ="float: right; margin: -6px 200px 0 0; height:100px; width: 350px;">
-      <strong><%= tour.zip %>&nbsp;<%= tour.state %>&nbsp;<%= tour.city %></strong><br />
+      <% title = "#{tour.zip} #{tour.state} #{tour.city}" %>
+      <strong><%= link_to title, tour %></strong><br />
     <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
     <strong>Price($): </strong> <%= tour.price %><br />
     <strong>Category:</strong> <%= tour.product.name %><br />
