@@ -52,7 +52,7 @@ module VirtualTour
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
     # parameters by using an attr_accessible or attr_protected declaration.
     config.active_record.whitelist_attributes = false
-config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
     # Enable the asset pipeline
     config.assets.enabled = true
     # config.assets.precompile += %w( search.js )
@@ -62,18 +62,18 @@ config.autoload_paths += Dir["#{config.root}/lib/**/"]
     config.assets.initialize_on_precompile = false
     
     #Contact Mailer configuration
-      config.action_mailer.smtp_settings = {
-  :address              => "smtp.gmail.com",
-  :port                 => 587,
-  :domain               => "localhost",
-  :user_name            => "git.venkat@gmail.com",
-  :password             => "mypassword",
-  :authentication       => :plain,
-  :enable_starttls_auto => true
-}
+    config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :domain               => "localhost",
+      :user_name            => "bjtrails@gmail.com",
+      :password             => "brilliance123",
+      :authentication       => :plain,
+      :enable_starttls_auto => true
+    }
 
-config.action_mailer.default_url_options = {
-  :host => "localhost:3000"
-}
+    config.action_mailer.default_url_options = {
+      :host => "localhost:3000"
+    }
   end
 end

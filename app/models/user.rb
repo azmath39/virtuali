@@ -49,6 +49,7 @@ class User < ActiveRecord::Base
   def add_coupon_transaction
     self.coupon_transactions<<CouponTransaction.create(:coupon_id=>self.assigned_coupon_coupon_id, :email=>self.email,:name=>self.name)
   end
+
   def  assign_package(pkg)
     p=Package.find(pkg[:id].to_i)
     if pkg.include?:type_of_payment and !p.special_price.nil?
@@ -99,14 +100,16 @@ class User < ActiveRecord::Base
       d =Delayed::Job.enqueue Dowgrade.new(self.id,pkg,new_package.no_of_tours,previous_package.no_of_tours),:priority=>0, :run_at=>self.selected_package.remaining_days.day.from_now
       self.user_delay_job=UserDelayJob.create(:delayed_job_id=>d.id)
       #downgrade_package(pkg,@new_package.no_of_tours,@previous_package.no_of_tours)
+      msg="You have successfully Dowgraded your package. Your change package will not affect until the current package validity"
+      send_message("Important Alert!",msg);
     end
   end
   def package_upgrade(pkg)
     assign_package(pkg)
     self.selected_package.tours_enable
     set_auto_destroy_event
-    msg="Your have Successfully upgrade your package. Kindly, Login to your acount and check for any changes."
-    # send_message("Important Alert!",msg);
+    msg="Your have Successfully upgrade your package. Kindly, Login to your acount and check for any changes you may need."
+    send_message("Important Alert!",msg);
   end
   def downgrade_package(pkg,new_no_of_tours,pre_no_of_tours)
     assign_package(pkg)
@@ -122,7 +125,7 @@ class User < ActiveRecord::Base
       self.user_delay_job.update_attributes(:delayed_job_id=>d.id)
     end
 
-    # send_message("Important Alert!",msg);
+    send_message("Important Alert!",msg);
   end
   def tours_inactive
     tours=self.tours
@@ -147,7 +150,7 @@ class User < ActiveRecord::Base
         tour.destroy
       end
     end
-    unless self.selected_package.status==1
+    if self.selected_package.status==1
       set_auto_destroy_event
       msg="All your tours are removed from virtuali. Login into your Account and create new tours. "
     else
@@ -194,7 +197,7 @@ class User < ActiveRecord::Base
   def set_auto_destroy_event
     destroy_delay_job
     s_pkg=self.selected_package
-    d=Delayed::Job.enqueue PackageDisable.new(s_pkg.id), :priority=>0, :run_at=>s_pkg.validity
+    d=Delayed::Job.enqueue RenewAlertMail.new(self.id), :priority=>0, :run_at=>s_pkg.validity
     self.user_delay_job=UserDelayJob.create(:delayed_job_id=>d.id)
   end
   def destroy_delay_job
@@ -206,7 +209,15 @@ class User < ActiveRecord::Base
   end
   def save_payment_details(reference,type,amount)
     a= amount.to_i/100
-    self.payments<< Payment.create(:reference=>reference,:amount=>a,:payment_type=>type)
+    payment=Payment.create(:reference=>reference,:amount=>a,:payment_type=>type)
+    self.payments<< payment
+    send_reciept_user(payment)
+
+  end
+  def send_reciept_user(payment)
+    msg="<table class='table table-bordered'><caption>Your Payment Details</caption><tr><th>Refference No</th><td> #{payment.reference}</td></tr> <tr><th> Date of Transaction</th><td>#{payment.created_at.strftime("%d-%b-%Y %H:%M")}</td></tr><tr><th>Amount</th><td> #{payment.amount}</td></tr> <tr><th> Payment Type</th><td> #{payment.payment_type_info}</td></tr></table>".html_safe
+    subject= "Payment Reciept #{payment.created_at.strftime("%d-%b-%Y %H:%M")} "
+    send_message(subject, msg)
   end
   def account_valid
     if self.selected_package.nil? or self.selected_package.status>1 or self.selected_package.renew_date < Date.today
@@ -255,7 +266,7 @@ class User < ActiveRecord::Base
     size/(1024*1024)
   end
   def send_message(subject,message)
-    # NotificationsMailer.alert_message(self.email,subject, message).deliver
+    NotificationsMailer.alert_message(self.email,subject, message).deliver
   end
   
   private
