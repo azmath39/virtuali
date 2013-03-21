@@ -71,13 +71,13 @@ class SelectedPackage < ActiveRecord::Base
   def package_destroy
     self.update_attributes(:status=>2) unless self.status==2
     self.user.tours_destroy
-    d =Delayed::Job.enqueue UserDestroy.new(self.user.id),:priority=>0, :run_at=>30.day.from_now
-    self.user.user_delay_job.update_attributes(:delayed_job_id=>d.id)
+    #d =Delayed::Job.enqueue UserDestroy.new(self.user.id),:priority=>0, :run_at=>30.day.from_now
+    #self.user.user_delay_job.update_attributes(:delayed_job_id=>d.id)
     
     # self.user.destroy_delay_job
 
-    msg="All your tours are removed from virtuali and Your account will deleted after 30 day from now. Login into your Account and Purchase any package, to keep your account live. "
-    self.user.send_message("Important Alert!",msg);
+    #msg="All your tours are removed from virtuali and Your account will deleted after 30 day from now. Login into your Account and Purchase any package, to keep your account live. "
+   # self.user.send_message("Important Alert!",msg);
   end
   def remaining_days
     (self.renew_date-Date.today).to_i
@@ -94,9 +94,7 @@ class SelectedPackage < ActiveRecord::Base
     end
   end
   def validity
-
-    ((self.renew_date-Date.today).to_i+5).day.from_now
-
+    ((self.renew_date-Date.today).to_i-5).day.from_now
   end
   # == Getters
   def name

@@ -60,6 +60,7 @@ background-image: url(bg2.jpg);
   font-size: 14px;
   list-style: square;
 }
+.money{background:url(/assets/icon-money.png)  2px  4px no-repeat #fff; padding-left:21px !important;width: 32px; }
 .map_container{
     margin-top: 0px;
 }
