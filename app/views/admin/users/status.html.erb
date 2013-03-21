@@ -26,7 +26,7 @@
               <td><%= user.name %> </td>
               <td><%= user.email %></td>
               <td><%= user.phno %> </td>
-              <td>packages</td>
+              <td><%=user.package_name%></td>
               <td>
                 <%= link_to "edit", edit_admin_user_path(user) %>&nbsp;
                 <%= link_to "view", admin_user_path(user), :method => :get %>&nbsp;
@@ -40,12 +40,15 @@
     <table class="index_table index">
            <tr>
               <th>Name</th>
+              <th>Category</th>
               <th><%= sortable "status"%></th>
               <th>Inactive From</th>
+
             </tr>
             <% @tours.each do |t| %>
             <tr>
               <td><%= t.name.gsub(/%/, '-') %></td>
+              <td> <%= t.product_name %></td>
               <td style="color: green;"><%= t.tour_status %></td>
               <% if t.status != 1  %>
               <td><%= t.updated_at.strftime("%d-%b-%y, %A (%H:%M)")%> </td>
