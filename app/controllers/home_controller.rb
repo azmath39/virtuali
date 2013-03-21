@@ -130,7 +130,7 @@ class HomeController < ApplicationController
     @amount = amount_to_charge
     stripe_charge
     add_coupon
-    if @selected_pkg.tours_enable
+    if @selected_pkg.renew_package
       
       flash[:notice]="sucessfully renewed"
     else

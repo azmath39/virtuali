@@ -41,22 +41,22 @@ class SelectedPackage < ActiveRecord::Base
     end
     self.save
   end
-
+def renew_package
+  self.renew_date += self.subscribed_days
+  self.save
+  tours_enable
+  self.user.set_auto_destroy_event
+end
 
   def tours_enable
-    if self.update_attributes(:status=>1) then
+    self.update_attributes(:status=>1) unless self.status==1
       tours=self.user.tours.where('status!=:status',:status=>1)
       unless tours.empty?
         tours.each do |tour|
           tour.update_attributes(:status=>1)
         end
-        
-        self.user.set_auto_destroy_event
       end
-      true
-    else
-      false
-    end
+
   end
   def disable
     self.update_attributes(:status=>2)

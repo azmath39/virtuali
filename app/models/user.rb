@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   has_many :coupons, :through=>:coupon_transactions
   has_many :coupon_transactions
   delegate :coupon_id, :to=>:assigned_coupon, :prefix=>true
+  
   def address
     "#{add1} #{add2}\n#{state} #{city}\n\n#{zipcode}"
   end
@@ -49,7 +50,9 @@ class User < ActiveRecord::Base
   def add_coupon_transaction
     self.coupon_transactions<<CouponTransaction.create(:coupon_id=>self.assigned_coupon_coupon_id, :email=>self.email,:name=>self.name)
   end
-
+def package_name
+  self.selected_package.package_name
+end
   def  assign_package(pkg)
     p=Package.find(pkg[:id].to_i)
     if pkg.include?:type_of_payment and !p.special_price.nil?
@@ -159,7 +162,7 @@ class User < ActiveRecord::Base
       msg="All your tours are removed from virtuali and Your account will deleted after 30 day from now. Login into your Account and Purchase any package, to keep your account live. "
 
     end
-    #send_message("Important Alert!", msg);
+    send_message("Important Alert!", msg);
   end
   def enable_tour
     s_pkg=self.selected_package
@@ -266,7 +269,7 @@ class User < ActiveRecord::Base
     size/(1024*1024)
   end
   def send_message(subject,message)
-    NotificationsMailer.alert_message(self.email,subject, message).deliver
+    #NotificationsMailer.alert_message(self.email,subject, message).deliver
   end
   
   private
