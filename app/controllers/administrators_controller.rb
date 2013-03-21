@@ -53,7 +53,7 @@ class AdministratorsController < ApplicationController
       #        select_pkg.tour.update_attributes(:status=>1)
       #end
       customer.save_payment_details(params["data"]["object"]["charge"],2,params["data"]["object"]["total"])
-      customer.selected_packages.tour_enable
+      customer.selected_packages.renew_package
      
       #puts @customer
     when "invoice.payment_failed"

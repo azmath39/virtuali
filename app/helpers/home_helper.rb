@@ -22,8 +22,7 @@ module HomeHelper
   def description
     description = "Name: #{@selected_pkg.package_name}<br />
     No.of Tours: #{@selected_pkg.package_no_of_tours}<br />
-    Regular Price: $#{@selected_pkg.package_regular_price}<br />
-    Special Price: $#{@selected_pkg.package_special_price}<br />
+    Price: $#{@selected_pkg.price}<br />
     Subscription Period: #{@selected_pkg.subscribed_days} Days"
     description.html_safe
   end
