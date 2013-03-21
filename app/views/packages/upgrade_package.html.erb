@@ -72,6 +72,7 @@
       </div><br />
       <div id="next_btn">
       <%=link_to "Next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_package" %>
+      <%= link_to "cancel", root_url , :style=> 'float:right;margin-right:20px;'%>
       </div>
     </div>
     <div id="payment_info">
@@ -83,8 +84,7 @@
         <div class="field" >Total Payable Amount($) : <%= hidden_field_tag "total_amount","",:class=> "money" %>
           <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
 
-
-        <div class="field" style="padding:20px 0px;">
+       <div class="field" style="padding:20px 0px;">
           <%=hidden_field_tag "type_of_transaction",1%>
 
   <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
@@ -103,19 +103,21 @@
         </div>
         <div class="field">
           <%= label_tag :card_code, "Security Code on Card (CVV)" %>
-          <%= text_field_tag "card-cvc", nil, name: nil %>
+          <%= password_field_tag "card-cvc", nil, name: nil, :style => "width: 50px;" %>
         </div>
         <div>
           <%= label_tag :card_month, "Card Expiration" %>
-          <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
-          <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
+          <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month", :style=> 'width:30%;'} %>
+          <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year", :style=> 'width:30%;'} %>
         </div></div>
+
       <div id="next_btn">
         <%= f.submit "Upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
+        <%= link_to "cancel", root_url , :style=> 'float:right;margin-right:20px;'%>
       </div>
+      
     </div>
   
-
 <%end%>
 </div>
 <script>

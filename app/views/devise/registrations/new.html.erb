@@ -109,10 +109,11 @@
 <div style="margin-top:10%;margin-left: -14%;">
 <%= render 'shared/flash_messages' %>
 </div>
+
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :id => 'payment-form', :multipart => true })  do |f| %>
   <%= devise_error_messages! %>
   <%#= render 'shared/error_messages', :target => @user %>
-
+<p class="title-text" style="margin: 2% 0 -80px 20%;">Sign Up</p>
   <div id="slides">
     <div id="personal_info">
       
@@ -130,10 +131,12 @@
         </div>
         <div>
           <%= f.label "password", "Password <span>*<span>".html_safe %>
+          <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i><br />
           <%= f.password_field :password, :id=>"password" %><span id="personal_info_error_password" style="color:red;"></span>
         </div>
         <div>
           <%= f.label "password_confirmation", "Password Confirmation <span>*<span>".html_safe %>
+          <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i><br />
           <%= f.password_field :password_confirmation,:id=>"password_confirmation" %><span id="personal_info_error_cpassword" style="color:red;"></span>
         </div>
         <div>
@@ -224,6 +227,7 @@
         <div class="field">
             
          <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
+          <i style="font-size: 10px;">( Leave blank if no coupon is available now. )</i><br />
           <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
           <div id='discounted_total'></div>
         </div>
@@ -233,7 +237,7 @@
         </div>
         <div class="field">
           <%= label_tag :card_code, "Security Code on Card (CVV) <span>*<span>".html_safe %>
-          <%= text_field_tag "card-cvc", nil, name: nil %>
+          <%= password_field_tag "card-cvc", nil, name: nil, :style => "width:50px;" %>
         </div>
         <div>
           <%= label_tag :card_month, "Card Expiration <span>*<span>".html_safe %>
@@ -242,7 +246,7 @@
         </div></div>
       <%= button_tag "Previous", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
       <div id="next_btn">
-        <%= f.submit "Sign up",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
+        <%= f.submit "Sign up", 'data-disable-with' => "Processing",  :class=>"btn-large btn-primary"%>
       </div>
     </div>
  

@@ -155,7 +155,7 @@ class User < ActiveRecord::Base
       msg="All your tours are removed from virtuali and Your account will deleted after 30 day from now. Login into your Account and Purchase any package, to keep your account live. "
 
     end
-    send_message("Important Alert!",msg);
+    #send_message("Important Alert!", msg);
   end
   def enable_tour
     s_pkg=self.selected_package
@@ -255,7 +255,7 @@ class User < ActiveRecord::Base
     size/(1024*1024)
   end
   def send_message(subject,message)
-    # NotificationsMailer.alert_message(self.email,subject, message).deliver
+     NotificationsMailer.alert_message(self.email,subject, message).deliver
   end
   
   private

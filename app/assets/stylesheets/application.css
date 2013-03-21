@@ -60,3 +60,6 @@ background-image: url(bg2.jpg);
   font-size: 14px;
   list-style: square;
 }
+.map_container{
+    margin-top: 0px;
+}

@@ -78,6 +78,7 @@ class Tour < ActiveRecord::Base
  delegate :name, :address, :to => :user, :prefix => true
  delegate :name, :to => :product, :prefix => true
  scope :active, where('status = ?' , 1)
+ scope :inactive, where('status = ?', 2)
  scope :sold, where('status = ?', 3)
 
  def self.tours_list_pagination(page)

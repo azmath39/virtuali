@@ -70,14 +70,14 @@ $("#user_add1").blur(function(event){
 
  $("#user_city").blur(function(event){
  $('#personal_info_error_city').html("");
-  if($("#user_name").val()==""){
+  if($("#user_city").val()==""){
       $('#personal_info_error_city').append("<br/>* City Can't be empty.");
     }
  });
 
  $("#user_zipcode").blur(function(event){
  $('#personal_info_error_zipcode').html("");
-  if($("#user_name").val()==""){
+  if($("#user_zipcode").val()==""){
       $('#personal_info_error_zipcode').append("<br/>* ZIP Code Can't be empty.");
     }
  });

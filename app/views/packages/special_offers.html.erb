@@ -49,12 +49,12 @@
       </div>
       <div class="field">
         <%= label_tag :card_code, "Security Code on Card (CVV)" %>
-        <%= text_field_tag "card-cvc", nil, name: nil %>
+        <%= password_field_tag "card-cvc", nil, name: nil, :style=>"width: 50px;" %>
       </div>
       <div>
         <%= label_tag :card_month, "Card Expiration" %>
-        <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
-        <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
+        <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month", :style=> 'width:30%;'} %>
+        <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year", :style=> 'width:30%;'} %>
       </div></div>
     <div id="next_btn">
       <%= f.submit "Upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
