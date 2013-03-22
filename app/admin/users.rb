@@ -12,7 +12,7 @@ ActiveAdmin.register User do
       f.input   "zipcode"
     end
     f.actions
-  end
+  end 
   index do
     column "Full Name", :name
     column :email
