@@ -71,6 +71,16 @@ end
       a.flatten!
     end
   end
+  def subscribe_product_for_upgrade
+    pkg=self.selected_package.package
+    a=[]
+    unless pkg.package_type==2
+      a<< self.selected_product.product
+    else
+      a<< Product.where(:category_id=>pkg.product.category_id)
+      a.flatten!
+    end
+  end
   def price_after_discount(total)
     total-self.assigned_coupon.coupon.value.to_f
   end

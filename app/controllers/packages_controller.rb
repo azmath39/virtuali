@@ -22,7 +22,7 @@ class PackagesController < ApplicationController
       @regular_packages=current_user.packages_for_upgarde(1)
       @combo_packages=current_user.packages_for_upgarde(2)
     else
-      @products=current_user.subscribe_product
+      @products=current_user.subscribe_product_for_upgrade
       render :upgrade_combo_package
     end
   end
