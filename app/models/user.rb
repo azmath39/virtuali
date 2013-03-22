@@ -67,7 +67,7 @@ end
     unless pkg.package_type==2
       a<< self.selected_product.product
     else
-      a<< Product.where(:category_id=>pkg.product.category_id)
+      a<< Product.where(:category_id=>pkg.product.category_id,:product_type=>1)
       a.flatten!
     end
   end

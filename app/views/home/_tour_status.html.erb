@@ -2,6 +2,6 @@
 <%=select_tag "product_id_status", options_from_collection_for_select(current_user.subscribe_product,"id","name"),:onchange=>"display_tours_for_status()",:prompt=>"All" if current_user.multiple_products?%>
 </div>
 
-<div style="float:right;margin-right: 14%; margin-bottom: 3%;">
+<div id="tour_status" style="float:right;margin-right: 14%; margin-bottom: 3%;">
   <%=render 'inner_tour_status'%>
   </div>
