@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
   has_one :assigned_coupon, :dependent => :destroy
   has_many :coupons, :through=>:coupon_transactions
   has_many :coupon_transactions
+  scope :recent, :limit => 5, :order => 'created_at DESC'
   delegate :coupon_id, :to=>:assigned_coupon, :prefix=>true
   
   def address

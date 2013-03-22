@@ -1,12 +1,13 @@
 ActiveAdmin.register Coupon do
- menu :priority => 5
+ menu :priority => 4
+ config.per_page = 10
   index do
     column :code
-    column "Expires On", :expire_date
-    column "Valid until", :valid_date
-    column :value
-    column :company
+    column "Company Name",:company
     column :company_email
+    column :value
+    column "Last Reemeded", :expire_date
+    column "Valid until", :valid_date
     default_actions
   end
     

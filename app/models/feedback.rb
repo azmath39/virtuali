@@ -13,4 +13,5 @@
 class Feedback < ActiveRecord::Base
   attr_accessible :content, :satisfaction_status
   belongs_to :user
+  scope :recent, :limit => 5, :order => 'created_at DESC'
 end

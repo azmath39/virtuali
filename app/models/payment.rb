@@ -1,7 +1,7 @@
 class Payment < ActiveRecord::Base
   attr_accessible :payment_type, :amount, :user_id, :reference
   belongs_to :user
-  
+  scope :recent, :limit => 5, :order => 'created_at DESC'
   def payment_type_info
     case self.payment_type
     when 1

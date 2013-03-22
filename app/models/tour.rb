@@ -81,6 +81,7 @@ class Tour < ActiveRecord::Base
  scope :inactive, where('status = ?', 2)
  scope :sold, where('status = ?', 3)
 
+
  def self.tours_list_pagination(page)
    order('created_at DESC').paginate(:page => page, :per_page => 5)
  end
@@ -96,9 +97,12 @@ class Tour < ActiveRecord::Base
   def set_status
     self.status ||= 1
   end
-  def set_address
-    self.address = "#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
-  end
+#  def set_address
+#    self.address = "#{self.address1},#{self.city},#{self.state},#{self.zip}"
+#  end
+def location
+  "#{self.address1},#{self.city},#{self.state},#{self.zip}"
+end
   def tour_name
     "#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
   end
