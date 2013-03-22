@@ -13,4 +13,5 @@
 class Feedback < ActiveRecord::Base
   attr_accessible :content, :satisfaction_status
   belongs_to :user
+  delegate :email, :to => :user, :prefix => true
 end
