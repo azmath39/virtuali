@@ -1,4 +1,5 @@
 ActiveAdmin.register Coupon do
+   menu :priority => 5
   form do |f|
     f.inputs "Coupon Details" do
       f.input :company

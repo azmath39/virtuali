@@ -1,4 +1,5 @@
 ActiveAdmin.register CouponTransaction do
+   menu :priority => 6
   config.clear_action_items!
 
 index do
