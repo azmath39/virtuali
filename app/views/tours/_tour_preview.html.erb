@@ -89,7 +89,7 @@
       </tr>
     </table><br />
   </div>
-  <p style = "float:right;height: 150px; width: 23%; margin: -500px 0 0 0; overflow: auto;">some description<%= @tour.description.html_safe %></p>
+  <p style = "float:right;height: 150px; width: 23%; margin: -500px 0 0 0; overflow: auto;"><%= @tour.description.html_safe %></p>
   <div id ="user_img" style="float: right; height: 200px; width: 150px;margin: -320px 70px -40px 30px;">
     <% if @tour.user.image? %>
     <%= image_tag(@tour.user.image_url(:medium)) %>
