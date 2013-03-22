@@ -58,7 +58,7 @@ class Tour < ActiveRecord::Base
   #attr_accessor :pro
   acts_as_paranoid
   validates :state, :city, :zip, :subdivision, :price, :address1, :square_footage,:product_id, :presence => true
-  validates :price, :numericality => {:greater_than => 0}
+  validates :price, :numericality => {:greater_than_or_equal_to => 0}
   after_initialize :set_status
   before_create :set_address
   friendly_id :address, use: :slugged

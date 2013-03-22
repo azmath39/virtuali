@@ -1,5 +1,15 @@
 ActiveAdmin.register Coupon do
-   menu :priority => 5
+ menu :priority => 5
+  index do
+    column :code
+    column "Expires On", :expire_date
+    column "Valid until", :valid_date
+    column :value
+    column :company
+    column :company_email
+    default_actions
+  end
+    
   form do |f|
     f.inputs "Coupon Details" do
       f.input :company
