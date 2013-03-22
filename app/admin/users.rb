@@ -12,16 +12,25 @@ ActiveAdmin.register User do
       f.input   "zipcode"
     end
     f.actions
-  end 
-  config.clear_action_items!
-  member_action :status do
-    @users = User.all
-    #@tours = Tour.order(params[:sort]+" "+params[:direction])
-    @tours = Tour.order("#{params[:sort] ||= 'status'} #{params[:direction] ||= 'desc'}")
-    @payments = Payment.find(:all,:order=>'created_at DESC')
-    #@u = User.find(params[:id])
-    @app_size= User::appliction_size
-    # This will render app/views/admin/posts/comments.html.erb
   end
-  menu :label => "Status Report" ,:url=> '/admin/users/status/status'
+  index do
+    column "Full Name", :name
+    column :email
+    column "Phone No",:phno
+    column :city
+    column :state
+    column "Package", :package_name
+    default_actions
+  end
+#  config.clear_action_items!
+#  member_action :status do
+#    @users = User.all
+#    #@tours = Tour.order(params[:sort]+" "+params[:direction])
+#    @tours = Tour.order("#{params[:sort] ||= 'status'} #{params[:direction] ||= 'desc'}")
+#    @payments = Payment.find(:all,:order=>'created_at DESC')
+#    #@u = User.find(params[:id])
+#    @app_size= User::appliction_size
+#    # This will render app/views/admin/posts/comments.html.erb
+#  end
+#  menu :label => "Status Report" ,:url=> '/admin/users/status/status'
 end
