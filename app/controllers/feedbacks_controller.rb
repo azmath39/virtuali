@@ -9,11 +9,11 @@ class FeedbacksController < ApplicationController
     @feedback = Feedback.new(params[:feedback])
     @feedback.user_id = current_user.id
     if @feedback.save
-      flash[:success] = "Thanks for your feedback. We look forward to serve better!"
-      redirect_to :back
+      flash[:notice] = "Thanks for your feedback. We look forward to serve better!" 
     else
-      render :text => "Not saved feedback"
+      flash[:error] = "Sorry, Your feedback has not been submitted. kindly, try again later."
     end
+     redirect_to :back
   end
   def destroy
     @feedback = Feedback.find(params[:id])

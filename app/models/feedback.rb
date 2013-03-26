@@ -14,5 +14,19 @@ class Feedback < ActiveRecord::Base
   attr_accessible :content, :satisfaction_status
   belongs_to :user
   scope :recent, :limit => 5, :order => 'created_at DESC'
-  delegate :email, :to => :user, :prefix => true
+  delegate :email,:name,:to=>:user, :prefix => true
+# def user_name
+#   self.user.name
+# end
+# def user_email
+# end
+
+  def opinion
+    case self.satisfaction_status
+    when 'yes'
+      'Satisfied'
+    when 'no'
+      'UnSatisfied'
+    end
+  end
 end

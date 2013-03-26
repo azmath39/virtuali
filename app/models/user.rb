@@ -51,9 +51,9 @@ class User < ActiveRecord::Base
   def add_coupon_transaction
     self.coupon_transactions<<CouponTransaction.create(:coupon_id=>self.assigned_coupon_coupon_id, :email=>self.email,:name=>self.name)
   end
-def package_name
-  self.selected_package.package_name
-end
+  def package_name
+    self.selected_package.package_name
+  end
   def  assign_package(pkg)
     p=Package.find(pkg[:id].to_i)
     if pkg.include?:type_of_payment and !p.special_price.nil?
@@ -273,12 +273,12 @@ end
   ##     end
   #  end
 
-  def self.appliction_size
-    require 'find'
-    size = 0
-    Find.find(Rails.root) { |f| size += File.size(f) if File.file?(f) }
-    size/(1024*1024)
-  end
+  #  def self.appliction_size
+  #    require 'find'
+  #    size = 0
+  #    Find.find(Rails.root) { |f| size += File.size(f) if File.file?(f) }
+  #    size/(1024*1024)
+  #  end
   def send_message(subject,message)
     #NotificationsMailer.alert_message(self.email,subject, message).deliver
   end

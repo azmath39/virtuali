@@ -54,13 +54,13 @@
 
 class Tour < ActiveRecord::Base
   extend FriendlyId
-  attr_accessible :gmaps, :state, :description, :city, :zip, :subdivision, :price,:address1,:address2, :square_footage, :bed_rooms, :bath_rooms,:product_id,:selected_package_id,:status
+  attr_accessible :gmaps, :state, :description, :city, :zip, :subdivision, :price,:address1,:address2, :square_footage, :status,:user_id,:name,:bed_rooms, :bath_rooms,:product_id,:selected_package_id,:status
   #attr_accessor :pro
   acts_as_paranoid
   validates :state, :city, :zip, :subdivision, :price, :address1, :square_footage,:product_id, :presence => true
   validates :price, :numericality => {:greater_than_or_equal_to => 0}
   after_initialize :set_status
-  before_create :set_address
+
   friendly_id :address, use: :slugged
   acts_as_gmappable
   belongs_to :user
@@ -97,9 +97,6 @@ class Tour < ActiveRecord::Base
   def set_status
     self.status ||= 1
   end
-#  def set_address
-#    self.address = "#{self.address1},#{self.city},#{self.state},#{self.zip}"
-#  end
 def location
   "#{self.address1},#{self.city},#{self.state},#{self.zip}"
 end
@@ -119,6 +116,13 @@ end
     
     when 4
       "In Active (Action needed)"
+    end
+  end
+  def inactive_from
+    unless self.status==1
+    self.updated_at
+    else
+      '-'
     end
   end
  

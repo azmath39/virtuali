@@ -30,8 +30,8 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Space Usage" do
           div :class => "blank_slate_container", :id => "dashboard_default_message" do
-            span :class => "blank_slate" do
-              " #{User::appliction_size}MB."
+            span :class => "blank_slate",:style=>"width:105px; !important; color:black;" do
+              " #{SpaceUsage::remaining_space}."
             end
           end
         end
@@ -116,9 +116,9 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Recent Feedbacks" do
           ul do
-#                      Feedbacks.recent.map do |feed|
-#                        li  link_to("#{feed.user_name} #{feed.satisfaction_status}", admin_user_path(feed))
-#                      end
+                     Feedback.recent.map do |feed|
+                        li  link_to("#{feed.user_name} : #{feed.opinion}", admin_feedback_path(feed))
+                      end
           end
         end
       end

@@ -1,5 +1,6 @@
 ActiveAdmin.register Payment do
   config.clear_action_items!
+  actions :index, :show
    menu :priority => 6
    config.per_page = 10
   index do
@@ -8,6 +9,6 @@ ActiveAdmin.register Payment do
     column "Transaction Type",:payment_type_info
     column :amount
     
-    default_actions
+    #default_actions
   end
 end
