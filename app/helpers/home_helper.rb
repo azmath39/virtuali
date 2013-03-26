@@ -11,10 +11,10 @@ module HomeHelper
       @selected_pkg=pkg
   end
   def start_date
-      @selected_pkg.created_at.to_date
+      @selected_pkg.created_at.strftime("%b-%d-%Y")
   end
   def end_date
-      @selected_pkg.renew_date
+      @selected_pkg.renew_date.strftime("%b-%d-%Y")
   end
   def pictures
       @selected_pkg.pictures_for_tour

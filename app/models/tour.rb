@@ -60,7 +60,7 @@ class Tour < ActiveRecord::Base
   validates :state, :city, :zip, :subdivision, :price, :address1, :square_footage,:product_id, :presence => true
   validates :price, :numericality => {:greater_than_or_equal_to => 0}
   after_initialize :set_status
-  before_create :set_address
+#  before_create :set_address
   friendly_id :address, use: :slugged
   acts_as_gmappable
   belongs_to :user
