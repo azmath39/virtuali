@@ -34,7 +34,8 @@ class ToursController < ApplicationController
         @tour.paintings << pic
       end 
       flash[:notice] = "Tour was created successfully."
-      redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
+      #redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
+       redirect_to tour_path(@tour)
     else
       error_to_flash
       redirect_to :action=>'new', :controller=>"paintings"

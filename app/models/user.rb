@@ -106,7 +106,7 @@ class User < ActiveRecord::Base
   def change_package(pkg)
     new_package=Package.find(pkg[:id].to_i)
     previous_package=self.selected_package.package
-    if new_package.regular_price >=previous_package.regular_price 
+    if new_package.regular_price >=previous_package.regular_price or self.selected_package.status!=1
       package_upgrade(pkg)
       tours_inactive if  new_package.package_type.to_i==2 and  previous_package.package_type.to_i==1
     else
