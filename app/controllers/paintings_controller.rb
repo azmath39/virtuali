@@ -23,6 +23,15 @@ class PaintingsController < ApplicationController
       @painting = Painting.create(params[:painting])
       @painting.user_id= current_user.id
       @painting.save
+     respond_to do |format|
+      format.html {render @painting}
+      format.js
+    end
+    end
+    def create_ie
+      @painting= Painting.find(params[:id])
+    
+
     end
     #    puts "***********************"
     #    p @painting

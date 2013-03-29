@@ -1,8 +1,9 @@
 <% if verify_tours_allowed %>
+
 <div class="span12" style="margin-left: 15%;">
   <p class="title-text">Create a Tour</p>
   <%= render 'shared/error_messages', :target => @tour  %>
-<%= form_for Painting.new do |f| %>
+<%= form_for Painting.new,:remote=>true do |f| %>
   <%$serial_no=0%>
 <div class="fileupload btn btn-primary">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
@@ -14,6 +15,7 @@
   <%= render @paintings %>
   
 </div>
+
 
 <br/>
 </div>
