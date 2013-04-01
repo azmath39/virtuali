@@ -38,7 +38,7 @@
        <a class="btn btn-warning" onclick="$('input[id=user_file]').click();">Browse</a>
     </div>
      
-    <br />
+    <br /><br />
     <h3>Change Password?</h3>
      <i>(Please Ignore it if you don't want to change your password!)</i>
     <hr />
@@ -52,6 +52,9 @@
     <div><%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %></div>
     <br />
+    <% if resource.company %>
+      <%= render :partial => '/companies/edit', :locals=>{:company => resource.company}  %>
+    <% end %>
     <h3>Current Password?</h3>
     <i>(we need your current password to confirm your changes)</i>
     <hr />
