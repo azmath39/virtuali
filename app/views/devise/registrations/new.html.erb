@@ -164,13 +164,15 @@
           <%= f.label :zipcode, "ZIP Code <span>*<span>".html_safe %>
           <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
         </div>
-<%= f.label :image, "Profile Picture" %>
-<%= f.file_field :image, :id => 'user_file', :style => "display:none" %>
+        <%= f.label :image, "Profile Picture" %>
+        <%= f.file_field :image, :id => 'user_file', :style => "display:none" %>
 
     <div class="input-append">
        <input id="photoCover" class="input-large" type="text">
        <a class="btn btn-warning" onclick="$('input[id=user_file]').click();">Browse</a>
     </div>
+        
+        
       </div>
       <div id="next_btn">
         <%=button_tag "Next", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_personal",:onclick=>"button()" %>
@@ -186,10 +188,14 @@
         <%@i=0%>
         <% Product.all.each do |x| %>
           <div style="margin-left: 12px;">
-            <%= radio_button_tag "user[product]", x.id,nil,:id=>"product" %>&nbsp;<%=  x.name%>
+            <%= radio_button_tag "user[product]", x.id, nil, :id=>"product", :onclick => "company()" %>&nbsp;<%=  x.name%>
           </div><br/>
           <% @i+=1 %>
         <% end %><br />
+        <div id="company_details">
+          
+        </div>
+        <br />
       </div>
       <%= button_tag "Previous", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
       <div id="next_btn">
@@ -286,6 +292,23 @@ function apply_discount()
 
   });
 }
+
+$(document).ready(function(){
+company();
+});
+function company()
+{
+  $.ajax({
+    type: 'GET',
+    url: '/companies/new',
+    data:{
+      product: $("input[name='user[product]']:checked").val()
+    }
+  }).done(function(html){
+    $('#company_details').html(html)
+  });
+}
+
 </script>
 <%#= render "devise/shared/links" %>
 <%#= javascript_include_tag "jquery.slides.min" %>

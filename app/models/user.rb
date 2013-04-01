@@ -10,8 +10,6 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
 
   attr_accessible :name, :phno, :email, :password, :password_confirmation, :add1, :add2, :state, :city, :zipcode, :remember_me, :image,:product,:package,:coupon
-
-
   mount_uploader :image, ImageUploader
   has_many :tours, :dependent => :destroy
   has_one :product, :through => :selected_product
@@ -30,6 +28,7 @@ class User < ActiveRecord::Base
   has_one :assigned_coupon, :dependent => :destroy
   has_many :coupons, :through=>:coupon_transactions
   has_many :coupon_transactions
+  has_one :company, :dependent => :destroy
   scope :recent, :limit => 5, :order => 'created_at DESC'
   delegate :coupon_id, :to=>:assigned_coupon, :prefix=>true
   
@@ -42,6 +41,10 @@ class User < ActiveRecord::Base
       self.selected_product=SelectedProduct.create(:product_id=>pro.to_i)
     end
   end
+#  def company=(cmp)
+#    @comp = cmp
+#    self.company= Company.create(@comp)
+#  end
   def package=(pkg)
     assign_package(pkg)
   end

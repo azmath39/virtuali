@@ -1,0 +1,22 @@
+<h3>Company Details?</h3>
+<hr />
+<div>
+          <%= label_tag "Company Name" %>
+          <%= text_field_tag "company[name]", company.name %>
+        </div>
+        <div>
+          <%= label_tag "Address" %>
+          <%= text_field_tag "company[address]", company.address %>
+        </div>
+        <div>
+          <%= label_tag "Change Company logo" %>
+          <%= file_field_tag "company[logo]" %>
+        </div>
+<div style="float:right;margin: -40px 100px 0 0px;height:60px; width:60px;">
+      <% if current_user.company.logo? %>
+        <%= image_tag current_user.company.logo_url(:thumb) %>
+      <% else %>
+        <%= image_tag 'user_default_image.gif' %>
+      <% end %>
+    </div>
+<br /><br />
