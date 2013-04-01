@@ -1,5 +1,8 @@
 class PaintingsController < ApplicationController
   before_filter :verify_account_validity, :only=>["new"]
+  before_filter :set_default_response_format
+
+
   def index
     #@painting = Painting.new
     @paintings = Painting.all
@@ -113,4 +116,8 @@ class PaintingsController < ApplicationController
       return false
     end
   end
+   protected
+  def set_default_response_format
+      request.format = 'js'.to_sym
+    end
 end

@@ -272,7 +272,7 @@ class User < ActiveRecord::Base
   #      self.packag=s_pkg=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>2,:renew_date=>estimate_renew_date(p.yearly_price,365))
   ##     end
   #  end
-
+ #note change
   #  def self.appliction_size
   #    require 'find'
   #    size = 0
