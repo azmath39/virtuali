@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
     @email= params[:user][:email]
     payment
     if resource.save
-     
+      resource.company= Company.new(params[:company])
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)
@@ -27,6 +27,17 @@ class RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
     # create the charge on Stripe's servers - this will charge the user's card 
+  end
+  def edit
+    super
+    @company = current_user.company
+  end
+
+  def update
+    super
+    if resource.company
+      resource.company.update_attributes(params[:company])
+    end
   end
   
   private
