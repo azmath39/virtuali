@@ -39,6 +39,8 @@ home_image3.png: home_image3.png
 home_image3/index.png: home_image3.png
 icon-money.png: icon-money.png
 icon-money/index.png: icon-money.png
+loading.gif: loading.gif
+loading/index.gif: loading.gif
 menu_bg.png: menu_bg.png
 menu_bg/index.png: menu_bg.png
 rails.png: rails.png
@@ -71,8 +73,6 @@ application.js: application.js
 application/index.js: application.js
 application.css: application.css
 application/index.css: application.css
-loading.gif: loading.gif
-loading/index.gif: loading.gif
 progressbar.gif: progressbar.gif
 progressbar/index.gif: progressbar.gif
 bootstrap-wysihtml5.js: bootstrap-wysihtml5.js

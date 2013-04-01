@@ -109,7 +109,7 @@ class User < ActiveRecord::Base
   def change_package(pkg)
     new_package=Package.find(pkg[:id].to_i)
     previous_package=self.selected_package.package
-    if new_package.regular_price >=previous_package.regular_price 
+    if new_package.regular_price >=previous_package.regular_price or self.selected_package.status!=1
       package_upgrade(pkg)
       tours_inactive if  new_package.package_type.to_i==2 and  previous_package.package_type.to_i==1
     else
@@ -275,7 +275,7 @@ class User < ActiveRecord::Base
   #      self.packag=s_pkg=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>2,:renew_date=>estimate_renew_date(p.yearly_price,365))
   ##     end
   #  end
-
+ #note change
   #  def self.appliction_size
   #    require 'find'
   #    size = 0

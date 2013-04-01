@@ -61,7 +61,7 @@ class Tour < ActiveRecord::Base
   validates :price, :numericality => {:greater_than_or_equal_to => 0}
   after_initialize :set_status
 
-  friendly_id :address, use: :slugged
+  friendly_id :address, :use=> :slugged
   acts_as_gmappable
   belongs_to :user
   has_many :paintings, :dependent => :destroy
@@ -97,6 +97,9 @@ class Tour < ActiveRecord::Base
   def set_status
     self.status ||= 1
   end
+  def address
+  "#{self.address1},#{self.city},#{self.state},#{self.zip}"
+end
 def location
   "#{self.address1},#{self.city},#{self.state},#{self.zip}"
 end
