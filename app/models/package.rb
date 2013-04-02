@@ -21,6 +21,7 @@ class Package < ActiveRecord::Base
   has_many :users, :through => :selected_packages
   has_many :selected_packages
   belongs_to :product
+  before_save :set_status_and_subscription_period
   def max_tours
     case self.no_of_tours
     when 0
@@ -37,6 +38,27 @@ class Package < ActiveRecord::Base
     else
       "$#{self.regular_price}/ 3 months"
 
+    end
+  end
+  
+  def set_status_and_subscription_period
+    self.status ||=1
+    self.subscription_period ||=1
+  end
+  def tours_allowed
+    case self.no_of_tours
+    when 0
+      "Unlimited"
+    when 1
+       "Only One"
+    end
+  end
+  def package_type_to_string
+    case self.package_type.to_i
+    when 1
+       "Regular"
+    when 2
+        "Combo"
     end
   end
 end
