@@ -12,7 +12,7 @@ menu :parent => "Admin Options"
 
   form do |f|                         
     f.inputs "Admin Details" do
-      f.input "Full Name", :name
+      f.input :name, :label=>"Full Name"
       f.input :email                  
       f.input :password             
       f.input :password_confirmation  
