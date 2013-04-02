@@ -3,7 +3,7 @@ var ec=0;
     $('#slides').slidesjs({
       width: 600,
       height: 1500,
-      navigation: false
+      navigation: true
     });
   });
 
