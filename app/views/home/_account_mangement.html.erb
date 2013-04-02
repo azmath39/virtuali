@@ -78,7 +78,9 @@
       <li class="active tab"><%= link_to '<i class="icon-desktop"></i> Dashboard'.html_safe, "#div_dashboard", "data-toggle" => "tab"%> </li>
       <li class="tab"><%= link_to '<i class="icon-eye-open"></i> Status'.html_safe, '#div_status', "data-toggle" => "tab"%> </li>
       <li class="tab"><%= link_to '<i class="icon-money"></i> Billing'.html_safe, '#div_billing', "data-toggle" => "tab" %></li>
-
+      <% if current_user.company %>
+      <li class="tab"><%= link_to '<i class="icon-certificate"></i> Company'.html_safe, '#div_company', "data-toggle" => "tab" %></li>
+      <% end %>
       <li class="tab"><%= link_to '<i class="icon-edit"></i> Profile'.html_safe, '#div_profile', "data-toggle" => "tab" %></li>
       <li class="tab"><%#= link_to "Manage Account", '#div_manage', "data-toggle" => "tab"%> </li>
       <li class="tab"><%#= link_to "Upgrade Account", '#div_upgrade', "data-toggle" => "tab"%> </li>
@@ -88,7 +90,24 @@
 
 <%= render 'payment_form' %>
 <%=render "tab_content"%>
-
+<%if current_user.company %>
+<style>
+  .tab{
+    width:20%;
+    text-align:center;
+  }
+  .tab > a{
+    font-size:20px;
+    font-weight: bold;
+    line-height: 4;
+    box-shadow:10px 10px 5px #888888;
+    color:#0088CC !important
+  }
+  .tab > a:hover{
+    color: black !important;
+  }
+  </style>
+  <% else %>
 <style>
   .tab{
     width:25%;
@@ -105,3 +124,5 @@
     color: black !important;
   }
 </style>
+<%  end %>
+

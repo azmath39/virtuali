@@ -4,7 +4,9 @@
    <%=render 'tour_status'%>
   </div>
   <div class="tab-pane" id="div_billing"><%=render 'billing_page'%></div>
-  
+  <% if current_user.company  %>
+    <div class="tab-pane" id="div_company"><%=render 'company_page', :user => current_user%></div>
+  <% end %>
   <div class="tab-pane" id="div_profile"><%=render 'user_profile'%></div>
   <div class="tab-pane" id="div_manage"><%#=render "side_buttons"%></div>
   <div class="tab-pane" id="div_upgrade"><%#=render "upgrade_package"%></div>

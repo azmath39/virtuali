@@ -1,0 +1,29 @@
+<div id="signin_div" style="width:30%;">
+<h3>Edit Company Details</h3>
+<hr />
+<%= form_for @company, :url => '/companies/update' do |f| %>
+<%= f.hidden_field :id %>
+<div>
+  <%= f.label :name, 'Comapny Name'  %>
+  <%= f.text_field :name %>
+</div>
+<div>
+  <%= f.label :address %>
+  <%= f.text_field :address %>
+</div>
+<div>
+  <%= f.label :logo, "Change Company logo" %>
+  <%= f.file_field :logo %>
+</div>
+
+<%= f.submit "Update" %>
+<% end %>
+<div style="float:right;margin: -80px 40px 0 0px;height:60px; width:60px;">
+  <% if current_user.company.logo? %>
+    <%= image_tag current_user.company.logo_url(:thumb) %>
+  <% else %>
+    <%= image_tag 'user_default_image.gif' %>
+  <% end %>
+</div>
+<br /><br />
+</div>
