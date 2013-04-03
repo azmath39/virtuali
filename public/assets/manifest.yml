@@ -1,4 +1,8 @@
 ---
+Helvetica.dfont: Helvetica.dfont
+Helvetica/index.dfont: Helvetica.dfont
+helvetica.ttf: helvetica.ttf
+helvetica/index.ttf: helvetica.ttf
 bg.jpg: bg.jpg
 bg/index.jpg: bg.jpg
 bg2.jpg: bg2.jpg
