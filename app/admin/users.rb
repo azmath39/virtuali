@@ -17,8 +17,8 @@ ActiveAdmin.register User do
   end 
   index do
     column "Full Name", :name
-    column :email
     column "Package", :package_name
+    column :email
     column "Phone No",:phno
     column :city
     column :state

@@ -15,4 +15,12 @@ class Product < ActiveRecord::Base
   has_many :packages
   has_many :tours
   belongs_to :category
+  def product_type_to_string
+    case self.product_type.to_i
+    when 1
+      "Regular"
+    when 2
+      "Combo"
+    end
+  end
 end

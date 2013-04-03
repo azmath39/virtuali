@@ -1,8 +1,10 @@
 ---
+ArchitectsDaughter.ttf: ArchitectsDaughter.ttf
+ArchitectsDaughter/index.ttf: ArchitectsDaughter.ttf
 Helvetica.dfont: Helvetica.dfont
 Helvetica/index.dfont: Helvetica.dfont
-helvetica.ttf: helvetica.ttf
-helvetica/index.ttf: helvetica.ttf
+helvetica lt 23 ultra light extended.ttf: helvetica lt 23 ultra light extended.ttf
+helvetica lt 23 ultra light extended/index.ttf: helvetica lt 23 ultra light extended.ttf
 bg.jpg: bg.jpg
 bg/index.jpg: bg.jpg
 bg2.jpg: bg2.jpg
