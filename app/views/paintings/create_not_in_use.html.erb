@@ -1,0 +1,14 @@
+
+<%=hidden_field_tag :painting, @painting.id%>
+<script type="text/javascript">
+  
+  $(document).ready(function(){
+    alert($('#painting').val());
+    $.ajax({ url: '/paintings/create_ie', type: 'get', dataType:'script',
+      data: {
+        id: $('#painting').val()
+      }
+    });
+  });
+</script>
+
