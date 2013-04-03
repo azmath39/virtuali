@@ -1,269 +1,186 @@
-
-<style>
-  /* Prevent the slideshow from flashing on load */
-
-  #slides {
-    margin-top:100px;
-    margin-left: 20%;
-    -moz-box-shadow: 0 0 5px 5px #888;
-    -webkit-box-shadow: 0 0 5px 5px#888;
-    box-shadow: 0 0 5px 5px #888;
-    width:37% !important;
+<script>
+  $(document).ready(function(){
+    $('#signupCarousel').carousel({
+      //pause:true,
+      interval: false
+      
+    })
     
-    padding: 2%;
-    background: url(bg2.png);
-    background-repeat: repeat;
-    border-radius:20px;
-
-
-  }
-
-  /* Center the slideshow */
-  .container {
-    margin: 10px 100px 10px 100px;
-
-  }
-
-  /* Show active item in the pagination */
-  .slidesjs-pagination .active {
-    color:red;
-  }
-
-  #scont{
-    height: auto;
-  }
-
-  #next_btn{
-    float :right;
-    margin-bottom: 50px;
-  }
-
-  body {
-    -webkit-font-smoothing: antialiased;
-    font: normal 15px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #232525;
-  }
-
-  #slides .slidesjs-navigation {
-    margin-top:3px;
-  }
-
-  #slides .slidesjs-previous {
-    margin-right: 5px;
-    float: left;
-    color: white !important;
-  }
-
-  #slides .slidesjs-next {
-    margin-right: 5px;
-    float: left;
-    color: white !important;
-  }
-
-  .slidesjs-pagination {
-    margin: 6px 0 0;
-    float: right;
-    list-style: none;
-  }
-
-  .slidesjs-pagination li {
-    float: left;
-    margin: 0 1px;
-  }
-
-  .slidesjs-pagination li a {
-    display: block;
-    width: 13px;
-    height: 0;
-    padding-top: 13px;
-    background-image: url(/img/pagination.png);
-    background-position: 0 0;
-    float: left;
-    overflow: hidden;
-  }
-
-  .slidesjs-pagination li a.active,
-  .slidesjs-pagination li a:hover.active {
-    background-position: 0 -13px
-  }
-
-  .slidesjs-pagination li a:hover {
-    background-position: 0 -26px
-  }
-
-  #slides a:link,
-  #slides a:visited {
-    color: #333
-  }
-
-  #slides a:hover,
-  #slides a:active {
-    color: #9e2020
-  }
-  #payment,#package_info, #product_select, #personal_info{
-
-
-
-  }
-
-
-  
-</style>
-<div style="margin-top:10%;margin-left: -14%;">
-<%= render 'shared/flash_messages' %>
-</div>
-
+  });
+</script>
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :id => 'payment-form', :multipart => true })  do |f| %>
   <%= devise_error_messages! %>
-  <%#= render 'shared/error_messages', :target => @user %>
-<p class="title-text" style="margin: 2% 0 -80px 20%;">Sign Up</p>
-  <div id="slides">
-    <div id="personal_info">
-      
-      <div id="scont">
-        <h3>Personal Information</h3>
-        <hr></hr>
-        <span id="personal_info_error" style="color:red;"></span>
-        <div>
-          <%= f.label "full_Name", 'Full Name <span>*<span>'.html_safe %>
-          <%= f.text_field :name%><span id="personal_info_error_name" style="color:red;"></span>
-        </div>
-        <div>
-          <%= f.label "email", "Email <span>*<span>".html_safe %>
-          <%= f.email_field :email,:id=>"email_id",:onblur=>"email_validation()" %><span id="personal_info_error_email" style="color:red;"></span>
-        </div>
-        <div>
-          <%= f.label "password", "Password <span>*<span>".html_safe %>
-          <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i><br />
-          <%= f.password_field :password, :id=>"password" %><span id="personal_info_error_password" style="color:red;"></span>
-        </div>
-        <div>
-          <%= f.label "password_confirmation", "Password Confirmation <span>*<span>".html_safe %>
-          <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i><br />
-          <%= f.password_field :password_confirmation,:id=>"password_confirmation" %><span id="personal_info_error_cpassword" style="color:red;"></span>
-        </div>
-        <div>
-          <%= f.label :phno, "Mobile Number" %>
-          <%= f.text_field :phno %>
-        </div>
-        <div>
-          <%= f.label :add1, "Address1 <span>*<span>".html_safe %>
-          <%= f.text_field :add1 %><span id="personal_info_error_add1" style="color:red;"></span>
-        </div>
-        <div>
-          <%= f.label :add2, "Address2" %>
-          <%= f.text_field :add2 %><span id="personal_info_error_add2" style="color:red;"></span>
-        </div>
-        <div>
-          <%= f.label "state", "State <span>*<span>".html_safe %>
-          <%= f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
-          <span id="personal_info_error_state" style="color:red;"></span>
-        </div>
-        <div class ="control-group">
-          <%= f.label "city", "City <span>*<span>".html_safe, :html => {:class => 'control-label'} %>
-          <%=f.select :city, {},:prompt=>"Select City"%>
-          <span id="personal_info_error_city" style="color:red;"></span>
-        </div>
-        <div>
-          <%= f.label :zipcode, "ZIP Code <span>*<span>".html_safe %>
-          <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
-        </div>
-        <%= f.label :image, "Profile Picture" %>
-        <%= f.file_field :image, :id => 'user_file', :style => "display:none" %>
 
-    <div class="input-append">
-       <input id="photoCover" class="input-large" type="text">
-       <a class="btn btn-warning" onclick="$('input[id=user_file]').click();">Browse</a>
-    </div>
-        
-        
-      </div>
-      <div id="next_btn">
-        <%=link_to "Next", '#',:class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_personal",:onclick=>"button()" %>
-      </div>
-   </div>
-    <div id="product_select" >
-      
-      <div id="scont">
-        <h3>Product Selection</h3>
-        <span id="product_error" style="color:red;"></span>
-        <hr></hr>
-        <span id="product_error" style="color:red;"></span>
-        <%@i=0%>
-        <% Product.all.each do |x| %>
-          <div style="margin-left: 12px;">
-            <%= radio_button_tag "user[product]", x.id, nil, :id=>"product", :onclick => "company()" %>&nbsp;<%=  x.name%>
-          </div><br/>
-          <% @i+=1 %>
-        <% end %><br />
-        <div id="company_details">
+  <div id="signupCarousel" class="carousel slide" style="border:2px solid;height:600px;" >
+
+    <div class="carousel-inner" style="height:600px;">
+      <div class="active item">
+        <div id="personal_info">
+          <div id="scont">
+            <h3>Personal Information</h3>
+            <hr></hr>
+            <span id="personal_info_error" style="color:red;"></span>
+            <div class="span6">
+            <div>
+              <%= f.label "full_Name", 'Full Name <span>*<span>'.html_safe %>
+              <%= f.text_field :name%><span id="personal_info_error_name" style="color:red;"></span>
+            </div>
+            <div>
+              <%= f.label "email", "Email <span>*<span>".html_safe %>
+              <%= f.email_field :email,:id=>"email_id",:onblur=>"email_validation()" %><span id="personal_info_error_email" style="color:red;"></span>
+            </div>
+            <div>
+              <%= f.label "password", "Password <span>*<span>".html_safe %>
+              <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i><br />
+              <%= f.password_field :password, :id=>"password" %><span id="personal_info_error_password" style="color:red;"></span>
+            </div>
+            <div>
+              <%= f.label "password_confirmation", "Password Confirmation <span>*<span>".html_safe %>
+              <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i><br />
+              <%= f.password_field :password_confirmation,:id=>"password_confirmation" %><span id="personal_info_error_cpassword" style="color:red;"></span>
+            </div>
+            <div>
+              <%= f.label :phno, "Mobile Number" %>
+              <%= f.text_field :phno %>
+            </div>
+              <%= f.label :image, "Profile Picture" %>
+            <%= f.file_field :image, :id => 'user_file', :style => "display:none" %>
+            <div class="input-append">
+              <input id="photoCover" class="input-large" type="text">
+              <a class="btn btn-warning" onclick="$('input[id=user_file]').click();">Browse</a>
+            </div>
+            </div>
+            <div class="span6">
+            <div>
+              <%= f.label :add1, "Address1 <span>*<span>".html_safe %>
+              <%= f.text_field :add1 %><span id="personal_info_error_add1" style="color:red;"></span>
+            </div>
+            <div>
+              <%= f.label :add2, "Address2" %>
+              <%= f.text_field :add2 %><span id="personal_info_error_add2" style="color:red;"></span>
+            </div>
+            <div>
+              <%= f.label "state", "State <span>*<span>".html_safe %>
+              <%= f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
+              <span id="personal_info_error_state" style="color:red;"></span>
+            </div>
+            <div class ="control-group">
+              <%= f.label "city", "City <span>*<span>".html_safe, :html => {:class => 'control-label'} %>
+              <%=f.select :city, {},:prompt=>"Select City"%>
+              <span id="personal_info_error_city" style="color:red;"></span>
+            </div>
+            <div>
+              <%= f.label :zipcode, "ZIP Code <span>*<span>".html_safe %>
+              <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
+            </div>
+            <div id="next_btn">
+            <%=link_to "Next", '#signupCarousel',:class =>"carousel-control  btn-large btn-primary","data-slide"=>"next", :id=>"btn_personal",:onclick=>"button()" %>
+          </div>
+            </div>
+
+          </div>
+
           
         </div>
-        <br />
       </div>
-      <%= link_to "Previous","#", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
-      <div id="next_btn">
-        <%=link_to "Next","#",:class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_product" %>
+
+
+      <div class="item">
+        <div id="product_select" >
+
+          <div id="scont">
+            <h3>Product Selection</h3>
+            <span id="product_error" style="color:red;"></span>
+            <hr></hr>
+            <span id="product_error" style="color:red;"></span>
+            <%@i=0%>
+            <% Product.all.each do |x| %>
+              <div style="margin-left: 12px;">
+                <%= radio_button_tag "user[product]", x.id, nil, :id=>"product", :onclick => "company()" %>&nbsp;<%=  x.name%>
+              </div><br/>
+              <% @i+=1 %>
+            <% end %><br />
+            <div id="company_details">
+
+            </div>
+            <br />
+          </div>
+          <%= link_to "Previous","#signupCarousel", :class =>"carousel-control left btn-large btn-primary","data-slide"=>"prev" %>
+          <div id="next_btn">
+            <%=link_to "Next","#signupCarousel",:class => "carousel-control right btn-large btn-primary",:id=>"btn_product","data-slide"=>"next" %>
   <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
-      </div>
-    </div>
-    <div id ="package_info">
-      
-      <div id="scont">
-        <div id="packages">
+          </div>
         </div>
+
       </div>
-      <%= link_to "Previous","#", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
-      <div id="next_btn">
-        <%=link_to "Next","#",  :class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_package"%>
-  
-      </div>
-    </div>
-    <div id="payment">
-      <div id="scont">
-        <h3>Payment Process</h3>
-        <hr></hr>
-        <div class = "payment-errors" style="margin:0 0 20px 15px; color: red;">
-        </div>
-        <div class="field" >Total Payable Amount($): <%= hidden_field_tag "total_amount","",:class=> "money" %>
-         &nbsp;&nbsp; <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
 
 
-        <div class="field" style="padding:20px 0px;">
-          <%=hidden_field_tag "type_of_transaction",1%>
-          <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
+      <div class="item">
+        <div id ="package_info">
+
+          <div id="scont">
+            <div id="packages">
+            </div>
+          </div>
+          <%= link_to "Previous","#signupCarousel", :class =>"carousel-control left btn-large btn-primary","data-slide"=>"prev" %>
+          <div id="next_btn">
+            <%=link_to "Next","#signupCarousel",  :class => "carousel-control right btn-large btn-primary",:id=>"btn_package","data-slide"=>"next"%>
+
+          </div>
         </div>
-        <div class="field">
-            
-         <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
-          <i style="font-size: 10px;">( Leave blank if no coupon is available now. )</i><br />
-          <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
-          <div id='discounted_total'></div>
-        </div>
-        <div class="field">
-          <%= label_tag :card_number, "Credit Card Number <span>*<span>".html_safe %>
-          <%= text_field_tag "card-number", nil, name: nil %>
-        </div>
-        <div class="field">
-          <%= label_tag :card_code, "Security Code on Card (CVV) <span>*<span>".html_safe %>
-          <%= password_field_tag "card-cvc", nil, name: nil, :style => "width:50px;" %>
-        </div>
-        <div>
-          <%= label_tag :card_month, "Card Expiration <span>*<span>".html_safe %>
-          <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
-          <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
-        </div></div>
-      <%= link_to "Previous","#", :class =>"slidesjs-previous slidesjs-navigation btn-large btn-primary" %>
-      <div id="next_btn">
-        <%= f.submit "Sign up", 'data-disable-with' => "Processing",  :class=>"btn-large btn-primary"%>
       </div>
+      <div class="item">
+        <div id="payment">
+          <div id="scont">
+            <h3>Payment Process</h3>
+            <hr></hr>
+            <div class = "payment-errors" style="margin:0 0 20px 15px; color: red;">
+            </div>
+            <div class="field" >Total Payable Amount($): <%= hidden_field_tag "total_amount","",:class=> "money" %>
+              &nbsp;&nbsp; <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
+
+
+            <div class="field" style="padding:20px 0px;">
+              <%=hidden_field_tag "type_of_transaction",1%>
+  <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
+            </div>
+            <div class="field">
+
+              <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
+              <i style="font-size: 10px;">( Leave blank if no coupon is available now. )</i><br />
+              <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
+              <div id='discounted_total'></div>
+            </div>
+            <div class="field">
+              <%= label_tag :card_number, "Credit Card Number <span>*<span>".html_safe %>
+              <%= text_field_tag "card-number", nil, name: nil %>
+            </div>
+            <div class="field">
+              <%= label_tag :card_code, "Security Code on Card (CVV) <span>*<span>".html_safe %>
+              <%= password_field_tag "card-cvc", nil, name: nil, :style => "width:50px;" %>
+            </div>
+            <div>
+              <%= label_tag :card_month, "Card Expiration <span>*<span>".html_safe %>
+              <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
+              <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
+            </div></div>
+          <%= link_to "Previous","#signupCarousel", :class =>"carousel-control left btn-large btn-primary","data-slide"=>"prev" %>
+          <div id="next_btn">
+            <%= f.submit "Sign up", 'data-disable-with' => "Processing",  :class=>"btn-large btn-primary"%>
+          </div>
+        </div>
+      </div>
+
     </div>
- 
-  </div>
+  <%#*<a class="carousel-control left" href="#signupCarousel" data-slide="prev">&lsaquo;</a>%>
+  <%#*<a class="carousel-control right" href="#signupCarousel" data-slide="next">&rsaquo;</a>%>
+  </div><!-- end of carousel -->
 <% end %>
+
+
 <%= javascript_include_tag "registrations" %>
 <script>
-  
+
   function state_city()
   {
     $.ajax({
@@ -273,45 +190,45 @@
         'state' :  $("#user_state").val()
       }
     }).done(function(text) {
-  $('#user_city').empty().append(text);
+      $('#user_city').empty().append(text);
     });
   }
 
   //file upload button
   $('input[id=user_file]').change(function() {
-   $('#photoCover').val($(this).val());
-});
-function apply_discount()
-{
-  $.ajax({
-    type:'GET',
-    url: '/home/check_discount',
-    data:{
-      code: $('#coupon_id').val(),
-      amount:$('#total_amount').val()
-    }
-  }).done(function(html){
-    
-    $('#discounted_total').html(html)
-
+    $('#photoCover').val($(this).val());
   });
-}
+  function apply_discount()
+  {
+    $.ajax({
+      type:'GET',
+      url: '/home/check_discount',
+      data:{
+        code: $('#coupon_id').val(),
+        amount:$('#total_amount').val()
+      }
+    }).done(function(html){
 
-$(document).ready(function(){
-company();
-});
-function company()
-{
-  $.ajax({
-    type: 'GET',
-    url: '/companies/new',
-    data:{
-      product: $("input[name='user[product]']:checked").val()
-    }
-  }).done(function(html){
-    $('#company_details').html(html)
+      $('#discounted_total').html(html)
+
+    });
+  }
+
+  $(document).ready(function(){
+    company();
   });
-}
+  function company()
+  {
+    $.ajax({
+      type: 'GET',
+      url: '/companies/new',
+      data:{
+        product: $("input[name='user[product]']:checked").val()
+      }
+    }).done(function(html){
+      $('#company_details').html(html)
+    });
+  }
 
 </script>
 <%#= render "devise/shared/links" %>
@@ -319,5 +236,5 @@ function company()
 <style>
   span{
     color: red;
-}
+  }
 </style>

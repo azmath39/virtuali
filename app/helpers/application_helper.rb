@@ -18,6 +18,16 @@ module ApplicationHelper
 
     end
   end
+  def just_price(pkg)
+    if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?
+      "#{pkg.regular_price}<sub id ='per-month'>/month</sub> (or) #{pkg.special_price}<sub id ='per-month'>/year</sub> ".html_safe
+  elsif !pkg.special_price.nil?
+    "#{pkg.regular_price}<sub id ='per-month'>/Month</sub>".html_safe
+    else
+      "#{pkg.regular_price}<sub id ='per-month'>/3Months</sub>".html_safe
+
+    end
+  end
   def actual_price(pkg)
     if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?
       "$#{pkg.regular_price/0.85}/month (or) $#{pkg.special_price/0.85}/year "
