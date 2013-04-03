@@ -75,5 +75,8 @@ module VirtualTour
     config.action_mailer.default_url_options = {
       :host => "localhost:3000"
     }
+    #custom fonts
+    #config.assets.paths << "#{Rails.root}/app/assets/fonts"
   end
+  
 end

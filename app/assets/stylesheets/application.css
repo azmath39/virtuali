@@ -12,8 +12,10 @@
  *= require gmaps4rails
  *= require galleria.classic
  *= require bootstrap-wysihtml5
+ *= require fonts
  *= require_tree .
  */
+
 #feedback a{
 display:block;
 position:fixed;
