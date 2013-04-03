@@ -1,29 +1,29 @@
 <center><h3>Package Selection</h3>
 
-<span id="package_error" style="color:red;"></span>
+  <span id="package_error" style="color:red;"></span>
 </center>
 <div class="pricing_grid row" >
   <% @regular_packages.each do |pkg| %>
-   
+
     <div class="span3 first-grid" >
   <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
       <p><center><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package"%></center></p>
       <p id="price">
 
-    <sup id="dollar-symb">$</sup><%=just_price(pkg)%>
-  </p>
-  <hr />
-      
+        <sup id="dollar-symb">$</sup><%=just_price(pkg)%>
+      </p>
+      <hr />
+
       <center><h2><%=pkg.name%></h2>
-      <ul class="unstyled">
-      <p><li><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></li></p>
-      <p><li><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></li></p>
-      <p><li><b>Template size:</b>&nbsp;600x400</li></p>
-      <%if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?%>
-        <p><li> <%=radio_button_tag "user[package][type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly</li> </p>
-      <%elsif !pkg.special_price.nil?%>
-        <%=hidden_field_tag "user[package][type_of_payment]",1%>
-      <%end%>
+        <ul class="unstyled">
+          <p><li><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></li></p>
+          <p><li><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></li></p>
+          <p><li><b>Template size:</b>&nbsp;600x400</li></p>
+          <%if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?%>
+            <p><li> <%=radio_button_tag "user[package][type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly</li> </p>
+          <%elsif !pkg.special_price.nil?%>
+            <%=hidden_field_tag "user[package][type_of_payment]",1%>
+          <%end%>
         </ul></center>
   <%#unless pkg.monthly_price.nil?%>
   <%#=hidden_field_tag "user[package][type_of_payment]",1%>
@@ -43,27 +43,35 @@
 
           </div>
           <div id="pack" class="accordion-body collapse" style="height: 0px; ">
-            <div>
+            <div class="pricing_grid row" >
               <% @combo_packages.each do |pkg| %>
-                <hr />
-                <div>
+                <div class="span3 first-grid" >
+                  <p><center><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package"%></center></p>
     <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
-                  <p><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package"%>&nbsp;<b><span style="color:rgb(0, 136, 204);font-weight: bold;"><%=pkg.name%></span></b></p>
-                  <p><b>Actual Price:</b>&nbsp;<%=actual_price(pkg)%></p>
-                  <p><b>Offer Price:</b>&nbsp;<%=price(pkg)%></p>
-                  <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
-                  <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
-                  <p><b>Template size:</b>&nbsp;600x400</p>
+                  <p id="price">
+
+                    <sup id="dollar-symb">$</sup><%=just_price(pkg)%>
+                  </p>
+                  <hr />
+                   <center><h2><%=pkg.name%></h2>
+        <ul class="unstyled">
+                  
+                  <p><li><b>Actual Price:</b>&nbsp;<%=actual_price(pkg)%></li></p>
+                  <p><li><b>Offer Price:</b>&nbsp;<%=price(pkg)%></li></p>
+                  <p><li><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></li></p>
+                  <p><li><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></li></p>
+                  <p><li><b>Template size:</b>&nbsp;600x400</li></p>
 
                   <%if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?%>
-                    <p> <%=radio_button_tag "user[package][type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </p>
+                    <p><li> <%=radio_button_tag "user[package][type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </li></p>
                   <%elsif !pkg.special_price.nil?%>
                     <%=hidden_field_tag "user[package][type_of_payment]",1%>
                   <%end%>
     <%#unless pkg.monthly_price.nil?%>
     <%#=hidden_field_tag "user[package][type_of_payment]",1%>
     <%#*<p><b>Subscription Period</b>:&nbsp;<%=radio_button_tag "user[package][type_of_payment]",1% &nbsp;Monthly&nbsp;<%=radio_button_tag "user[package][type_of_payment]",2%&nbsp;Yearly</p>%>
-    <%#end%>
+<%#end%>
+        </ul></center>
                 </div>
 
               <% end %>

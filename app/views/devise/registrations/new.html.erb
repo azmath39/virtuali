@@ -86,9 +86,10 @@
 
 
       <div class="item">
+        
         <div id="product_select" >
-
-          <div id="scont">
+<div class="row">
+          <div id="scont" class="span5" style="border-right: 2px #cccccc solid;">
             <h3>Product Selection</h3>
             <span id="product_error" style="color:red;"></span>
             <hr></hr>
@@ -100,11 +101,13 @@
               </div><br/>
               <% @i+=1 %>
             <% end %><br />
-            <div id="company_details">
+            </div>
+            <div id="company_details" class="span5">
 
             </div>
+        </div>
             <br />
-          </div>
+          
           <%= link_to "Previous","#signupCarousel", :class =>"carousel-control left btn-large btn-primary","data-slide"=>"prev" %>
           <div id="next_btn">
             <%=link_to "Next","#signupCarousel",:class => "carousel-control right btn-large btn-primary",:id=>"btn_product","data-slide"=>"next" %>
@@ -237,4 +240,5 @@
   span{
     color: red;
   }
+ 
 </style>
