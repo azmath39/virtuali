@@ -4,25 +4,28 @@
 <%= form_for @company, :url => '/companies/update' do |f| %>
 <%= f.hidden_field :id %>
 <div>
-  <%= f.label :name, 'Comapny Name'  %>
+  <%= f.label :name, 'Company Name'  %>
   <%= f.text_field :name %>
 </div>
 <div>
   <%= f.label :address %>
   <%= f.text_field :address %>
 </div>
-<div>
   <%= f.label :logo, "Change Company logo" %>
-  <%= f.file_field :logo %>
-</div>
+  <%= f.file_field :logo, :id => 'company_logo', :style=>"display:none;" %>
 
-<%= f.submit "Update" %>
+<div class="input-append">
+  <input id="photoCover" class="input-large" type="text" style="width:146px;"/>
+  <a class="btn btn-primary" onclick="$('input[id=company_logo]').click();">Browse</a>
+</div><br />
+
+<%= f.submit "Update", :class=>'btn btn-primary' %>
 <% end %>
-<div style="float:right;margin: -80px 40px 0 0px;height:60px; width:60px;">
+<div style="float:right;margin: -25% 25% 0 0px;height:60px; width:60px;">
   <% if current_user.company.logo? %>
     <%= image_tag current_user.company.logo_url(:thumb) %>
   <% else %>
-    <%= image_tag 'user_default_image.gif' %>
+    <%= image_tag 'default_company_logo.png' %>
   <% end %>
 </div>
 <br /><br />

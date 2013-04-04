@@ -35,6 +35,10 @@ classic-map.png: classic-map.png
 classic-map/index.png: classic-map.png
 cut.png: cut.png
 cut/index.png: cut.png
+default_company_logo.png: default_company_logo.png
+default_company_logo/index.png: default_company_logo.png
+default_user_company_logo.gif: default_user_company_logo.gif
+default_user_company_logo/index.gif: default_user_company_logo.gif
 down_arrow.gif: down_arrow.gif
 down_arrow/index.gif: down_arrow.gif
 fdback.png: fdback.png

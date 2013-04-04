@@ -85,14 +85,20 @@ $("#user_zipcode").blur(function(event){
     }
 });
 
+
 $('#btn_personal').click(function(event) {
     $('#btn_personal').prop('disabled', true);
     var count=0;
     $('#personal_info_error').html("");
     if($("#user_name").val()==""){
-        $('#personal_info_error_name').html("<br/>* Required field Name.");
+        $('#personal_info_error_name').html("<br/>* Required Full Name.");
         count +=1;
     
+    }
+    if($("#company_name").val()==""){
+        $('#company_name_error').html("<br/>* Required Company Name.");
+        count +=1;
+
     }
 
     if($("#password").val()==""){
