@@ -1,21 +1,22 @@
 <div style="margin-left: 2%;">
-<p><span class="title-text">Company Profile</span>&nbsp;<b><%= link_to "edit".html_safe, {:controller => 'companies', :action => 'edit', :id => current_user.company.id}, :class=>"btn btn-link" %></b></p>
+<p><span class="title-text">Company Details</span>&nbsp;<b><%= link_to "Edit".html_safe, {:controller => 'companies', :action => 'edit', :id => current_user.company.id}, :class=>"btn btn-link" %></b></p>
 <hr />
 <% if user.company %>
 <div style="float: right; height:200px;width: 120px;">
   <%if user.company.logo?%>
   <%= image_tag user.company.logo_url(:thumb), :class=>'first-grid' %>
   <% else %>
-  <%= image_tag 'company_default_logo.gif' %>
+  <%= image_tag 'default_company_logo.png' %>
   <% end %>
   <center>
     <strong><%= user.company.name %> </strong>
     <p><%#= "+1 "+user.company.phno %></p>
   </center>
 </div>
-
-<u><h4> Company Details </h4></u>
-<%= user.company.name %><br />
+<b>Name</b><br />
+<%= user.company.name %><br /><br />
+<b>Address</b><br />
 <%= user.company.address %>
 <% end %><br /><br />
+<hr />
 </div>

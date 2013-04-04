@@ -1,8 +1,8 @@
 <h4>Provide your company Details:</h4>
 <br/><br/>
 <div>
-  <%= label_tag "Company Name" %>
-  <%= text_field_tag "company[name]" %>
+  <%= label_tag "Company Name *"%>
+  <%= text_field_tag "company[name]" %><span id="company_name_error" style="color:red;"></span>
 </div>
 <div>
   <%= label_tag "Address" %>
@@ -13,7 +13,20 @@
 <%= file_field_tag "company[logo]", :style => "display:none"%>
 
 <div class="input-append">
-  <input id="photoCover" class="input-large" type="text" style="width:146px;">
+  <input id="photoCover" class="input-large" type="text" style="width:146px;"/>
   <a class="btn btn-primary" onclick="$('input[id=company_logo]').click();">Browse</a>
 </div>
 
+<style>
+  span{
+    color: red;
+  }
+</style>
+<script>
+  $("#company_name").blur(function(event){
+    $('#company_name_error').html("");
+    if($("#company_name").val()==""){
+        $('#company_name_error').append("<br/>* Company Name Can't be empty.");
+    }
+});
+</script>

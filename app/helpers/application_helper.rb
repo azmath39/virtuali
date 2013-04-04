@@ -10,11 +10,11 @@ module ApplicationHelper
 
   def price(pkg)
     if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?
-      "$#{pkg.regular_price}/month (or) $#{pkg.special_price}/year "
+      "#{pkg.regular_price}<sub id='per-month'>/month</sub> (or) #{pkg.special_price}<sub id='per-month'>/year</sub> ".html_safe
   elsif !pkg.special_price.nil?
-      "$#{pkg.regular_price}/month"
+      "#{pkg.regular_price}<sub id='per-month'>/month</sub>".html_safe
     else
-      "$#{pkg.regular_price}/ 3 months"
+      "#{pkg.regular_price}<sub id='per-month'>/3months</sub>".html_safe
 
     end
   end
@@ -30,11 +30,11 @@ module ApplicationHelper
   end
   def actual_price(pkg)
     if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?
-      "$#{pkg.regular_price/0.85}/month (or) $#{pkg.special_price/0.85}/year "
+      "#{pkg.regular_price/0.85}<sub id ='per-month'>/month</sub> (or) #{pkg.special_price/0.85}<sub id ='per-month'>/year</sub>".html_safe
   elsif !pkg.special_price.nil?
-      "$#{pkg.regular_price/0.85}/month"
+      "#{pkg.regular_price/0.85}<sub id ='per-month'>/month</sub>".html_safe
     else
-      "$#{pkg.regular_price/0.85}/ 3 months"
+      "#{pkg.regular_price/0.85}<sub id ='per-month'>/3months</sub>".html_safe
 
     end
   end

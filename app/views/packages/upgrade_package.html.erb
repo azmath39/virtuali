@@ -1,124 +1,133 @@
-<div id="packages-div1">
+<div id="packages-div1" class="border-box">
   <%=form_for :package ,:url=>"upgrade",:html => { :id => 'payment-form'} do|f|%>
-
     <div id ="package_info">
-      <h3>Package Selection</h3>
-
-      <span id="package_error" style="color:red;"></span>
-      <div>
+        <div class="pricing_grid row" style="margin:4% 0 0 3%;">
+        <h3>Package Selection</h3>
+        <hr />
+        <span id="package_error" style="color:red;"></span>
         <% @regular_packages.each do |pkg| %>
-          <div>
-           
-
-           <p><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%>&nbsp;<b><span style="color:rgb(0, 136, 204);font-weight: bold;"><%=pkg.name%></span></b></p>
-                        <p><b>Price:</b>&nbsp;<%=price(pkg)%></p>
-                        <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
-                        <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
-                        <p><b>Template size:</b>&nbsp;600x400</p>
-
+          <div class="span3 first-grid" style="width:21%;">
+            <p><center><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%></center></p>
+    <%#*&nbsp;<b><span style="color:rgb(0, 136, 204);font-weight: bold;"><%=pkg.name%</span></b>%>
+            <br />
+            <p id="price">
+              <sup id="dollar-symb">$</sup><%=  price(pkg)%>
+            </p>
+            <hr />
+            <center><h2><%=pkg.name%></h2>
+              <ul class="unstyled">
+                <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
+                <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
+                <p><b>Template size:</b>&nbsp;600x400</p>
+              
               <%if current_user.special_offer and !pkg.special_price.nil?%>
                 <p> <%=radio_button_tag "package[type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </p>
-
-
-
               <%elsif !pkg.special_price.nil?%>
                 <%=hidden_field_tag "package[type_of_payment]",1%>
               <%end%>
-            
-          </div><br />
+                </ul>
+          </div>
         <% end %>
-        <%unless @combo_packages.empty?%>
-          <hr />
-          <div class="container-fluid">
-            <div class="accordion" id="accordion2">
-              <div >
-                <div class="accordion-heading">
-                  <p><b><span style="color:rgb(0, 136, 204);font-weight: bold;">Combo Package</span></b>
-                    <%=link_to "view","#pack", "data-toggle"=>"collapse", :class=>"btn btn-link"%></p>
+      </div>
 
-                </div>
-                <div id="pack" class="accordion-body collapse" style="height: 0px; ">
-                  <div>
+        <%unless @combo_packages.empty?%>
+          <%#*<hr />%>
+          <%#*<div class="container-fluid">%>
+            <%#*<div class="accordion" id="accordion2">%>
+              <%#*<div >%>
+                <%#*<div class="accordion-heading">%>
+                  <%#*<p><b><span style="color:rgb(0, 136, 204);font-weight: bold;">Combo Package</span></b>%>
+                    <%#=link_to "view","#pack", "data-toggle"=>"collapse", :class=>"btn btn-link"%</p>
+
+                <%#*</div>%>
+                <%#*<div id="pack" class="accordion-body collapse" style="height: 0px; ">%>
+                  <div class="pricing_grid row" style="margin:4% 0 0 3%;">
+                    <span id="package_error" style="color:red;"></span>
                     <% @combo_packages.each do |pkg| %>
-                      <hr />
-                      <div>
-      <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
-                        <p><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%>&nbsp;<b><span style="color:rgb(0, 136, 204);font-weight: bold;"><%=pkg.name%></span></b></p>
+                    <div class="span3 first-grid" style="width:21%;">
+                        <p><center><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%></center></p>
+                    <br />
+            <p id="price">
+              <sup id="dollar-symb">$</sup><%=  actual_price(pkg)%>
+            </p>
+            <hr />
+            <center><h2><%=pkg.name%></h2></center>
+            <ul class="unstyled">
                         <p><b>Actual Price:</b>&nbsp;<%=actual_price(pkg)%></p>
-                  <p><b>Offer Price:</b>&nbsp;<%=price(pkg)%></p>
+                        <p><b>Offer Price:</b>&nbsp;<%=price(pkg)%></p>
                         <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
                         <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
                         <p><b>Template size:</b>&nbsp;600x400</p>
-
+            
                         <%if current_user.special_offer and !pkg.special_price.nil?%>
                           <p> <%=radio_button_tag "package[type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </p>
-
-
 
                         <%elsif !pkg.special_price.nil?%>
                           <%=hidden_field_tag "package[type_of_payment]",1%>
                         <%end%>
-                      </div>
-
+                     </ul>
+                  </div>
                     <% end %>
-                  
-                </div>
-              </div>
+                <%#*</div>%>
 
-            </div>
-          </div>
-        </div>
-          <%end%>
-      </div><br />
-      <div id="next_btn">
-      <%=link_to "Next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_package" %>
-      <%= link_to "cancel", root_url , :style=> 'float:right;margin-right:20px;'%>
+              <%#*</div>%>
+            <%#*</div>%>
+          <%#*</div>%>
       </div>
-    </div>
-    <div id="payment_info">
-      <div id="scont">
-        <h3>Payment Process</h3>
-        <hr></hr>
-        <div class = "payment-errors" style="margin:0 0 20px 15px; color: red;">
+        <%end%><br /><br />
+        <div id="next_btn" style="float:right; margin-right:16%;">
+<%=link_to "Next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_package" %>&nbsp;
+          <span><%= link_to "Cancel", root_url , :style=> 'float:right;margin-right:20px;'%></span>
         </div>
-        <div class="field" >Total Payable Amount($) : <%= hidden_field_tag "total_amount","",:class=> "money" %>
-          <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
-
-       <div class="field" style="padding:20px 0px;">
-          <%=hidden_field_tag "type_of_transaction",1%>
-
-  <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
-        </div>
-        <%unless current_user.any_coupon?%>
-          <div class="field">
-
-            <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
-            <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
-            <div id='discounted_total'></div>
-          </div>
-        <%end%>
-        <div class="field">
-          <%= label_tag :card_number, "Credit Card Number" %>
-          <%= text_field_tag "card-number", nil, name: nil %>
-        </div>
-        <div class="field">
-          <%= label_tag :card_code, "Security Code on Card (CVV)" %>
-          <%= password_field_tag "card-cvc", nil, name: nil, :style => "width: 50px;" %>
-        </div>
-        <div>
-          <%= label_tag :card_month, "Card Expiration" %>
-          <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month", :style=> 'width:30%;'} %>
-          <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year", :style=> 'width:30%;'} %>
-        </div></div>
-
-      <div id="next_btn">
-        <%= f.submit "Upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
-        <%= link_to "cancel", root_url , :style=> 'float:right;margin-right:20px;'%>
-      </div>
-      
     </div>
   
-<%end%>
+      <div id="payment_info">
+        <div id="scont" style="margin:auto; width:50%;padding:4% 0 0 20%; ">
+          <h3>Payment Process</h3>
+          <hr style="width:38%;"></hr>
+          <div class = "payment-errors" style="margin:0 0 20px 0px; color: red;">
+          </div>
+          <div class="field" >Total Payable Amount($) : <%= hidden_field_tag "total_amount","",:class=> "money" %>
+            <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
+
+          <div class="field" style="padding:20px 0px;">
+            <%=hidden_field_tag "type_of_transaction",1%>
+
+  <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
+          </div>
+          <%unless current_user.any_coupon?%>
+            <div class="field">
+
+              <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
+              <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
+              <div id='discounted_total'></div>
+            </div>
+          <%end%>
+          <div class="field">
+            <%= label_tag :card_number, "Credit Card Number" %>
+            <%= text_field_tag "card-number", nil, name: nil %>
+          </div>
+          <div class="field">
+            <%= label_tag :card_code, "Security Code on Card (CVV)" %>
+            <%= password_field_tag "card-cvc", nil, name: nil, :style => "width: 50px;" %>
+          </div>
+          <div>
+            <%= label_tag :card_month, "Card Expiration" %>
+            <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month", :style=> 'width:108px;'} %>
+            <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year", :style=> 'width:108px;'} %>
+          </div>
+          <div id="next_btn">
+            <%= f.submit "Upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
+            <span><%= link_to "Cancel", root_url , :tyle=> 'float:right;margin-right:120px;'%></span>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    <%end%>
+  </div>
 </div>
 <script>
   $(document).ready(function(){
@@ -170,3 +179,10 @@
     });
   }
 </script>
+<style>
+  .border-box{
+    border-radius: 25px;
+    box-shadow:10px 10px 5px #0088CC ;
+    border:2px #0088CC solid;height:650px; width: 80%; margin:auto;
+  }
+</style>

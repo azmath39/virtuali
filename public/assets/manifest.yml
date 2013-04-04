@@ -1,6 +1,4 @@
 ---
-ArchitectsDaughter.ttf: ArchitectsDaughter.ttf
-ArchitectsDaughter/index.ttf: ArchitectsDaughter.ttf
 HELR45W.TTF: HELR45W.TTF
 HELR45W/index.TTF: HELR45W.TTF
 HELR46W.TTF: HELR46W.TTF
@@ -17,8 +15,6 @@ HELR67W.TTF: HELR67W.TTF
 HELR67W/index.TTF: HELR67W.TTF
 HELR68W.TTF: HELR68W.TTF
 HELR68W/index.TTF: HELR68W.TTF
-Helvetica.dfont: Helvetica.dfont
-Helvetica/index.dfont: Helvetica.dfont
 helveticalt23ultralightextended.ttf: helveticalt23ultralightextended.ttf
 helveticalt23ultralightextended/index.ttf: helveticalt23ultralightextended.ttf
 bg.jpg: bg.jpg
@@ -39,6 +35,10 @@ classic-map.png: classic-map.png
 classic-map/index.png: classic-map.png
 cut.png: cut.png
 cut/index.png: cut.png
+default_company_logo.png: default_company_logo.png
+default_company_logo/index.png: default_company_logo.png
+default_user_company_logo.gif: default_user_company_logo.gif
+default_user_company_logo/index.gif: default_user_company_logo.gif
 down_arrow.gif: down_arrow.gif
 down_arrow/index.gif: down_arrow.gif
 fdback.png: fdback.png
