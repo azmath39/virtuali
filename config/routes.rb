@@ -11,6 +11,7 @@ VirtualTour::Application.routes.draw do
   match '/paintings/count_rooms'=>'paintings#count_rooms'
   match '/tours/sold_out_tours' => 'tours#sold_out_tours'
   match '/tours/find_map_tours' => 'tours#find_map_tours'
+ # match '/paintings/create_ie'=>'paintings#create_ie'
 
   ActiveAdmin.routes(self)
 

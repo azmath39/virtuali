@@ -1,6 +1,6 @@
 class PaintingsController < ApplicationController
   before_filter :verify_account_validity, :only=>["new"]
-  before_filter :set_default_response_format
+  # before_filter :set_default_response_format
 
 
   def index
@@ -17,6 +17,10 @@ class PaintingsController < ApplicationController
     @painting = Painting.new
     @tour = Tour.new
     @products = current_user.subscribe_product
+    
+    #    respond_to do |format|
+    #    format.js {render :layout=>false}
+    #  end
     # @selected_pkgs=selected_pkgs_without_tour
   end
 
@@ -26,16 +30,16 @@ class PaintingsController < ApplicationController
       @painting = Painting.create(params[:painting])
       @painting.user_id= current_user.id
       @painting.save
-     respond_to do |format|
-      format.html {render @painting}
-      format.js
+      respond_to do |format|
+        format.html {render :js=>"window.location.reload(true);"}
+        format.js
+      end
+     
     end
-    end
-    def create_ie
-      @painting= Painting.find(params[:id])
-    
-
-    end
+    #    def create_ie
+    #      @painting= Painting.find(params[:id])
+    #
+    #    end
     #    puts "***********************"
     #    p @painting
     #
@@ -116,8 +120,9 @@ class PaintingsController < ApplicationController
       return false
     end
   end
-   protected
-  def set_default_response_format
-      request.format = 'js'.to_sym
-    end
+  protected
+  #  def set_default_response_format
+  #      #request.format = 'js'.to_sym
+  #      #
+  #    end
 end

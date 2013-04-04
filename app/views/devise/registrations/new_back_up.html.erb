@@ -11,19 +11,16 @@
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :id => 'payment-form', :multipart => true })  do |f| %>
   <%= devise_error_messages! %>
 
-  <div id="signupCarousel" class="carousel slide"  >
+  <div id="signupCarousel" class="carousel slide" style="border:2px solid;height:650px; width: 80%; margin:auto;" >
 
-    <div class="carousel-inner" style="height:650px; margin:auto;">
-      <div class="active item" >
+    <div class="carousel-inner" style="height:650px; margin:auto;border: 1px solid black;">
+      <div class="active item" style="margin:auto;width:75%;">
         <div id="personal_info">
           <div id="scont">
             <h3>Personal Information</h3>
-            <div class="item-inner">
-            
-            <hr></hr><br/>
+            <hr></hr>
             <span id="personal_info_error" style="color:red;"></span>
-            
-            <div class="span4" style="border-right:1px #0088CC solid;">
+            <div class="span6">
               <div>
                 <%= f.label "full_Name", 'Full Name <span>*<span>'.html_safe %>
                 <%= f.text_field :name%><span id="personal_info_error_name" style="color:red;"></span>
@@ -49,11 +46,11 @@
               <%= f.label :image, "Profile Picture" %>
               <%= f.file_field :image, :id => 'user_file', :style => "display:none" %>
               <div class="input-append">
-                <input id="photoCover" class="input-large" type="text" style="width:146px;">
-                <a class="btn btn-primary" onclick="$('input[id=user_file]').click();">Browse</a>
+                <input id="photoCover" class="input-large" type="text">
+                <a class="btn btn-warning" onclick="$('input[id=user_file]').click();">Browse</a>
               </div>
             </div>
-            <div class="span4" style="margin-left:11%;">
+            <div class="span6">
               <div>
                 <%= f.label :add1, "Address1 <span>*<span>".html_safe %>
                 <%= f.text_field :add1 %><span id="personal_info_error_add1" style="color:red;"></span>
@@ -76,11 +73,11 @@
                 <%= f.label :zipcode, "ZIP Code <span>*<span>".html_safe %>
                 <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
               </div>
-
-            </div></div>
-            <div id="next_bn">
-              <%=link_to '', '#signupCarousel',:class =>"carousel-control icon-arrow-right right btn-large btn-primary btn_personal", "data-slide"=>"next", :id=>"btn_personal",:onclick=>"button()" %>
+              <div id="next_btn">
+                <%=link_to "Next", '#signupCarousel',:class =>"carousel-control  btn-large btn-primary","data-slide"=>"next", :id=>"btn_personal",:onclick=>"button()" %>
+              </div>
             </div>
+
           </div>
 
 
@@ -88,72 +85,58 @@
       </div>
 
 
-      <div class="item" >
+      <div class="item">
 
-        <div id="product_select">
-
-          <div id="scont" >
-            <h3>Product Selection</h3>
-            <div class="item-inner">
-              
-               <hr></hr>
-            <div class="span4" style="border-right:1px #0088CC solid;">
-            
-            <span id="product_error" style="color:red;"></span>
-           
-            <span id="product_error" style="color:red;"></span>
-            <%@i=0%>
-            <% Product.all.each do |x| %>
-              <div class="product-list">
-                <%= radio_button_tag "user[product]", x.id, nil, :id=>"product", :onclick => "company()" %>&nbsp;<%=  x.name%>
-              </div><br/>
-              <% @i+=1 %>
-            <% end %><br />
-          </div>
-          <div id="company_details" class="span4" style="margin-left:11%;">
-
-          </div>
-
-              <br />
+        <div id="product_select" >
+          <div class="row">
+            <div id="scont" class="span5" style="border-right: 2px #cccccc solid;">
+              <h3>Product Selection</h3>
+              <span id="product_error" style="color:red;"></span>
+              <hr></hr>
+              <span id="product_error" style="color:red;"></span>
+              <%@i=0%>
+              <% Product.all.each do |x| %>
+                <div style="margin-left: 12px;">
+                  <%= radio_button_tag "user[product]", x.id, nil, :id=>"product", :onclick => "company()" %>&nbsp;<%=  x.name%>
+                </div><br/>
+                <% @i+=1 %>
+              <% end %><br />
             </div>
+            <div id="company_details" class="span3">
 
-          <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
+            </div>
+          </div>
+          <br />
+
+          <%= link_to "Previous","#signupCarousel", :class =>"carousel-control left btn-large btn-primary","data-slide"=>"prev" %>
           <div id="next_btn">
             <%=link_to "","#signupCarousel",:class => "carousel-control right icon-arrow-right btn-large btn-primary btn_personal",:id=>"btn_product","data-slide"=>"next" %>
   <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
           </div>
-          </div>
         </div>
 
       </div>
 
 
-      <div class="item" >
+      <div class="item" style="margin:auto; width:100%;">
         <div id ="package_info">
 
           <div id="scont">
-            <h3>Package Selection</h3>
-            <div class="item-package">
             <div id="packages">
             </div>
-            </div>
-         
+          </div>
           <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
           <div id="next_btn">
             <%=link_to "","#signupCarousel",  :class => "carousel-control right icon-arrow-right btn-large btn-primary btn_personal",:id=>"btn_package","data-slide"=>"next"%>
 
           </div>
-             </div>
         </div>
       </div>
-      <div class="item" >
+      <div class="item" style="margin-left:auto; width:75%;">
         <div id="payment">
           <div id="scont">
-             <h3>Payment Process</h3>
-             <hr></hr>
-            <div class="item-payment">
-           
-            
+            <h3>Payment Process</h3>
+            <hr></hr>
             <div class = "payment-errors" style="margin:0 0 20px 15px; color: red;">
             </div>
             <div class="field" >Total Payable Amount($): <%= hidden_field_tag "total_amount","",:class=> "money" %>
@@ -181,14 +164,12 @@
             </div>
             <div>
               <%= label_tag :card_month, "Card Expiration <span>*<span>".html_safe %>
-              <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month",:style=> 'width:13%;'} %>
-              <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year",:style=> 'width:11%;'} %>
+              <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
+              <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
             </div></div>
-
           <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
           <div id="next_btn">
-            <%= f.submit "Submit", 'data-disable-with' => "Processing",  :class=>"btn-large btn-primary btn_submit" %>
-          </div>
+            <%= f.submit '<i class="icon-ok"></i>'.html_safe, 'data-disable-with' => "Processing",  :class=>"carousel-control right btn-large btn-primary btn_personal" %>
           </div>
         </div>
       </div>
@@ -259,51 +240,10 @@
   span{
     color: red;
   }
+
+
   .btn_personal{
     margin-top: 250px;
-
-  }
-  .btn_submit{
-    margin-left: 55%;
-    margin-top: -10%;
-    height:89px;
-    border-radius:49px;
-
+    background-image:
 }
-   .item-inner{
-    margin-left: 11%;
-    margin-top: 2%;
-
-  }
-  .item-payment{
-    margin-left: 23%;
-}
-  .item-package{
-    margin-left: 4%;
-   margin-top: 2%;
-}
-  #signupCarousel{
-    border-radius: 25px;
-    box-shadow:10px 10px 5px #0088CC ;
-    border:2px #0088CC solid;height:650px; width: 80%; margin:auto;
-  }
-  h3{
-    color: #0088CC;
-   
-    margin-left: 38%;
-}
-.product-list{
- 
-   font-size: 25px;
-   margin-top: 6%;
-}
-#company_details{
-  margin-top: 2%;
-  
-}
-h4{
-  font-size: 25px;
-  color: #0088CC
-}
-.
 </style>
