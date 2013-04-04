@@ -1,11 +1,11 @@
 var ec=0;
-$(document).ready(function() {
-    $('#slides').slidesjs({
-        width: 600,
-        height: 1500,
-        navigation: true
-    });
-});
+//$(document).ready(function() {
+//    $('#slides').slidesjs({
+//        width: 600,
+//        height: 1500,
+//        navigation: true
+//    });
+//});
 
 function email_validation(){
     $('#personal_info_error_email').html("");
@@ -24,9 +24,14 @@ function email_validation(){
                 ec=0;
             }
         });
+
+        $('#btn_personal').prop('disabled', false);
+    
+
     }else{
         $('#personal_info_error_email').append(" <br/>* Enter valid Email address. ");
     }
+
 }
 
 $("#user_name").blur(function(event){
@@ -35,6 +40,8 @@ $("#user_name").blur(function(event){
     $('#personal_info_error_name').html("");
     if($("#user_name").val()==""){
         $('#personal_info_error_name').append("<br/>* Full Name Can't be empty.");
+    }else{
+        $('#btn_personal').prop('disabled', false);
     }
 
 });
@@ -44,7 +51,10 @@ $("#password").blur(function(event){
         $('#personal_info_error_password').append("<br/>* Password can't be empty.");
     }else if($("#password").val().length<8){
         $('#personal_info_error_password').append("<br/>* Password should be more than 8 characters. ");
+    }else{
+        $('#btn_personal').prop('disabled', false);
     }
+
 
 });
 
@@ -54,35 +64,50 @@ $("#password_confirmation").blur(function(event){
         $('#personal_info_error_cpassword').append("<br/>* Password Confirmation should not be empty.");
     }else if($("#password_confirmation").val()!=$("#password").val()){
         $('#personal_info_error_cpassword').append("<br/>* Password and Password Confirmation should match.");
+    }else{
+        $('#btn_personal').prop('disabled', false);
     }
+
 });
 
 $("#user_add1").blur(function(event){
     $('#personal_info_error_add1').html("");
     if($("#user_add1").val()==""){
         $('#personal_info_error_add1').append("<br/>* Address1 can't be empty.");
+    }else{
+        $('#btn_personal').prop('disabled', false);
     }
+
 });
 
 $("#user_state").blur(function(event){
     $('#personal_info_error_state').html("");
     if($("#user_state").val()==""){
         $('#personal_info_error_state').append("<br/>* State Can't be empty.");
+    }else{
+        $('#btn_personal').prop('disabled', false);
     }
+
 });
 
 $("#user_city").blur(function(event){
     $('#personal_info_error_city').html("");
     if($("#user_city").val()==""){
         $('#personal_info_error_city').append("<br/>* City Can't be empty.");
+    }else{
+        $('#btn_personal').prop('disabled', false);
     }
+
 });
 
 $("#user_zipcode").blur(function(event){
     $('#personal_info_error_zipcode').html("");
     if($("#user_zipcode").val()==""){
         $('#personal_info_error_zipcode').append("<br/>* ZIP Code Can't be empty.");
+    }else{
+        $('#btn_personal').prop('disabled', false);
     }
+
 });
 
 $('#btn_personal').click(function(event) {
