@@ -1,5 +1,6 @@
-ActiveAdmin.register CouponTransaction do
-  menu :priority => 5
+ActiveAdmin.register CouponTransaction,:as=>"PromotionTransactions" do
+  menu :label => "Promotion Transactions",:priority => 5
+  
   config.clear_action_items!
   config.per_page = 10
   actions :index
@@ -10,6 +11,7 @@ ActiveAdmin.register CouponTransaction do
   filter :name, :label=>"Full Name"
 
   index do
+    selectable_column
     column "Trancation Date", :created_at
     column  :coupon_code
     column "Coupon value($)" ,:coupon_value

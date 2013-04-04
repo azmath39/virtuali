@@ -12,10 +12,13 @@ class Coupon < ActiveRecord::Base
   #    end
   before_create :generate_code
 
-def generate_code
+  def generate_code
     begin
-        code = SecureRandom.hex(4)
+      code = SecureRandom.hex(4)
     end while Coupon.where(:code => code).exists?
     self.code = code
-end
+  end
+  def email
+    "<a href='mailto:#{company_email}'>#{company_email}</a>".html_safe
+  end
 end

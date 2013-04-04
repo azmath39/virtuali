@@ -35,7 +35,15 @@ class User < ActiveRecord::Base
   def address
     "#{add1} #{add2}\n#{state} #{city}\n\n#{zipcode}"
   end
-
+ def package_name
+    self.selected_package.package_name
+  end
+  def package_price_admin
+    "$ #{self.selected_package.price}"
+  end
+  def product_name
+    self.selected_product.product.name
+  end
   def product=(pro)
     unless pro.nil?
       self.selected_product=SelectedProduct.create(:product_id=>pro.to_i)
@@ -54,9 +62,7 @@ class User < ActiveRecord::Base
   def add_coupon_transaction
     self.coupon_transactions<<CouponTransaction.create(:coupon_id=>self.assigned_coupon_coupon_id, :email=>self.email,:name=>self.name)
   end
-  def package_name
-    self.selected_package.package_name
-  end
+ 
   def  assign_package(pkg)
     p=Package.find(pkg[:id].to_i)
     if pkg.include?:type_of_payment and !p.special_price.nil?
@@ -226,7 +232,7 @@ class User < ActiveRecord::Base
   end
   def save_payment_details(reference,type,amount)
     a= amount.to_i/100
-    payment=Payment.create(:reference=>reference,:amount=>a,:payment_type=>type)
+    payment=Payment.create(:reference=>reference,:amount=>a,:payment_type=>type,:user_name=>self.name,:user_email=>self.email,:product_id=>self.selected_product.product_id)
     self.payments<< payment
     send_reciept_user(payment)
 

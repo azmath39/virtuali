@@ -17,7 +17,8 @@ ActiveAdmin.register User do
   end 
   index do
     column "Full Name", :name
-    column "Package", :package_name
+    column "subscription",:product_name
+    column "Package", :package_price_admin
     column :email
     column "Phone No",:phno
     column :city
@@ -25,6 +26,20 @@ ActiveAdmin.register User do
     
     default_actions
   end
+
+
+  filter :name, :label=>"Full Name"
+  filter :php, :label=>"Phone No"
+  filter :email
+  filter :city
+  filter :state
+  filter :zipcode
+  filter :created_at
+  filter :current_sign_in_ip
+
+
+ 
+
 #  config.clear_action_items!
 #  member_action :status do
 #    @users = User.all

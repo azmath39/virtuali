@@ -1,10 +1,11 @@
-ActiveAdmin.register Coupon do
- menu :priority => 4
+ActiveAdmin.register Coupon,:as=>"Promotions" do
+ menu :label => "Promotions",:priority => 4
  config.per_page = 10
   index do
+    selectable_column
     column :code
     column "Company Name",:company
-    column :company_email
+    column :email
     column :value
     column "Last Reemeded", :expire_date
     column "Valid until", :valid_date

@@ -6,6 +6,10 @@ ActiveAdmin.register Payment do
   index do
     column "Transaction Date", :created_at
     column  "Transaction Reference",:reference
+    column "user name",:name
+    column :product
+    column "user email", :email
+
     column "Transaction Type",:payment_type_info
     column :amount
     
