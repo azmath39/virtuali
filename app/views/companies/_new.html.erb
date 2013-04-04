@@ -1,5 +1,5 @@
-<h3>Provide your company Details:</h3>
-<hr />
+<h4>Provide your company Details:</h4>
+<br/><br/>
 <div>
   <%= label_tag "Company Name" %>
   <%= text_field_tag "company[name]" %>
@@ -8,7 +8,12 @@
   <%= label_tag "Address" %>
   <%= text_field_tag "company[address]" %>
 </div>
-<div>
-  <%= label_tag "logo" %>
-  <%= file_field_tag "company[logo]" %>
+
+<%= label_tag "logo" %>
+<%= file_field_tag "company[logo]", :style => "display:none"%>
+
+<div class="input-append">
+  <input id="photoCover" class="input-large" type="text" style="width:146px;">
+  <a class="btn btn-primary" onclick="$('input[id=company_logo]').click();">Browse</a>
 </div>
+

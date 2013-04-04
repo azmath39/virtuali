@@ -17,12 +17,13 @@
       <div class="active item" >
         <div id="personal_info">
           <div id="scont">
-            <div class="item-inner">
             <h3>Personal Information</h3>
+            <div class="item-inner">
+            
             <hr></hr><br/>
             <span id="personal_info_error" style="color:red;"></span>
             
-            <div class="span4">
+            <div class="span4" style="border-right:1px #0088CC solid;">
               <div>
                 <%= f.label "full_Name", 'Full Name <span>*<span>'.html_safe %>
                 <%= f.text_field :name%><span id="personal_info_error_name" style="color:red;"></span>
@@ -48,11 +49,11 @@
               <%= f.label :image, "Profile Picture" %>
               <%= f.file_field :image, :id => 'user_file', :style => "display:none" %>
               <div class="input-append">
-                <input id="photoCover" class="input-large" type="text">
-                <a class="btn btn-warning" onclick="$('input[id=user_file]').click();">Browse</a>
+                <input id="photoCover" class="input-large" type="text" style="width:146px;">
+                <a class="btn btn-primary" onclick="$('input[id=user_file]').click();">Browse</a>
               </div>
             </div>
-            <div class="span4">
+            <div class="span4" style="margin-left:11%;">
               <div>
                 <%= f.label :add1, "Address1 <span>*<span>".html_safe %>
                 <%= f.text_field :add1 %><span id="personal_info_error_add1" style="color:red;"></span>
@@ -92,21 +93,24 @@
         <div id="product_select">
 
           <div id="scont" >
-            <div class="item-inner">
-            <div class="span4">
             <h3>Product Selection</h3>
+            <div class="item-inner">
+              
+               <hr></hr>
+            <div class="span4" style="border-right:1px #0088CC solid;">
+            
             <span id="product_error" style="color:red;"></span>
-            <hr></hr>
+           
             <span id="product_error" style="color:red;"></span>
             <%@i=0%>
             <% Product.all.each do |x| %>
-              <div style="margin-left: 12px;">
+              <div class="product-list">
                 <%= radio_button_tag "user[product]", x.id, nil, :id=>"product", :onclick => "company()" %>&nbsp;<%=  x.name%>
               </div><br/>
               <% @i+=1 %>
             <% end %><br />
           </div>
-          <div id="company_details" class="span5">
+          <div id="company_details" class="span4" style="margin-left:11%;">
 
           </div>
 
@@ -128,6 +132,7 @@
         <div id ="package_info">
 
           <div id="scont">
+            <h3>Package Selection</h3>
             <div class="item-package">
             <div id="packages">
             </div>
@@ -144,9 +149,11 @@
       <div class="item" >
         <div id="payment">
           <div id="scont">
+             <h3>Payment Process</h3>
+             <hr></hr>
             <div class="item-payment">
-            <h3>Payment Process</h3>
-            <hr></hr>
+           
+            
             <div class = "payment-errors" style="margin:0 0 20px 15px; color: red;">
             </div>
             <div class="field" >Total Payable Amount($): <%= hidden_field_tag "total_amount","",:class=> "money" %>
@@ -174,8 +181,8 @@
             </div>
             <div>
               <%= label_tag :card_month, "Card Expiration <span>*<span>".html_safe %>
-              <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month"} %>
-              <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year"} %>
+              <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month",:style=> 'width:13%;'} %>
+              <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year",:style=> 'width:11%;'} %>
             </div></div>
 
           <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
@@ -257,23 +264,46 @@
 
   }
   .btn_submit{
-    margin-left: 83%;
-    margin-top: 8%;
+    margin-left: 55%;
+    margin-top: -10%;
     height:89px;
     border-radius:49px;
 
 }
-  .item-payment, .item-inner{
-    margin-left: 15%;
+   .item-inner{
+    margin-left: 11%;
     margin-top: 2%;
 
   }
+  .item-payment{
+    margin-left: 23%;
+}
   .item-package{
     margin-left: 4%;
    margin-top: 2%;
 }
   #signupCarousel{
     border-radius: 25px;
-    border:2px solid;height:650px; width: 80%; margin:auto;
+    box-shadow:10px 10px 5px #0088CC ;
+    border:2px #0088CC solid;height:650px; width: 80%; margin:auto;
   }
+  h3{
+    color: #0088CC;
+   
+    margin-left: 38%;
+}
+.product-list{
+ 
+   font-size: 25px;
+   margin-top: 6%;
+}
+#company_details{
+  margin-top: 2%;
+  
+}
+h4{
+  font-size: 25px;
+  color: #0088CC
+}
+.
 </style>

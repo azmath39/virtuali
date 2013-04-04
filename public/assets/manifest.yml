@@ -1,10 +1,26 @@
 ---
 ArchitectsDaughter.ttf: ArchitectsDaughter.ttf
 ArchitectsDaughter/index.ttf: ArchitectsDaughter.ttf
+HELR45W.TTF: HELR45W.TTF
+HELR45W/index.TTF: HELR45W.TTF
+HELR46W.TTF: HELR46W.TTF
+HELR46W/index.TTF: HELR46W.TTF
+HELR47W.TTF: HELR47W.TTF
+HELR47W/index.TTF: HELR47W.TTF
+HELR48W.TTF: HELR48W.TTF
+HELR48W/index.TTF: HELR48W.TTF
+HELR65W.TTF: HELR65W.TTF
+HELR65W/index.TTF: HELR65W.TTF
+HELR66W.TTF: HELR66W.TTF
+HELR66W/index.TTF: HELR66W.TTF
+HELR67W.TTF: HELR67W.TTF
+HELR67W/index.TTF: HELR67W.TTF
+HELR68W.TTF: HELR68W.TTF
+HELR68W/index.TTF: HELR68W.TTF
 Helvetica.dfont: Helvetica.dfont
 Helvetica/index.dfont: Helvetica.dfont
-helvetica lt 23 ultra light extended.ttf: helvetica lt 23 ultra light extended.ttf
-helvetica lt 23 ultra light extended/index.ttf: helvetica lt 23 ultra light extended.ttf
+helveticalt23ultralightextended.ttf: helveticalt23ultralightextended.ttf
+helveticalt23ultralightextended/index.ttf: helveticalt23ultralightextended.ttf
 bg.jpg: bg.jpg
 bg/index.jpg: bg.jpg
 bg2.jpg: bg2.jpg
