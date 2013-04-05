@@ -36,4 +36,7 @@ class Product < ActiveRecord::Base
   def subscriptions
     self.payments.count
   end
+  def name_label
+    "#{self.name}\n <br\><br\>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp$ #{self.payments.sum(:amount)}".html_safe
+  end
 end

@@ -1,6 +1,8 @@
 ActiveAdmin.register User do
   menu :priority => 2
   config.per_page = 10
+  
+
   form do |f|
     f.inputs "User Details" do
       f.input :email
@@ -17,8 +19,8 @@ ActiveAdmin.register User do
   end 
   index do
     column "Full Name", :name
-    column "subscription",:product_name
-    column "Package", :package_price_admin
+    column "subscription",:product
+    column "Package", :package_price_admin, :sortable=>false
     column :email
     column "Phone No",:phno
     column :city
@@ -39,7 +41,6 @@ ActiveAdmin.register User do
 
 
  
-
 #  config.clear_action_items!
 #  member_action :status do
 #    @users = User.all

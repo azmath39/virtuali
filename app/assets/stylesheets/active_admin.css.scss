@@ -33,3 +33,18 @@ body.active_admin .blank_slate_container .blank_slate
 {
 border: 0px;
 }
+
+body.active_admin .table_tools{
+height:75px;
+
+}
+body.active_admin a.table_tools_button{
+height:50px;
+font-size:10px;
+
+
+
+}
+
+body.active_admin .scopes li .count{
+display:none;}

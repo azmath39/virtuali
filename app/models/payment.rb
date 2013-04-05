@@ -1,8 +1,9 @@
 class Payment < ActiveRecord::Base
-  attr_accessible :payment_type, :amount, :user_id, :reference
+  attr_accessible :payment_type, :amount, :user_id, :reference,:product_id,:name,:email
   belongs_to :user
   belongs_to :product
   scope :recent, :limit => 5, :order => 'created_at DESC'
+  
   def payment_type_info
     case self.payment_type
     when 1
@@ -15,6 +16,7 @@ class Payment < ActiveRecord::Base
       "Refunded"
     end
   end
+  
 #  def user_name
 #    self.user.name unless self.user.nil?
 #  end
@@ -23,3 +25,10 @@ class Payment < ActiveRecord::Base
 #  end
   
 end
+#class PaymentDecorator < ApplicationDecorator
+#    decorates :name
+#
+##    def image
+##      h.image_tag model.image_url
+##    end
+#  end
