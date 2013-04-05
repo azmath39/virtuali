@@ -6,7 +6,7 @@
 
     <div class="span3 first-grid" style="width:21%;">
   <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
-      <p><center><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package"%></center></p>
+      <p><center><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package",:onclick=>"enable_btn_package()"%></center></p>
       <p id="price">
 
         <sup id="dollar-symb">$</sup><%=just_price(pkg)%>

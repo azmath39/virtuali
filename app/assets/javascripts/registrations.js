@@ -241,7 +241,6 @@ $('#btn_product').click(function(event) {
     }
 });
 
-
 $('#btn_package').click(function(event) {
     var payment_type= $("#user_package_type_of_payment").val() || 2;
     if (!$("input[name='user[package][id]']:checked").val())
@@ -271,5 +270,11 @@ function validEmail(v) {
     var r = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
     return (v.match(r) == null) ? false : true;
 }
+
+function enable_btn_package(){
+      
+      $('#btn_package').prop('disabled', false);
+
+    }
   //menu handling
   

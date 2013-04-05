@@ -20,65 +20,65 @@
             <h3>Personal Information</h3>
             <hr />
             <div class="item-inner">
-            
-            <br/>
-            <span id="personal_info_error" style="color:red;"></span>
-            
-            <div class="span4" style="border-right:1px #0088CC solid;">
-              <div>
-                <%= f.label "full_Name", 'Full Name <span>*<span>'.html_safe %>
-                <%= f.text_field :name%><span id="personal_info_error_name" style="color:red;"></span>
-              </div>
-              <div>
-                <%= f.label "email", "Email <span>*<span>".html_safe %>
-                <%= f.email_field :email,:id=>"email_id",:onblur=>"email_validation()" %><span id="personal_info_error_email" style="color:red;"></span>
-              </div>
-              <div>
-                <%= f.label "password", "Password <span>*<span>".html_safe %>
-                <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i><br />
-                <%= f.password_field :password, :id=>"password" %><span id="personal_info_error_password" style="color:red;"></span>
-              </div>
-              <div>
-                <%= f.label "password_confirmation", "Password Confirmation <span>*<span>".html_safe %>
-                <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i><br />
-                <%= f.password_field :password_confirmation,:id=>"password_confirmation" %><span id="personal_info_error_cpassword" style="color:red;"></span>
-              </div>
-              <div>
-                <%= f.label :phno, "Mobile Number" %>
-                <%= f.text_field :phno %>
-              </div>
-              <%= f.label :image, "Profile Picture" %>
-              <%= f.file_field :image, :id => 'user_file', :style => "display:none" %>
-              <div class="input-append">
-                <input id="photoCover" class="input-large" type="text" style="width:146px;"/>
-                <a class="btn btn-primary" onclick="$('input[id=user_file]').click();">Browse</a>
-              </div>
-            </div>
-            <div class="span4" style="margin-left:11%;">
-              <div>
-                <%= f.label :add1, "Address1 <span>*<span>".html_safe %>
-                <%= f.text_field :add1 %><span id="personal_info_error_add1" style="color:red;"></span>
-              </div>
-              <div>
-                <%= f.label :add2, "Address2" %>
-                <%= f.text_field :add2 %><span id="personal_info_error_add2" style="color:red;"></span>
-              </div>
-              <div>
-                <%= f.label "state", "State <span>*<span>".html_safe %>
-                <%= f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
-                <span id="personal_info_error_state" style="color:red;"></span>
-              </div>
-              <div class ="control-group">
-                <%= f.label "city", "City <span>*<span>".html_safe, :html => {:class => 'control-label'} %>
-                <%=f.select :city, {},:prompt=>"Select City"%>
-                <span id="personal_info_error_city" style="color:red;"></span>
-              </div>
-              <div>
-                <%= f.label :zipcode, "ZIP Code <span>*<span>".html_safe %>
-                <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
-              </div>
 
-            </div></div>
+              <br/>
+              <span id="personal_info_error" style="color:red;"></span>
+
+              <div class="span4" style="border-right:1px #0088CC solid;">
+                <div>
+                  <%= f.label "full_Name", 'Full Name <span>*<span>'.html_safe %>
+                  <%= f.text_field :name%><span id="personal_info_error_name" style="color:red;"></span>
+                </div>
+                <div>
+                  <%= f.label "email", "Email <span>*<span>".html_safe %>
+                  <%= f.email_field :email,:id=>"email_id",:onblur=>"email_validation()" %><span id="personal_info_error_email" style="color:red;"></span>
+                </div>
+                <div>
+                  <%= f.label "password", "Password <span>*<span>".html_safe %>
+                  <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i><br />
+                  <%= f.password_field :password, :id=>"password" %><span id="personal_info_error_password" style="color:red;"></span>
+                </div>
+                <div>
+                  <%= f.label "password_confirmation", "Password Confirmation <span>*<span>".html_safe %>
+                  <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i><br />
+                  <%= f.password_field :password_confirmation,:id=>"password_confirmation" %><span id="personal_info_error_cpassword" style="color:red;"></span>
+                </div>
+                <div>
+                  <%= f.label :phno, "Mobile Number" %>
+                  <%= f.text_field :phno %>
+                </div>
+                <%= f.label :image, "Profile Picture" %>
+                <%= f.file_field :image, :id => 'user_file', :style => "display:none" %>
+                <div class="input-append">
+                  <input id="photoCover" class="input-large" type="text" style="width:146px;"/>
+                  <a class="btn btn-primary" onclick="$('input[id=user_file]').click();">Browse</a>
+                </div>
+              </div>
+              <div class="span4" style="margin-left:11%;">
+                <div>
+                  <%= f.label :add1, "Address1 <span>*<span>".html_safe %>
+                  <%= f.text_field :add1 %><span id="personal_info_error_add1" style="color:red;"></span>
+                </div>
+                <div>
+                  <%= f.label :add2, "Address2" %>
+                  <%= f.text_field :add2 %><span id="personal_info_error_add2" style="color:red;"></span>
+                </div>
+                <div>
+                  <%= f.label "state", "State <span>*<span>".html_safe %>
+                  <%= f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
+                  <span id="personal_info_error_state" style="color:red;"></span>
+                </div>
+                <div class ="control-group">
+                  <%= f.label "city", "City <span>*<span>".html_safe, :html => {:class => 'control-label'} %>
+                  <%=f.select :city, {},:prompt=>"Select City"%>
+                  <span id="personal_info_error_city" style="color:red;"></span>
+                </div>
+                <div>
+                  <%= f.label :zipcode, "ZIP Code <span>*<span>".html_safe %>
+                  <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
+                </div>
+
+              </div></div>
             <div id="next_bn">
               <%=link_to '', '#signupCarousel',:class =>"carousel-control icon-arrow-right right btn-large btn-primary btn_personal", "data-slide"=>"next", :id=>"btn_personal",:onclick=>"button()" %>
             </div>
@@ -97,33 +97,33 @@
             <h3>Product Selection</h3>
             <hr />
             <div class="item-inner">
-              
-               
-            <div class="span4" style="border-right:1px #0088CC solid;">
-            
-            <span id="product_error" style="color:red;"></span>
-           
-            <span id="product_error" style="color:red;"></span>
-            <%@i=0%>
-            <% Product.all.each do |x| %>
-              <div class="product-list">
-                <%= radio_button_tag "user[product]", x.id, nil, :id=>"product", :onclick => "company()" %>&nbsp;<%=  x.name%>
-              </div><br/>
-              <% @i+=1 %>
-            <% end %><br />
-          </div>
-          <div id="company_details" class="span4" style="margin-left:11%;">
 
-          </div>
+
+              <div class="span4" style="border-right:1px #0088CC solid;">
+
+                <span id="product_error" style="color:red;"></span>
+
+                <span id="product_error" style="color:red;"></span>
+                <%@i=0%>
+                <% Product.all.each do |x| %>
+                  <div class="product-list">
+                    <%= radio_button_tag "user[product]", x.id, nil, :id=>"product", :onclick => "company()" %>&nbsp;<%=  x.name%>
+                  </div><br/>
+                  <% @i+=1 %>
+                <% end %><br />
+              </div>
+              <div id="company_details" class="span4" style="margin-left:11%;">
+
+              </div>
 
               <br />
             </div>
 
-          <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
-          <div id="next_btn">
-            <%=link_to "","#signupCarousel",:class => "carousel-control right icon-arrow-right btn-large btn-primary btn_personal",:id=>"btn_product","data-slide"=>"next" %>
+            <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
+            <div id="next_btn">
+              <%=link_to "","#signupCarousel",:class => "carousel-control right icon-arrow-right btn-large btn-primary btn_personal",:id=>"btn_product","data-slide"=>"next" %>
   <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
-          </div>
+            </div>
           </div>
         </div>
 
@@ -137,59 +137,59 @@
             <h3>Package Selection</h3>
             <hr />
             <div class="item-package">
-            <div id="packages">
+              <div id="packages">
+              </div>
             </div>
-            </div>
-         
-          <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
-          <div id="next_btn">
-            <%=link_to "","#signupCarousel",  :class => "carousel-control right icon-arrow-right btn-large btn-primary btn_personal",:id=>"btn_package","data-slide"=>"next"%>
 
+            <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
+            <div id="next_btn">
+              <%=link_to "","#signupCarousel",  :class => "carousel-control right icon-arrow-right btn-large btn-primary btn_personal",:id=>"btn_package","data-slide"=>"next"%>
+
+            </div>
           </div>
-             </div>
         </div>
       </div>
       <div class="item">
         <div id="payment">
           <div id="scont">
-             <h3>Payment Process</h3>
-             <hr />
+            <h3>Payment Process</h3>
+            <hr />
             <div class="item-payment">
-            <div class = "payment-errors" style="margin:0 0 20px 0px; color: red;">
-            </div>
-            <div class="field" >Total Payable Amount($): <%= hidden_field_tag "total_amount","",:class=> "money" %>
-              &nbsp;&nbsp; <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
+              <div class = "payment-errors" style="margin:0 0 20px 0px; color: red;">
+              </div>
+              <div class="field" >Total Payable Amount($): <%= hidden_field_tag "total_amount","",:class=> "money" %>
+                &nbsp;&nbsp; <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
 
 
-            <div class="field" style="padding:20px 0px;">
-              <%=hidden_field_tag "type_of_transaction",1%>
+              <div class="field" style="padding:20px 0px;">
+                <%=hidden_field_tag "type_of_transaction",1%>
   <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
-            </div>
-            <div class="field">
+              </div>
+              <div class="field">
 
-              <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
-              <i style="font-size: 10px;">( Leave blank if no coupon is available now. )</i><br />
-              <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
-              <div id='discounted_total'></div>
-            </div>
-            <div class="field">
-              <%= label_tag :card_number, "Credit Card Number <span>*<span>".html_safe %>
-              <%= text_field_tag "card-number", nil, name: nil %>
-            </div>
-            <div class="field">
-              <%= label_tag :card_code, "Security Code on Card (CVV) <span>*<span>".html_safe %>
-              <%= password_field_tag "card-cvc", nil, name: nil, :style => "width:50px;" %>
-            </div>
-            <div>
-              <%= label_tag :card_month, "Card Expiration <span>*<span>".html_safe %>
-              <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month",:style=> 'width:13%;'} %>
-              <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year",:style=> 'width:13%;'} %>
-            </div></div>
+                <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
+                <i style="font-size: 10px;">( Leave blank if no coupon is available now. )</i><br />
+                <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
+                <div id='discounted_total'></div>
+              </div>
+              <div class="field">
+                <%= label_tag :card_number, "Credit Card Number <span>*<span>".html_safe %>
+                <%= text_field_tag "card-number", nil, name: nil %>
+              </div>
+              <div class="field">
+                <%= label_tag :card_code, "Security Code on Card (CVV) <span>*<span>".html_safe %>
+                <%= password_field_tag "card-cvc", nil, name: nil, :style => "width:50px;" %>
+              </div>
+              <div>
+                <%= label_tag :card_month, "Card Expiration <span>*<span>".html_safe %>
+                <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month",:style=> 'width:13%;'} %>
+                <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year",:style=> 'width:13%;'} %>
+              </div></div>
 
-          <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
-          <div id="next_btn">
-            <%= f.submit "Submit", 'data-disable-with' => "Processing",  :class=>"btn-large btn-primary btn_submit" %>
-          </div>
+            <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
+            <div id="next_btn">
+              <%= f.submit "Submit", 'data-disable-with' => "Processing",  :class=>"btn-large btn-primary btn_submit" %>
+            </div>
           </div>
         </div>
       </div>
@@ -249,10 +249,13 @@
         product: $("input[name='user[product]']:checked").val()
       }
     }).done(function(html){
-      $('#company_details').html(html)
+      $('#company_details').html(html);
     });
-  }
+    $('#btn_product').prop('disabled', false);
+   
 
+  }
+ 
 </script>
 <%#= render "devise/shared/links" %>
 <%#= javascript_include_tag "jquery.slides.min" %>
@@ -270,19 +273,19 @@
     height:89px;
     border-radius:49px;
 
-}
-   .item-inner{
+  }
+  .item-inner{
     margin-left: 11%;
     margin-top: 2%;
 
   }
   .item-payment{
     margin-left: 23%;
-}
+  }
   .item-package{
     margin-left: 4%;
-   margin-top: 2%;
-}
+    margin-top: 2%;
+  }
   #signupCarousel{
     border-radius: 25px;
     box-shadow:10px 10px 5px #0088CC ;
@@ -290,20 +293,20 @@
   }
   h3{
     color: #0088CC;
-   
+
     margin-left: 38%;
-}
-.product-list{
- 
-   font-size: 25px;
-   margin-top: 6%;
-}
-#company_details{
-  margin-top: 2%;
-  
-}
-h4{
-  font-size: 25px;
-  color: #0088CC
-}
+  }
+  .product-list{
+
+    font-size: 25px;
+    margin-top: 6%;
+  }
+  #company_details{
+    margin-top: 2%;
+
+  }
+  h4{
+    font-size: 25px;
+    color: #0088CC
+  }
 </style>

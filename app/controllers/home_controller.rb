@@ -10,11 +10,13 @@ class HomeController < ApplicationController
   end
   def check_discount
     @coupon=Coupon.find_by_code(params[:code])
-    unless @coupon.nil?
+    if !@coupon.nil?
       @amount= params[:amount].to_f-@coupon.value.to_f
       render :partial=>'discount'
-    else
+    elsif params[:code]!=""
       render :text=>"<p style='color:red;'>Coupon code Invalid</p>".html_safe
+    else
+      render :text=>""
     end
   end
   def index
