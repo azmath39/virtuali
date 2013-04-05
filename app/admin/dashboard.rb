@@ -30,7 +30,7 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Space Usage" do
           div :class => "blank_slate_container", :id => "dashboard_default_message" do
-            span :class => "blank_slate",:style=>"width:105px; !important; color:black;" do
+            span :class => "blank_slate",:style=>"width:105px !important;margin-left:-10%; color:black;" do
               " #{SpaceUsage::remaining_space}."
             end
           end
@@ -40,7 +40,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Total User" do
 
           div :class => "blank_slate_container", :id => "dashboard_default_message" do
-            span :class => "blank_slate",:style=>"width:105px; !important; color:black;" do
+            span :class => "blank_slate" do
               link_to(User.count,admin_users_path)
             end
           end
@@ -52,7 +52,7 @@ ActiveAdmin.register_page "Dashboard" do
         panel "Promotions" do
 
           div :class => "blank_slate_container", :id => "dashboard_default_message" do
-            span :class => "blank_slate",:style=>"width:105px; !important; color:black;" do
+            span :class => "blank_slate" do
               link_to(CouponTransaction.count,admin_promotion_transactions_path)
             end
           end
@@ -61,7 +61,7 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "Total Payment" do
           div :class => "blank_slate_container", :id => "dashboard_default_message" do
-            span :class => "blank_slate",:style=>"width:105px; !important; color:black;" do
+            span :class => "blank_slate" do
               link_to("$ #{Payment.sum(:amount)}", admin_payments_path)
             end
           end
