@@ -4,7 +4,9 @@ ActiveAdmin.register Payment do
    menu :priority => 6
    config.per_page = 10
 
-
+scope Product::all_label do |payments|
+  payments
+end
 Product.all.each do |product|
   scope product.name_label do |payments|
     payments.where("product_id = ?", product.id)

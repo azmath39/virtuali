@@ -28,15 +28,18 @@ class Product < ActiveRecord::Base
     self.payments.sum(:amount)
   end
   def users_count
-    self.selected_products.count
+    self.users.count
   end
   def promoted_subscriptions
-    self.selected_products.collect{|s| s.user.coupon_transactions.count}.inject(:+)
+    self.users.collect{|s| s.coupon_transactions.count}.inject(:+)
   end
   def subscriptions
     self.payments.count
   end
   def name_label
     "#{self.name}\n <br\><br\>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp$ #{self.payments.sum(:amount)}".html_safe
+  end
+  def self.all_label
+    "All\n <br\><br\>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp$ #{Payment.sum(:amount)}".html_safe
   end
 end
