@@ -131,16 +131,16 @@ $('#btn_personal').click(function(event) {
         count +=1;
     }
     if(($("#password").val()).length<8){
-        $('#personal_info_error_password').html("<br/>* Password should be more than 6 characters.");
+        $('#personal_info_error_password').html("<br/>* Password should be more than 8 characters.");
         count +=1;
     }
 
     if($("#password_confirmation").val()==""){
-        $('#personal_info_error_cpassword').html("<br/>* Required field Password_Confirmation.");
+        $('#personal_info_error_cpassword').html("<br/>* Required field password confirmation.");
         count +=1;
     }
     if($("#password_confirmation").val()!=$("#password").val()){
-        $('#personal_info_error_cpassword').html("<br/>* Password and Password_Confirmation should match.");
+        $('#personal_info_error_cpassword').html("<br/>* Password and password confirmation should match.");
         count +=1;
     }
 

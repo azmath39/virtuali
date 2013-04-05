@@ -13,7 +13,7 @@
 <%= file_field_tag "company[logo]", :style => "display:none"%>
 
 <div class="input-append">
-  <input id="photoCover" class="input-large" type="text" style="width:146px;"/>
+  <input id="photoCover1" class="input-large" type="text" style="width:146px;"/>
   <a class="btn btn-primary" onclick="$('input[id=company_logo]').click();">Browse</a>
 </div>
 
@@ -29,4 +29,8 @@
         $('#company_name_error').append("<br/>* Company Name Can't be empty.");
     }
 });
+
+$('input[id=company_logo]').change(function(){
+    $('#photoCover1').val($(this).val());
+  });
 </script>
