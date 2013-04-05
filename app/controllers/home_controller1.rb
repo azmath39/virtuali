@@ -9,14 +9,23 @@ class HomeController < ApplicationController
     end
   end
   def check_discount
+    unless params[:code].empty?
     @coupon=Coupon.find_by_code(params[:code])
     if !@coupon.nil?
       @amount= params[:amount].to_f-@coupon.value.to_f
       render :partial=>'discount'
+<<<<<<< HEAD
+    else
+      render :text=>"<i style='color:red;'>* Coupon code Invalid</i>".html_safe
+    end
+    else
+      render :nothing => true
+=======
     elsif params[:code]!=""
       render :text=>"<p style='color:red;'>Coupon code Invalid</p>".html_safe
     else
       render :text=>""
+>>>>>>> ad727ba70dcf64ae8b709170abeccfdae0e0cf9e
     end
   end
   def index
