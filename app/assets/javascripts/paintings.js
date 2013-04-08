@@ -2,6 +2,7 @@ jQuery(function() {
 
   return $('#new_painting').fileupload({
     dataType: "script",
+    "Content-Type": "text/javascript; charset=utf-8",
     Default: false,
     add: function(e, data) {
       
