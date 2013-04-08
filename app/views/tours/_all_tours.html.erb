@@ -11,8 +11,8 @@
     <strong>Price($): </strong> <%= tour.price %><br />
     <strong>Category:</strong> <%= tour.product.name %><br />
     <strong>Description:</strong>
-    <%= truncate(tour.description, :length => 20).html_safe%>
-    <% if tour.description.length > 20 %>
+    <span><%=  strip_tags(truncate(tour.description, :length => 30))%></span>
+    <% if tour.description.length > 30 %>
     <span><%=link_to "[More]", tour %></span>
     <%end%>
     <%#= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%><br />
