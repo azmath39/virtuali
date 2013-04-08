@@ -232,7 +232,7 @@ class User < ActiveRecord::Base
   end
   def save_payment_details(reference,type,amount)
     a= amount.to_i/100
-    payment=Payment.create(:reference=>reference,:amount=>a,:payment_type=>type,:user_name=>self.name,:user_email=>self.email,:product_id=>self.selected_product.product_id)
+    payment=Payment.create(:reference=>reference,:amount=>a,:payment_type=>type,:name=>self.name,:email=>self.email,:product_id=>self.selected_product.product_id)
     self.payments<< payment
     send_reciept_user(payment)
 

@@ -23,7 +23,7 @@ class Payment < ActiveRecord::Base
 #  def user_email
 #    self.user.email unless self.user.nil?
 #  end
-  
+ 
 end
 #class PaymentDecorator < ApplicationDecorator
 #    decorates :name
