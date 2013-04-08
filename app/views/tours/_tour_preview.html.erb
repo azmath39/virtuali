@@ -94,12 +94,14 @@
     <% if @tour.user.company %>
       <% if @tour.user.company.logo? %>
         <%= image_tag(@tour.user.company.logo_url(:medium)) %>
-        <strong><%= @tour.user.company.name %></strong>
+        <strong><%#= @tour.user.company.name %></strong>
+        <% else %>
+        <%= image_tag('default_company_logo.png') %>
       <% end %>
+      <strong><%= @tour.user.company.name == "" ? "Company Name" : "#{@tour.user.company.name}" %></strong>
     <% else %>
       <% if @tour.user.image? %>
       <%= image_tag(@tour.user.image_url(:medium)) %>
-      
       <% else %>
       <%= image_tag('user_default_image.gif') unless @tour.user.image? %>
       <% end %>

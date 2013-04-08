@@ -24,6 +24,7 @@
 <div style="float:right;margin: -25% 25% 0 0px;height:60px; width:60px;">
   <% if current_user.company.logo? %>
     <%= image_tag current_user.company.logo_url(:thumb) %>
+  <center><%= link_to "Remove", {:controller => 'companies', :action => 'remove_logo'}, :confirm => "Are you sure?", :method => :delete %></center>
   <% else %>
     <%= image_tag 'default_company_logo.png' %>
   <% end %>

@@ -19,4 +19,11 @@ class CompaniesController < ApplicationController
       render 'edit'
     end
   end
+  def remove_logo
+     if current_user.company.remove_logo!
+       redirect_to :back, :notice => "Company logo removed."
+     else
+       
+     end
+  end
 end
