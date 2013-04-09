@@ -71,7 +71,8 @@ class PaintingsController < ApplicationController
   def destroy
     @painting = Painting.find(params[:id])
     if @painting.destroy
-      redirect_to :back
+      render :nothing=>true
+      #redirect_to :back
       # redirect_to paintings_url, :notice=> "Image was successfully deleted."
     end
   end

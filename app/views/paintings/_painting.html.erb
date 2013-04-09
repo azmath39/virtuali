@@ -25,7 +25,7 @@
        });
       return false;
    }
-
+ 
 </script>
 <div id='injection_site'></div>
 <div class="painting" >
@@ -43,6 +43,8 @@
   
   <div class="actions">
     <%= link_to "edit", '#', :onclick=>"return launchEditor('#{painting.id}', 'http://virtuali.herokuapp.com#{painting.image_url(:large)}');"%> |
-    <%= link_to "remove", painting, :method => :delete, :confirm => "Are you sure1?" %> <span class="badge badge-info" style="float:right; font-weight: bold"><%#=$serial_no +=1%></span>
+    <%#= link_to "remove", painting, :method => :delete, :confirm => "Are you sure1?" %> <span class="badge badge-info" style="float:right; font-weight: bold"><%#=$serial_no +=1%></span>
+  <%= link_to "remove","#", :class=>"removed", :id=>painting.id %> <span class="badge badge-info" style="float:right; font-weight: bold"><%#=$serial_no +=1%></span>
+
   </div>
 </div>

@@ -3,7 +3,7 @@
 <div class="span12" style="margin-left: 15%;">
   <p class="title-text">Create a Tour</p>
   <%= render 'shared/error_messages', :target => @tour  %>
-<%= form_for Painting.new,:remote=>true do |f| %>
+<%= form_for Painting.new,{:remote=>true} do |f| %>
   <%$serial_no=0%>
 <div class="fileupload btn btn-primary">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
@@ -13,7 +13,7 @@
 <span id="painting_error"></span>
 <div id="paintings">
   <%= render @paintings %>
-  
+
 </div>
 
 
@@ -186,4 +186,67 @@ You have already published Sufficient Tours. To create more tours upgrade your S
           $("#tour_bath_rooms").val(text[1]);
     });
   }
+
+  $('.removed').click(  function(e){
+   if(confirm("Are You Sure")){
+    e.preventDefault();
+    $(this).closest('.painting').hide();
+  // alert($(this).attr("id"));
+   $.ajax({
+     type:'DELETE',
+     dataType: "script",
+     url:'/paintings/'+$(this).attr("id")
+     
+   }).done(function(){
+
+     $('#painting_error').html("<div class='alert'>Picture Successfully Removed. </div> ")
+   });
+   }else
+     {
+       return false;
+     }
+});
+
+
+  jQuery(function() {
+
+  return $('#new_painting').fileupload({
+    type:'POST',
+    dataType: "script",
+    cache:false,
+
+    add: function(e, data) {
+
+      var file, types;
+      types = /(\.|\/)(gif|jpe?g|png)$/i;
+      file = data.files[0];
+      if (types.test(file.type) || types.test(file.name)) {
+
+        data.context = $(tmpl("template-upload", file));
+        $('#new_painting').append(data.context);
+        return data.submit();
+      } else {
+        return alert("" + file.name + " is not a gif, jpeg, or png image file");
+      }
+    },
+    progress: function(e, data) {
+      var progress;
+      if (data.context) {
+        progress = parseInt(data.loaded / data.total * 100, 10);
+        return data.context.find('.bar').css('width', progress + '%');
+      }
+    },
+    beforeSend: function (XMLHttpRequest) {
+
+   // alert("ok");
+   //Specifying this header ensures that the results will be returned as JSON.
+   XMLHttpRequest.setRequestHeader("Accept", "text/javascript");
+}
+
+  });
+
+});
+
+
+
 </script>
