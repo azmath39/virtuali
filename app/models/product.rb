@@ -37,7 +37,7 @@ class Product < ActiveRecord::Base
     self.payments.count
   end
   def name_label
-    "#{self.name}\n <br\><br\>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp$ #{self.payments.sum(:amount)}".html_safe
+    "#{self.name}\n <br\><br\>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp$ #{self.payments(true).sum(:amount)}".html_safe
   end
   def self.all_label
     "All\n <br\><br\>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp$ #{Payment.sum(:amount)}".html_safe
