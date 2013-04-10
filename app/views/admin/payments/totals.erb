@@ -1,1 +1,23 @@
-<%="ok"%>
+<table class="index_table index">
+      <tr>
+         <th>Payment Date</th>
+         <th>User Name</th>
+         <th>User Email</th>
+         <th>Amount($)</th>
+      </tr>
+      <% @payments.each do |payment| %>
+            <tr>
+              <td><%= payment.created_at.strftime("%d-%b-%y, %A") %></td>
+              <td><%= payment.name %> </td>
+              <td><%= payment.email %></td>
+              <td>$<%= payment.amount %> </td>
+
+            </tr>
+            <% end %>
+            <tr>
+              <td></td>
+              <td></td>
+            <th>Total Amount:</th>
+            <td> $<%=Payment.sum(:amount)%> </td>
+            </tr>
+  </table>

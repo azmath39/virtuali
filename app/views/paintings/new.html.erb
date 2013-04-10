@@ -187,7 +187,7 @@ You have already published Sufficient Tours. To create more tours upgrade your S
     });
   }
 
-  $('.removed').click(  function(e){
+  /*$('.removed').click(function(e){
    if(confirm("Are You Sure")){
     e.preventDefault();
     $(this).closest('.painting').hide();
@@ -205,8 +205,25 @@ You have already published Sufficient Tours. To create more tours upgrade your S
      {
        return false;
      }
-});
+});*/
+function remove_image(id){
+ if(confirm("Are You Sure")){
 
+$.ajax({
+     type:'DELETE',
+     dataType: "script",
+     url:'/paintings/'+$('#'+id).attr("id")
+
+   }).done(function(){
+$('#'+id).closest('.painting').hide();
+     $('#painting_error').html("<div class='alert'>Picture Successfully Removed. </div> ")
+   });
+   }else
+     {
+       return false;
+     }
+
+}
 
   jQuery(function() {
 

@@ -48,3 +48,22 @@ border: 0px;
 
 // body.active_admin .scopes li .count{
 // display:none;}
+body.active_admin .total{
+float:right;
+color: white;
+font-size:40px;
+padding:20px;
+margin-bottom:2%;
+margin-top:-4%;
+background-color:#4d5256;
+border-radius:20px;
+background: -moz-linear-gradient(-90deg, #6A7176, #4D5256) repeat scroll 0 0 transparent !important;
+    border-bottom: 1px solid #44484B;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.37);
+    height: 20px;
+    overflow: visible;
+
+    position: inherit;
+    text-shadow: 0 1px 0 #000000;
+    z-index: 900;
+}

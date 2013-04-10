@@ -10,7 +10,7 @@
        onSave: function(imageID, newURL) {
            var img = document.getElementById(imageID);
            img.src = newURL;
-           $('#painting_remote_image_url  ').val(newURL);
+           $('#painting_remote_image_url').val(newURL);
            $('#image_updated_id').val(imageID);
            $('form#updated_image_form').submit();
        },
@@ -44,7 +44,7 @@
   <div class="actions">
     <%= link_to "edit", '#', :onclick=>"return launchEditor('#{painting.id}', 'http://virtuali.herokuapp.com#{painting.image_url(:large)}');"%> |
     <%#= link_to "remove", painting, :method => :delete, :confirm => "Are you sure1?" %> <span class="badge badge-info" style="float:right; font-weight: bold"><%#=$serial_no +=1%></span>
-  <%= link_to "remove","#", :class=>"removed", :id=>painting.id %> <span class="badge badge-info" style="float:right; font-weight: bold"><%#=$serial_no +=1%></span>
+  <%= link_to "remove","#", :class=>"removed", :id=>painting.id, :onclick=>"remove_image(#{painting.id})"%> <span class="badge badge-info" style="float:right; font-weight: bold"><%#=$serial_no +=1%></span>
 
   </div>
 </div>
