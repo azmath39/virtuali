@@ -128,7 +128,7 @@
 
     <%end%>
   </div>
-</div>
+
 <script>
   $(document).ready(function(){
     
@@ -141,7 +141,7 @@
     var payment_type=  $("input[name='package[type_of_payment]']:checked").val()||$("#package_type_of_payment").val() ||2;
     if (!$("input[name='package[id]']:checked").val())
     {
-      $('#package_error').append("* Select any Package  to continue..... <br/>")
+      $('#package_error').html("* Select any Package  to continue..... <br/>")
       $('#btn_package').die( "click" );
     }else{
 

@@ -245,7 +245,7 @@ $('#btn_package').click(function(event) {
     var payment_type= $("#user_package_type_of_payment").val() || 2;
     if (!$("input[name='user[package][id]']:checked").val())
     {
-        $('#package_error').append("* Select any Package  to continue..... <br/>")
+        $('#package_error').html    ("* Select any Package  to continue..... <br/>")
         //$('#btn_package').die( "click" );
         $('#btn_package').prop('disabled', true);
     }else{
