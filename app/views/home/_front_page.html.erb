@@ -18,7 +18,17 @@
        <a class="carousel-control left" href="#myCarousel1" data-slide="prev">&lsaquo;</a>
        <a class="carousel-control right" href="#myCarousel1" data-slide="next">&rsaquo;</a>
   </div><!-- end of carousel -->
-
+  <div class="nav-collapse1" style="margin: 20px 25% 20px 30%;">
+    <ul id="nav" class="nav nav-pills one-page">
+        <li><%= link_to "About VI", '#section-1'%></li>
+        <li><%= link_to "Products", '#section-2'%> </li>
+        <li><%= link_to "Pricing", '#section-3' %> </li>
+        <li><%= link_to "Tutorial", '#section-4' %> </li>
+        <li><%= link_to "How to?", '#section-5' %> </li>
+        <li><%= link_to "FAQ", '#section-6'%></li>
+    </ul>
+  </div>
+  <div id="toTop">Back to Top&nbsp;<i class="icon-arrow-up"></i></div>
   <div class="container marketing">
 <!-- START THE FEATURETTES -->
      <div class="featurette">
@@ -46,48 +56,102 @@
 <hr class="featurette-divider">
       <!-- Three columns of text below the carousel -->
       <%= render 'pricing' %>
-      <hr class="featurette-divider">
+      <hr class="featurette-divider2">
       <div id="section-1">
       <div class="featurette">
       
-        <%#= render 'pages/about_vi' %>
+        <%= render 'pages/about_vi' %>
       </div>
 </div>
-      <hr class="featurette-divider">
+      <hr class="featurette-divider2">
       <div id="section-2">
       <div class="featurette">
 
-        <%#= render 'pages/products' %>
+        <%= render 'pages/products' %>
       </div>
 </div>
-      <hr class="featurette-divider">
+      <hr class="featurette-divider2">
       <div id="section-3">
       <div class="featurette">
 
-        <%#= render 'pages/pricing' %>
+        <%= render 'pages/pricing' %>
       </div>
 </div>
-      <hr class="featurette-divider">
+      <hr class="featurette-divider2">
       <div id="section-4">
       <div class="featurette">
 
-        <%#= render 'pages/tutorial' %>
+        <%= render 'pages/tutorial' %>
       </div>
 </div>
-      <hr class="featurette-divider">
+      <hr class="featurette-divider2">
       <div id="section-5">
       <div class="featurette">
 
-        <%#= render 'pages/how_to' %>
+        <%= render 'pages/how_to' %>
       </div>
 </div>
-      <hr class="featurette-divider">
+      <hr class="featurette-divider2">
       <div id="section-6">
       <div class="featurette">
 
-        <%#= render 'pages/faq' %>
+        <%= render 'pages/faq' %>
       </div>
 </div>
       
 
 <!-- end of marketing fields -->
+
+<script>
+  $('#nav').onePageNav({
+    currentClass: 'current',
+    changeHash: false,
+    scrollSpeed: 950,
+    scrollOffset: 30,
+    scrollThreshold: 0.5,
+    filter: '',
+    easing: 'swing',
+    begin: function() {
+        //I get fired when the animation is starting
+    },
+    end: function() {
+        //I get fired when the animation is ending
+    },
+    scrollChange: function($currentListItem) {
+        //I get fired when you enter a section and I pass the list item of the section
+    }
+});
+</script>
+<style>
+  #toTop {
+	width:100px;
+        border:1px solid #ccc;
+        background:lightgreen;
+        box-shadow: 5px 5px 2px #888888;
+        text-align:center;
+        padding:5px;
+        position:fixed; /* this is the magic */
+        bottom:10px; /* together with this to put the div at the bottom*/
+        right:10px;
+        cursor:pointer;
+        display:none;
+        color:#333;
+        font-family:verdana;
+        font-size:11px;
+}
+</style>
+<script>
+  $(function() {
+	$(window).scroll(function() {
+		if($(this).scrollTop() != 0) {
+			$('#toTop').fadeIn();
+		} else {
+			$('#toTop').fadeOut();
+		}
+	});
+
+	$('#toTop').click(function() {
+		$('body,html').animate({scrollTop:0},800);
+	});
+});
+</script>

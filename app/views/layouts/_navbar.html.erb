@@ -11,16 +11,16 @@
       </a>
       <%#= link_to image_tag("Virtual I Logo 300dpi.png", :size => "100x100", :alt => "Virtuali"), root_path%>
       <div class="nav-collapse" style="margin-top:20px;">
-      <ul class="nav nav-pills">
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "About VI", '/pages/about_vi'%></li>
-        <li><%= link_to "Products", '/pages/products'%> </li>
-        <li><%= link_to "Pricing", '/pages/pricing' %> </li>
-        <li><%= link_to "Tutorial", '/pages/tutorial' %> </li>
+      <ul class="nav nav-pills" id="top-nav">
+        <li><%= link_to "Home", root_path if !current_user %></li>
+        <li><%#= link_to "About VI", '/pages/about_vi'%></li>
+        <li><%#= link_to "Products", '/pages/products'%> </li>
+        <li><%#= link_to "Pricing", '/pages/pricing' %> </li>
+        <li><%#= link_to "Tutorial", '/pages/tutorial' %> </li>
         <li><%= link_to "Tours Map", '/tours/view_map'%> </li>
         <li><%= link_to "All Tours", tours_path %> </li>
-        <li><%= link_to "How to?", '/pages/how_to' %> </li>
-        <li><%= link_to "FAQ", '/pages/faq'%></li>
+        <li><%#= link_to "How to?", '/pages/how_to' %> </li>
+        <li><%#= link_to "FAQ", '/pages/faq'%></li>
       </ul>
       <div class="navbar-text pull-right">
       <ul class="nav" style="margin-right: 155px;">
@@ -63,24 +63,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  $('#nav').onePageNav({
-    currentClass: 'current',
-    changeHash: false,
-    scrollSpeed: 50,
-    scrollOffset: 30,
-    scrollThreshold: 0.5,
-    filter: '',
-    easing: 'swing',
-    begin: function() {
-        //I get fired when the animation is starting
-    },
-    end: function() {
-        //I get fired when the animation is ending
-    },
-    scrollChange: function($currentListItem) {
-        //I get fired when you enter a section and I pass the list item of the section
-    }
-});
-</script>

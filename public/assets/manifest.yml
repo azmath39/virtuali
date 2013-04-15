@@ -101,6 +101,8 @@ application.js: application.js
 application/index.js: application.js
 application.css: application.css
 application/index.css: application.css
+rails.mp4: rails.mp4
+rails/index.mp4: rails.mp4
 progressbar.gif: progressbar.gif
 progressbar/index.gif: progressbar.gif
 bootstrap-wysihtml5.js: bootstrap-wysihtml5.js
