@@ -17,9 +17,13 @@
 
         <% end %><br />
       </div>
+
       <div id="next_btn" style="float:right; margin-right:16%;">
-        <%=button_tag "Next",:class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_product" %>
+        <%=link_to "Next",'#',:class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_product" %>
+
+        <%#=button_tag "Next",:class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_product" %>
         <span><%= link_to "Cancel", root_url , :style=> 'margin-right:20px;'%></span>
+
       </div>
     </div>
 
@@ -112,7 +116,7 @@
     var payment_type=  $("input[name='user[package][type_of_payment]']:checked").val()||$("#user_package_type_of_payment").val() ||2;
     if (!$("input[name='user[package][id]']:checked").val())
     {
-      $('#package_error').append("* Select any Package  to continue..... <br/>")
+      $('#package_error').html("* Select any Package  to continue..... <br/>")
       $('#btn_package').die( "click" );
     }else{
 

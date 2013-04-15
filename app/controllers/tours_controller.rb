@@ -143,7 +143,7 @@ class ToursController < ApplicationController
         i = 1
         Zip::ZipOutputStream.open(t.path) do |z|
           image_list.each do |img|
-            title = "#{i}.#{img.name}"
+            title = "#{i}_#{img.name||"unknown"}.#{img.image.file.extension}"
             image_url = "#{Rails.root.to_s}/public#{img.image.url(:large)}"
             #title += ".jpg" unless title.end_with?(".jpg")
             z.put_next_entry(title)

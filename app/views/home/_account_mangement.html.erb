@@ -45,7 +45,9 @@
     $("#div_company").html(html);
   });
   }
-  function edit_tour(id){
+
+  /* ajax for edit in same page*/
+ /* function edit_tour(id){
     //alert(id);
     //var x = id;
     $.ajax({
@@ -67,7 +69,7 @@
     }).done(function(html){
       $("#user_tours").html(html)
     });
-  }
+  }*/
   function display_tours_for_status(){
     $.ajax({
       type: 'GET',

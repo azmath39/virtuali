@@ -35,8 +35,8 @@
   <div class="name">
     <%#= painting.name %>
     <%# @names= ["Living Rm", "Kitchen", "Den", "Great Rm", "Dinning Rm", "Bath Rm", "Master Batch", "Half Batch", "Master Bed Rm", "Bed Rm1", "Bed Rm2", "Bed Rm3"] %>
-<%@names=["Living Room", "Kitchen", "Den", "Great Room", "Dinning Room","Bath Room", "Bed Room","Others"]%>
-<%= select_tag "Name", options_for_select(@names), :id => "select#{painting.id}",:onchange=>"check_others(#{painting.id})" ,:prompt=>"Please Select Name..",:style=>"width: 100%"%>
+<%@names=["Living Room", "Kitchen", "Den", "Great Room", "Dinning Room","Bath Room", "Bed Room", "Front" , "Rear", "Foyer", "Bonus Rm","Others"]%>
+<%= select_tag "Name", options_for_select(@names), :id => "select#{painting.id}",:onchange=>"check_others(#{painting.id})" ,:prompt=>"#{painting.name ||"Please Select Name."}",:style=>"width: 100%"%>
   <div id="other-name<%=painting.id%>">
 
   </div>
@@ -45,7 +45,7 @@
   
   <div class="actions" style="font-size:14px;">
     <%= link_to "edit", '#', :onclick=>"return launchEditor('#{painting.id}', 'http://virtuali.herokuapp.com#{painting.image_url(:large)}');"%> |
-    <%#= link_to "remove", painting, :method => :delete, :confirm => "Are you sure1?" %> <span class="badge badge-info" style="float:right; font-weight: bold"><%#=$serial_no +=1%></span>
+    <%#= link_to "remove", painting, :method => :delete, :confirm => "Are you sure1?" %> <span class="badge badge-info" style="float:right; font-weight: bold"><%=$serial_no +=1%></span>
   <%= link_to "remove", "#", :class=>"removed", :id=>painting.id, :onclick=>"remove_image(#{painting.id})"%> <span class="badge badge-info" style="float:right; font-weight: bold"><%#=$serial_no +=1%></span>
 
   </div>
