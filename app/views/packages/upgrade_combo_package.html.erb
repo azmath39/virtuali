@@ -1,10 +1,10 @@
 
-<div id="packages-div1">
+<div id="packages-div1" class="border-box">
   <%=form_for :package ,:url=>"upgrade_combo",:html => { :id => 'payment-form'} do|f|%>
 
     <div id="product_select" >
 
-      <div id="scont">
+      <div id="scont" style="margin:auto; width:50%;padding:4% 0 0 20%;">
         <h3>Product Selection</h3>
 
         <hr></hr>
@@ -17,8 +17,13 @@
 
         <% end %><br />
       </div>
-      <div id="next_btn">
+
+      <div id="next_btn" style="float:right; margin-right:16%;">
         <%=link_to "Next",'#',:class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_product" %>
+
+        <%#=button_tag "Next",:class => "slidesjs-next slidesjs-navigation btn-large btn-primary",:id=>"btn_product" %>
+        <span><%= link_to "Cancel", root_url , :style=> 'margin-right:20px;'%></span>
+
       </div>
     </div>
 
@@ -26,10 +31,11 @@
     <div id ="package_info">
       <div id="packages">
       </div><br />
-      <%=link_to "Next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_package" %>
+      <%=link_to "Next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_package", :style=>"float:right; margin-right:16%;" %>
+      <span><%= link_to "Cancel", root_url , :style=> 'float:right;margin-right:10px;margin-top:15px;'%></span>
     </div>
     <div id="payment_info">
-      <div id="scont">
+      <div id="scont" style="margin:auto; width:50%;padding:4% 0 0 20%; ">
         <h3>Payment Process</h3>
         <hr></hr>
         <div class = "payment-errors" style="margin:0 0 20px 15px; color: red;">
@@ -64,8 +70,9 @@
           <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month", :style=> 'width:30%;'} %>
           <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year", :style=> 'width:30%;'} %>
         </div></div>
-      <div id="next_btn">
+      <div id="next_btn" style="float:right; margin-right:16%;">
         <%= f.submit "Upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
+        <span><%= link_to "Cancel", root_url , :style=> 'margin-right:10px;'%></span>
       </div>
     </div>
   </div>
@@ -147,3 +154,10 @@
     });
   }
 </script>
+<style>
+  .border-box{
+    border-radius: 25px;
+    box-shadow:10px 10px 5px #0088CC ;
+    border:2px #0088CC solid;height:650px; width: 80%; margin:auto;
+  }
+</style>

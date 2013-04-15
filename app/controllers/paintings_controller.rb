@@ -13,6 +13,7 @@ class PaintingsController < ApplicationController
   end
   
   def new
+    #render :layout => false
     @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil).order('created_at ASC')
     @painting = Painting.new
     @tour = Tour.new

@@ -28,6 +28,9 @@ class RegistrationsController < Devise::RegistrationsController
     end
     # create the charge on Stripe's servers - this will charge the user's card 
   end
+  def edit
+    render :layout => false
+  end
   
   private
    def amount_to_charge

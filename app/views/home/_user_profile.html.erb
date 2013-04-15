@@ -1,5 +1,5 @@
 <div style="margin-left:2%;">
-<p><span class="title-text">My Profile</span>&nbsp;<b><%= link_to "Edit".html_safe, edit_user_registration_path(current_user),:class=>"btn btn-link" %></b></p>
+<p><span class="title-text">My Profile</span>&nbsp;<b><%= link_to "Edit".html_safe, '#edit_user', :onclick => "edit_user()", :class=>"btn btn-link" %></b></p>
 <hr />
 <% user = current_user %>
 <div style="float: right; height:200px;width: 120px;">
