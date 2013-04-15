@@ -62,6 +62,35 @@
     </div>
     </div>
   </div>
+<%if current_user%>
+  <div class="navbar-inner" style="margin-top:3%; background: rgb(147, 156, 179);">
+<%#= link_to image_tag("rsz_1virtual_i_logo_300dpi.png", :alt => "Virtuali"), root_path, :style=> "float:left; clear:none;"%>
+    <div class="container" style="margin: 10px 10px 0 100px;">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <%#= link_to image_tag("Virtual I Logo 300dpi.png", :size => "100x100", :alt => "Virtuali"), root_path%>
+      <div class="nav-collapse" style="margin-top:0%; ">
+      <ul class="nav" style="margin-bottom:2%; ">
+
+        <li><%= link_to '<center><i class="icon-1x icon-desktop"></i></center> Dashboard'.html_safe, "#div_dashboard", "data-toggle" => "tab"%> </li>
+      <li ><%= link_to '<center><i class="icon-1x icon-eye-open"></i></center> Status'.html_safe, '#div_status', "data-toggle" => "tab"%> </li>
+      <li><%= link_to '<center><i class="icon-1x icon-money"></i></center> Billing'.html_safe, '#div_billing', "data-toggle" => "tab" %></li>
+      <% if current_user.company %>
+      <li ><%= link_to '<center><i class="icon-1x icon-cog"></i> </center>Company'.html_safe, '#div_company', "data-toggle" => "tab" %></li>
+      <% end %>
+      <li><%= link_to '<center><i class="icon-1x icon-edit"></i> </center>Profile'.html_safe, '#div_profile', "data-toggle" => "tab" %></li>
+      <li><%#= link_to "Manage Account", '#div_manage', "data-toggle" => "tab"%> </li>
+      <li><%#= link_to "Upgrade Account", '#div_upgrade', "data-toggle" => "tab"%> </li>
+
+      </ul>
+      
+    </div>
+    </div>
+  </div>
+  <%end%>
 </div>
 
 <script>
