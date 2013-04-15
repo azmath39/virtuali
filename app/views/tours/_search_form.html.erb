@@ -1,3 +1,6 @@
+  <% content_for :search do %>
+ <div class ="span3" id="map-search">
+<h1 class="title-text">Search</h1>
   <%= search_form_for @search, :class => 'well form-inline', :id => 'img_bg' do |f| %>
     <%= f.label :state_cont, "State" %>
     <%=f.select :state_cont, State.all.collect {|s| [s.name, s.name]},{:include_blank => "All"},:onchange=>"state_city()"%><br />
@@ -11,8 +14,9 @@
     <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %>
     <%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
 <br /><%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
+ </div>
   <% end %>
-
+<%end%>
 <script>
  function state_city()
   {
