@@ -20,12 +20,12 @@
   </div><!-- end of carousel -->
   <div class="nav-collapse1" style="margin: 20px 25% 20px 30%;">
     <ul id="nav" class="nav nav-pills one-page">
-        <li><%= link_to "About VI", '#section-1'%></li>
-        <li><%= link_to "Products", '#section-2'%> </li>
-        <li><%= link_to "Pricing", '#section-3' %> </li>
-        <li><%= link_to "Tutorial", '#section-4' %> </li>
-        <li><%= link_to "How to?", '#section-5' %> </li>
-        <li><%= link_to "FAQ", '#section-6'%></li>
+        <li><%= link_to "About VI", '#aboutvi'%></li>
+        <li><%= link_to "Products", '#products'%> </li>
+        <li><%= link_to "Pricing", '#pricing' %> </li>
+        <li><%= link_to "Tutorial", '#tutorial' %> </li>
+        <li><%= link_to "How to?", '#howto' %> </li>
+        <li><%= link_to "FAQ", '#faq'%></li>
     </ul>
   </div>
   <div id="toTop">Back to Top&nbsp;<i class="icon-arrow-up"></i></div>
@@ -53,46 +53,46 @@
       </div>
   </div>
       <!-- /END THE FEATURETTES -->
-<hr class="featurette-divider">
-      <!-- Three columns of text below the carousel -->
-      <%= render 'pricing' %>
+<%#*<hr class="featurette-divider">%>
+      <%#*<!-- Three columns of text below the carousel -->%>
+      <%#= render 'pricing' %>
       <hr class="featurette-divider2">
-      <div id="section-1">
+      <div id="aboutvi">
       <div class="featurette">
       
         <%= render 'pages/about_vi' %>
       </div>
 </div>
       <hr class="featurette-divider2">
-      <div id="section-2">
+      <div id="products">
       <div class="featurette">
 
         <%= render 'pages/products' %>
       </div>
 </div>
       <hr class="featurette-divider2">
-      <div id="section-3">
+      <div id="pricing">
       <div class="featurette">
 
         <%= render 'pages/pricing' %>
       </div>
 </div>
       <hr class="featurette-divider2">
-      <div id="section-4">
+      <div id="tutorial">
       <div class="featurette">
 
         <%= render 'pages/tutorial' %>
       </div>
 </div>
       <hr class="featurette-divider2">
-      <div id="section-5">
+      <div id="howto">
       <div class="featurette">
 
         <%= render 'pages/how_to' %>
       </div>
 </div>
       <hr class="featurette-divider2">
-      <div id="section-6">
+      <div id="faq">
       <div class="featurette">
 
         <%= render 'pages/faq' %>

@@ -2,9 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 #pages_div{
-  width: 85%;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin: auto;
   font-size: 15px;
   text-align: justify;
   font-weight: 50;
@@ -12,7 +10,7 @@
 }
 h1.center{
   text-align: center;
-  line-height: 20px;
+  line-height: 10px;
   font-family: "ProximaNovaLight","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
@@ -28,9 +26,12 @@ text-align: center;
 .p60 {
 margin-bottom: 60px!important;
 }
+.p20 {
+margin-bottom: 20px!important;
+}
 .one-page > li > a:hover{
-    background: none;
-    border-bottom: 3px solid green;
+    background: lightgreen;
+    
 }
 #top-nav{
   margin-left: 30px;
