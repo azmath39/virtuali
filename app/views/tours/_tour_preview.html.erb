@@ -1,7 +1,7 @@
 <script>
   $(document).ready(function(){
     $('.carousel').carousel({
-    interval: 1000,
+    interval: 7000,
     autoplay: true
   })
   var slider = $(".carousel-inner")
@@ -58,9 +58,12 @@
   <% unless @objs.empty? %>
   <div class="slider-pager" style="margin: 5% 0 0 20%;">
     <% if @objs.size >= 5 %>
-    <% for image in @objs.first 5 %>
-      <a href="#main-slider" class="btn btn-mini btn-primary"><%= image.name%></a>&nbsp;&nbsp;
-    <% end %>
+    <% images = @objs.first 5 %>
+      <a href="#main-slider" class="btn btn-mini btn-primary pager-active" ><%= images.first.name%></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%img2=images[1]%><%= img2.name%></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%img3=images[2]%><%= img3.name%></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%img4=images[3]%><%= img4.name%></a>&nbsp;&nbsp;
+      <a href="#main-slider" class="btn btn-mini btn-primary"><%img5=images[4]%><%= img5.name%></a>&nbsp;&nbsp;
     <% else %>
       <% for image in @objs %>
       <a href="#main-slider" class="btn btn-mini btn-primary"><%= image.name%></a>&nbsp;&nbsp;
