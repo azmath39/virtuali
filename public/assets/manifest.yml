@@ -17,6 +17,8 @@ HELR68W.TTF: HELR68W.TTF
 HELR68W/index.TTF: HELR68W.TTF
 helveticalt23ultralightextended.ttf: helveticalt23ultralightextended.ttf
 helveticalt23ultralightextended/index.ttf: helveticalt23ultralightextended.ttf
+Virtual I Logo 300dpi.png: Virtual I Logo 300dpi.png
+Virtual I Logo 300dpi/index.png: Virtual I Logo 300dpi.png
 bg.jpg: bg.jpg
 bg/index.jpg: bg.jpg
 bg2.jpg: bg2.jpg
@@ -67,6 +69,8 @@ menu_bg.png: menu_bg.png
 menu_bg/index.png: menu_bg.png
 rails.png: rails.png
 rails/index.png: rails.png
+rsz_1virtual_i_logo_300dpi.png: rsz_1virtual_i_logo_300dpi.png
+rsz_1virtual_i_logo_300dpi/index.png: rsz_1virtual_i_logo_300dpi.png
 slide-01.jpg: slide-01.jpg
 slide-01/index.jpg: slide-01.jpg
 slide-02.jpg: slide-02.jpg
@@ -91,6 +95,8 @@ up_arrow.gif: up_arrow.gif
 up_arrow/index.gif: up_arrow.gif
 user_default_image.gif: user_default_image.gif
 user_default_image/index.gif: user_default_image.gif
+virtuali_logo.png: virtuali_logo.png
+virtuali_logo/index.png: virtuali_logo.png
 application.js: application.js
 application/index.js: application.js
 application.css: application.css

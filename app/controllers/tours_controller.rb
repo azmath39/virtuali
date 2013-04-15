@@ -42,7 +42,7 @@ class ToursController < ApplicationController
     end
   end
     def edit
-      @tour = Tour.find(params[:id])
+      @tour = Tour.find(params[:id].to_i)
       @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id).order('created_at ASC')
       @count=@paintings.count unless @paintings.nil?
       @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil)

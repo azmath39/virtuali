@@ -24,6 +24,50 @@
     });
 
   }
+  function edit_user(){
+  //alert('ok');
+  $.ajax({
+    type: 'GET',
+    url: '/users/edit'
+  }).done(function(html){
+    $("#div_profile").html(html);
+  });
+  }
+  function edit_company(id){
+  //alert('ok');
+  $.ajax({
+    type: 'GET',
+    url: '/companies/edit',
+    data: {
+      id: id
+    }
+  }).done(function(html){
+    $("#div_company").html(html);
+  });
+  }
+  function edit_tour(id){
+    //alert(id);
+    //var x = id;
+    $.ajax({
+
+      type: 'GET',
+      url: '/tours/'+id+'/edit'
+      
+    }).done(function(html){
+      $("#div_dashboard").html(html)
+    });
+  }
+  function create_tour(){
+    //alert("ok")
+    $.ajax({
+
+      type: 'GET',
+      url: '/paintings/new'
+
+    }).done(function(html){
+      $("#user_tours").html(html)
+    });
+  }
   function display_tours_for_status(){
     $.ajax({
       type: 'GET',
@@ -88,8 +132,8 @@
 
   </div></div>
 
-<%= render 'payment_form' %>
-<%=render "tab_content"%>
+<%= render '/home/payment_form' %>
+<%=render "/home/tab_content"%>
 <%if current_user.company %>
 <style>
   .tab{

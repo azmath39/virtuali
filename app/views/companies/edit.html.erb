@@ -1,4 +1,4 @@
-<div id="signin_div" style="width:30%;">
+<div id="signin_div" style="width:50%;">
 <h3>Edit Company Details</h3>
 <hr />
 <%= form_for @company, :url => '/companies/update' do |f| %>
@@ -19,7 +19,7 @@
   <a class="btn btn-primary" onclick="$('input[id=company_logo]').click();">Browse</a>
 </div><br />
 
-<%= f.submit "Update", :class=>'btn btn-primary' %>
+<%= f.submit "Update", :class=>'btn btn-large btn-primary' %>
 <% end %>
 <div style="float:right;margin: -25% 25% 0 0px;height:60px; width:60px;">
   <% if current_user.company.logo? %>

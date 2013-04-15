@@ -103,7 +103,7 @@
       <strong><%= @tour.user.company.name == "" ? "Company Name" : "#{@tour.user.company.name}" %></strong>
     <% else %>
       <% if @tour.user.image? %>
-      <%= image_tag(@tour.user.image_url(:medium)) %>
+      <%= image_tag(@tour.user.image_url(:thumb)) %>
       <% else %>
       <%= image_tag('user_default_image.gif') unless @tour.user.image? %>
       <% end %>

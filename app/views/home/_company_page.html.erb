@@ -1,5 +1,5 @@
 <div style="margin-left: 2%;">
-<p><span class="title-text">Company Details</span>&nbsp;<b><%= link_to "Edit".html_safe, {:controller => 'companies', :action => 'edit', :id => current_user.company.id}, :class=>"btn btn-link" %></b></p>
+<p><span class="title-text">Company Details</span>&nbsp;<b><%= link_to "Edit".html_safe, "#edit_company", :onclick => "edit_company(#{current_user.company.id})", :class=>"btn btn-link" %></b></p>
 <hr />
 <% if user.company %>
 <div style="float: right; height:200px;width: 120px;">

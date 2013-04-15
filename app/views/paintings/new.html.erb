@@ -1,4 +1,5 @@
 <% if verify_tours_allowed %>
+<%#= render '/home/account_mangement'  %>
 
 <div class="span12" style="margin-left: 15%;">
   <p class="title-text">Create a Tour</p>
@@ -225,7 +226,7 @@ $('#'+id).closest('.painting').hide();
 
 }
 
-  jQuery(function() {
+    jQuery(function() {
 
   return $('#new_painting').fileupload({
     type:'POST',
