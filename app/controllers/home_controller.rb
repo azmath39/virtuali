@@ -29,6 +29,27 @@ class HomeController < ApplicationController
       @payments=current_user.payments.order('created_at DESC')
     end
   end
+  #navigation
+  def status
+    @tours= current_user.tours.order('created_at DESC')
+    render :partial=>'/home/tour_status'
+  end
+  def dashboard
+    @tours= current_user.tours.order('created_at DESC')
+    render :partial=>'/home/dashboard'
+  end
+  def billing
+    @package_price=current_user.package_price
+      @payments=current_user.payments.order('created_at DESC')
+      render :partial=>'/home/billing_page'
+  end
+  def profile
+    render :partial=>'/home/user_profile'
+  end
+  def company
+    render :partial=>'/home/company_page'
+  end
+  #end---navigation
   def cancel_direct_debit
     mess= unsubscribe
     render :text=>mess
