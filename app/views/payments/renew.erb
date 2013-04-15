@@ -1,0 +1,17 @@
+<%= form_for :sim_transaction,:url => AuthorizeNet::SIM::Transaction::Gateway::TEST, :html=>{:id=>"payment_form",:target=>"asd"} do |f| %>
+  <%= sim_fields(@sim_transaction) %>
+  <%#= label_tag 'x_amount', "Total: #{number_to_currency(11)}" %>
+  
+
+  <br />
+  <%= hidden_field_tag("x_description", "Product1", {:id => "x_description"}) %>
+  <%= hidden_field_tag("x_email", "jagadishwer@brilliance-works.com", {:id => "x_email"}) %>
+  <%#= f.submit 'Purchase'%>
+<% end %>
+<iframe name="asd" style="width:100%; height:400px; border:0px;">
+</iframe>
+<script>
+  $(document).ready(function(){
+$('form#payment_form').submit();
+  });
+</script>

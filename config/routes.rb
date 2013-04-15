@@ -1,4 +1,9 @@
 VirtualTour::Application.routes.draw do
+  match '/payments/payment', :to => 'payments#payment', :as => 'paymentspayment', :via => [:get]
+
+  match '/payments/thank_you', :to => 'payments#thank_you', :as => 'payments_thank_you', :via => [:get]
+match '/payments/renew_successfull', :to => 'payments#renew_successfull', :as => 'payments_renew_successfull', :via => [:get]
+
   #get "home/index"
   get "packages/show"
    
