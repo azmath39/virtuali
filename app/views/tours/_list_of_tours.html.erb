@@ -13,7 +13,7 @@
   <div class="span2" style="width:174px;">
     <%#*<div style ="float: right; margin: -6px 200px 0 0; height:100px; width: auto;">%>
     <%=link_to "view", tour_path(tour.id)%>&nbsp;|
-      <%=link_to "edit", edit_tour_path(tour.id)%>
+      <%=link_to "edit", edit_tour_path(tour.id),:confirm => "Are you sure?"%>
       <%#=link_to "edit", "#edit_tour", :onclick => "edit_tour(#{tour.id})"%>&nbsp;|
       <%=link_to "download", :controller => 'tours', :action => 'download_zip', :id => tour.id %>&nbsp;|
       <%=link_to "delete", tour_path(tour.id),:method=>:delete, :confirm => "Are you sure?"%>
