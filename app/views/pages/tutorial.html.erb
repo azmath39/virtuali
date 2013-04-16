@@ -1,4 +1,10 @@
+<%if current_user%>
+<div id="pages_div1">
+<%else%>
 <div id="pages_div">
+  <%end%>
+
+
 <h1 class="center">Tutorial</h1>
 <h2 class="grey center p20">(Something about tutorial)</h2>
 <div style="margin-left: auto;margin-right: auto; width:30%;">
@@ -61,3 +67,12 @@ The main page   pg 1
 </p>
 </div>
 
+<style>
+  #pages_div1{
+    font-size: 15px;
+    line-height: 30px;
+    margin: 2% 5% 2% -15%;
+    position: absolute;
+    text-align: justify;
+}
+  </style>
