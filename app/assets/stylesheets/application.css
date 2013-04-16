@@ -69,3 +69,9 @@ background-image: url(bg2.jpg);
 .sp-div{
     padding-top: 30px;
 }
+#img_bg select{
+    width: 100% !important;
+}
+td{
+  text-align: left;
+}
