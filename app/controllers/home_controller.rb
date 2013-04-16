@@ -25,13 +25,13 @@ class HomeController < ApplicationController
     if current_user
       #      @feedback = Feedback.new
       if params[:q].nil?
-        @search = current_user.tours.active.search(params[:q])
-        @tours = current_user.tours.active.tours_list_pagination(params[:page])
-      elsif params[:q][:status_eq] == "3"
-        @search = current_user.tours.sold.search(params[:q])
-        @tours = @search.result.tours_list_pagination(params[:page])
+        @search = current_user.tours.search(params[:q])
+        @tours = current_user.tours.tours_list_pagination(params[:page])
+#      elsif params[:q][:status_eq] == "3"
+#        @search = current_user.tours.sold.search(params[:q])
+#        @tours = @search.result.tours_list_pagination(params[:page])
       else
-        @search =current_user.tours.active.search(params[:q])
+        @search =current_user.tours.search(params[:q])
         @tours = @search.result.tours_list_pagination(params[:page])
       end
       

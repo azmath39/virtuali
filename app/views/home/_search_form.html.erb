@@ -1,4 +1,5 @@
   <% content_for :search do %>
+
  <div class ="span3" id="map-search">
 <h1 class="title-text">Search</h1>
   <%= search_form_for @search, :url => '/home/index',:class => 'well form-inline', :id => 'img_bg' do |f| %>
@@ -9,7 +10,7 @@
     <%= f.label :product_name_cont, "Category" %>
     <%= f.select :product_name_cont,  Product.where(:product_type=>1).collect {|p| [ p.name, p.name ] }, {:include_blank => "All"}%><br />
     <%= f.label :status_eq, "Status" %>
-    <%= f.select :status_eq, {"Active" => 1, "Sold" => 3}  %><br />
+    <%= f.select :status_eq, {"Active" => 1, "Sold" => 3,"InActive"=>4}  %><br />
     <%#= f.label :price_gteq, "Price Between" %>
     <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %>
     <%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>

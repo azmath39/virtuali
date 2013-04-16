@@ -1,62 +1,62 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Virtuali</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= stylesheet_link_tag "fonts", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  
-  <%#= javascript_include_tag :xdr_transport %>
-  <%= javascript_include_tag "https://js.stripe.com/v1/" %>
-  <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
-  <%= csrf_meta_tags %>
-  <%#*<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>%>
-  <%#*<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />%>
- </head>
-<body>
-  <%= render 'layouts/navbar' %>
-  <%if current_user%>
-  <div id="wrap" style="margin-top: 20%;">
-    <%else%>
-  <div id="wrap">
-  <%end%>
-  
-  <div class ="container ">
-    <%= render 'shared/flash_messages' %>
+  <head>
+    <title>Virtuali</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= stylesheet_link_tag "fonts", :media => "all" %>
+    <%= javascript_include_tag "application" %>
 
-    <%=yield :search%>
+<%#= javascript_include_tag :xdr_transport %>
+    <%= javascript_include_tag "https://js.stripe.com/v1/" %>
+    <%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
+    <%= csrf_meta_tags %>
+<%#*<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>%>
+<%#*<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />%>
+  </head>
+  <body>
+    <%= render 'layouts/navbar' %>
     <%if current_user%>
-   
-   
-    <div id="jquery-container">
+      <div id="wrap" style="margin-top: 23%;">
       <%else%>
-      <div>
+        <div id="wrap">
         <%end%>
-    <%= yield %>
-    </div>
-    <%= yield :scripts %>
 
-    <% if current_user %>
-    <%= render 'feedbacks/feedback_form' %>
-    <div id="feedback">
-      <%= link_to image_tag('fdback.png'), "#example", "data-toggle" => "modal"%>
-    </div>
-    
-    <%end%>
-  </div>
-  <div id="push"></div>
-  </div>
+        <div class ="container ">
+          <%= render 'shared/flash_messages' %>
 
-     <%= render 'layouts/footer' %>
- </body>
-</html>
-<style>
-  #jquery-container{
-  
-  margin-left:20%;
-  min-height: 700px;
-  margin-right:16%;
-  overflow: auto;
-  margin-top: 2%;
-  }
-</style>
+          <%=yield :search%>
+          <%if current_user%>
+
+            <%=yield :side_bar%>
+            <div id="jquery-container">
+            <%else%>
+              <div>
+              <%end%>
+              <%= yield %>
+            </div>
+            <%= yield :scripts %>
+
+            <% if current_user %>
+              <%= render 'feedbacks/feedback_form' %>
+              <div id="feedback">
+                <%= link_to image_tag('fdback.png'), "#example", "data-toggle" => "modal"%>
+              </div>
+
+            <%end%>
+          </div>
+          <div id="push"></div>
+        </div>
+
+        <%= render 'layouts/footer' %>
+        </body>
+        </html>
+        <style>
+          #jquery-container{
+
+            margin-left:20%;
+            min-height: 700px;
+            margin-right:16%;
+            overflow: auto;
+            margin-top: 2%;
+          }
+        </style>

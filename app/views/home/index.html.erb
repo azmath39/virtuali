@@ -1,8 +1,9 @@
 <% unless current_user %>
   <%= render 'front_page'%>
 <% else %>
+
   <%#=render 'account_mangement'%>
-<div style="float:left; margin-bottom:1%;margin-left:13%; ">  <%=select_tag "product_id", options_from_collection_for_select(current_user.subscribe_product,"id","name"),:onchange=>"display_tours()",:prompt=>"All" if current_user.multiple_products?%>
+<div style="float:right; margin-bottom:-6%;margin-right:6%;margin-top: 2%; ">  <%=select_tag "product_id", options_from_collection_for_select(current_user.subscribe_product,"id","name"),:onchange=>"display_tours()",:prompt=>"All" if current_user.multiple_products?%>
 </div>
 <%#*<div style="float:right;margin-right: 9%; margin-bottom: 3%;">%>
  <%#= link_to "Create New Tour", '/paintings/new', :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  if verify_tours_allowed%>
@@ -12,5 +13,53 @@
 <%=render 'search_form' %>
 <%=render '/tours/list_of_tours'%>
 </div>
+<%content_for :side_bar do %>
+<div id="outer_side_bar">
+<div class ="well"id="side_bar"  >
+  <% if current_user.company %>
+      <% if current_user.company.logo? %>
+        <%= image_tag(current_user.company.logo_url(:medium)) %>
+        <strong><%#= current_user.company.name %></strong>
+        <% else %>
+        <%= image_tag('default_company_logo.png') %>
+      <% end %>
+      <strong><%= current_user.company.name == "" ? "Company Name" : "#{current_user.company.name}" %></strong>
+    <% else %>
+      <% if current_user.image? %>
+      <%= image_tag(current_user.image_url(:thumb)) %>
+      <% else %>
+      <%= image_tag('user_default_image.gif') unless current_user.image? %>
+      <% end %>
+     <strong><%= current_user_name %></strong><br />
+     <%= current_user_address %>
+     <% end %>
+     <br/>
+     <br/>
+     <table class="table-striped">
+       <caption>Tours:</caption>
+       <tr><th>Active:</th><td><%=current_user.tours.active.size%></td></tr>
+ <tr><th> Sold :</th><td><%=current_user.tours.sold.size%></td></tr>
+ <tr><th> Inactive:</th><td><%=current_user.tours.inactive.size%></td></tr>
+  <tr><th>Total : </th><td><%=current_user.tours.size%></td></tr>
+     </table>
+
+</div>
+</div>
+<%end%>
+
 
 <% end %>
+<style>
+  #side_bar{
+  
+    width: 11%;
+    height: 275px;
+    float:left;
+    margin-top: 6%;
+      margin-left:85%;
+    background: url('/assets/bg2.jpg') repeat;
+    position: fixed;
+
+
+}
+</style>
