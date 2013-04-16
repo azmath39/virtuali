@@ -18,19 +18,22 @@
        <a class="carousel-control left" href="#myCarousel1" data-slide="prev">&lsaquo;</a>
        <a class="carousel-control right" href="#myCarousel1" data-slide="next">&rsaquo;</a>
   </div><!-- end of carousel -->
-  <div class="nav-collapse1" style="margin: 20px 25% 20px 30%;">
-    <ul id="nav" class="nav nav-pills one-page">
-        <li><%= link_to "About VI", '#aboutvi'%></li>
-        <li><%= link_to "Products", '#products'%> </li>
-        <li><%= link_to "Pricing", '#pricing' %> </li>
-        <li><%= link_to "Tutorial", '#tutorial' %> </li>
-        <li><%= link_to "How to?", '#howto' %> </li>
-        <li><%= link_to "FAQ", '#faq'%></li>
-    </ul>
-  </div>
+  <!-- Single page navigation code (make page/views as partials)
+  <%#*<div class="nav-collapse1" style="margin: 20px 25% 20px 30%;">%>
+    <%#*<ul id="nav" class="nav nav-pills one-page">%>
+        <%#*<li><%= link_to "About VI", '#aboutvi'%></li>%>
+        <%#*<li><%= link_to "Products", '#products'%> </li>%>
+        <%#*<li><%= link_to "Pricing", '#pricing' %> </li>%>
+        <%#*<li><%= link_to "Tutorial", '#tutorial' %> </li>%>
+        <%#*<li><%= link_to "How to?", '#howto' %> </li>%>
+        <%#*<li><%= link_to "FAQ", '#faq'%></li>%>
+    <%#*</ul>%>
+  <%#*</div>%>
+  -->
   <div id="toTop">Back to Top&nbsp;<i class="icon-arrow-up"></i></div>
   <div class="container marketing">
 <!-- START THE FEATURETTES -->
+
      <div class="featurette">
         <%= image_tag("home_image2.png", :class => "featurette-image pull-right featurette-image-round-shadow")%>
         <h2 class="featurette-heading">Virtuali Visual Tours.. <span class="muted">It'll blow your mind.</span></h2>
@@ -53,51 +56,54 @@
       </div>
   </div>
       <!-- /END THE FEATURETTES -->
-<%#*<hr class="featurette-divider">%>
-      <%#*<!-- Three columns of text below the carousel -->%>
-      <%#= render 'pricing' %>
+      <hr class="featurette-divider">
+      <!-- Three columns of text below the carousel -->
+      <%= render 'pricing' %>
       <hr class="featurette-divider2">
+
+      <!-- Single page nav app partials
       <div id="aboutvi">
       <div class="featurette">
       
-        <%= render 'pages/about_vi' %>
+        <%#= render 'pages/about_vi' %>
       </div>
 </div>
       <hr class="featurette-divider2">
       <div id="products">
       <div class="featurette">
 
-        <%= render 'pages/products' %>
+        <%#= render 'pages/products' %>
       </div>
 </div>
       <hr class="featurette-divider2">
       <div id="pricing">
       <div class="featurette">
 
-        <%= render 'pages/pricing' %>
+        <%#= render 'pages/pricing' %>
       </div>
 </div>
       <hr class="featurette-divider2">
       <div id="tutorial">
       <div class="featurette">
 
-        <%= render 'pages/tutorial' %>
+        <%#= render 'pages/tutorial' %>
       </div>
 </div>
       <hr class="featurette-divider2">
       <div id="howto">
       <div class="featurette">
 
-        <%= render 'pages/how_to' %>
+        <%#= render 'pages/how_to' %>
       </div>
 </div>
       <hr class="featurette-divider2">
       <div id="faq">
       <div class="featurette">
 
-        <%= render 'pages/faq' %>
+        <%#= render 'pages/faq' %>
       </div>
 </div>
+      -->
       
 
 <!-- end of marketing fields -->

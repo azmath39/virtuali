@@ -13,14 +13,14 @@
       <div class="nav-collapse" style="margin-top:20px;">
       <ul class="nav nav-pills" id="top-nav">
         <li><%= link_to "Home", root_path if !current_user %></li>
-        <li><%#= link_to "About VI", '/pages/about_vi'%></li>
+        <li><%= link_to "About VI", '/pages/about_vi'%></li>
         <li><%#= link_to "Products", '/pages/products'%> </li>
-        <li><%#= link_to "Pricing", '/pages/pricing' %> </li>
-        <li><%#= link_to "Tutorial", '/pages/tutorial' %> </li>
+        <li><%= link_to "Pricing", '/pages/pricing' %> </li>
+        <li><%= link_to "Tutorial", '/pages/tutorial' %> </li>
         <li><%= link_to "Tours Map", '/tours/view_map'%> </li>
         <li><%= link_to "All Tours", tours_path %> </li>
-        <li><%#= link_to "How to?", '/pages/how_to' %> </li>
-        <li><%#= link_to "FAQ", '/pages/faq'%></li>
+        <li><%= link_to "How to?", '/pages/how_to' %> </li>
+        <li><%= link_to "FAQ", '/pages/faq'%></li>
       </ul>
       <div class="navbar-text pull-right" style="margin-right:25% !important;">
       <ul class="nav" >
