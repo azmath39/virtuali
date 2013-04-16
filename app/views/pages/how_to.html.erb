@@ -1,4 +1,8 @@
+<%if current_user%>
+<div id="pages_div1">
+<%else%>
 <div id="pages_div">
+  <%end%>
 <h1 class="center">How To?</h1>
 <h2 class="grey center p20">(Something about How to?)</h2>
 <p>
@@ -54,3 +58,13 @@ The main page   pg 1
     Each category will be a hot link to is own page with the top heading page always being the same
 </p>
 </div>
+
+<style>
+  #pages_div1{
+    font-size: 15px;
+    line-height: 30px;
+    margin: 2% 5% 2% -15%;
+    position: absolute;
+    text-align: justify;
+}
+  </style>

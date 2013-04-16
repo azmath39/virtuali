@@ -1,4 +1,4 @@
-<div class="span12" style="width:100%;">
+<div class="span12" style="width:85%;">
   <p class="title-text">Edit a Tour</p>
 <%= form_for Painting.new do |f| %>
   <%$serial_no=0%>
@@ -21,7 +21,7 @@
 <%=f.hidden_field "remote_image_url"%>
 <%#= f.submit "Done", :class=>"btn-small btn-success"%>
 <%end%>
-<div class="span12" style="width:100%;">
+<div class="span12" style="width:85%;">
 
 <%= form_for @tour, :url => '/tours/update', :html =>{:class => "form-horizontal"}  do |f| %>
  <h3><legend>Tour Details:</legend></h3>
