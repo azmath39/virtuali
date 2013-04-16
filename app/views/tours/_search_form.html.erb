@@ -2,18 +2,19 @@
  <div class ="span3" id="map-search">
 <h1 class="title-text">Search</h1>
   <%= search_form_for @search, :class => 'well form-inline', :id => 'img_bg' do |f| %>
-    <%= f.label :state_cont, "State" %>
-    <%=f.select :state_cont, State.all.collect {|s| [s.name, s.name]},{:include_blank => "All"},:onchange=>"state_city()"%><br />
-    <%= f.label :city_cont, "City" %>
-    <%=f.select :city_cont, {}, :include_blank => "All"%><br />
-    <%= f.label :product_name_cont, "Category" %>
-    <%= f.select :product_name_cont,  Product.where(:product_type=>1).collect {|p| [ p.name, p.name ] }, {:include_blank => "All"}%><br />
-    <%= f.label :status_eq, "Status" %>
-    <%= f.select :status_eq, {"Active" => 1, "Sold" => 3}  %><br />
-    <%#= f.label :price_gteq, "Price Between" %>
+<table>
+  <tr><td>  State
+   </td> <td><%=f.select :state_cont, State.all.collect {|s| [s.name, s.name]},{:include_blank => "All"},:onchange=>"state_city()"%>
+    </td></tr><tr><td>City
+    </td> <td><%=f.select :city_cont, {}, :include_blank => "All"%>
+    </td></tr><tr><td>Category
+    </td> <td><%= f.select :product_name_cont,  Product.where(:product_type=>1).collect {|p| [ p.name, p.name ] }, {:include_blank => "All"}%>
+    </td></tr><tr><td>Status
+    </td> <td><%= f.select :status_eq, {"Active" => 1, "Sold" => 3}  %>
     <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %>
     <%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
-<br /><%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
+      <br /></td></tr>
+  <tr><td><%= f.submit "Search", :class => 'btn btn-medium btn-success' %></td></tr></table>
  </div>
   <% end %>
 <%end%>

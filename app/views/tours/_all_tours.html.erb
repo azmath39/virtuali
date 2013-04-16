@@ -29,7 +29,7 @@
  <%#******************************************%>
 
     <% @tours.each do |tour| %>
-<div class="span7 well" id = 'img_bg' style="margin: 0px 30px 1px 40px;">
+<div class="span7 well" id = 'img_bg' style="margin: 0px 30px 1px 0px;">
 
   <div class="span2" style="width:150px;">
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
