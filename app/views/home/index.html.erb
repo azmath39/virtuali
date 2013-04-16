@@ -1,5 +1,16 @@
 <% unless current_user %>
   <%= render 'front_page'%>
-<%# else %>
+<% else %>
   <%#=render 'account_mangement'%>
+<div style="float:left; margin-bottom:1%;margin-left:13%; ">  <%=select_tag "product_id", options_from_collection_for_select(current_user.subscribe_product,"id","name"),:onchange=>"display_tours()",:prompt=>"All" if current_user.multiple_products?%>
+</div>
+<%#*<div style="float:right;margin-right: 9%; margin-bottom: 3%;">%>
+ <%#= link_to "Create New Tour", '/paintings/new', :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  if verify_tours_allowed%>
+<%#*</div>%>
+<%=render 'shared/package_change_instruction' if current_user.any_instructions? or current_user.check_tours_type?%>
+<div id="user_tours" style="float:left;">
+<%=render 'search_form' %>
+<%=render '/tours/list_of_tours'%>
+</div>
+
 <% end %>

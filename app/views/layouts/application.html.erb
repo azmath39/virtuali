@@ -23,9 +23,10 @@
   
   <div class ="container ">
     <%= render 'shared/flash_messages' %>
+
+    <%=yield :search%>
     <%if current_user%>
    
-    <%=yield :search%>
    
     <div id="jquery-container">
       <%else%>
@@ -53,7 +54,7 @@
   #jquery-container{
   
   margin-left:20%;
-  min-height: 500px;
+  min-height: 700px;
   margin-right:16%;
   overflow: auto;
   margin-top: 2%;

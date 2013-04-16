@@ -75,7 +75,7 @@
         <div class="nav-collapse" style="margin-top:0%; ">
           <ul class="nav" style="height:140px; margin-left: 11%;margin-top:0%;width:55%">
 
-            <li class="tab"><%= link_to '<center><i class="icon-2x icon-desktop"></i></center> Dashboard'.html_safe, "#", "data-toggle" => "tab",:onclick=>'dashboard()'%> </li>
+            <li class="tab"><%= link_to '<center><i class="icon-2x icon-desktop"></i></center> Dashboard'.html_safe, "/"%> </li>
             <li class="tab"><%= link_to '<center><i class="icon-2x icon-eye-open"></i></center> Status'.html_safe, '#', "data-toggle" => "tab",:onclick=>'status()'%> </li>
             <li class="tab"><%= link_to '<center><i class="icon-2x icon-money"></i></center> Billing'.html_safe, '#', "data-toggle" => "tab",:onclick=>'billing()'%></li>
             <% if current_user.company %>
@@ -107,7 +107,7 @@
     }).done(function(html){
       $('#jquery-container').html(html);
       user_tours();
-      $('#map-search').html("");
+      
     });
   }
   function status()
@@ -166,7 +166,7 @@
 
     }).done(function(html) {
       $("#user_tours").html(html);
-      $('#map-search').html("");
+     
     });
   }
   function display_tours(){
@@ -178,7 +178,7 @@
       }
     }).done(function(html) {
       $("#user_tours").html(html);
-      $('#map-search').html("");
+      
 
     });
 

@@ -1,0 +1,37 @@
+  <% content_for :search do %>
+ <div class ="span3" id="map-search">
+<h1 class="title-text">Search</h1>
+  <%= search_form_for @search, :url => '/home/index',:class => 'well form-inline', :id => 'img_bg' do |f| %>
+    <%= f.label :state_cont, "State" %>
+    <%=f.select :state_cont, State.all.collect {|s| [s.name, s.name]},{:include_blank => "All"},:onchange=>"state_city()"%><br />
+    <%= f.label :city_cont, "City" %>
+    <%=f.select :city_cont, {}, :include_blank => "All"%><br />
+    <%= f.label :product_name_cont, "Category" %>
+    <%= f.select :product_name_cont,  Product.where(:product_type=>1).collect {|p| [ p.name, p.name ] }, {:include_blank => "All"}%><br />
+    <%= f.label :status_eq, "Status" %>
+    <%= f.select :status_eq, {"Active" => 1, "Sold" => 3}  %><br />
+    <%#= f.label :price_gteq, "Price Between" %>
+    <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %>
+    <%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
+<br /><%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
+ </div>
+  <% end %>
+<%end%>
+<script>
+ function state_city()
+  {
+    $.ajax({
+      type: 'GET',
+      url: "/home/state_cities",
+
+      data: {
+        'state' :  $("#q_state_cont").val()
+
+      }
+
+    }).done(function(text) {
+
+  $('#q_city_cont').empty().append(text);
+    });
+  }
+</script>
