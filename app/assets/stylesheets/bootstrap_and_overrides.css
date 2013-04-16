@@ -168,9 +168,7 @@ filter: alpha(opacity=50);
   z-index: 1;
 }
 
-.carousel.carousel-fade .carousel-control {
-  z-index: 3;
-}
+
 .unstyled li {
     display: inline;
     vertical-align: baseline;
