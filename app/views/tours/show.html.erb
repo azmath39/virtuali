@@ -1,1 +1,13 @@
+<%if current_user%>
+<div class="sign_in_css_final_tour">
+<%else%>
+<div>
+<%end%>
 <%= render "tour_preview" %>
+  </div>
+  <style>
+    .sign_in_css_final_tour{
+      position:absolute;
+      margin-left: -22%;
+}
+  </style>

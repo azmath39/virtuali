@@ -1,50 +1,7 @@
-<div class ="span3" id="map-search">
-  <p class="title-text">Search</p>
+
+
   <%= render 'search_form' %>
-</div>
-<div class="span8" id ="tour-list">
-  <p class="title-text">List of Tours</p>
-  <%#*<div style="float: right;margin: -35px 35px -30px 0;">%>
-    <%# @products = Product.all %>
-      <%#*Find Tours:    <%= select_tag :product, options_from_collection_for_select(@products, "id", "name"), :prompt => "All", :onchange => 'find_tours()' %%>
-      <%#*<span><%=link_to "Sold Tours", '#', :value => "sold_tours", :id => "sold_tours",  :class => 'btn btn-small btn-primary'%</span>%>
-  <%#*</div>%>
-  <div id="all_tour_render">
-    <%= render 'all_tours' %>
 
-  </div>
-<div class ="span4" style="margin: 0 0px 0 300px; float: left;">
-  <%= will_paginate @tours, :renderer => BootstrapPagination::Rails %>
-</div>
-</div>
-<script>
-  function find_tours()
-  {
-    $.ajax({
-      type: 'GET',
-      url: "/tours/find_tours",
 
-      data: {
-        'id' :  $("#product").val()
+<%=render 'tours'%>
 
-      }
-
-    }).done(function(html) {
-
-  $('#all_tour_render').html(html);
-    });
-  }
-  $('#sold_tours').click(function(){
-    $.ajax({
-      type: 'GET',
-      url: "/tours/sold_out_tours",
-
-      data: {
-        'status' : "3"
-      }
-    }).done(function(html){
-      $('#all_tour_render').html(html);
-    });
-  });
-  
-</script>

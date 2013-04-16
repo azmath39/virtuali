@@ -35,7 +35,8 @@ text-align:center;
 #map img { max-width: none; }
 
 #map-div{
-  margin-left: 350px;
+  margin-left:4%;
+padding-top:  6px;
 margin-top:2%;
 }
 
@@ -70,21 +71,15 @@ margin-left: 30px;
 
 
 .title-text{
-font-family: Garamond, serif;
+font-family: "ProximaNovaLight","Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 38.5px;
+font-weight: bold;
 line-height: 1em;
-font-size: 40px;
-color: black;
-text-shadow:
-    0px 0px 0 rgb(112,136,185),
-    -0px -0px 0 rgb(93,117,166),
-    -1px -1px 0 rgb(74,98,147),
-     -1px -1px 0 rgb(55,79,128),
-    -2px -2px 2px rgba(0,0,0,0.25),
-    -3px -3px 1px rgba(0,0,0,0.3),
-    0px 0px 3px rgba(0,0,0,.0);
+
 }
 #map-search{
-  margin: 2% 1px 0 75px;
+margin-top:2%;
+  width:20%;
   float: left;
   position: fixed;
 }
@@ -104,6 +99,7 @@ DIV#final_tour.span11{
 }
 .map_container{
   margin-top: -7px;
+
 }
 .img-border {
   border: 20px #afb3b6 solid;

@@ -24,6 +24,15 @@
      background: #0088CC ;
     
 }
+.navbar-inner2 {
+   /* background: url(cut.png);
+    background-repeat: repeat;*/
+    min-height: 30px;
+    
+    padding-right: 20px;
+   
+
+}
 .navbar-fixed-top{
     background: #0088CC ;
 }
@@ -49,10 +58,15 @@
     color: wheat;
     text-shadow: whitesmoke 0.01em 0.01em 0.01em;
     text-decoration: none;
+    background:none;
 }
 .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
 
-    box-shadow:10px 10px 5px #888888;
+      background:none;
+      box-shadow:none;
+}
+.navbar .nav > .active > a{
+ 
 }
 
 .btn [class^="icon-"], .nav [class^="icon-"], .btn [class*=" icon-"], .nav [class*=" icon-"]{
@@ -250,4 +264,5 @@ filter: alpha(opacity=50);
     .container{
         width:100%;
         margin-top: 120px;
+        
 }

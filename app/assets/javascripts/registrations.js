@@ -222,7 +222,7 @@ $('#btn_product').click(function(event) {
 
     if (!$("input[name='user[product]']:checked").val())
     {
-        $('#product_error').append("* Select any Product to continue..... <br/>")
+        $('#product_error').html("* Select any Product to continue..... <br/>")
         //$('#btn_product').die( "click" );
            $('#btn_product').prop('disabled', true);
     }else{
