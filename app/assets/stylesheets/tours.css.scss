@@ -24,7 +24,7 @@ text-align:center;
   text-align: center;
 }
 #user_img img{
- background: none repeat scroll 0% 0% rgb(255, 255, 255);
+ background: none repeat scroll 0% 0% #C0C0C0;
   padding: 8px;
 -webkit-box-shadow: 0 8px 6px -6px #CCC;
 	   -moz-box-shadow: 0 8px 6px -6px #CCC;
@@ -102,9 +102,9 @@ DIV#final_tour.span11{
 
 }
 .img-border {
-  border: 20px #afb3b6 solid;
-
--moz-box-shadow: inset 0px 0px 9px 4px #88888;
--webkit-box-shadow: inset 0px 0px 9px 4px #88888;
-box-shadow: inset 0px 0px 9px 4px #88888;
+  border: 10px #C0C0C0 solid;
+  -webkit-border-radius: 20px;
+-moz-border-radius: 20px;
+border-radius: 20px;
+overflow: hidden;
 }
