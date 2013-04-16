@@ -1,6 +1,7 @@
 
-<div class ="span3" id="map-search" style="margin-top:2%;">
-  <p class="title-text">Search</p>
+<%content_for :search do%>
+ <div class ="span3" id="map-search">
+  <h1 class="title-text">Search</h1>
   <%= search_form_for @search, :url => '/tours/view_map', :class => 'well form-inline', :id => 'img_bg' do |f| %>
     <%= f.label :state_cont, "State" %>
     <%=f.select :state_cont, State.all.collect {|s| [s.name,s.name]},{:include_blank=>"All"},:onchange=>"state_city()"%>
@@ -13,10 +14,15 @@
     <%#= f.label :price_gteq, "Price Between" %>
     <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %<%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
     <br/><%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
+ </div>
   <% end %>
-</div>
-<div id="map-div" style="margin-top: 2%; padding-top:  6px;">
-  <p class="title-text">Tour Map</p>
+<%end%>
+<%if current_user%>
+<div id="map-div" style="margin-left: 10%; margin-top: 0%;">
+  <%else%>
+  <div id="map-div" style="margin-left: 24%; margin-top: 4%;">
+    <%end%>
+  <h1 class="title-text">Tour Map</h1>
 <%= gmaps4rails(@json)%>
 </div>
 
@@ -44,10 +50,10 @@
 <style>
   .gmaps4rails_map{
     height: 550px;
-    width: 900px;
+    width: 97%;
 }
 .map_container{
   height: 550px;
-  width: 900px;
+  width: 97%;
 }
 </style>

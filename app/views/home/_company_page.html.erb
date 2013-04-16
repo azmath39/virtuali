@@ -1,3 +1,4 @@
+<%user=current_user%>
 <div style="margin-left: 2%;">
 <p><span class="title-text">Company Details</span>&nbsp;<b><%= link_to "Edit".html_safe, "#edit_company", :onclick => "edit_company(#{current_user.company.id})", :class=>"btn btn-link" %></b></p>
 <hr />
