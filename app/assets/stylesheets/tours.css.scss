@@ -108,3 +108,21 @@ DIV#final_tour.span11{
 border-radius: 20px;
 overflow: hidden;
 }
+.final-tour-btn {
+  color: black;
+  padding: 1px;
+  border: 8px solid #C0C0C0;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  text-decoration: none;
+  color: blue;
+}
+a:hover,
+a:focus {
+  text-decoration: none;
+  color: blue;
+}
+#tbh{
+  border: 4px solid #C0C0C0;
+}
