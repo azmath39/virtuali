@@ -106,8 +106,9 @@ DIV#final_tour.span11{
   margin-top: -7px;
 }
 .img-border {
-  background: none repeat scroll 0% 0% rgb(255, 255, 255);
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  border: 20px #afb3b6 solid;
+
+-moz-box-shadow: inset 0px 0px 9px 4px #888888;
+-webkit-box-shadow: inset 0px 0px 9px 4px #888888;
+box-shadow: inset 0px 0px 9px 4px #888888;
 }
