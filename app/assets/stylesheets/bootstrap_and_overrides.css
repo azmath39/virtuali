@@ -182,9 +182,7 @@ filter: alpha(opacity=50);
   z-index: 1;
 }
 
-.carousel.carousel-fade .carousel-control {
-  z-index: 3;
-}
+
 .unstyled li {
     display: inline;
     vertical-align: baseline;
@@ -211,16 +209,16 @@ filter: alpha(opacity=50);
     ------------------------- */
 
     .featurette-divider {
-      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+      margin: 70px 0; /* Space out the Bootstrap <hr> more */
     }
     .featurette-divider2 {
-      margin: 20px 0; /* Space out the Bootstrap <hr> more */
+      margin: 0px 0; /* Space out the Bootstrap <hr> more */
     }
     .featurette {
-      padding-top: 130px; /* Vertically center images part 1: add padding above and below text. */
+      padding-top: 115px; /* Vertically center images part 1: add padding above and below text. */
       margin: 0 40px 0 40px;
-      overflow: hidden; /* Vertically center images part 2: clear their floats. */
-      height: 750px;
+       /* Vertically center images part 2: clear their floats. */
+      height: auto;
     }
     
     .featurette-image {

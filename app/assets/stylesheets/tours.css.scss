@@ -24,7 +24,7 @@ text-align:center;
   text-align: center;
 }
 #user_img img{
- background: none repeat scroll 0% 0% rgb(255, 255, 255);
+ background: none repeat scroll 0% 0% #C0C0C0;
   padding: 8px;
 -webkit-box-shadow: 0 8px 6px -6px #CCC;
 	   -moz-box-shadow: 0 8px 6px -6px #CCC;
@@ -102,8 +102,9 @@ DIV#final_tour.span11{
 
 }
 .img-border {
-  background: none repeat scroll 0% 0% rgb(255, 255, 255);
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  border: 10px #C0C0C0 solid;
+  -webkit-border-radius: 20px;
+-moz-border-radius: 20px;
+border-radius: 20px;
+overflow: hidden;
 }
