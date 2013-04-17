@@ -1,10 +1,10 @@
 
 <div class="span8">
-  <p class="title-text" style="margin-left:5%; ">List of Tours</p>
+  <%#*<h1 class="title-text" style="margin-left:5%; ">List of Tours</h1>%>
    <%= render 'shared/welcome_message' if @tours.empty? %>
   
 <% @tours.each do |tour| %>
-<div class="span7 well" id = 'img_bg' style="margin: 0px 30px 1px 40px;">
+<div class="span7 well" id = 'img_bg'>
   
   <div class="span2" style="width:150px;">
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
@@ -13,7 +13,7 @@
   <div class="span2" style="width:174px;">
     <%#*<div style ="float: right; margin: -6px 200px 0 0; height:100px; width: auto;">%>
     <%=link_to "view", tour_path(tour.id)%>&nbsp;|
-      <%=link_to "edit", edit_tour_path(tour.id),:confirm => "Are you sure?"%>
+      <%=link_to "edit", edit_tour_path(tour.id)%>
       <%#=link_to "edit", "#edit_tour", :onclick => "edit_tour(#{tour.id})"%>&nbsp;|
       <%=link_to "download", :controller => 'tours', :action => 'download_zip', :id => tour.id,:confirm => "Are you sure?" %>&nbsp;|
       <%=link_to "delete", tour_path(tour.id),:method=>:delete, :confirm => "Are you sure?"%>
@@ -46,4 +46,7 @@
 </div>
 
 <% end %>
+  <div class ="span4" style="margin: 0 0px 0 300px; float: left;">
+  <%= will_paginate @tours, :renderer => BootstrapPagination::Rails %>
+</div>
 </div>

@@ -1,7 +1,7 @@
 <% if current_user %>
-<%content_for :search do%>
-<%=render :text=>"ok" %>
-<%end%>
+<p><span class="title-text">Billing</span></p>
+
+
 <%#= render :text=>"ok" %>
 <%= render '/home/payment_form' %>
 <%pkg=current_user.selected_package %>

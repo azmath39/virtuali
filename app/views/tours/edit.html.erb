@@ -1,113 +1,110 @@
 <div class="span12" style="width:85%;">
   <p class="title-text">Edit a Tour</p>
-<%= form_for Painting.new do |f| %>
-  <%$serial_no=0%>
-  <%=hidden_field_tag :count,@count%>
-   <%#  =hidden_field_tag :tour_id,@tour%>
-<div class="fileupload btn btn-primary">
-  <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
-  <%= f.file_field :image, multiple: true, name: "painting[image]" %>
-  
-<% end %>
-</div>
+  <%= form_for Painting.new do |f| %>
+    <%$serial_no=0%>
+    <%=hidden_field_tag :count,@count%>
+  <%#  =hidden_field_tag :tour_id,@tour%>
+    <div class="fileupload btn btn-primary">
+      <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
+      <%= f.file_field :image, multiple: true, name: "painting[image]" %>
+
+    <% end %>
+  </div>
   <span id="painting_error"></span>
-<div id="paintings">
-  <%= render @paintings %>
-</div>
-<br/>
+  <div id="paintings">
+    <%= render @paintings %>
+  </div>
+  <br/>
 </div>
 <%= form_for @painting,:url=>'/paintings/update', :html => {:multipart => true, :id=>"updated_image_form"} do |f| %>
-<%=f.hidden_field "id",:id=>"image_updated_id"%>
-<%=f.hidden_field "remote_image_url"%>
-<%#= f.submit "Done", :class=>"btn-small btn-success"%>
+  <%=f.hidden_field "id",:id=>"image_updated_id"%>
+  <%=f.hidden_field "remote_image_url"%>
+  <%#= f.submit "Done", :class=>"btn-small btn-success"%>
 <%end%>
 <div class="span12" style="width:85%;">
 
-<%= form_for @tour, :url => '/tours/update', :html =>{:class => "form-horizontal"}  do |f| %>
- <h3><legend>Tour Details:</legend></h3>
- <%=f.hidden_field :id%>
-<div style="float:left;">
-  <div class ="control-group">
-  <%= f.label "Category*", :html => {:class => 'control-label'} %>
-  <%= f.select :product_id, @products.collect{|p| [p.name,p.id]},:prompt=>@tour.product_name %>
-  </div>
-  <div class ="control-group">
-  <%= f.label "Address1*", :html => {:class => 'control-label'} %>
-    <i style="font-size:12px;">( Address1 Format Ex: 19 Quaker Ridge Rd )</i><br />
-  <%= f.text_field :address1 %>
-  </div>
-  <div class ="control-group">
-  <%= f.label "Address2 (Optional)", :html => {:class => 'control-label'} %>
-  <%= f.text_field :address2 %>
-  </div>
-<div class ="control-group">
-  <%= f.label "state*", :html => {:class => 'control-label'} %>
+  <%= form_for @tour, :url => '/tours/update', :html =>{:class => "form-horizontal",:id=>"edit_tour"}  do |f| %>
+    <h3><legend>Tour Details:</legend></h3>
+    <%=f.hidden_field :id%>
+    <div style="float:left;">
+      <div class ="control-group">
+        <%= f.label "Category*", :html => {:class => 'control-label'} %>
+        <%= f.select :product_id, @products.collect{|p| [p.name,p.id]},:prompt=>@tour.product_name,:class=>"required" %>
+      </div>
+      <div class ="control-group">
+        <%= f.label "Address1*", :html => {:class => 'control-label'} %>
+        <i style="font-size:12px;">( Address1 Format Ex: 19 Quaker Ridge Rd )</i><br />
+        <%= f.text_field :address1,:class=>"required" %>
+      </div>
+      <div class ="control-group">
+        <%= f.label "Address2 (Optional)", :html => {:class => 'control-label'} %>
+        <%= f.text_field :address2 %>
+      </div>
+      <div class ="control-group">
+        <%= f.label "state*", :html => {:class => 'control-label'} %>
   <%#= f.text_field :state %>
 
-  <%=f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
-</div>
-<div class ="control-group">
-  <%= f.label "city*", :html => {:class => 'control-label'} %>
+        <%=f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()",:class=>"required"%>
+      </div>
+      <div class ="control-group">
+        <%= f.label "city*", :html => {:class => 'control-label'} %>
   <%#= f.text_field :city %>
-  <%=f.select :city, {},:prompt=>"Select City"%>
+        <%=f.select :city, {},:prompt=>"Select City",:class=>"required"%>
 
-</div>
-<div class ="control-group">
-  <%= f.label :zip, "Zip Code*:", :html => {:class => 'control-label'} %>
-  <%= f.text_field :zip %>
-</div>
+      </div>
+      <div class ="control-group">
+        <%= f.label :zip, "Zip Code*:", :html => {:class => 'control-label'} %>
+        <%= f.text_field :zip,:class=>"required" %>
+      </div>
 
+    </div>
+    <div class="span1"></div>
+    <div style="float:left; ">
+      <div class="control-group">
+        <%= f.label "price*" %>
+        <%= f.text_field :price,:class=>"required number" %>
+      </div>
+      <div class="control-group">
+        <%= f.label "square_footage*" %>
+        <%= f.text_field :square_footage,:class=>"required number" %>
+      </div>
+      <div class="control-group">
+        <%= f.label :bed_rooms %>
+        <%= f.text_field :bed_rooms,:class=>"required digits"%>
+      </div>
+      <div class="control-group">
+        <%= f.label :bath_rooms %>
+        <%= f.text_field :bath_rooms,:class=>"required digits"%>
+      </div>
+      <div class ="control-group">
+        <%= f.label "subdivision", :html => {:class => 'control-label'} %>
+        <%= f.text_field :subdivision %>
+      </div>
+    </div>
+    <div style="float:left;margin-top: 0px;margin-right:26%;width: 650px;">
+      <div>
+        <%= f.label :description %>
+        <%= f.text_area :description, :rows => 10, :style=>"width: 87%;",:class=>'wysihtml5'%>
+      </div>
+    </div>
+    <div style="float:left;margin-top: 10px;clear: both;">
+      <div>
+        <%= f.submit :class => 'btn btn-large btn-primary' %>
+      </div>
+    <% end %>
+  </div>
 </div>
-<div class="span1"></div>
-<div style="float:left; ">
-<div class="control-group">
-  <%= f.label "price*" %>
-  <%= f.text_field :price %>
-</div>
-<div class="control-group">
-  <%= f.label "square_footage*" %>
-  <%= f.text_field :square_footage %>
-</div>
-<div class="control-group">
-  <%= f.label :bed_rooms %>
-  <%= f.text_field :bed_rooms %>
-</div>
-<div class="control-group">
-  <%= f.label :bath_rooms %>
-  <%= f.text_field :bath_rooms %>
-</div>
-  <div class ="control-group">
-  <%= f.label "subdivision", :html => {:class => 'control-label'} %>
-  <%= f.text_field :subdivision %>
-</div>
-</div>
-<div style="float:left;margin-top: 0px;margin-right:26%;width: 650px;">
-<div>
-  <%= f.label :description %>
-  <%= f.text_area :description, :rows => 10, :style=>"width: 87%;",:class=>'wysihtml5'%>
-</div>
-</div>
-<div style="float:left;margin-top: 10px;clear: both;">
-<div>
-  <%= f.submit :class => 'btn btn-large btn-primary' %>
-</div>
-<% end %>
-</div>
-</div>
-<script id="template-upload" type="text/x-tmpl">
-<%#*<div class="upload">%>
-  <%#*{%=o.name%}%>
-  <%#*<div class="progress"><div class="bar" style="width: 0%"></div></div>%>
-<%#*</div>%>
-</script>
 
 
- <script>
-   $(document).ready(function(){
-     $('.wysihtml5').each(function(i, elem) {
-    $(elem).wysihtml5();
-     });
-     $.ajax({
+<%= javascript_include_tag "http://jzaefferer.github.com/jquery-validation/jquery.validate.js" %>
+
+<script>
+  $(document).ready(function(){
+    $("#edit_tour").validate();
+    $('.wysihtml5').each(function(i, elem) {
+      $(elem).wysihtml5();
+    });
+    $.ajax({
       type: "GET",
       url:"/paintings/count_rooms",
       data:{
@@ -115,13 +112,13 @@
       }
     }).done(function(text){
     
-     text = text.split(',');
+      text = text.split(',');
 
-          $("#tour_bed_rooms").val(text[0]);
-          $("#tour_bath_rooms").val(text[1]);
+      $("#tour_bed_rooms").val(text[0]);
+      $("#tour_bath_rooms").val(text[1]);
     });
-   });
- function state_city()
+  });
+  function state_city()
   {
 
 
@@ -136,7 +133,7 @@
 
     }).done(function(text) {
 
-  $('#tour_city').empty().append(text);
+      $('#tour_city').empty().append(text);
     });
 
 
@@ -147,18 +144,18 @@
     //alert(name);
     if (name == 'Others') {
       $('#other-name'+id).show();
-            $('#other-name'+id).html("<input type=text id='text"+id+"'name='name' style='width:93%;'onblur='text_field_data("+id+")'>");
-        } else {
-            $('#other-name'+id).hide();
-            set_image_name(name, id);
-        }
+      $('#other-name'+id).html("<input type=text id='text"+id+"'name='name' style='width:93%;'onblur='text_field_data("+id+")'>");
+    } else {
+      $('#other-name'+id).hide();
+      set_image_name(name, id);
+    }
   }
   function text_field_data(id)
   {
     var name= $("#text"+id).val();
     //alert(name);
     if (name != "") {
-    set_image_name(name, id);
+      set_image_name(name, id);
     }
     else{
       alert("Name cant be empty")
@@ -169,7 +166,7 @@
   {
     //var name= $("#select"+id).attr('value');
 
-   //alert(name);
+    //alert(name);
     $.ajax({
       type: "GET",
       url:"/paintings/set_name",
@@ -182,68 +179,68 @@
 
     }).done(function(text){
 
-     text = text.split(',');
-//alert(text);
-          $("#tour_bed_rooms").val(text[0]);
-          $("#tour_bath_rooms").val(text[1]);
+      text = text.split(',');
+      //alert(text);
+      $("#tour_bed_rooms").val(text[0]);
+      $("#tour_bath_rooms").val(text[1]);
     });
   }
- function remove_image(id){
- if(confirm("Are You Sure")){
+  function remove_image(id){
+    if(confirm("Are You Sure")){
 
-$.ajax({
-     type:'DELETE',
-     dataType: "script",
-     url:'/paintings/'+$('#'+id).attr("id")
+      $.ajax({
+        type:'DELETE',
+        dataType: "script",
+        url:'/paintings/'+$('#'+id).attr("id")
 
-   }).done(function(){
-$('#'+id).closest('.painting').hide();
-     $('#painting_error').html("<div class='alert'>Picture Successfully Removed. </div> ")
-   });
-   }else
-     {
-       return false;
-     }
+      }).done(function(){
+        $('#'+id).closest('.painting').hide();
+        $('#painting_error').html("<div class='alert'>Picture Successfully Removed. </div> ")
+      });
+    }else
+    {
+      return false;
+    }
 
-}
+  }
 
-    jQuery(function() {
+  jQuery(function() {
 
-  return $('#new_painting').fileupload({
-    type:'POST',
-    dataType: "script",
-    cache:false,
+    return $('#new_painting').fileupload({
+      type:'POST',
+      dataType: "script",
+      cache:false,
 
-    add: function(e, data) {
+      add: function(e, data) {
 
-      var file, types;
-      types = /(\.|\/)(gif|jpe?g|png)$/i;
-      file = data.files[0];
-      if (types.test(file.type) || types.test(file.name)) {
+        var file, types;
+        types = /(\.|\/)(gif|jpe?g|png)$/i;
+        file = data.files[0];
+        if (types.test(file.type) || types.test(file.name)) {
 
-        data.context = $(tmpl("template-upload", file));
-        $('#new_painting').append(data.context);
-        return data.submit();
-      } else {
-        return alert("" + file.name + " is not a gif, jpeg, or png image file");
+          data.context = $(tmpl("template-upload", file));
+          $('#new_painting').append(data.context);
+          return data.submit();
+        } else {
+          return alert("" + file.name + " is not a gif, jpeg, or png image file");
+        }
+      },
+      progress: function(e, data) {
+        var progress;
+        if (data.context) {
+          progress = parseInt(data.loaded / data.total * 100, 10);
+          return data.context.find('.bar').css('width', progress + '%');
+        }
+      },
+      beforeSend: function (XMLHttpRequest) {
+
+        // alert("ok");
+        //Specifying this header ensures that the results will be returned as JSON.
+        XMLHttpRequest.setRequestHeader("Accept", "text/javascript");
       }
-    },
-    progress: function(e, data) {
-      var progress;
-      if (data.context) {
-        progress = parseInt(data.loaded / data.total * 100, 10);
-        return data.context.find('.bar').css('width', progress + '%');
-      }
-    },
-    beforeSend: function (XMLHttpRequest) {
 
-   // alert("ok");
-   //Specifying this header ensures that the results will be returned as JSON.
-   XMLHttpRequest.setRequestHeader("Accept", "text/javascript");
-}
+    });
 
   });
-
-});
 
 </script>
