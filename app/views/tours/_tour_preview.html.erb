@@ -78,7 +78,7 @@ border-radius: 30px;">
   <% else %>
     <p style="color:red;margin: 4% 0 0 30%;"> No images uploaded for this tour.</p>
     <% if current_user %>
-      <p style="margin: 0% 0 0 30%;">Please, <%= link_to "edit", edit_tour_path(@tour) %> tour! </p>
+      <p style="margin: 0% 0 0 30%;">Please, <%= link_to "edit", edit_tour_path(@tour.id) %> tour! </p>
       <% end %>
   <% end %>
   <div style="width: 240px;float: right; margin: -580px 0px 0 150px; font-size: 12px;">
@@ -108,7 +108,11 @@ border-radius: 30px;">
         <% else %>
         <%= image_tag('default_company_logo.png') %>
       <% end %>
-      <strong><%= @tour.user.company.name == "" ? "Company Name" : "#{@tour.user.company.name}" %></strong>
+      <address>
+        <strong><%= @tour.user.company.name == "" ? "Company Name" : "#{@tour.user.company.name}" %></strong><br />
+        <%= @tour.user.company.address %>.<br />
+        <i class="icon-phone-sign"></i>&nbsp;<%= @tour.user.company.phno %>
+      </address>
     <% else %>
       <% if @tour.user.image? %>
       <%= image_tag(@tour.user.image_url(:thumb)) %>

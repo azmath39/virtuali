@@ -13,7 +13,7 @@ Company Details
   <%= image_tag 'default_company_logo.png' %>
   <% end %>
   <center>
-    <strong><%= user.company.name %> </strong>
+    <strong><%= user.company.name %> </strong></p>
     <p><%#= "+1 "+user.company.phno %></p>
   </center>
 </div>
@@ -21,6 +21,7 @@ Company Details
 <%= user.company.name %><br /><br />
 <b>Address</b><br />
 <%= user.company.address %>
+<%= user.company.phno %>
 <% end %><br /><br />
 <hr />
 </div>

@@ -10,12 +10,14 @@
 </div>
 <div>
   <%= f.label :address %>
-  <%= f.text_field :address %>
-</div>
+  <%= f.text_field :address %><br />
+  <i style="font-size:12px;">( Format: DNo, Street, City, State and Zip )</i>
+</div><br />
 <div>
   <%= f.label :phno %>
-  <%= f.text_field :phno %>
-</div>
+  <%= f.text_field :phno %><br />
+  <i style="font-size:12px;">( Format: (Code) Phone Number )</i>
+</div><br />
   <%= f.label :logo, "Change Company logo" %>
   <%= f.file_field :logo, :id => 'company_logo', :style=>"display:none;" %>
 
