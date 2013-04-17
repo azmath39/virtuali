@@ -12,6 +12,10 @@
   <%= f.label :address %>
   <%= f.text_field :address %>
 </div>
+<div>
+  <%= f.label :phno %>
+  <%= f.text_field :phno %>
+</div>
   <%= f.label :logo, "Change Company logo" %>
   <%= f.file_field :logo, :id => 'company_logo', :style=>"display:none;" %>
 
@@ -22,7 +26,7 @@
 
 <%= f.submit "Update", :class=>'btn btn-large btn-primary' %>
 <% end %>
-<div style="float:right;margin: -25% 25% 0 0px;height:60px; width:60px;">
+<div style="float:right;height:60px; width:60px; float: right; margin: -14% 65% 0 0;">
   <% if current_user.company.logo? %>
     <%= image_tag current_user.company.logo_url(:thumb) %>
   <center><%= link_to "Remove", {:controller => 'companies', :action => 'remove_logo'}, :confirm => "Are you sure?", :method => :delete %></center>
