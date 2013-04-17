@@ -95,17 +95,24 @@ DIV#img_bg.span7.well{
   box-shadow: 0px 2px 4px #CCC;
   border-radius: 2px;
 }
-DIV#final_tour.span11{
-  background: black;
-}
+
 .map_container{
   margin-top: -7px;
 
 }
 .img-border {
+
+background: black;
   border: 10px #C0C0C0 solid;
   -webkit-border-radius: 20px;
 -moz-border-radius: 20px;
 border-radius: 20px;
 overflow: hidden;
+}
+.img-name {
+  background-color: transparent;
+  position: absolute;
+  max-width: 550px;
+  padding: 0 20px;
+  margin-bottom: 100px;
 }

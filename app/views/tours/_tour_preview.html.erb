@@ -37,9 +37,25 @@ border-radius: 30px;">
     <div id="myCarousel2" class="carousel slide carousel-fade img-border">
       <div class="carousel-inner" style="height: 507px;">
         <%unless @tour.paintings.empty?%>
-        <div class="active item"><%= image_tag(@tour.paintings.first.image_url(:large))%></div>
+        <div class="active item">
+          <%= image_tag(@tour.paintings.first.image_url(:large))%>
+          <div class="container1">
+          <div class="carousel-caption1">
+              <p><%= @tour.paintings.first.name %></p>
+              
+            </div>
+          </div>
+        </div>
         <%@objs.each do |painting|%>
-        <div class="item"><%= image_tag(painting.image_url(:large))%></div>
+        <div class="item">
+          <%= image_tag(painting.image_url(:large))%>
+          <div class="container1">
+          <div class="carousel-caption1">
+              <p><%=painting.name%></p>
+              
+            </div>
+          </div>
+        </div>
         <%end%>
           <% else %>
              <div class="active item"><%= image_tag('home_default_image.png')%> </div>
@@ -52,7 +68,7 @@ border-radius: 30px;">
   </div>
   <%# unless @objs.empty? %>
   <% unless @tour.paintings.empty? %>
-  <div class="slider-pager" style="margin: 5% 0 0 20%;">
+  <div class="slider-pager" style="margin: 8% 0 0 20%;">
     <a href="#main-slider" class="final-tour-btn" ><%= @tour.paintings.first.name%></a>&nbsp;&nbsp;
     <% @objs.each do |painting| %>
     <%# images = @objs.first 5 %>
@@ -134,4 +150,26 @@ a:focus {
 #tbh{
   border: 4px solid #C0C0C0;
 }
+.carousel-caption1 {
+      width: 100%;
+      background-color: transparent;
+      position: absolute;
+      z-index: 2;
+      max-width: 550px;
+      padding: 0 20px;
+      margin-top: 230px;
+    }
+.carousel-caption1 p{
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+.carousel .container1 {
+        text-align: center;
+  position: absolute;
+  top: 33%;
+  right: 40%;
+  bottom: 0;
+  left: 35%;
+  }
 </style>

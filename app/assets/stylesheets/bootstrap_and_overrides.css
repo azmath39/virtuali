@@ -147,7 +147,7 @@ filter: alpha(opacity=50);
 
 .carousel-caption {
   background-color: transparent;
-  position: static;
+  position: absolute;
   max-width: 550px;
   padding: 0 20px;
   margin-bottom: 100px;
