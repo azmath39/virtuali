@@ -18,6 +18,7 @@ class PaintingsController < ApplicationController
     @painting = Painting.new
     @tour = Tour.new
     @products = current_user.subscribe_product
+   # @priority=get_priority
     
     #    respond_to do |format|
     #    format.js {render :layout=>false}
@@ -30,10 +31,14 @@ class PaintingsController < ApplicationController
     if verify_no_image then
       @painting = Painting.create(params[:painting])
       @painting.user_id= current_user.id
-      @painting.save
+      if @painting.save
       respond_to do |format|
         format.html {render :js=>"window.location.reload(true);"}
         format.js
+      end
+      else
+
+        render :js=>"alert(#{@painting.errors[:image]})"
       end
      
     end
@@ -76,6 +81,12 @@ class PaintingsController < ApplicationController
       #redirect_to :back
       # redirect_to paintings_url, :notice=> "Image was successfully deleted."
     end
+  end
+  def update_priority
+    painting= Painting.find(params[:id])
+    painting.update_attributes(:priority=>params[:value])
+    render :nothing=>true
+
   end
   def set_name
     painting= Painting.find(params[:id])
@@ -122,7 +133,11 @@ class PaintingsController < ApplicationController
       return false
     end
   end
-  protected
+  private
+  def get_priority
+   
+  end
+
   #  def set_default_response_format
   #      #request.format = 'js'.to_sym
   #      #
