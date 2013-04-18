@@ -1,4 +1,10 @@
-<p><span class="title-text">Tour Enquiries</span></p><br />
+<p><span class="title-text">Messages</span></p><br />
+<% @tours.each do |tour|%>
+  <% @count = tour.messages.count %>
+<% end %>
+<% if @count == 0 %>
+<p>No Messages!</p>
+<% else %>
 <table class="table">
         <thead>
           <tr>
@@ -23,3 +29,4 @@
           <% end %>
         </tbody>
 </table>
+<% end %>
