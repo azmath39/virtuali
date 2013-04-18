@@ -14,7 +14,7 @@ development:
   reconnect: false
   database: virtuali_development
   pool: 5
-  username: virtuali
+  username: root
   password: coolapp1413#
   host: localhost
 
@@ -37,6 +37,6 @@ production:
   reconnect: false
   database: virtuali_development
   pool: 5
-  username: virtuali
-  password: coolapp1413#
+  username: root
+  password: 
   host: localhost
