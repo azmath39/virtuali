@@ -14,8 +14,8 @@ development:
   reconnect: false
   database: virtuali_development
   pool: 5
-  username: root
-  password: 
+  username: virtuali
+  password: coolapp1413#
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -35,7 +35,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: virtuali_production
+  database: virtuali_development
   pool: 5
   username: virtuali
   password: coolapp1413#
