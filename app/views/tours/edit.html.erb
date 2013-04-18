@@ -119,8 +119,14 @@
     
       text = text.split(',');
 
-      $("#tour_bed_rooms").val(text[0]);
-      $("#tour_bath_rooms").val(text[1]);
+      var bed=parseInt(text[0]);
+    var bath=parseInt(text[1]);
+
+          $("#tour_bed_rooms").val(bed);
+          $("#tour_bath_rooms").val(bath);
+          if (bath > 1){
+            alert("Caution! You have choosed Bath Room more than one.")
+          }
     });
   });
   function state_city()
@@ -186,8 +192,14 @@
 
       text = text.split(',');
       //alert(text);
-      $("#tour_bed_rooms").val(text[0]);
-      $("#tour_bath_rooms").val(text[1]);
+      var bed=parseInt(text[0]);
+    var bath=parseInt(text[1]);
+
+          $("#tour_bed_rooms").val(bed);
+          $("#tour_bath_rooms").val(bath);
+          if (bath > 1){
+            alert("Caution! You have choosed Bath Room more than one.")
+          };
     });
   }
   function remove_image(id){

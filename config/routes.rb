@@ -14,7 +14,6 @@ VirtualTour::Application.routes.draw do
   match '/tours/find_map_tours' => 'tours#find_map_tours'
  # match '/paintings/create_ie'=>'paintings#create_ie'
 
-  ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
@@ -74,8 +73,9 @@ VirtualTour::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index'
-
+ 
+root :to => 'home#index'
+  ActiveAdmin.routes(self)
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
