@@ -9,6 +9,7 @@
 <div class="fileupload btn btn-primary">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
+  
 <% end %>
 </div>
 <span id="painting_error"></span>
@@ -23,6 +24,7 @@
 <%= form_for @painting,:url=>'update', :html => {:multipart => true, :id=>"updated_image_form"} do |f| %>
 <%=f.hidden_field "id",:id=>"image_updated_id"%>
 <%=f.hidden_field "remote_image_url"%>
+
 <%#= f.submit "Done", :class=>"btn-small btn-success"%>
 <%end%>
 <div class="span12" style="width:85%;">
@@ -205,6 +207,19 @@ You have already published Sufficient Tours. To create more tours upgrade your S
           }
     });
   }
+  function change_priority(id)
+  {
+    var value = $('.priority_input_'+id).val();
+    $.ajax({
+      type:"GET",
+      url:"/paintings/update_priority",
+      data:{
+         id: id,
+         value: value
+      }
+
+    });
+  }
 
   /*$('.removed').click(function(e){
    if(confirm("Are You Sure")){
@@ -286,3 +301,14 @@ $('#'+id).closest('.painting').hide();
 
 
 </script>
+<style>
+  #priority{
+    border: 3px solid #0088CC;
+    border-radius: 19px;
+    float: right;
+    
+    height: 22px;
+    padding: 5px;
+    width: 25px;
+}
+</style>

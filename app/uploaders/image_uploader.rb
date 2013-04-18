@@ -16,9 +16,32 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+ 
+    
+  "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
+# def pre_limit file
+#
+#    #require 'debugger'; debugger
+#    if file && file.size >5.kilobytes
+#      raise Exception.new("too large")
+#    end
+#    true
+#  end
 
+#  process :save_image_dimensions
+# def save_image_dimensions file
+#
+#      puts "8"*15
+#        puts FastImage.size(file)
+#         puts "8"*15
+#      if FastImage.size(file)[0]< 700 and FastImage.size(file)[1]<500
+#
+#         raise Exception.new("Picture size Should Be more than 700X500")
+#      end
+#
+# true
+#    end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:
