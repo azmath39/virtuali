@@ -14,7 +14,7 @@ development:
   reconnect: false
   database: virtuali_development
   pool: 5
-  username: root
+  username: virtuali
   password: coolapp1413#
   host: localhost
 
