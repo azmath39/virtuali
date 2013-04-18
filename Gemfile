@@ -12,6 +12,7 @@ gem 'rails', '3.2.11'
     gem 'pg'
   end
   gem 'whenever', :require => false
+  gem "fastimage"
   gem 'devise'
   gem 'activeadmin'
   gem 'annotate'
