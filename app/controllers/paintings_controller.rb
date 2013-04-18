@@ -111,6 +111,14 @@ class PaintingsController < ApplicationController
  
     render :text=>str
   end
+  def check_name_of_pictures
+    unless current_user.check_name_of_pictures?
+     render :text=>"1"
+    else
+       render :text=>"0"
+
+    end
+  end
 
   private
   #  def selected_pkgs_without_tour

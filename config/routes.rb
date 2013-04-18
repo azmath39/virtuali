@@ -8,6 +8,7 @@ VirtualTour::Application.routes.draw do
   match '/tours/user_tours'=>'tours#user_tours'
   match '/paintings/set_name'=>'paintings#set_name'
    match '/paintings/update_priority'=>'paintings#update_priority'
+   match '/paintings/check_name_of_pictures'=>'paintings#check_name_of_pictures'
   match '/tours/find_tours' => 'tours#find_tours'
   match '/paintings/count_rooms'=>'paintings#count_rooms'
   match '/tours/sold_out_tours' => 'tours#sold_out_tours'
