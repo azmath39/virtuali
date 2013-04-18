@@ -1,9 +1,11 @@
 <script>
   $(document).ready(function(){
     $('.carousel').carousel({
-    interval: 7000,
-    autoplay: true
+    interval: 4500,
+    autoplay: true,
+    pause: false
   })
+  
   var slider = $(".carousel")
 
         .bind('slid', function() {
@@ -41,8 +43,7 @@ border-radius: 30px;">
           <%= image_tag(@tour.paintings.first.image_url(:large))%>
           <div class="container1">
           <div class="carousel-caption1">
-              <p><%= @tour.paintings.first.name %></p>
-              
+              <p><%= @tour.paintings.first.name %></p>  
             </div>
           </div>
         </div>
@@ -52,7 +53,6 @@ border-radius: 30px;">
           <div class="container1">
           <div class="carousel-caption1">
               <p><%=painting.name%></p>
-              
             </div>
           </div>
         </div>
@@ -68,7 +68,7 @@ border-radius: 30px;">
   </div>
   <%# unless @objs.empty? %>
   <% unless @tour.paintings.empty? %>
-  <div class="slider-pager" style="margin: 8% 0 0 20%;">
+  <div class="slider-pager" style="margin: 6% 0 20px 20%; width: 50%;">
     <a href="#main-slider" class="final-tour-btn" ><%= @tour.paintings.first.name%></a>&nbsp;&nbsp;
     <% @objs.each do |painting| %>
     <%# images = @objs.first 5 %>
@@ -81,26 +81,28 @@ border-radius: 30px;">
       <p style="margin: 0% 0 0 30%;">Please, <%= link_to "edit", edit_tour_path(@tour.id) %> tour! </p>
       <% end %>
   <% end %>
-  <div style="width: 240px;float: right; margin: -580px 0px 0 150px; font-size: 12px;">
-    <table style="margin-right:15px;">
-      <tr>
-        <th id="tbh">Price($)</th>
-        <th id="tbh">Bedrooms</th>
-        <th id="tbh">Bathrooms</th>
-        <th id="tbh">Sq.feets</th>
+  <div style="width: 240px;float: right; margin: -620px 0px 0 150px; font-size: 12px;">
+    <center>
+    <h4><%= "#{@tour.zip} #{@tour.city}" %></h4>
+    <table style="margin-right:0px;margin-top: 2px;">
+      <tr id="tbr">
+        <th id="tbh">Price</th>
+        <th id="tbh">Beds</th>
+        <th id="tbh">Baths</th>
+        <th id="tbh">Sq.Feet</th>
       </tr>
       <tr>
-        <td><%= @tour.price %> </td>
+        <td>$<%= @tour.price %> </td>
         <td><%= @tour.bed_rooms %> </td>
         <td><%= @tour.bath_rooms %> </td>
         <td><%= @tour.square_footage %> </td>
       </tr>
-    </table><br />
-  </div>
-  <div style = "position: relative; float:right;height: 150px; width: 23%; margin: -500px 0 0 0; overflow: auto;">
+    </table></center>
+    </div><br /><br />
+  <div style = "position: relative; float:right;height: 150px; width: 22%; margin: -550px 2px 0 0; overflow: auto;">
     <%= @tour.description.html_safe %>
   </div>
-  <div id ="user_img" style="float: right; height: 200px; width: 150px;margin: -320px 70px -40px 30px;">
+  <div id ="user_img" style="float: right; height: 200px; width: 150px;margin: -350px 70px -40px 30px;">
     <% if @tour.user.company %>
       <% if @tour.user.company.logo? %>
         <%= image_tag(@tour.user.company.logo_url(:medium)) %>
@@ -122,7 +124,7 @@ border-radius: 30px;">
      <%= @tour.user_address %>
      <% end %>
   </div>
-  <div  style="float: right; height: 50px; width: 200px;margin: -40px -20px 0px 0px;">
+  <div  style="float: right; height: 50px; width: 200px;margin: -80px 0px 0px 0px;">
     <% if !current_user || current_user.id != @tour.user.id %>
       <%= render 'contact/contact_form' %>
         <%= link_to "Request for Info", "#contact", "data-toggle" => "modal", :class => 'btn btn-small btn-success'%>
@@ -136,21 +138,26 @@ border-radius: 30px;">
 </div>
 <style>
   .final-tour-btn {
-  color: black;
-  padding: 1px;
-  border: 8px solid #C0C0C0;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
+  padding: 3px;
+  border: 4px solid #C0C0C0;
+  background: #C0C0C0;
+  -webkit-box-shadow: 0px 1px 4px rgba(50, 50, 50, 1);
+-moz-box-shadow:    0px 1px 4px rgba(50, 50, 50, 1);
+box-shadow:         0px 1px 4px rgba(50, 50, 50, 1);
   text-decoration: none;
   color: blue;
 }
 a:hover,
 a:focus {
   text-decoration: none;
-  color: blue;
+  color: black;
 }
 #tbh{
+  border-right: 1px black solid;
+  padding: 2px;
+  font-size: 16px;
+}
+#tbr{
   border: 4px solid #C0C0C0;
 }
 .carousel-caption1 {
