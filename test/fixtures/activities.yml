@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  adjustable_amount: 1
+  activity_type: 1
+
+two:
+  user_id: 1
+  adjustable_amount: 1
+  activity_type: 1
