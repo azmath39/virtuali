@@ -6,7 +6,7 @@
 <div class="modal-body" style="max-height: 800px;margin-left: 30px;">
   <%= form_for :message, :url => '/contact/create' do |form| %>
       <%= hidden_field_tag :tour_id, @tour.id %>
-      <%= form.label :name %>
+      <%= form.label :name,"Full Name" %>
       <%= form.text_field :name %><br />
  
       <%= form.label :email %>

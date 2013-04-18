@@ -49,7 +49,7 @@
       <div class ="control-group">
         <%= f.label "city*", :html => {:class => 'control-label'} %>
   <%#= f.text_field :city %>
-        <%=f.select :city, {},:prompt=>"Select City",:class=>"required"%>
+        <%=f.select :city, {},{:prompt=>"Select City"},:class=>"required"%>
 
       </div>
       <div class ="control-group">
@@ -106,6 +106,26 @@
 <script>
   $(document).ready(function(){
     $("#edit_tour").validate();
+    $('#submit-button').click(function(e) {
+  e.preventDefault();
+  $.ajax({
+      type: "GET",
+      url:"/paintings/check_name_of_pictures"
+
+    }).done(function(text){
+
+      if (text==1){
+          $('form#edit_tour').submit();
+      }
+      else{
+        alert("Please Select Name for Pictures");
+      }
+
+    });
+        });
+
+
+
     $('.wysihtml5').each(function(i, elem) {
       $(elem).wysihtml5();
     });
