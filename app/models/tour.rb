@@ -65,6 +65,7 @@ class Tour < ActiveRecord::Base
   acts_as_gmappable
   belongs_to :user
   has_many :paintings, :dependent => :destroy
+  has_many :messages
   belongs_to :product
   belongs_to :selected_package
   after_create :set_name

@@ -55,7 +55,12 @@ class HomeController < ApplicationController
     render :partial=>'/home/user_profile'
   end
   def company
+    
     render :partial=>'/home/company_page'
+  end
+  def messages
+    @tours = current_user.tours
+    render :partial => 'home/messages'
   end
   #end---navigation
   def cancel_direct_debit

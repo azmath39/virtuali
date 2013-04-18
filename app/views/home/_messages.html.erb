@@ -1,0 +1,25 @@
+<p><span class="title-text">Tour Enquiries</span></p><br />
+<table class="table">
+        <thead>
+          <tr>
+            <th>User's Name</th>
+            <th>Email</th>
+            <th>Interested Tour</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @tours.each do |tour| %>
+          <% if tour.messages %>
+          <% tour.messages.order('created_at DESC').each do |message| %>
+          <tr>
+            <td><%= message.name %></td>
+            <td><a href="mailto:#"><%= message.email %></a></td>
+            <td><%= link_to "#{message.tour.address}", tour %> </td>
+            <td><%= message.created_at.strftime("%b-%d-%Y") %></td>
+          </tr>
+          <% end %>
+          <% end %>
+          <% end %>
+        </tbody>
+</table>

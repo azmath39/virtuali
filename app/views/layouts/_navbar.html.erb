@@ -75,14 +75,14 @@
         <div class="nav-collapse" style="margin-top:0%; ">
           <ul class="nav" style="height:140px; margin-left: 11%;margin-top:0%;width:55%">
 
-            <li class="tab"><%= link_to '<center><i class="icon-2x icon-desktop"></i></center> Dashboard'.html_safe, "/"%> </li>
+            <li class="tab active"><%= link_to '<center><i class="icon-2x icon-desktop"></i></center> Dashboard'.html_safe, "/"%> </li>
             <li class="tab"><%= link_to '<center><i class="icon-2x icon-eye-open"></i></center> Status'.html_safe, '#', "data-toggle" => "tab",:onclick=>'status()'%> </li>
             <li class="tab"><%= link_to '<center><i class="icon-2x icon-money"></i></center> Billing'.html_safe, '#', "data-toggle" => "tab",:onclick=>'billing()'%></li>
             <% if current_user.company %>
               <li class="tab"><%= link_to '<center><i class="icon-2x icon-cog"></i> </center>Company'.html_safe, '#', "data-toggle" => "tab",:onclick=>'company()' %></li>
             <% end %>
-            <li class="tab"><%= link_to '<center><i class="icon-2x icon-edit"></i> </center>Profile'.html_safe, '#', "data-toggle" => "tab",:onclick=>'profile()' %></li>
-            <li class="tab"><%#= link_to "Manage Account", '#div_manage', "data-toggle" => "tab"%> </li>
+            <li class="tab"><%= link_to '<center><i class="icon-2x icon-edit"></i> </center>Profile'.html_safe, '#', "data-toggle" => "tab", :onclick=>'profile()' %></li>
+            <li class="tab"><%= link_to '<center><i class="icon-2x icon-envelope-alt"></i> </center>Messages'.html_safe, '#', "data-toggle" => "tab", :onclick => 'messages()'%> </li>
             <li class="tab"><%#= link_to "Upgrade Account", '#div_upgrade', "data-toggle" => "tab"%> </li>
 
           </ul>
@@ -151,6 +151,17 @@
     $.ajax({
       type:'GET',
       url:'/home/profile'
+    }).done(function(html){
+      $('#jquery-container').html(html);
+      $('#map-search').html("");
+      $('#outer_side_bar').html("");
+    });
+  }
+  function messages()
+  {
+    $.ajax({
+      type:'GET',
+      url:'/home/messages'
     }).done(function(html){
       $('#jquery-container').html(html);
       $('#map-search').html("");
@@ -290,7 +301,7 @@
 </script>
 <style>
   .tab{
-    width:20%;
+    width:16%;
     text-align:center;
   }
 </style>

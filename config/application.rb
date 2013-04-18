@@ -66,8 +66,8 @@ module VirtualTour
       :address              => "smtp.gmail.com",
       :port                 => 587,
       :domain               => "localhost",
-      :user_name            => "xxxxxx@gmail.com",
-      :password             => "xxxxxxx",
+      :user_name            => "xxxxxxx@gmail.com",
+      :password             => "xxxxxxxx",
       :authentication       => :plain,
       :enable_starttls_auto => true
     }
