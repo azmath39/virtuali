@@ -8,9 +8,13 @@ gem 'rails', '3.2.11'
  group :development do
     gem 'mysql2'
   end
-  group :production do
-    gem 'pg'
-  end
+  #gem 'mongrel', '>= 1.2.0.pre2'
+  #gem 'dispatch'
+  #gem 'thin'
+  
+#  group :production do
+#    gem 'pg'
+#  end
   gem 'whenever', :require => false
   gem "fastimage"
   gem 'devise'
