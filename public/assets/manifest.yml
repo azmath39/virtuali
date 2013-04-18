@@ -97,8 +97,12 @@ user_default_image.gif: user_default_image.gif
 user_default_image/index.gif: user_default_image.gif
 virtuali_logo.png: virtuali_logo.png
 virtuali_logo/index.png: virtuali_logo.png
+active_admin.js: active_admin.js
+active_admin/index.js: active_admin.js
 application.js: application.js
 application/index.js: application.js
+active_admin.css: active_admin.css
+active_admin/index.css: active_admin.css
 application.css: application.css
 application/index.css: application.css
 progressbar.gif: progressbar.gif
@@ -131,6 +135,14 @@ active_admin/datepicker/datepicker-nipple.png: active_admin/datepicker/datepicke
 active_admin/datepicker/datepicker-nipple/index.png: active_admin/datepicker/datepicker-nipple.png
 active_admin/datepicker/datepicker-prev-link-icon.png: active_admin/datepicker/datepicker-prev-link-icon.png
 active_admin/datepicker/datepicker-prev-link-icon/index.png: active_admin/datepicker/datepicker-prev-link-icon.png
+active_admin/index_list_icons/block_icon.svg: active_admin/index_list_icons/block_icon.svg
+active_admin/index_list_icons/block_icon/index.svg: active_admin/index_list_icons/block_icon.svg
+active_admin/index_list_icons/blog_icon.svg: active_admin/index_list_icons/blog_icon.svg
+active_admin/index_list_icons/blog_icon/index.svg: active_admin/index_list_icons/blog_icon.svg
+active_admin/index_list_icons/grid_icon.svg: active_admin/index_list_icons/grid_icon.svg
+active_admin/index_list_icons/grid_icon/index.svg: active_admin/index_list_icons/grid_icon.svg
+active_admin/index_list_icons/table_icon.svg: active_admin/index_list_icons/table_icon.svg
+active_admin/index_list_icons/table_icon/index.svg: active_admin/index_list_icons/table_icon.svg
 active_admin/loading.gif: active_admin/loading.gif
 active_admin/loading/index.gif: active_admin/loading.gif
 active_admin/nested_menu_arrow.gif: active_admin/nested_menu_arrow.gif
@@ -143,5 +155,7 @@ active_admin/application.js: active_admin/application.js
 active_admin/application/index.js: active_admin/application.js
 active_admin/pages/application.js: active_admin/pages/application.js
 active_admin/pages/application/index.js: active_admin/pages/application.js
+active_admin/print.css: active_admin/print.css
+active_admin/print/index.css: active_admin/print.css
 jquery.min.map: jquery.min.map
 jquery/index.min.map: jquery.min.map
