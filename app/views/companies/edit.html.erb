@@ -26,7 +26,10 @@
   <a class="btn btn-primary" onclick="$('input[id=company_logo]').click();">Browse</a>
 </div><br />
 
+<div style="margin-left:65%;">
 <%= f.submit "Update", :class=>'btn btn-large btn-primary' %>
+<span><%= link_to "Cancel", root_url , :tyle=> 'float:right;margin-right:120px;'%></span>
+</div>
 <% end %>
 <div style="float:right;height:60px; width:60px; float: right; margin: -14% 65% 0 0;">
   <% if current_user.company.logo? %>
@@ -36,6 +39,7 @@
     <%= image_tag 'default_company_logo.png' %>
   <% end %>
 </div>
+
 <br /><br />
 </div>
 
