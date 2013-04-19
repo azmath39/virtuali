@@ -9,6 +9,7 @@
  <%#= link_to "Create New Tour", '/paintings/new', :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  if verify_tours_allowed%>
 <%#*</div>%>
 <%=render 'shared/package_change_instruction' if current_user.any_instructions? or current_user.check_tours_type?%>
+<%= render 'shared/welcome_message' if current_user.tours.empty? %>
 <div id="user_tours" style="float:left;margin-top: 6%;">
 <%=render 'search_form' %>
 <%=render '/tours/list_of_tours'%>
