@@ -1,7 +1,9 @@
 
-<%if @tours.empty? or current_user.validate_no_of_tours? or current_user.check_tours_type?%>
+<%if current_user.tours.empty? or current_user.validate_no_of_tours? or current_user.check_tours_type?%>
 <%=render "/shared/status_message"%>
-<%else%>
+<%elsif @tours.empty? %>
+  <p style="color:red;margin-left:180px;margin-top: 50px;">No Tours found, Please try again!</p>
+<% else %>
 <table class="table table-striped table-bordered">
   <tr><th>Tour Name</th><th>Current Status</th><th>Set Status</th></tr>
 <%@tours.each do |tour|%>
