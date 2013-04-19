@@ -75,7 +75,7 @@ class PaintingsController < ApplicationController
   end
 
   def destroy
-    @painting = Painting.find(params[:id])
+    @painting = current_user.paintings.find(params[:id])
     if @painting.destroy
       render :nothing=>true
       #redirect_to :back
