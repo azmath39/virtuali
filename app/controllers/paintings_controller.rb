@@ -13,10 +13,12 @@ class PaintingsController < ApplicationController
   end
   
   def new
+    #render :layout => false
     @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil).order('created_at ASC')
     @painting = Painting.new
     @tour = Tour.new
     @products = current_user.subscribe_product
+   # @priority=get_priority
     
     #    respond_to do |format|
     #    format.js {render :layout=>false}
@@ -29,10 +31,14 @@ class PaintingsController < ApplicationController
     if verify_no_image then
       @painting = Painting.create(params[:painting])
       @painting.user_id= current_user.id
-      @painting.save
+      if @painting.save
       respond_to do |format|
         format.html {render :js=>"window.location.reload(true);"}
         format.js
+      end
+      else
+
+        render :js=>"alert(#{@painting.errors[:image]})"
       end
      
     end
@@ -76,6 +82,12 @@ class PaintingsController < ApplicationController
       # redirect_to paintings_url, :notice=> "Image was successfully deleted."
     end
   end
+  def update_priority
+    painting= Painting.find(params[:id])
+    painting.update_attributes(:priority=>params[:value])
+    render :nothing=>true
+
+  end
   def set_name
     painting= Painting.find(params[:id])
     painting.update_attributes(:name=>params[:name])
@@ -99,6 +111,14 @@ class PaintingsController < ApplicationController
  
     render :text=>str
   end
+  def check_name_of_pictures
+    unless current_user.check_name_of_pictures?
+     render :text=>"1"
+    else
+       render :text=>"0"
+
+    end
+  end
 
   private
   #  def selected_pkgs_without_tour
@@ -121,7 +141,11 @@ class PaintingsController < ApplicationController
       return false
     end
   end
-  protected
+  private
+  def get_priority
+   
+  end
+
   #  def set_default_response_format
   #      #request.format = 'js'.to_sym
   #      #

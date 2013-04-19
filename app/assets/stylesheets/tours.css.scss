@@ -24,7 +24,7 @@ text-align:center;
   text-align: center;
 }
 #user_img img{
- background: none repeat scroll 0% 0% rgb(255, 255, 255);
+ background: none repeat scroll 0% 0% #C0C0C0;
   padding: 8px;
 -webkit-box-shadow: 0 8px 6px -6px #CCC;
 	   -moz-box-shadow: 0 8px 6px -6px #CCC;
@@ -35,7 +35,8 @@ text-align:center;
 #map img { max-width: none; }
 
 #map-div{
-  margin-left: 350px;
+  margin-left:4%;
+padding-top:  6px;
 margin-top:2%;
 }
 
@@ -70,23 +71,18 @@ margin-left: 30px;
 
 
 .title-text{
-font-family: Garamond, serif;
+font-family: "ProximaNovaLight","Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 38.5px;
+font-weight: bold;
 line-height: 1em;
-font-size: 40px;
-color: black;
-text-shadow:
-    0px 0px 0 rgb(112,136,185),
-    -0px -0px 0 rgb(93,117,166),
-    -1px -1px 0 rgb(74,98,147),
-     -1px -1px 0 rgb(55,79,128),
-    -2px -2px 2px rgba(0,0,0,0.25),
-    -3px -3px 1px rgba(0,0,0,0.3),
-    0px 0px 3px rgba(0,0,0,.0);
+
 }
 #map-search{
-  margin: 2% 1px 0 75px;
-  float: left;
-  position: fixed;
+margin-top: 6.6%;
+width: 16%;
+float: left;
+position: fixed;
+margin-left: 3%;
 }
 DIV#img_bg.span7.well{
   margin-bottom: 1px;
@@ -99,15 +95,24 @@ DIV#img_bg.span7.well{
   box-shadow: 0px 2px 4px #CCC;
   border-radius: 2px;
 }
-DIV#final_tour.span11{
-  background: black;
-}
+
 .map_container{
   margin-top: -7px;
+
 }
 .img-border {
-  background: none repeat scroll 0% 0% rgb(255, 255, 255);
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+
+background: black;
+  border: 10px #C0C0C0 solid;
+  -webkit-border-radius: 20px;
+-moz-border-radius: 20px;
+border-radius: 20px;
+overflow: hidden;
+}
+.img-name {
+  background-color: transparent;
+  position: absolute;
+  max-width: 550px;
+  padding: 0 20px;
+  margin-bottom: 100px;
 }

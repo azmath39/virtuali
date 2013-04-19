@@ -10,25 +10,59 @@ class HomeController < ApplicationController
   end
   def check_discount
     unless params[:code].empty?
-    @coupon=Coupon.find_by_code(params[:code])
-    if !@coupon.nil?
-      @amount= params[:amount].to_f-@coupon.value.to_f
-      render :partial=>'discount'
-    else
-      render :text=>"<i style='color:red;'>* Coupon code Invalid</i>".html_safe
-    end
+      @coupon=Coupon.find_by_code(params[:code])
+      if !@coupon.nil?
+        @amount= params[:amount].to_f-@coupon.value.to_f
+        render :partial=>'discount'
+      else
+        render :text=>"<i style='color:red;'>* Coupon code Invalid</i>".html_safe
+      end
     else
       render :nothing => true
     end
   end
   def index
     if current_user
-      @feedback = Feedback.new
-      @tours= current_user.tours
-      @package_price=current_user.package_price
-      @payments=current_user.payments.order('created_at DESC')
+      #      @feedback = Feedback.new
+      if params[:q].nil?
+        @search = current_user.tours.search(params[:q])
+        @tours = current_user.tours.tours_list_pagination(params[:page])
+#      elsif params[:q][:status_eq] == "3"
+#        @search = current_user.tours.sold.search(params[:q])
+#        @tours = @search.result.tours_list_pagination(params[:page])
+      else
+        @search =current_user.tours.search(params[:q])
+        @tours = @search.result.tours_list_pagination(params[:page])
+      end
+      
     end
   end
+  #navigation
+  def status
+    @tours= current_user.tours.order('created_at DESC')
+    render :partial=>'/home/tour_status'
+  end
+  def dashboard
+    @tours= current_user.tours.order('created_at DESC')
+    render :partial=>'/home/dashboard'
+  end
+  def billing
+    @package_price=current_user.package_price
+    @payments=current_user.payments.order('created_at DESC')
+    render :partial=>'/home/billing_page'
+  end
+  def profile
+    render :partial=>'/home/user_profile'
+  end
+  def company
+    
+    render :partial=>'/home/company_page'
+  end
+  def messages
+    @tours = current_user.tours
+    render :partial => 'home/messages'
+  end
+  #end---navigation
   def cancel_direct_debit
     mess= unsubscribe
     render :text=>mess

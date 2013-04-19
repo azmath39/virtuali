@@ -38,7 +38,7 @@ background-image: url(bg2.jpg);
   padding-bottom: 12px;
   margin-bottom: 20px;
   background-color: #f0f0f0;
-  margin-left:32%;
+  margin-left:18%;
 }
 
 #error_explanation h2 {
@@ -65,4 +65,28 @@ background-image: url(bg2.jpg);
 .money{background:url(/assets/icon-money.png)  2px  4px no-repeat #fff; padding-left:21px !important;width: 32px; }
 .map_container{
     margin-top: 0px;
+}
+.sp-div{
+    padding-top: 30px;
+}
+#img_bg select{
+    width: 100% !important;
+}
+td{
+  text-align: left;
+}
+.error{
+    color:red;
+}
+#pages_div1{
+    font-size: 15px;
+    line-height: 30px;
+    margin: 2% 5% 2% -15%;
+    position: absolute;
+    text-align: justify;
+}
+ #faq{
+                    position: absolute;
+                    width:95%;
+                    margin-left: -16%;
 }

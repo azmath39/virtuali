@@ -1,12 +1,14 @@
 <%= devise_error_messages! %>
-<p class="title-text" style="margin-left: 32%;">Edit Your Account</p>
-<div class ="edit_form_div">
-  <h3>Personal Information?</h3>
+<p class="title-text" style="margin-left: 25%;">Edit Your Account</p>
+<%#*<div class ="edit_form_div" style="width: 50%;">%>
+<div>
+  
 <hr />
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
 
   <div>
-    
+    <div class="span4">
+      <h3>Personal Information?</h3>
     <%= f.label "full_Name*" %>
     <%= f.text_field :name%><span id="personal_info_error_name" style="color:red;"></span>
     <%#= f.label :email %>
@@ -25,20 +27,23 @@
     <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
     
     <%= f.label :image, "Change Profile Picture", :style=>'margin-top: 5px;' %>
-    <%= f.file_field :image, :id => 'user_file', :style => "display:none" %>
-    <div style="float:right;margin: -15px 100px 0 0px;height:60px; width:60px;">
+    <%= f.file_field :image, :id => 'user_file', :style => "display:none;" %>
+    <div style="float:right;margin: -15px 70px 0 0px;height:60px; width:60px;">
       <% if current_user.image? %>
         <%= image_tag current_user.image_url(:thumb) %>
       <% else %>
         <%= image_tag 'user_default_image.gif' %>
       <% end %>
     </div>
+
     <div class="input-append">
        <input id="photoCover" class="input-large" type="text">
-       <a class="btn btn-warning" onclick="$('input[id=user_file]').click();">Browse</a>
+       <a class="btn btn-primary" onclick="$('input[id=user_file]').click();">Browse</a>
     </div>
      
     <br /><br />
+     </div>
+    <div class="span3">
     <h3>Change Password?</h3>
      <i>(Please Ignore it if you don't want to change your password!)</i>
     <hr />
@@ -57,13 +62,21 @@
     <i>(we need your current password to confirm your changes)</i>
     <hr />
     <div><%= f.label :current_password %>
-    <%= f.password_field :current_password %></div>
-
-    <div><%= f.submit "Update", :class => 'btn btn-large btn-primary' %></div>
+    <%= f.password_field :current_password %></div><br/>
+    <div></div>
+    </div><br /><br />
+    <div class="span3" style="padding-left:30%;">
+      <%= f.submit "Update", :class => 'btn btn-large btn-primary' %>
+    </div>
   <% end %>
 
 
 <br />
+
+    
+    
+</div>
+<div class="span8">
 <hr />
 <p>Unhappy? <%= link_to "Cancel Your Account!", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
 
@@ -89,3 +102,8 @@
    $('#photoCover').val($(this).val());
 });
 </script>
+<style>
+  #photoCover.input-large{
+    width: 150px;
+}
+</style>

@@ -1,10 +1,18 @@
-<p class="title-text" style="margin:2% 0 10px 12%;">Tour slide show</p>
-<div class="span11" style="margin-left: 10%;border: 40px solid #0073BF;border-radius:40px; width:auto;padding:0px;">
+
+<%if current_user%>
+<div class="sign_in_css_slide_show">
+<%else%>
+<div>
+<%end%>
+
+<%#*<p class="title-text" style="margin:2% 0 10px 12%;">Tour slide show</p>%>
+<div class="span11" style="margin-left: 10%;border: 30px solid #C0C0C0;border-radius:30px; width:auto;padding:0px;">
 <div>
 <div id="abc" style="">
 <% @tour.paintings.each do |p| %>
   <%=image_tag p.image_url(:large) %>
 <% end %>
+</div>
 </div>
 </div>
 </div>
@@ -21,3 +29,9 @@
         });
 
 </script>
+  <style>
+    .sign_in_css_slide_show{
+      position:absolute;
+      margin-left: -18%;
+}
+  </style>

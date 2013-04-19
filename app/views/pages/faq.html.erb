@@ -1,5 +1,12 @@
+<%if current_user%>
+<div id="faq">
+  <%else%>
+<div>
+  <%end%>
 <div id="pages_div">
-<p class="title-text">FAQ</p>
+
+<h1 class="center">FAQ?</h1>
+<h2 class="grey center p20">(Something about faq)</h2>
 <section class="faq-section">
     <input type="checkbox" id="q1">
     <label for="q1">1. How do I sign up?</label>
@@ -48,13 +55,9 @@
     </section>
 
 </div>
-<%= stylesheet_link_tag "faq", :media => "all" %>
-<style>
+</div>
+<%#= stylesheet_link_tag "faq", :media => "all" %>
 
-  p{
-    line-height: 200%;
-}
-</style>
 <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <style>
@@ -72,4 +75,6 @@
 			overflow: visible;
 		}
     </style>
-<![endif]--> 
+<![endif]-->
+
+                

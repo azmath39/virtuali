@@ -8,11 +8,16 @@ gem 'rails', '3.2.11'
  group :development do
     gem 'mysql2'
   end
-  group :production do
-    gem 'pg'
-  end
-  gem 'authorize-net'
+  #gem 'mongrel', '>= 1.2.0.pre2'
+  #gem 'dispatch'
+  #gem 'thin'
+  
+#  group :production do
+#    gem 'pg'
+#  end
+gem 'authorize-net'
   gem 'whenever', :require => false
+  gem "fastimage"
   gem 'devise'
   gem 'activeadmin'
   gem 'annotate'
@@ -39,7 +44,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'jquery-fileupload-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+   #gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end

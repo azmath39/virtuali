@@ -1,6 +1,7 @@
 <% if verify_tours_allowed %>
+<%#= render '/home/account_mangement'  %>
 
-<div class="span12" style="margin-left: 15%;">
+<div class="span12" style="width:85%;">
   <p class="title-text">Create a Tour</p>
   <%= render 'shared/error_messages', :target => @tour  %>
 <%= form_for Painting.new,{:remote=>true} do |f| %>
@@ -8,6 +9,7 @@
 <div class="fileupload btn btn-primary">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
+  
 <% end %>
 </div>
 <span id="painting_error"></span>
@@ -22,20 +24,21 @@
 <%= form_for @painting,:url=>'update', :html => {:multipart => true, :id=>"updated_image_form"} do |f| %>
 <%=f.hidden_field "id",:id=>"image_updated_id"%>
 <%=f.hidden_field "remote_image_url"%>
+
 <%#= f.submit "Done", :class=>"btn-small btn-success"%>
 <%end%>
-<div class="span12" style="margin-left:15%;">
-<%= form_for @tour, :url => '/tours/create', :html =>{:class => "form-horizontal"}  do |f| %>
+<div class="span12" style="width:85%;">
+<%= form_for @tour, :url => '/tours/create', :html =>{:class => "form-horizontal",:onsubmit=>"grt()"}  do |f| %>
  <h3><legend>Tour Details:</legend></h3>
 <div style="float:left;">
    <div class ="control-group">
   <%= f.label "Category*", :html => {:class => 'control-label'} %>
-  <%= f.select :product_id, @products.collect{|p| [p.name,p.id]},{:prompt=>"Select Category"} %>
+  <%= f.select :product_id, @products.collect{|p| [p.name,p.id]},{:prompt=>"Select Category"},:class=>"required" %>
   </div>
   <div class ="control-group">
   <%= f.label "Address1*", :html => {:class => 'control-label'} %>
     <i style="font-size:12px;">( Address1 Format Ex: 19 Quaker Ridge Rd )</i><br />
-  <%= f.text_field :address1 %>
+  <%= f.text_field :address1,:class=>"required" %>
   </div>
   <div class ="control-group">
   <%= f.label "Address2 (Optional)", :html => {:class => 'control-label'} %>
@@ -45,17 +48,17 @@
   <%= f.label "state*", :html => {:class => 'control-label'} %>
   <%#= f.text_field :state %>
  
-  <%=f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
+  <%=f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()",:class=>"required"%>
 </div>
 <div class ="control-group">
   <%= f.label "city*", :html => {:class => 'control-label'} %>
   <%#= f.text_field :city %>
-  <%=f.select :city, {},:prompt=>"Select City"%>
+  <%=f.select :city, {},{:prompt=>"Select City"},:class=>"required"%>
 
 </div>
 <div class ="control-group">
   <%= f.label :zip, "Zip Code*:", :html => {:class => 'control-label'} %>
-  <%= f.text_field :zip %>
+  <%= f.text_field :zip,:class=>"required" %>
 </div>
 
 </div>
@@ -63,22 +66,22 @@
 <div style="float:left; ">
 <div class="control-group">
   <%= f.label "price*" %>
-  <%= f.text_field :price %>
+  <%= f.text_field :price,:class=>"required number" %>
 </div>
 <div class="control-group">
   <%= f.label "square_footage*" %>
-  <%= f.text_field :square_footage %>
+  <%= f.text_field :square_footage,:class=>"required digits" %>
 </div>
 <div class="control-group">
   <%= f.label :bed_rooms %>
-  <%= f.text_field :bed_rooms %>
+  <%= f.text_field :bed_rooms,:class=>"required digits" %>
 </div>
 <div class="control-group">
   <%= f.label :bath_rooms %>
-  <%= f.text_field :bath_rooms %>
+  <%= f.text_field :bath_rooms,:class=>"required digits" %>
 </div>
   <div class ="control-group">
-  <%= f.label "subdivision*", :html => {:class => 'control-label'} %>
+  <%= f.label "subdivision", :html => {:class => 'control-label'} %>
   <%= f.text_field :subdivision %>
 </div>
   
@@ -92,7 +95,7 @@
 </div>
 <div style="float:left;margin-top: 10px;clear: both;">
 <div>
-  <%= f.submit :class => 'btn btn-large btn-primary' %>
+  <%= f.submit :class => 'btn btn-large btn-primary',:id=>"submit-button" %>
 </div>
 <% end %>
 </div>
@@ -107,9 +110,30 @@
 <br/><br/><br/><br/><br/><br/>
 You have already published Sufficient Tours. To create more tours upgrade your Subscription.
 <%end%>
-
+<%= javascript_include_tag "http://jzaefferer.github.com/jquery-validation/jquery.validate.js" %>
  <script>
    $(document).ready(function(){
+    $("#new_tour").validate();
+$('#submit-button').click(function(e) {
+  e.preventDefault();
+  $.ajax({
+      type: "GET",
+      url:"/paintings/check_name_of_pictures"
+
+    }).done(function(text){
+    
+      if (text==1){
+          $('form#new_tour').submit();
+      }
+      else{
+        alert("Please Select Name for Pictures");
+      }
+          
+    });
+        });
+
+
+
       $('.wysihtml5').each(function(i, elem) {
     $(elem).wysihtml5();
      });
@@ -122,11 +146,21 @@ You have already published Sufficient Tours. To create more tours upgrade your S
     }).done(function(text){
    
      text = text.split(',');
+    var bed=parseInt(text[0]);
+    var bath=parseInt(text[1]);
 
-          $("#tour_bed_rooms").val(text[0]);
-          $("#tour_bath_rooms").val(text[1]);
+          $("#tour_bed_rooms").val(bed);
+          $("#tour_bath_rooms").val(bath);
+          if (bath > 1){
+            alert("Caution! You have choosed Bath Room more than one.")
+          }
     });
    });
+   function grt(){
+   //alert("ok");
+   //return false;
+   }
+
  function state_city()
   {
     $.ajax({
@@ -181,9 +215,27 @@ You have already published Sufficient Tours. To create more tours upgrade your S
     }).done(function(text){
     //alert(text);
      text = text.split(',');
+    var bed=parseInt(text[0]);
+    var bath=parseInt(text[1]);
     
-          $("#tour_bed_rooms").val(text[0]);
-          $("#tour_bath_rooms").val(text[1]);
+          $("#tour_bed_rooms").val(bed);
+          $("#tour_bath_rooms").val(bath);
+          if (bath > 1){
+            alert("Caution! You have choosed Bath Room more than one.")
+          }
+    });
+  }
+  function change_priority(id)
+  {
+    var value = $('.priority_input_'+id).val();
+    $.ajax({
+      type:"GET",
+      url:"/paintings/update_priority",
+      data:{
+         id: id,
+         value: value
+      }
+
     });
   }
 
@@ -225,7 +277,7 @@ $('#'+id).closest('.painting').hide();
 
 }
 
-  jQuery(function() {
+    jQuery(function() {
 
   return $('#new_painting').fileupload({
     type:'POST',
@@ -267,3 +319,14 @@ $('#'+id).closest('.painting').hide();
 
 
 </script>
+<style>
+  #priority{
+    border: 3px solid #0088CC;
+    border-radius: 19px;
+    float: right;
+    
+    height: 22px;
+    padding: 5px;
+    width: 25px;
+}
+</style>

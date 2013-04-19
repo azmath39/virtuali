@@ -24,6 +24,15 @@
      background: #0088CC ;
     
 }
+.navbar-inner2 {
+   /* background: url(cut.png);
+    background-repeat: repeat;*/
+    min-height: 30px;
+    
+    padding-right: 20px;
+   
+
+}
 .navbar-fixed-top{
     background: #0088CC ;
 }
@@ -49,10 +58,15 @@
     color: wheat;
     text-shadow: whitesmoke 0.01em 0.01em 0.01em;
     text-decoration: none;
+    background:none;
 }
 .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
 
-    box-shadow:10px 10px 5px #888888;
+      background:none;
+      box-shadow:none;
+}
+.navbar .nav > .active > a{
+ 
 }
 
 .btn [class^="icon-"], .nav [class^="icon-"], .btn [class*=" icon-"], .nav [class*=" icon-"]{
@@ -133,7 +147,7 @@ filter: alpha(opacity=50);
 
 .carousel-caption {
   background-color: transparent;
-  position: static;
+  position: absolute;
   max-width: 550px;
   padding: 0 20px;
   margin-bottom: 100px;
@@ -168,9 +182,7 @@ filter: alpha(opacity=50);
   z-index: 1;
 }
 
-.carousel.carousel-fade .carousel-control {
-  z-index: 3;
-}
+
 .unstyled li {
     display: inline;
     vertical-align: baseline;
@@ -197,13 +209,18 @@ filter: alpha(opacity=50);
     ------------------------- */
 
     .featurette-divider {
-      margin: 80px 0; /* Space out the Bootstrap <hr> more */
+      margin: 70px 0; /* Space out the Bootstrap <hr> more */
+    }
+    .featurette-divider2 {
+      margin: 0px 0; /* Space out the Bootstrap <hr> more */
     }
     .featurette {
-      padding-top: 130px; /* Vertically center images part 1: add padding above and below text. */
+      padding-top: 115px; /* Vertically center images part 1: add padding above and below text. */
       margin: 0 40px 0 40px;
-      overflow: hidden; /* Vertically center images part 2: clear their floats. */
+       /* Vertically center images part 2: clear their floats. */
+      height: auto;
     }
+    
     .featurette-image {
       margin-top: -110px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
       margin-right: 12px;
@@ -247,4 +264,5 @@ filter: alpha(opacity=50);
     .container{
         width:100%;
         margin-top: 120px;
+        
 }

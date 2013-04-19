@@ -1,4 +1,5 @@
-<div id="signin_div" style="width:30%;">
+<%#*<div id="signin_div" style="width:50%;">%>
+<div>
 <h3>Edit Company Details</h3>
 <hr />
 <%= form_for @company, :url => '/companies/update' do |f| %>
@@ -9,8 +10,14 @@
 </div>
 <div>
   <%= f.label :address %>
-  <%= f.text_field :address %>
-</div>
+  <%= f.text_field :address %><br />
+  <i style="font-size:12px;">( Format: DNo, Street, City, State and Zip )</i>
+</div><br />
+<div>
+  <%= f.label :phno, "Phone Number" %>
+  <%= f.text_field :phno %><br />
+  <i style="font-size:12px;">( Format: (Code) Phone Number )</i>
+</div><br />
   <%= f.label :logo, "Change Company logo" %>
   <%= f.file_field :logo, :id => 'company_logo', :style=>"display:none;" %>
 
@@ -19,9 +26,9 @@
   <a class="btn btn-primary" onclick="$('input[id=company_logo]').click();">Browse</a>
 </div><br />
 
-<%= f.submit "Update", :class=>'btn btn-primary' %>
+<%= f.submit "Update", :class=>'btn btn-large btn-primary' %>
 <% end %>
-<div style="float:right;margin: -25% 25% 0 0px;height:60px; width:60px;">
+<div style="float:right;height:60px; width:60px; float: right; margin: -14% 65% 0 0;">
   <% if current_user.company.logo? %>
     <%= image_tag current_user.company.logo_url(:thumb) %>
   <center><%= link_to "Remove", {:controller => 'companies', :action => 'remove_logo'}, :confirm => "Are you sure?", :method => :delete %></center>

@@ -1,5 +1,7 @@
-<div id="packages-div1" class="border-box">
-  <%=form_for :package ,:url=>"/payments/upgrade" do|f|%>
+
+<div class="border-box">
+  <%#=form_for :package ,:url=>"upgrade",:html => { :id => 'payment-form'} do|f|%>
+<%=form_for :package ,:url=>"/payments/upgrade" do|f|%>
     <div id ="package_info">
         <div class="pricing_grid row" style="margin:4% 0 0 3%;">
         <h3>Package Selection</h3>
@@ -186,7 +188,7 @@
 <style>
   .border-box{
     border-radius: 25px;
-    box-shadow:10px 10px 5px #0088CC ;
-    border:2px #0088CC solid;height:650px; width: 80%; margin:auto;
+   
+    border:2px #0088CC solid;height:650px; 
   }
 </style>

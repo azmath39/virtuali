@@ -2,23 +2,25 @@ VirtualTour::Application.routes.draw do
   match '/payments/payment', :to => 'payments#payment', :as => 'paymentspayment', :via => [:get]
 
   match '/payments/thank_you', :to => 'payments#thank_you', :as => 'payments_thank_you', :via => [:get]
-match '/payments/renew_successfull', :to => 'payments#renew_successfull', :as => 'payments_renew_successfull', :via => [:get]
+  match '/payments/renew_successfull', :to => 'payments#renew_successfull', :as => 'payments_renew_successfull', :via => [:get]
+match '/packages/upgrade', :to => 'packages#upgrade', :as => 'upgrade_packages', :via => [:get]
+match '/packages/upgrade_combo', :to => 'packages#upgrade_combo', :as => 'upgrade_combo_packages', :via => [:get]
 
   #get "home/index"
   get "packages/show"
-   
   match '/tours/view_map' => 'tours#view_map'
   match '/tours/status_change' => 'tours#status_change'
   match '/tours/update' => 'tours#update'
   match '/tours/user_tours'=>'tours#user_tours'
   match '/paintings/set_name'=>'paintings#set_name'
+   match '/paintings/update_priority'=>'paintings#update_priority'
+   match '/paintings/check_name_of_pictures'=>'paintings#check_name_of_pictures'
   match '/tours/find_tours' => 'tours#find_tours'
   match '/paintings/count_rooms'=>'paintings#count_rooms'
   match '/tours/sold_out_tours' => 'tours#sold_out_tours'
   match '/tours/find_map_tours' => 'tours#find_map_tours'
  # match '/paintings/create_ie'=>'paintings#create_ie'
 
-  ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
@@ -78,8 +80,9 @@ match '/payments/renew_successfull', :to => 'payments#renew_successfull', :as =>
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index'
-
+ 
+root :to => 'home#index'
+  ActiveAdmin.routes(self)
   # See how all your routes lay out with "rake routes"
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.

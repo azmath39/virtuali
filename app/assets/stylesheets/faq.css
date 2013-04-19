@@ -1,8 +1,8 @@
 /*Add some spacing*/
 .faq-section{
-	margin: 40px 0;
+	margin: 40px 0 0 10%;
         position: relative;
-        width: 90%;
+        width: 80%;
 }
 
 /*Hide the paragraphs*/

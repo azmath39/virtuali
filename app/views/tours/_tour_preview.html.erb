@@ -1,10 +1,12 @@
 <script>
   $(document).ready(function(){
     $('.carousel').carousel({
-    interval: 4000,
-    autoplay: true
+    interval: 4500,
+    autoplay: true,
+    pause: false
   })
-  var slider = $(".carousel-inner")
+  
+  var slider = $(".carousel")
 
         .bind('slid', function() {
             var index = $(this).find(".active").index();
@@ -24,28 +26,37 @@
 
 .slider-pager a.pager-active { background: #2c8571; }
 </style>
-<p class="title-text" style="margin:2% 0 10px 10%;">Initial Tour Preview</p>
-<div class="span11" id="final_tour" style="margin-left: 8%; border-color: #0073BF;border-width: 30px;border-radius:20px; color: whitesmoke;">
+<%#*<p class="title-text" style="margin:2% 0 10px 10%;">Initial Tour Preview</p>%>
+<div class="span11" id="final_tour" style="margin-left: 8%; border-color: #C0C0C0;border-width: 15px;border-radius:15px; color: black;background: white;-webkit-border-radius: 30px;
+-moz-border-radius: 30px;
+border-radius: 30px;">
   <div style="height: 507px; width: 800px; margin: 10px 10px 10px 10px;">
-    <% @objs = [] %>
-    <% @tour.paintings.each do |img|%>
-      <% @objs << img %>
-      <% @objs.compact! %>
-    <% end %>
+    <% @objs = @tour.paintings.offset(1).first 4 %>
+    <%# @tour.paintings.each do |img|%>
+      <%# @objs << img %>
+      <%# @objs.compact! %>
+    <%# end %>
     <div id="myCarousel2" class="carousel slide carousel-fade img-border">
-
       <div class="carousel-inner" style="height: 507px;">
-        <% unless @objs.empty? %>
-          <div class="active item"><%= image_tag(@objs.first.image_url(:large))%></div>
-          <% if @objs.size >= 5 %>
-            <% for image in @objs.first 5 %>
-              <div class="item"><%= image_tag(image.image_url(:large)) %></div>
-            <% end %>
-          <% else %>
-            <% for image in @objs %>
-              <div class="item"><%= image_tag(image.image_url(:large)) %></div>
-            <% end %>
-          <% end %>
+        <%unless @tour.paintings.empty?%>
+        <div class="active item">
+          <%= image_tag(@tour.paintings.first.image_url(:large))%>
+          <div class="container1">
+          <div class="carousel-caption1">
+              <p><%= @tour.paintings.first.name %></p>  
+            </div>
+          </div>
+        </div>
+        <%@objs.each do |painting|%>
+        <div class="item">
+          <%= image_tag(painting.image_url(:large))%>
+          <div class="container1">
+          <div class="carousel-caption1">
+              <p><%=painting.name%></p>
+            </div>
+          </div>
+        </div>
+        <%end%>
           <% else %>
              <div class="active item"><%= image_tag('home_default_image.png')%> </div>
         <% end %>
@@ -55,44 +66,43 @@
        <%#*<a class="carousel-control right" href="#myCarousel2" data-slide="next">&rsaquo;</a>%>
     </div>
   </div>
-  <% unless @objs.empty? %>
-  <div class="slider-pager" style="margin: 5% 0 0 20%;">
-    <% if @objs.size >= 5 %>
-    <% for image in @objs.first 5 %>
-      <a href="#main-slider" class="btn btn-mini btn-primary"><%= image.name%></a>&nbsp;&nbsp;
-    <% end %>
-    <% else %>
-      <% for image in @objs %>
-      <a href="#main-slider" class="btn btn-mini btn-primary"><%= image.name%></a>&nbsp;&nbsp;
-    <% end %>
+  <%# unless @objs.empty? %>
+  <% unless @tour.paintings.empty? %>
+  <div class="slider-pager" style="margin: 6% 0 20px 20%; width: 50%;">
+    <a href="#main-slider" class="final-tour-btn" ><%= @tour.paintings.first.name%></a>&nbsp;&nbsp;
+    <% @objs.each do |painting| %>
+    <%# images = @objs.first 5 %>
+    <a href="#main-slider" class="final-tour-btn"><%= painting.name%></a>&nbsp;&nbsp;
     <% end %>
   </div>
   <% else %>
     <p style="color:red;margin: 4% 0 0 30%;"> No images uploaded for this tour.</p>
     <% if current_user %>
-      <p style="margin: 0% 0 0 30%;">Please, <%= link_to "edit", edit_tour_path(@tour) %> tour! </p>
+      <p style="margin: 0% 0 0 30%;">Please, <%= link_to "edit", edit_tour_path(@tour.id) %> tour! </p>
       <% end %>
   <% end %>
-  <div style="width: 240px;float: right; margin: -580px 0px 0 150px; font-size: 12px;">
-    <table border="1" style="margin-right:15px;">
-      <tr>
-        <th>Price($)</th>
-        <th>Bedrooms</th>
-        <th>Bathrooms</th>
-        <th>Sq.feets</th>
+  <div style="width: 240px;float: right; margin: -620px 0px 0 150px; font-size: 12px;">
+    <center>
+    <h4><%= "#{@tour.zip} #{@tour.city}" %></h4>
+    <table style="margin-right:0px;margin-top: 2px;">
+      <tr id="tbr">
+        <th id="tbh">Price</th>
+        <th id="tbh">Beds</th>
+        <th id="tbh">Baths</th>
+        <th id="tbh">Sq.Feet</th>
       </tr>
       <tr>
-        <td><%= @tour.price %> </td>
+        <td>$<%= @tour.price %> </td>
         <td><%= @tour.bed_rooms %> </td>
         <td><%= @tour.bath_rooms %> </td>
         <td><%= @tour.square_footage %> </td>
       </tr>
-    </table><br />
-  </div>
-  <div style = "position: relative; float:right;height: 150px; width: 23%; margin: -500px 0 0 0; overflow: auto;">
+    </table></center>
+    </div><br /><br />
+  <div style = "position: relative; float:right;height: 150px; width: 22%; margin: -550px 2px 0 0; overflow: auto;">
     <%= @tour.description.html_safe %>
   </div>
-  <div id ="user_img" style="float: right; height: 200px; width: 150px;margin: -320px 70px -40px 30px;">
+  <div id ="user_img" style="float: right; height: 200px; width: 150px;margin: -350px 70px -40px 30px;">
     <% if @tour.user.company %>
       <% if @tour.user.company.logo? %>
         <%= image_tag(@tour.user.company.logo_url(:medium)) %>
@@ -100,10 +110,13 @@
         <% else %>
         <%= image_tag('default_company_logo.png') %>
       <% end %>
-      <strong><%= @tour.user.company.name == "" ? "Company Name" : "#{@tour.user.company.name}" %></strong>
+      <address>
+        <strong><%= @tour.user.company.name == "" ? "Company Name" : "#{@tour.user.company.name}" %></strong><br />
+        <%= @tour.user.company.address %>.<br />
+      </address>
     <% else %>
       <% if @tour.user.image? %>
-      <%= image_tag(@tour.user.image_url(:medium)) %>
+      <%= image_tag(@tour.user.image_url(:thumb)) %>
       <% else %>
       <%= image_tag('user_default_image.gif') unless @tour.user.image? %>
       <% end %>
@@ -111,15 +124,62 @@
      <%= @tour.user_address %>
      <% end %>
   </div>
-  <div  style="float: right; height: 50px; width: 200px;margin: -40px -20px 0px 0px;">
+  <div  style="float: right; height: 50px; width: 200px;margin: -80px 0px 0px 0px;">
     <% if !current_user || current_user.id != @tour.user.id %>
       <%= render 'contact/contact_form' %>
         <%= link_to "Request for Info", "#contact", "data-toggle" => "modal", :class => 'btn btn-small btn-success'%>
     <% elsif %>
     <h5 style="margin:0 0 0 35px; color: green;">Your Tour</h5>
     <% end %>
-    <% if !@objs.empty? %>
+    <% if !@tour.paintings.empty? %>
       <h4><%= button_to "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click for Tour&nbsp;&nbsp;&nbsp;&nbsp;".html_safe, {:controller => 'tours', :action => 'slide_show', :id => @tour.slug }, :class=> 'brn btn-small btn-primary'%></h4>
     <% end %>
   </div>
 </div>
+<style>
+  .final-tour-btn {
+  padding: 3px;
+  border: 4px solid #C0C0C0;
+  background: #C0C0C0;
+  -webkit-box-shadow: 0px 1px 4px rgba(50, 50, 50, 1);
+-moz-box-shadow:    0px 1px 4px rgba(50, 50, 50, 1);
+box-shadow:         0px 1px 4px rgba(50, 50, 50, 1);
+  text-decoration: none;
+  color: blue;
+}
+a:hover,
+a:focus {
+  text-decoration: none;
+  color: black;
+}
+#tbh{
+  border-right: 1px black solid;
+  padding: 2px;
+  font-size: 16px;
+}
+#tbr{
+  border: 4px solid #C0C0C0;
+}
+.carousel-caption1 {
+      width: 100%;
+      background-color: transparent;
+      position: absolute;
+      z-index: 2;
+      max-width: 550px;
+      padding: 0 20px;
+      margin-top: 230px;
+    }
+.carousel-caption1 p{
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+.carousel .container1 {
+        text-align: center;
+  position: absolute;
+  top: 33%;
+  right: 40%;
+  bottom: 0;
+  left: 35%;
+  }
+</style>

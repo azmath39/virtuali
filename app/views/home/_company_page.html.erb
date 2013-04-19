@@ -1,6 +1,10 @@
+<%user=current_user%>
+<%content_for :title do%>
+Company Details
+<%end%>
 <div style="margin-left: 2%;">
-<p><span class="title-text">Company Details</span>&nbsp;<b><%= link_to "Edit".html_safe, {:controller => 'companies', :action => 'edit', :id => current_user.company.id}, :class=>"btn btn-link" %></b></p>
-<hr />
+<p><span class="title-text">Company Details</span>&nbsp;<b><%= link_to "Edit".html_safe, "#edit_company", :onclick => "edit_company(#{current_user.company.id})", :class=>"btn btn-link" %></b></p>
+
 <% if user.company %>
 <div style="float: right; height:200px;width: 120px;">
   <%if user.company.logo?%>
@@ -9,7 +13,7 @@
   <%= image_tag 'default_company_logo.png' %>
   <% end %>
   <center>
-    <strong><%= user.company.name %> </strong>
+    <strong><%= user.company.name %> </strong></p>
     <p><%#= "+1 "+user.company.phno %></p>
   </center>
 </div>
@@ -17,6 +21,7 @@
 <%= user.company.name %><br /><br />
 <b>Address</b><br />
 <%= user.company.address %>
+<%= user.company.phno %>
 <% end %><br /><br />
 <hr />
 </div>

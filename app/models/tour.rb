@@ -57,7 +57,7 @@ class Tour < ActiveRecord::Base
   attr_accessible :gmaps, :state, :description, :city, :zip, :subdivision, :price,:address1,:address2, :square_footage, :status,:user_id,:name,:bed_rooms, :bath_rooms,:product_id,:selected_package_id,:status
   #attr_accessor :pro
   acts_as_paranoid
-  validates :state, :city, :zip, :subdivision, :price, :address1, :square_footage,:product_id, :presence => true
+  validates :state, :city, :zip, :price, :address1, :square_footage,:product_id, :presence => true
   validates :price, :numericality => {:greater_than_or_equal_to => 0}
   after_initialize :set_status
 
@@ -65,6 +65,7 @@ class Tour < ActiveRecord::Base
   acts_as_gmappable
   belongs_to :user
   has_many :paintings, :dependent => :destroy
+  has_many :messages
   belongs_to :product
   belongs_to :selected_package
   after_create :set_name
@@ -78,14 +79,19 @@ class Tour < ActiveRecord::Base
  delegate :name, :address, :to => :user, :prefix => true
  delegate :name, :to => :product, :prefix => true
  scope :active, where('status = ?' , 1)
- scope :inactive, where('status = ?', 2)
+ scope :inactive, where(:status => [2,4])
  scope :sold, where('status = ?', 3)
 
 
  def self.tours_list_pagination(page)
-   order('created_at DESC').paginate(:page => page, :per_page => 5)
+   order('created_at DESC').paginate(:page => page, :per_page => 3)
  end
- 
+ def add_line_1
+   "#{address1} #{address2}"
+ end
+ def add_line_2
+   "#{city} #{state} #{zip}"
+ end
  def set_name
     self.name="#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
     self.save

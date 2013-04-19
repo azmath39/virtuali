@@ -1,40 +1,53 @@
 
 <div class="span8">
+
+  <%#*<h1 class="title-text" style="margin-left:5%; ">List of Tours</h1>%>
    <%= render 'shared/welcome_message' if @tours.empty? %>
   
 <% @tours.each do |tour| %>
-<div class="span7 well" id = 'img_bg' style="margin: 0px 30px 1px 90px;">
-  <div>
-    <%#= t.paintings %>
+<div class="span7 well" id = 'img_bg'>
+  
+  <div class="span2" style="width:150px;">
     <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
     <%= link_to(image_tag('home_default_image_thumb.jpg'), tour) if tour.paintings.empty?  %>
-  <div style ="float: right; margin: -6px 200px 0 0; height:100px; width: 350px;">
-    <% title = "#{tour.zip} #{tour.state} #{tour.city}" %>
-    <strong><%= link_to title, tour %></strong><br />
-    <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
-    <strong>Price: </strong> <%= tour.price %><br />
-    <strong>Category: </strong><%= tour.product.name %><br />
-    <strong>Description:</strong>
-    <span><%=  strip_tags(truncate(tour.description, :length => 30))%></span>
-      <% if tour.description.length > 30 %>
-    <span><%=link_to "[More]",tour %></span>
-      <%end%>
-
-    <%#= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%><br />
-    
-    <strong>Status:</strong> <%=tour.tour_status %>
-    
-    
   </div>
-
-    <div style="float:right;margin: -15px 0px 0px 10px;">
-      <%#*<div style="float:right;margin: 10px 20px;">%>
-      <%=link_to "view", tour_path(tour.id)%>&nbsp;|
-      <%=link_to "edit", edit_tour_path(tour.id)%>&nbsp;|
-      <%=link_to "download", :controller => 'tours', :action => 'download_zip', :id => tour.id %>&nbsp;|
+  <div class="span2" style="width:174px;">
+    <%#*<div style ="float: right; margin: -6px 200px 0 0; height:100px; width: auto;">%>
+    <%=link_to "view", tour_path(tour.id)%>&nbsp;|
+      <%=link_to "edit", edit_tour_path(tour.id)%>
+      <%#=link_to "edit", "#edit_tour", :onclick => "edit_tour(#{tour.id})"%>&nbsp;|
+      <%=link_to "download", :controller => 'tours', :action => 'download_zip', :id => tour.id,:confirm => "Are you sure?" %>&nbsp;|
       <%=link_to "delete", tour_path(tour.id),:method=>:delete, :confirm => "Are you sure?"%>
-   </div>
+    <br />
+    <strong>Price: </strong> <%= number_to_currency(tour.price) %><br />
+    <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
+    <strong>Sq foot: </strong> <%= tour.square_footage %><br />
+    <%#*<strong>Category: </strong><%= tour.product.name %<br />%>
+    <%#*<strong>Description:</strong>%>
+    <%#*<span><%=  strip_tags(truncate(tour.description, :length => 30))%</span>%>
+      <%# if tour.description.length > 30 %>
+    <%#*<span><%=link_to "[More]",tour %</span>%>
+      <%#end%>
+
+    <%#= raw(truncate tour.description, :length => -115, :omission => "... #{link_to('[more]', tour)}")%>
+    
+    <strong>Status:</strong> <%=tour.tour_status %></strong><br />
+     
+
+    
+    
   </div>
+  <div class="span2"style="width:185px;">
+<%=tour.add_line_1%><br />
+    <%=tour.add_line_2%><br />
+    <strong>Category: </strong><%= tour.product.name %><br />
+    <strong>Date Created:</strong> <%=tour.created_at.strftime("%b-%d-%Y") %>
+      
+   </div>
 </div>
+
 <% end %>
+  <div class ="span4" style="margin: 0 0px 0 300px; float: left;">
+  <%= will_paginate @tours, :renderer => BootstrapPagination::Rails %>
+</div>
 </div>

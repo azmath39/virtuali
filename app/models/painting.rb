@@ -13,21 +13,40 @@
 
 class Painting < ActiveRecord::Base
 
-  attr_accessible :image, :name, :pro,:remote_image_url
+  attr_accessible :image, :name, :pro,:remote_image_url,:priority
+
 #  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   mount_uploader :image, ImageUploader
+ # before_create :add_priority
+#  def add_priority
+#
+#    self.priority=$serial_no
+#    $serial_no+=1
+#  end
 
 
   
   belongs_to :tour
   belongs_to :user
   #belongs_to :paintable, :polymorphic => true
-  mount_uploader :image, ImageUploader
-  before_create :default_name
+  #mount_uploader :image, ImageUploader
+  #before_create :default_name
+ validate :image_dimensions
 
- def default_name
-   self.name ||= "Living Room"
- end
+  private
+
+    def image_dimensions
+      if FastImage.size("#{Rails.root}/public#{image}")[0]< 700 or FastImage.size("#{Rails.root}/public#{image}")[1]<500
+        
+        self.errors.add(:image, "Picture size Should Be more than 700X500")
+      end
+     
+
+    end
+
+# def default_name
+#   self.name ||= "Living Room"
+# end
 
 
 

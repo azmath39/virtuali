@@ -7,6 +7,7 @@
     <div class="span3 first-grid" style="width:21%;">
   <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
       <p><center><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package",:onclick=>"enable_btn_package()"%></center></p>
+    <br />
       <p id="price">
 
         <sup id="dollar-symb">$</sup><%=just_price(pkg)%>
@@ -47,7 +48,7 @@
       <%#*</div>%>
     <%#*</div>%>
   <%#*</div>%>
-     <div class="pricing_grid row" style="margin:auto;width:90%;">
+     <div class="pricing_grid row" style="margin:auto;width:100%;">
               <% @combo_packages.each do |pkg| %>
                 <div class="span3 first-grid" >
                   <p><center><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package"%></center></p>

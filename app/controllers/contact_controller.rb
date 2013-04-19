@@ -5,14 +5,16 @@ class ContactController < ApplicationController
 
   def create
     @message = Message.new(params[:message])
-    $receiver_email = Tour.find_by_id(params[:tour_id]).user.email
-    if @message.valid?
+    tour=Tour.find_by_id(params[:tour_id])
+    $receiver_email = tour.user.email
+    if @message.save
+      tour.messages << @message
       NotificationsMailer.new_message(@message).deliver
       flash[:notice] = "Message sent successfully!"
       redirect_to :back
     else
       flash.now.alert = "Please fill all fields."
-      render :new
+      redirect_to :back
     end
   end
 end

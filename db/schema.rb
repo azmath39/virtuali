@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130414084502) do
-
+ActiveRecord::Schema.define(:version => 20130418105051) do
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
     t.string   "resource_type", :null => false
@@ -27,6 +26,14 @@ ActiveRecord::Schema.define(:version => 20130414084502) do
   add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+
+  create_table "activities", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "adjustable_amount"
+    t.integer  "activity_type"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "admin_users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -82,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20130414084502) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "phno"
   end
 
   create_table "coupon_transactions", :force => true do |t|
@@ -139,6 +147,16 @@ ActiveRecord::Schema.define(:version => 20130414084502) do
   add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
 
+  create_table "messages", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "subject"
+    t.text     "body"
+    t.integer  "tour_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "packages", :force => true do |t|
     t.string   "name"
     t.integer  "product_id"
@@ -161,6 +179,7 @@ ActiveRecord::Schema.define(:version => 20130414084502) do
     t.datetime "updated_at", :null => false
     t.integer  "tour_id"
     t.integer  "user_id"
+    t.integer  "priority"
   end
 
   create_table "payments", :force => true do |t|

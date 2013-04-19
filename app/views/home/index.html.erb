@@ -1,5 +1,52 @@
 <% unless current_user %>
   <%= render 'front_page'%>
 <% else %>
-  <%=render 'account_mangement'%>
+<p><span class="title-text" style="position:absolute;">Dashboard </span></p>
+  <%#=render 'account_mangement'%>
+<div style="float:left; margin-bottom:-5%;margin-left:548px;margin-top: 0%; ">  <%=select_tag "product_id", options_from_collection_for_select(current_user.subscribe_product,"id","name"),:onchange=>"display_tours()",:prompt=>"All" if current_user.multiple_products?%>
+</div>
+<%#*<div style="float:right;margin-right: 9%; margin-bottom: 3%;">%>
+ <%#= link_to "Create New Tour", '/paintings/new', :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  if verify_tours_allowed%>
+<%#*</div>%>
+<%=render 'shared/package_change_instruction' if current_user.any_instructions? or current_user.check_tours_type?%>
+<div id="user_tours" style="float:left;margin-top: 6%;">
+<%=render 'search_form' %>
+<%=render '/tours/list_of_tours'%>
+</div>
+<%content_for :side_bar do %>
+<div id="outer_side_bar">
+  
+<div class ="well"id="side_bar"  >
+ 
+     <table class="table-striped">
+
+       <h2>Tours</h2>
+       <tr><th>Active:</th><td><%=current_user.tours.active.size%></td></tr>
+ <tr><th> Sold :</th><td><%=current_user.tours.sold.size%></td></tr>
+ <tr><th> Inactive:</th><td><%=current_user.tours.inactive.size%></td></tr>
+  <tr><th>Total : </th><td><%=current_user.tours.size%></td></tr>
+     </table>
+
+</div>
+</div>
+<%end%>
+
+
 <% end %>
+<style>
+  #side_bar{
+  
+    width: 11%;
+    height: 155px;
+    float:left;
+    margin-top: 6.67%;
+      margin-left:84.5%;
+    background: url('/assets/bg2.jpg') repeat;
+    position: fixed;
+
+
+}
+th{
+  text-align:left;
+}
+</style>

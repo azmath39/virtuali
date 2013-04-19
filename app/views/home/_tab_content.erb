@@ -1,13 +1,13 @@
 <div class="tab-content" style="margin-left: 12%; width: 65%;height:600px;padding: 20px;">
-  <div class="tab-pane active" id="div_dashboard"><%=render 'dashboard'%></div>
+  <div class="tab-pane active" id="div_dashboard"><%=render '/home/dashboard'%></div>
   <div class="tab-pane" id="div_status">
    <%=render 'tour_status'%>
   </div>
-  <div class="tab-pane" id="div_billing"><%=render 'billing_page'%></div>
+  <div class="tab-pane" id="div_billing"><%=render '/home/billing_page'%></div>
   <% if current_user.company  %>
-    <div class="tab-pane" id="div_company"><%=render 'company_page', :user => current_user%></div>
+    <div class="tab-pane" id="div_company"><%=render '/home/company_page', :user => current_user%></div>
   <% end %>
-  <div class="tab-pane" id="div_profile"><%=render 'user_profile'%></div>
+  <div class="tab-pane" id="div_profile"><%=render '/home/user_profile'%></div>
   <div class="tab-pane" id="div_manage"><%#=render "side_buttons"%></div>
   <div class="tab-pane" id="div_upgrade"><%#=render "upgrade_package"%></div>
 </div>
