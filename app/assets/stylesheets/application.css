@@ -78,3 +78,15 @@ td{
 .error{
     color:red;
 }
+#pages_div1{
+    font-size: 15px;
+    line-height: 30px;
+    margin: 2% 5% 2% -15%;
+    position: absolute;
+    text-align: justify;
+}
+ #faq{
+                    position: absolute;
+                    width:95%;
+                    margin-left: -16%;
+}
