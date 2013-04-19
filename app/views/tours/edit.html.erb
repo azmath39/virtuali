@@ -144,10 +144,27 @@
 
           $("#tour_bed_rooms").val(bed);
           $("#tour_bath_rooms").val(bath);
-          if (bath > 1){
+          /*if (bath > 1){
             alert("Caution! You have choosed Bath Room more than one.")
-          }
+          }*/
     });
+
+    var state=$("#tour_state").val();
+    if(state != ""){
+    $.ajax({
+      type: 'GET',
+      url: "/home/state_cities",
+
+      data: {
+        'state' :  $("#tour_state").val()
+
+      }
+
+    }).done(function(text) {
+
+      $('#tour_city').empty().append(text);
+    });
+    }
   });
   function state_city()
   {
