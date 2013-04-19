@@ -35,7 +35,7 @@
   <div class="name">
     <%#= painting.name %>
     <%# @names= ["Living Rm", "Kitchen", "Den", "Great Rm", "Dinning Rm", "Bath Rm", "Master Batch", "Half Batch", "Master Bed Rm", "Bed Rm1", "Bed Rm2", "Bed Rm3"] %>
-<%@names=["Living Room", "Kitchen", "Den", "Great Room", "Dinning Room","Bath Room", "Bed Room", "Front" , "Rear", "Foyer", "Bonus Rm","Others"]%>
+<%@names=["Bath Room", "Bed Room", "Bonus Rm", "Den", "Dinning Room", "Foyer", "Front", "Great Room", "Kitchen", "Living Room", "Rear", "Others"]%>
 <%= select_tag "Name", options_for_select(@names), :id => "select#{painting.id}",:onchange=>"check_others(#{painting.id})" ,:prompt=>"#{painting.name ||"Please Select Name."}",:style=>"width: 100%"%>
   <div id="other-name<%=painting.id%>">
 

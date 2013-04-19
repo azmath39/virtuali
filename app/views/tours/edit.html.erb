@@ -49,7 +49,7 @@
       <div class ="control-group">
         <%= f.label "city*", :html => {:class => 'control-label'} %>
   <%#= f.text_field :city %>
-        <%=f.select :city, {},{:prompt=>"Select City"},:class=>"required"%>
+        <%=f.select :city, @cities.collect {|s| [s.name,s.name]},{:prompt=>"Select City"},:class=>"required"%>
 
       </div>
       <div class ="control-group">
@@ -90,6 +90,7 @@
     <div style="float:left;margin-top: 10px;clear: both;">
       <div>
         <%= f.submit :class => 'btn btn-large btn-primary' %>
+        <span><%= link_to "Cancel", root_url , :tyle=> 'float:right;margin-right:120px;'%></span>
       </div>
     <% end %>
   </div>
@@ -154,19 +155,7 @@
   
     
     
-    $.ajax({
-      type: 'GET',
-      url: "/home/state_cities",
-
-      data: {
-        'state' :  $("#tour_state").val()
-
-      }
-
-    }).done(function(text) {
-
-      $('#tour_city').empty().append(text);
-    });
+   
     
   });
   function state_city()

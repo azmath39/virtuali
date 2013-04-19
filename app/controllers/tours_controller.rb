@@ -42,16 +42,18 @@ class ToursController < ApplicationController
     end
   end
   def edit
-    @tour = Tour.find(params[:id].to_i)
+    @tour = current_user.tours.find(params[:id].to_i)
     @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id).order('created_at ASC')
     @count=@paintings.count unless @paintings.nil?
     @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil)
     @paintings.flatten!
     @painting = Painting.new
     @products = current_user.subscribe_product
+    state=State.find_by_name(@tour.state)
+    @cities= City.find(:all,:conditions=>{:code=>state.code})
   end
   def update
-    @tour = Tour.find(params[:tour][:id])
+    @tour = current_user.tours.find(params[:tour][:id])
     if @tour.update_attributes(params[:tour])
       @paintings=current_user.paintings.where(:tour_id=>nil)
       @paintings.each do |pic|
@@ -66,7 +68,7 @@ class ToursController < ApplicationController
     end
   end
   def destroy
-    @tour = Tour.find(params[:id])
+    @tour = current_user.tour.find(params[:id])
     if @tour.destroy
       flash[:notice] = "Tour was deleted."
       redirect_to :action => 'index',:controller=>"home"

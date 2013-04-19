@@ -261,7 +261,7 @@ class User < ActiveRecord::Base
     self.tours.count.to_i > 1 and self.selected_package.package.no_of_tours.to_i == 1 
   end
   def any_instructions?
-    self.tours.any?{|tour| tour.status!=1 and tour.status!=3}
+    self.tours.any?{|tour| tour.status==2}
   end
   def check_tours_type?
     pkg= self.selected_package.package

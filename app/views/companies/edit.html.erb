@@ -26,9 +26,12 @@
   <a class="btn btn-primary" onclick="$('input[id=company_logo]').click();">Browse</a>
 </div><br />
 
+<div style="margin-top:6%;">
 <%= f.submit "Update", :class=>'btn btn-large btn-primary' %>
+<span><%= link_to "Cancel", root_url , :tyle=> 'float:right;margin-right:120px;'%></span>
+</div>
 <% end %>
-<div style="float:right;height:60px; width:60px; float: right; margin: -14% 65% 0 0;">
+<div style="float:right;height:60px; width:60px; float: right; margin: -21% 61% 0 0;">
   <% if current_user.company.logo? %>
     <%= image_tag current_user.company.logo_url(:thumb) %>
   <center><%= link_to "Remove", {:controller => 'companies', :action => 'remove_logo'}, :confirm => "Are you sure?", :method => :delete %></center>
@@ -36,6 +39,7 @@
     <%= image_tag 'default_company_logo.png' %>
   <% end %>
 </div>
+
 <br /><br />
 </div>
 

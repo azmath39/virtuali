@@ -2,7 +2,10 @@
 <div class="span8">
 
   <%#*<h1 class="title-text" style="margin-left:5%; ">List of Tours</h1>%>
-   <%= render 'shared/welcome_message' if @tours.empty? %>
+
+  <% if @tours.empty? %>
+  <p style="color:red;margin-left:180px;margin-top: 50px;">No Tours found, Please try again!</p>
+<% end %>
   
 <% @tours.each do |tour| %>
 <div class="span7 well" id = 'img_bg'>
@@ -48,6 +51,6 @@
 
 <% end %>
   <div class ="span4" style="margin: 0 0px 0 300px; float: left;">
-  <%= will_paginate @tours, :renderer => BootstrapPagination::Rails %>
+  <%#= will_paginate @tours, :renderer => BootstrapPagination::Rails %>
 </div>
 </div>
