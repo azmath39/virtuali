@@ -105,6 +105,8 @@
 
 <script>
   $(document).ready(function(){
+    
+
     $("#edit_tour").validate();
     $('#submit-button').click(function(e) {
   e.preventDefault();
@@ -148,9 +150,10 @@
             alert("Caution! You have choosed Bath Room more than one.")
           }*/
     });
-
-    var state=$("#tour_state").val();
-    if(state != ""){
+    
+  
+    
+    
     $.ajax({
       type: 'GET',
       url: "/home/state_cities",
@@ -164,7 +167,7 @@
 
       $('#tour_city').empty().append(text);
     });
-    }
+    
   });
   function state_city()
   {
