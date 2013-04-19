@@ -49,6 +49,8 @@ class ToursController < ApplicationController
     @paintings.flatten!
     @painting = Painting.new
     @products = current_user.subscribe_product
+    state=State.find_by_name(@tour.state)
+    @cities= City.find(:all,:conditions=>{:code=>state.code})
   end
   def update
     @tour = Tour.find(params[:tour][:id])
