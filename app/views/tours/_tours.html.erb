@@ -13,7 +13,7 @@
       <%#*Find Tours:    <%= select_tag :product, options_from_collection_for_select(@products, "id", "name"), :prompt => "All", :onchange => 'find_tours()' %%>
       <%#*<span><%=link_to "Sold Tours", '#', :value => "sold_tours", :id => "sold_tours",  :class => 'btn btn-small btn-primary'%</span>%>
   <%#*</div>%>
-  <div id="all_tour_render">
+  <div id="all_tour_render" style="margin-top:2%;">
     <%= render '/tours/all_tours' %>
 
   </div>

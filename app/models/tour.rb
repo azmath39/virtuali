@@ -79,7 +79,7 @@ class Tour < ActiveRecord::Base
  delegate :name, :address, :to => :user, :prefix => true
  delegate :name, :to => :product, :prefix => true
  scope :active, where('status = ?' , 1)
- scope :inactive, where('status = ?', 2)
+ scope :inactive, where(:status => [2,4])
  scope :sold, where('status = ?', 3)
 
 
