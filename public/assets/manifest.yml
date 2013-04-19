@@ -43,6 +43,8 @@ default_user_company_logo.gif: default_user_company_logo.gif
 default_user_company_logo/index.gif: default_user_company_logo.gif
 down_arrow.gif: down_arrow.gif
 down_arrow/index.gif: down_arrow.gif
+favicon.ico: favicon.ico
+favicon/index.ico: favicon.ico
 fdback.png: fdback.png
 fdback/index.png: fdback.png
 feedback.jpg: feedback.jpg
