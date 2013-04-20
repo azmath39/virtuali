@@ -68,7 +68,7 @@ class ToursController < ApplicationController
     end
   end
   def destroy
-    @tour = current_user.tour.find(params[:id])
+    @tour = current_user.tours.find(params[:id])
     if @tour.destroy
       flash[:notice] = "Tour was deleted."
       redirect_to :action => 'index',:controller=>"home"
