@@ -1,5 +1,5 @@
 
-<div class="span8">
+<div class="span8" style="margin-left:0px;">
 
   <%#*<h1 class="title-text" style="margin-left:5%; ">List of Tours</h1>%>
 
@@ -8,11 +8,15 @@
 <% end %>
   
 <% @tours.each do |tour| %>
-<div class="span7 well" id = 'img_bg'>
+<div class="span7 well" id = 'img_bg' style="margin-left:0px;">
   
   <div class="span2" style="width:150px;">
-    <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
-    <%= link_to(image_tag('home_default_image_thumb.jpg'), tour) if tour.paintings.empty?  %>
+
+   <% unless tour.paintings.where(:name=>"Front").empty?%>
+    <%= link_to(image_tag(tour.paintings.where(:name=>"Front").first.image_url(:small)), tour)   %>
+    <%else%>
+    <%= link_to(image_tag('home_default_image_thumb.jpg'), tour)%>
+    <%end%>
   </div>
   <div class="span2" style="width:174px;">
     <%#*<div style ="float: right; margin: -6px 200px 0 0; height:100px; width: auto;">%>
