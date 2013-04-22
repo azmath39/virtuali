@@ -86,16 +86,23 @@ class PaintingsController < ApplicationController
   def update_priority
 
     target= current_user.paintings.find(params[:id])
-
+   target_priority=target.priority
     if params.include?"tour_id"
      other= current_user.paintings.where(:priority=>params[:value],:tour_id=>[nil,params[:tour_id]]).last
     else
     other= current_user.paintings.where(:priority=>params[:value],:tour_id=>nil).last
     end
-    other.update_attributes(:priority=>target.priority) unless other.nil?
-    target.update_attributes(:priority=>params[:value])
 
-    render :nothing=>true
+
+    target.update_attributes(:priority=>params[:value])
+    unless other.nil?
+    other.update_attributes(:priority=>target_priority)
+    render :text=> "#{other.id},#{target_priority}"
+    else
+      render :nothing=>true
+    end
+
+
 
   end
   def set_name
