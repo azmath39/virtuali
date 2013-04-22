@@ -152,12 +152,11 @@
           }*/
     });
     
-  
-    
-    
-   
-    
   });
+
+
+
+
   function state_city()
   {
 
@@ -242,6 +241,12 @@
          value: value,
          tour_id : $("#tour_id").val()
       }
+
+     }).done(function(text){
+      text = text.split(',');
+    var id=parseInt(text[0]);
+    var value=parseInt(text[1]);
+      $('.priority_input_'+id).val(value);
 
     });
   }

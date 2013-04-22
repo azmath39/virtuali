@@ -237,6 +237,12 @@ $('#submit-button').click(function(e) {
          value: value
       }
 
+    }).done(function(text){
+      text = text.split(',');
+    var id=parseInt(text[0]);
+    var value=parseInt(text[1]);
+      $('.priority_input_'+id).val(value);
+
     });
   }
 
