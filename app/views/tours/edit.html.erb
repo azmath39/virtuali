@@ -1,7 +1,7 @@
 <div class="span12" style="width:85%;">
   <p class="title-text">Edit a Tour</p>
   <%= form_for Painting.new do |f| %>
-    <%$serial_no=0%>
+    <%$serial_no= @priority||1%>
     <%=hidden_field_tag :count,@count%>
   <%#  =hidden_field_tag :tour_id,@tour%>
     <div class="fileupload btn btn-primary">
@@ -152,12 +152,11 @@
           }*/
     });
     
-  
-    
-    
-   
-    
   });
+
+
+
+
   function state_city()
   {
 
@@ -229,6 +228,26 @@
           if (bath > 1){
             alert("Caution! You have choosed Bath Room more than one.")
           };
+    });
+  }
+  function change_priority(id)
+  {
+    var value = $('.priority_input_'+id).val();
+    $.ajax({
+      type:"GET",
+      url:"/paintings/update_priority",
+      data:{
+         id: id,
+         value: value,
+         tour_id : $("#tour_id").val()
+      }
+
+     }).done(function(text){
+      text = text.split(',');
+    var id=parseInt(text[0]);
+    var value=parseInt(text[1]);
+      $('.priority_input_'+id).val(value);
+
     });
   }
   function remove_image(id){

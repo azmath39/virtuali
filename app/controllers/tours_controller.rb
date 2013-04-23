@@ -43,14 +43,16 @@ class ToursController < ApplicationController
   end
   def edit
     @tour = current_user.tours.find(params[:id].to_i)
-    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id).order('created_at ASC')
+    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id).order('priority ASC')
     @count=@paintings.count unless @paintings.nil?
-    @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil)
+    #@paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil)
+    Painting.destroy_all(:user_id=>current_user.id,:tour_id=>nil)
     @paintings.flatten!
     @painting = Painting.new
     @products = current_user.subscribe_product
     state=State.find_by_name(@tour.state)
     @cities= City.find(:all,:conditions=>{:code=>state.code})
+    @priority=get_priority
   end
   def update
     @tour = current_user.tours.find(params[:tour][:id])
@@ -201,5 +203,12 @@ class ToursController < ApplicationController
     end
 
   end
+  private
+  def get_priority
+   priority=@tour.paintings.maximum(:priority)
+   priority += 1 unless priority.nil?
+  end
+
+
 end
  

@@ -5,7 +5,7 @@
   <p class="title-text">Create a Tour</p>
   <%= render 'shared/error_messages', :target => @tour  %>
 <%= form_for Painting.new,{:remote=>true} do |f| %>
-  <%$serial_no=0%>
+  <%$serial_no= @priority||1%>
 <div class="fileupload btn btn-primary">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
@@ -237,6 +237,12 @@ $('#submit-button').click(function(e) {
          value: value
       }
 
+    }).done(function(text){
+      text = text.split(',');
+    var id=parseInt(text[0]);
+    var value=parseInt(text[1]);
+      $('.priority_input_'+id).val(value);
+
     });
   }
 
@@ -320,14 +326,3 @@ $('#'+id).closest('.painting').hide();
 
 
 </script>
-<style>
-  #priority{
-    border: 3px solid #0088CC;
-    border-radius: 19px;
-    float: right;
-    
-    height: 22px;
-    padding: 5px;
-    width: 25px;
-}
-</style>

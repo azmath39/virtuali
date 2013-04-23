@@ -14,11 +14,12 @@ class PaintingsController < ApplicationController
   
   def new
     #render :layout => false
-    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil).order('created_at ASC')
+    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil).order('priority ASC')
+
     @painting = Painting.new
     @tour = Tour.new
     @products = current_user.subscribe_product
-   # @priority=get_priority
+    @priority=get_priority
     
     #    respond_to do |format|
     #    format.js {render :layout=>false}
@@ -83,9 +84,25 @@ class PaintingsController < ApplicationController
     end
   end
   def update_priority
-    painting= Painting.find(params[:id])
-    painting.update_attributes(:priority=>params[:value])
-    render :nothing=>true
+
+    target= current_user.paintings.find(params[:id])
+   target_priority=target.priority
+    if params.include?"tour_id"
+     other= current_user.paintings.where(:priority=>params[:value],:tour_id=>[nil,params[:tour_id]]).last
+    else
+    other= current_user.paintings.where(:priority=>params[:value],:tour_id=>nil).last
+    end
+
+
+    target.update_attributes(:priority=>params[:value])
+    unless other.nil?
+    other.update_attributes(:priority=>target_priority)
+    render :text=> "#{other.id},#{target_priority}"
+    else
+      render :nothing=>true
+    end
+
+
 
   end
   def set_name
@@ -143,7 +160,8 @@ class PaintingsController < ApplicationController
   end
   private
   def get_priority
-   
+   priority=current_user.paintings.where(:tour_id=>nil).maximum(:priority)
+   priority += 1 unless priority.nil?
   end
 
   #  def set_default_response_format
