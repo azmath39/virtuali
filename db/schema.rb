@@ -188,7 +188,7 @@ ActiveRecord::Schema.define(:version => 20130418105051) do
     t.string   "reference"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.string   "payment_type"
+    t.integer  "payment_type"
     t.integer  "user_id"
     t.string   "email"
     t.string   "name"

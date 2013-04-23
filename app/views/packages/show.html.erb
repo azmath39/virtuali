@@ -1,19 +1,14 @@
-
-  <span id="package_error" style="color:red; margin-left: 5%;"></span>
-
+<span id="package_error" style="color:red; margin-left: 5%;"></span>
 <div class="pricing_grid row" style="margin:4% 0 0 3%;">
   <% @regular_packages.each do |pkg| %>
-
     <div class="span3 first-grid" style="width:21%;">
   <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
       <p><center><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package",:onclick=>"enable_btn_package()"%></center></p>
     <br />
       <p id="price">
-
         <sup id="dollar-symb">$</sup><%=just_price(pkg)%>
       </p>
       <hr />
-
       <center><h2><%=pkg.name%></h2>
         <ul class="unstyled">
           <p><li><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></li></p>
@@ -30,7 +25,6 @@
   <%#*<p><b>Subscription Period</b>:&nbsp;<%=radio_button_tag "user[package][type_of_payment]",1% &nbsp;Monthly&nbsp;<%=radio_button_tag "user[package][type_of_payment]",2%&nbsp;Yearly</p>%>
   <%#end%>
     </div>
-
   <% end %>
   <%unless @combo_packages.empty?%>
     <%#*<div class="container-fluid">%>
