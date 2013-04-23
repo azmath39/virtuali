@@ -25,7 +25,7 @@
       <div class="navbar-text pull-left" >
       <ul class="nav" >
       <% if current_user %>
-        <li style="margin: -11px 0 0 0;"><a href="#"><i class="icon-user"></i><%= current_user.name%> </a></li>
+        <li><a href="#"><i class="icon-user"></i><%= current_user.name%> </a></li>
         <li class="dropdown" id="menu1">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
            Account
@@ -73,7 +73,7 @@
         </a>
   <%#= link_to image_tag("Virtual I Logo 300dpi.png", :size => "100x100", :alt => "Virtuali"), root_path%>
         <div class="nav-collapse" style="margin-top:0%; ">
-          <ul class="nav" style="height:140px; margin-left: 11%;margin-top:0%;width:55%">
+          <ul class="nav" style="height:70px; margin-left: 11%;margin-top:0%;width:55%">
 
             <li class="tab active"><%= link_to '<center><i class="icon-2x icon-desktop"></i></center> Dashboard'.html_safe, '/'%> </li>
 
@@ -89,7 +89,7 @@
           </ul>
 
         </div>
-         <div style="float:left;margin-left: 2%; margin-top:6%;">
+         <div style="float:left;margin-left: 2%; margin-top:2.6%;">
  <%= link_to "Create New Tour", '/paintings/new', :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  if verify_tours_allowed%>
 </div>
       
@@ -305,5 +305,9 @@
     width:16%;
     text-align:center;
   }
+  li [class^="icon-"]{
+    line-height: 0.9em ;
+
+}
 </style>
 

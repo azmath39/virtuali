@@ -16,7 +16,7 @@
   <body>
     <%= render 'layouts/navbar' %>
     <%if current_user%>
-      <div id="wrap" style="margin-top: 23%;">
+      <div id="wrap" style="margin-top: 16%;">
       <%else%>
         <div id="wrap">
         <%end%>
@@ -55,10 +55,13 @@
 
             margin-left:20%;
             min-height: 700px;
-            width:63%;
+            width:64%;
             overflow: auto;
             margin-top: 2%;
             
           }
+          .nav [class^="icon-"], .nav [class*=" icon-"] {
+            line-height: 0.9em;
+}
           
         </style>

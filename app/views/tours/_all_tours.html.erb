@@ -32,12 +32,15 @@
 <div class="span7 well" id = 'img_bg' style="margin: 0px 30px 1px 0px;">
 
   <div class="span2" style="width:150px;">
-    <%= link_to(image_tag(tour.paintings.compact.first.image_url(:small)), tour) unless tour.paintings.empty?  %>
-    <%= link_to(image_tag('home_default_image_thumb.jpg'), tour) if tour.paintings.empty?  %>
+    <% unless tour.paintings.where(:name=>"Front").empty?%>
+    <%= link_to(image_tag(tour.paintings.where(:name=>"Front").first.image_url(:small)), tour)   %>
+    <%else%>
+    <%= link_to(image_tag('home_default_image_thumb.jpg'), tour)%>
+    <%end%>
   </div>
   <div class="span2">
     <%#*<div style ="float: right; margin: -6px 200px 0 0; height:100px; width: auto;">%>
-    <br/>
+   
     <strong>Price: </strong> <%= number_to_currency(tour.price) %><br />
     <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
     <strong>Sq foot: </strong> <%= tour.square_footage %><br />
@@ -57,7 +60,7 @@
 
   </div>
   <div class="span2"style="width:185px;">
-    <br/>
+    
 <%=tour.add_line_1%><br />
     <%=tour.add_line_2%><br />
     <strong>Category: </strong><%= tour.product.name %><br />

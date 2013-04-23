@@ -3,7 +3,7 @@
 <% else %>
 <p><span class="title-text" style="position:absolute;">Dashboard </span></p>
   <%#=render 'account_mangement'%>
-<div style="float:left; margin-bottom:-5%;margin-left:548px;margin-top: 0%; ">  <%=select_tag "product_id", options_from_collection_for_select(current_user.subscribe_product,"id","name"),:onchange=>"display_tours()",:prompt=>"All" if current_user.multiple_products?%>
+<div style="float:left; margin-bottom:-5%;margin-left:490px;margin-top: 0%; ">  <%=select_tag "product_id", options_from_collection_for_select(current_user.subscribe_product,"id","name"),:onchange=>"display_tours()",:prompt=>"All" if current_user.multiple_products?%>
 </div>
 <%#*<div style="float:right;margin-right: 9%; margin-bottom: 3%;">%>
  <%#= link_to "Create New Tour", '/paintings/new', :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  if verify_tours_allowed%>
