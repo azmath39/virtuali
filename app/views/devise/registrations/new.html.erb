@@ -8,7 +8,8 @@
 
   });
 </script>
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :id => 'payment-form', :multipart => true }) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:multipart => true }) do |f| %>
+<%#= form_for(resource, :as => resource_name, :url => '/payments/new_account', :html => {:multipart => true }) do |f| %>
   <%= devise_error_messages! %>
 
   <div id="signupCarousel" class="carousel slide" >
@@ -175,19 +176,7 @@
               <i style="font-size: 12px;">( Leave blank if no coupon is available now. )</i><br />
               <div id='discounted_total'></div>
             </div><br />
-              <div class="field">
-                <%= label_tag :card_number, "Credit Card Number <span>*<span>".html_safe %>
-                <%= text_field_tag "card-number", nil, name: nil %>
               </div>
-              <div class="field">
-                <%= label_tag :card_code, "Security Code on Card (CVV) <span>*<span>".html_safe %>
-                <%= password_field_tag "card-cvc", nil, name: nil, :style => "width:50px;" %>
-              </div>
-              <div>
-                <%= label_tag :card_month, "Card Expiration <span>*<span>".html_safe %>
-                <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month",:style=> 'width:13%;'} %>
-                <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year",:style=> 'width:13%;'} %>
-              </div></div>
 
             <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
             <div id="next_btn">

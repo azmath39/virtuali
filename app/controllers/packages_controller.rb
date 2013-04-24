@@ -27,35 +27,61 @@ class PackagesController < ApplicationController
     end
   end
   def upgrade
-
-    @token = params[:stripeToken]
+#********* stripe code ***************
+#    @token = params[:stripeToken]
     #@amount =(current_user.ajust_amount(params[:total_amount]).to_f*100).to_i
-    @amount =amount_to_charge
-    @email= current_user.email
+#    @amount =amount_to_charge
+#    @email= current_user.email
 
-    payment()
-    add_coupon
-    #current_user.coupon=(params[:user][:coupon]) if params.include?:user
-    current_user.change_package(params[:package])
+#    payment()
+#    add_coupon
+#    #current_user.coupon=(params[:user][:coupon]) if params.include?:user
+#    current_user.change_package(params[:package])
+#    flash[:notice]= "Successfully Changed Your Package"
+#
+#    #    if current_user.selected_package.payment_period_type.to_i==2 then
+#    #      change_annual_plan
+#    #    else
+#    #      change_montly_plan
+#    #    end
+#    redirect_to root_url
+
+    #*****************authorize.net**************
+
+    current_user.save_payment_details(params[:x_trans_id],params[:x_card_type],params[:x_amount])
+    puts "*"*10
+    puts session[:package]
+    puts "*"*10
+
+    current_user.change_package(session[:package])
+    session[:package]=nil
     flash[:notice]= "Successfully Changed Your Package"
-    
-    #    if current_user.selected_package.payment_period_type.to_i==2 then
-    #      change_annual_plan
-    #    else
-    #      change_montly_plan
-    #    end
     redirect_to root_url
+
+
   end
   def upgrade_combo
-    @token = params[:stripeToken]
-    #@amount =(current_user.ajust_amount(params[:total_amount]).to_f*100).to_i
-    @amount =amount_to_charge
-    @email= current_user.email
-    payment()
-    add_coupon
-    current_user.change_product(params[:user][:product])
-    current_user.change_package(params[:user][:package])
+#********* stripe code ***************
+#    @token = params[:stripeToken]
+#    #@amount =(current_user.ajust_amount(params[:total_amount]).to_f*100).to_i
+#    @amount =amount_to_charge
+#    @email= current_user.email
+#    payment()
+#    add_coupon
+#    current_user.change_product(params[:user][:product])
+#    current_user.change_package(params[:user][:package])
+#    redirect_to root_url
+
+    #*****************authorize.net**************
+
+    current_user.save_payment_details(params[:x_trans_id],params[:x_card_type],params[:x_amount])
+    current_user.change_product(session[:product])
+    current_user.change_package(session[:package])
+    flash[:notice]= "Successfully Changed Your Package"
+    session[:product]=nil
+    session[:package]=nil
     redirect_to root_url
+
   end
 
   

@@ -5,16 +5,17 @@ class Payment < ActiveRecord::Base
   scope :recent, :limit => 5, :order => 'created_at DESC'
   
   def payment_type_info
-    case self.payment_type
-    when 1
-      "Card Payment"
-    when 2
-      "Direct Debit"
-    when 3
-      "1st Direct Debit"
-    when 4
-      "Refunded"
-    end
+    self.payment_type
+#    case self.payment_type
+#    when 1
+#      "Card Payment"
+#    when 2
+#      "Direct Debit"
+#    when 3
+#      "1st Direct Debit"
+#    when 4
+#      "Refunded"
+#    end
   end
   
 #  def user_name
