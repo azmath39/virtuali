@@ -17,6 +17,10 @@ class PackagesController < ApplicationController
     @value = current_user.price_after_discount(@value) if !current_user.nil? and current_user.any_coupon?
     render :text=>@value
   end
+  def downgrade
+    @regular_packages=current_user.packages_for_downgrade(1)
+    @combo_packages=current_user.packages_for_dowgrade(2)
+  end
   def upgrade_package
     unless current_user.multiple_products?
       @regular_packages=current_user.packages_for_upgarde(1)
@@ -95,18 +99,7 @@ class PackagesController < ApplicationController
     end
     redirect_to root_url
   end
-
-
-  private
-  def add_coupon
-    if params.include?:user and params[:user].include?:coupon
-      current_user.coupon=(params[:user][:coupon])
-      current_user.add_coupon_transaction
-    elsif current_user.any_coupon?
-      current_user.add_coupon_transaction
-    end
-  end
-  #  def change_montly_plan
+#  def change_montly_plan
   #      @token = params[:stripeToken]
   #      #@amount =(current_user.ajust_amount(params[:total_amount]).to_f*100).to_i
   #      @amount =(params[:total_amount].to_f*100).to_i
@@ -119,6 +112,17 @@ class PackagesController < ApplicationController
   #  def change_annual_plan
   #      current_user.change_to_montly_plan(params[:package])
   #  end
+
+  private
+  def add_coupon
+    if params.include?:user and params[:user].include?:coupon
+      current_user.coupon=(params[:user][:coupon])
+      current_user.add_coupon_transaction
+    elsif current_user.any_coupon?
+      current_user.add_coupon_transaction
+    end
+  end
+  
   def amount_to_charge
     if params.include?:user and params[:user].include?:coupon
       (params[:user][:coupon][:amount].to_f*100).to_i

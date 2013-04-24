@@ -109,6 +109,10 @@ class User < ActiveRecord::Base
     #Package.where("product_id=:product_id AND yearly_price > :price",{:product_id=>pkg.product_id,:price=>price})
     self.selected_product.product.packages.where(:package_type=>package_type)
   end
+  def packages_for_downgrade(package_type)
+    price = self.package.regular_price
+    product.packages.where("regular_price<:price AND package_type=:package_type",:price=>price,:package_type=>package_type)
+  end
   def change_product(pro)
     self.selected_product.update_attributes(:product_id=>pro.to_i)
   end
