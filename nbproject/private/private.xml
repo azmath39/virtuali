@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+<<<<<<< HEAD
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1">
         <file>
             <url>app/controllers/paintings_controller.rb</url>
@@ -11,4 +12,7 @@
             <line>39</line>
         </file>
     </editor-bookmarks>
+=======
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
+>>>>>>> 12624173a291f22e1189ef43519a218d56240292
 </project-private>
