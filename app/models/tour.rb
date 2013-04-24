@@ -143,5 +143,12 @@ end
       false
     end
   end
+  def display_image
+    unless self.paintings.empty?
+    self.paintings.first.image.url(:thumb)
+    else
+      '/assets/home_default_image_thumb.jpg'
+    end
+  end
   
 end
