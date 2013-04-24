@@ -49,6 +49,10 @@ class PackagesController < ApplicationController
     #*****************authorize.net**************
 
     current_user.save_payment_details(params[:x_trans_id],params[:x_card_type],params[:x_amount])
+    puts "*"*10
+    puts session[:package]
+    puts "*"*10
+
     current_user.change_package(session[:package])
     session[:package]=nil
     flash[:notice]= "Successfully Changed Your Package"
