@@ -14,12 +14,22 @@ class PackagesController < ApplicationController
     else
       @value = pkg.regular_price
     end
-    @value = current_user.price_after_discount(@value) if !current_user.nil? and current_user.any_coupon?
+    @value = current_user.total_after_all_discounts(@value) if !current_user.nil?
+    #@value = current_user.price_after_discount(@value) if !current_user.nil? and current_user.any_coupon?
     render :text=>@value
   end
   def downgrade
     @regular_packages=current_user.packages_for_downgrade(1)
-    @combo_packages=current_user.packages_for_dowgrade(2)
+    @combo_packages=current_user.packages_for_downgrade(2)
+  end
+  def dowgrade_package
+    if current_user.downgrade(params[:package])
+      flash[:success]="Sucessfully downgraded. Change your tours according to new package."
+      redirect_to root_url
+    else
+      flash[:error]= "Unable to downgrade at this moment. try some other time."
+      redirect_to :action=>"downgrade"
+    end
   end
   def upgrade_package
     unless current_user.multiple_products?
@@ -52,12 +62,8 @@ class PackagesController < ApplicationController
 
     #*****************authorize.net**************
 
-    current_user.save_payment_details(params[:x_trans_id],params[:x_card_type],params[:x_amount])
-    puts "*"*10
-    puts session[:package]
-    puts "*"*10
-
-    current_user.change_package(session[:package])
+    current_user.save_payment_details(params[:x_trans_id],params[:x_card_type],params[:x_amount]) if params.include?:x_amount
+    current_user.upgrade(session[:package])
     session[:package]=nil
     flash[:notice]= "Successfully Changed Your Package"
     redirect_to root_url
@@ -78,7 +84,7 @@ class PackagesController < ApplicationController
 
     #*****************authorize.net**************
 
-    current_user.save_payment_details(params[:x_trans_id],params[:x_card_type],params[:x_amount])
+    current_user.save_payment_details(params[:x_trans_id],params[:x_card_type],params[:x_amount]) if params.include?:x_amount
     current_user.change_product(session[:product])
     current_user.change_package(session[:package])
     flash[:notice]= "Successfully Changed Your Package"

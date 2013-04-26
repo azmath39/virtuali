@@ -29,13 +29,14 @@ class User < ActiveRecord::Base
   has_many :coupons, :through=>:coupon_transactions
   has_many :coupon_transactions
   has_one :company, :dependent => :destroy
+  has_many :activities
   scope :recent, :limit => 5, :order => 'created_at DESC'
   delegate :coupon_id, :to=>:assigned_coupon, :prefix=>true
   
   def address
     "#{add1} #{add2}\n#{state} #{city}\n\n#{zipcode}"
   end
- def package_name
+  def package_name
     self.selected_package.package_name
   end
   def package_price_admin
@@ -49,10 +50,10 @@ class User < ActiveRecord::Base
       self.selected_product=SelectedProduct.create(:product_id=>pro.to_i)
     end
   end
-#  def company=(cmp)
-#    @comp = cmp
-#    self.company= Company.create(@comp)
-#  end
+  #  def company=(cmp)
+  #    @comp = cmp
+  #    self.company= Company.create(@comp)
+  #  end
   def package=(pkg)
     assign_package(pkg)
   end
@@ -102,16 +103,30 @@ class User < ActiveRecord::Base
       price
     end
   end
-
+  def total_after_all_discounts(price)
+    balance=activities.last.balance
+    if any_coupon?
+      price=price_after_discount(price)
+    end
+    if balance< price
+      price-balance
+    else
+      0
+    end
+  end
   def packages_for_upgarde(package_type)
     #pkg=self.selected_package.package
     #price=pkg.yearly_price
     #Package.where("product_id=:product_id AND yearly_price > :price",{:product_id=>pkg.product_id,:price=>price})
-    self.selected_product.product.packages.where(:package_type=>package_type)
+
+    #self.selected_product.product.packages.where(:package_type=>package_type)
+    price = self.package.regular_price
+    product.packages.where("regular_price>:price AND package_type=:package_type",:price=>price,:package_type=>package_type) unless price==10
+
   end
   def packages_for_downgrade(package_type)
     price = self.package.regular_price
-    product.packages.where("regular_price<:price AND package_type=:package_type",:price=>price,:package_type=>package_type)
+    product.packages.where("regular_price>10 AND regular_price<:price AND package_type=:package_type",:price=>price,:package_type=>package_type) unless price==10
   end
   def change_product(pro)
     self.selected_product.update_attributes(:product_id=>pro.to_i)
@@ -154,6 +169,33 @@ class User < ActiveRecord::Base
 
     send_message("Important Alert!",msg);
   end
+  def downgrade(pkg)
+    previous_package=selected_package
+    new_package= Package.find(pkg[:id])
+    if previous_package.remaining_days>15 and previous_package.payment_period_type==1
+      refund= (package.regular_price-new_package.regular_price).round
+    else
+      refund=0
+    end
+    activities.create(:activity_type=>1, :refund=>refund)
+    update_package(new_package)
+    tours_disable
+  end
+  def upgrade(pkg)
+    previous_package=selected_package
+    new_package= Package.find(pkg[:id])
+     if previous_package.remaining_days>15 and previous_package.payment_period_type==1
+      charge= (package.regular_price-new_package.regular_price).round
+    else
+      charge=0
+    end
+    activities.create(:activity_type=>1, :charge=>charge)
+    update_package(new_package)
+  end
+  def update_package(pkg)
+    selected_package.update_attributes(:package_id=>pkg.id,:price=>pkg.regular_price,:status=>1,:pictures_for_tour=>pkg.pictures_for_tour)
+  end
+
   def tours_inactive
     tours=self.tours
     unless tours.empty?
@@ -289,7 +331,7 @@ class User < ActiveRecord::Base
   #      self.packag=s_pkg=SelectedPackage.create(:package_id=>p.id,:pictures_for_tour=>p.pictures_for_tour,:payment_period_type=>2,:renew_date=>estimate_renew_date(p.yearly_price,365))
   ##     end
   #  end
- #note change
+  #note change
   #  def self.appliction_size
   #    require 'find'
   #    size = 0

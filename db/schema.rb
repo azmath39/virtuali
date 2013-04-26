@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130418105051) do
+ActiveRecord::Schema.define(:version => 20130426064359) do
+
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
     t.string   "resource_type", :null => false
@@ -29,10 +30,12 @@ ActiveRecord::Schema.define(:version => 20130418105051) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "adjustable_amount"
+    t.integer  "refund"
     t.integer  "activity_type"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.float    "balance"
+    t.float    "charge"
   end
 
   create_table "admin_users", :force => true do |t|
@@ -187,7 +190,7 @@ ActiveRecord::Schema.define(:version => 20130418105051) do
     t.string   "reference"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.integer  "payment_type"
+    t.string   "payment_type"
     t.integer  "user_id"
     t.string   "email"
     t.string   "name"
