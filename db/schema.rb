@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130426064359) do
+ActiveRecord::Schema.define(:version => 20130427025456) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -299,6 +299,7 @@ ActiveRecord::Schema.define(:version => 20130426064359) do
     t.string   "state"
     t.string   "city"
     t.string   "zipcode"
+    t.float    "balance"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true

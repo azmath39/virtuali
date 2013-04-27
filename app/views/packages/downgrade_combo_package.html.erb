@@ -50,14 +50,14 @@
 
   <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
         </div>
-        <%unless current_user.any_coupon?%>
-          <div class="field">
+        <%#unless current_user.any_coupon?%>
+          <%#*<div class="field">%>
 
-            <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
-            <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
-            <div id='discounted_total'></div>
-          </div>
-        <%end%>
+            <%#=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
+            <%#=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
+            <%#*<div id='discounted_total'></div>%>
+          <%#*</div>%>
+        <%#end%>
         
         
         </div>
@@ -89,7 +89,7 @@
       //alert($("input[name='user[product]']:checked").val());
       $.ajax({
         type: 'GET',
-        url: '/packages/show',
+        url: '/packages/packages_for_downgrade_combo',
         data:{
           product:$("input[name='user[product]']:checked").val()
         }
@@ -114,7 +114,7 @@
       //alert($("input[name='user[package]']:checked").val());
       $.ajax({
         type: 'GET',
-        url: '/packages/total_value',
+        url: '/packages/upgrade_charge',
         data:{
           package_id:$("input[name='user[package][id]']:checked").val(),
           type_of_payment:payment_type

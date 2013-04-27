@@ -103,17 +103,18 @@ class User < ActiveRecord::Base
       price
     end
   end
-  def total_after_all_discounts(price)
-    balance=activities.last.balance
-    if any_coupon?
-      price=price_after_discount(price)
-    end
-    if balance< price
-      price-balance
-    else
-      0
-    end
-  end
+
+  #  def total_after_all_discounts(price)
+  #    balance=activities.last.balance
+  #    if any_coupon?
+  #      price=price_after_discount(price)
+  #    end
+  #    if balance< price
+  #      price-balance
+  #    else
+  #      0
+  #    end
+  #  end
   def packages_for_upgarde(package_type)
     #pkg=self.selected_package.package
     #price=pkg.yearly_price
@@ -121,12 +122,18 @@ class User < ActiveRecord::Base
 
     #self.selected_product.product.packages.where(:package_type=>package_type)
     price = self.package.regular_price
-    product.packages.where("regular_price>:price AND package_type=:package_type",:price=>price,:package_type=>package_type) unless price==10
+    product.packages.where("regular_price>:price AND package_type=:package_type",:price=>price,:package_type=>package_type) 
 
   end
   def packages_for_downgrade(package_type)
     price = self.package.regular_price
     product.packages.where("regular_price>10 AND regular_price<:price AND package_type=:package_type",:price=>price,:package_type=>package_type) unless price==10
+  end
+  def packages_for_downgrade_combo(product_id,package_type)
+    product=Product.find(product_id)
+    price = self.package.regular_price
+    product.packages.where("regular_price>10 AND regular_price<:price AND package_type=:package_type",:price=>price,:package_type=>package_type) unless price==10
+
   end
   def change_product(pro)
     self.selected_product.update_attributes(:product_id=>pro.to_i)
@@ -169,6 +176,7 @@ class User < ActiveRecord::Base
 
     send_message("Important Alert!",msg);
   end
+
   def downgrade(pkg)
     previous_package=selected_package
     new_package= Package.find(pkg[:id])
@@ -177,19 +185,27 @@ class User < ActiveRecord::Base
     else
       refund=0
     end
-    activities.create(:activity_type=>1, :refund=>refund)
+
+    #activities.create(:activity_type=>1, :refund=>refund)
     update_package(new_package)
+    self.balance += refund
+    self.save
     tours_disable
   end
-  def upgrade(pkg)
+  def upgrade_charge(id)
+    puts "-------------"
     previous_package=selected_package
-    new_package= Package.find(pkg[:id])
-     if previous_package.remaining_days>15 and previous_package.payment_period_type==1
-      charge= (package.regular_price-new_package.regular_price).round
+    new_package= Package.find(id)
+    if previous_package.remaining_days>15 and previous_package.payment_period_type==1
+      (new_package.regular_price-package.regular_price).round
+    elsif  previous_package.payment_period_type==3
+      new_package.regular_price
     else
-      charge=0
+      0
     end
-    activities.create(:activity_type=>1, :charge=>charge)
+  end 
+  def upgrade(pkg)
+    new_package= Package.find(pkg[:id])
     update_package(new_package)
   end
   def update_package(pkg)

@@ -5,6 +5,11 @@ class PackagesController < ApplicationController
     @combo_packages=product.packages.where(:package_type=>2)
     render :layout => false
   end
+  def packages_for_downgrade_combo
+    @regular_packages=current_user.packages_for_downgrade_combo(params["product"].to_i,1)
+    @combo_packages=current_user.packages_for_downgrade_combo(params["product"].to_i,2)
+    render 'show', :layout => false
+  end
   def total_value
     pkg=Package.find(params["package_id"].to_i)
     payment_type=choose_payment_type.to_i
@@ -14,13 +19,21 @@ class PackagesController < ApplicationController
     else
       @value = pkg.regular_price
     end
-    @value = current_user.total_after_all_discounts(@value) if !current_user.nil?
-    #@value = current_user.price_after_discount(@value) if !current_user.nil? and current_user.any_coupon?
+    #@value = current_user.total_after_all_discounts(@value) if !current_user.nil?
+    @value = current_user.price_after_discount(@value) if !current_user.nil? and current_user.any_coupon?
     render :text=>@value
   end
+  def upgrade_charge
+    render :text=> current_user.upgrade_charge(params["package_id"].to_i)
+  end
   def downgrade
-    @regular_packages=current_user.packages_for_downgrade(1)
-    @combo_packages=current_user.packages_for_downgrade(2)
+    unless current_user.multiple_products?
+      @regular_packages=current_user.packages_for_downgrade(1)
+      @combo_packages=current_user.packages_for_downgrade(2)
+    else
+      @products=current_user.subscribe_product_for_upgrade
+      render :downgrade_combo_package
+    end
   end
   def dowgrade_package
     if current_user.downgrade(params[:package])
@@ -32,33 +45,35 @@ class PackagesController < ApplicationController
     end
   end
   def upgrade_package
-    unless current_user.multiple_products?
-      @regular_packages=current_user.packages_for_upgarde(1)
-      @combo_packages=current_user.packages_for_upgarde(2)
-    else
-      @products=current_user.subscribe_product_for_upgrade
-      render :upgrade_combo_package
-    end
+    #    unless current_user.multiple_products?
+    #      @regular_packages=current_user.packages_for_upgarde(1)
+    #      @combo_packages=current_user.packages_for_upgarde(2)
+    #    else
+    #      @products=current_user.subscribe_product_for_upgrade
+    #      render :upgrade_combo_package
+    #    end
+    @regular_packages=current_user.packages_for_upgarde(1)
+    @combo_packages=current_user.packages_for_upgarde(2)
   end
   def upgrade
-#********* stripe code ***************
-#    @token = params[:stripeToken]
+    #********* stripe code ***************
+    #    @token = params[:stripeToken]
     #@amount =(current_user.ajust_amount(params[:total_amount]).to_f*100).to_i
-#    @amount =amount_to_charge
-#    @email= current_user.email
+    #    @amount =amount_to_charge
+    #    @email= current_user.email
 
-#    payment()
-#    add_coupon
-#    #current_user.coupon=(params[:user][:coupon]) if params.include?:user
-#    current_user.change_package(params[:package])
-#    flash[:notice]= "Successfully Changed Your Package"
-#
-#    #    if current_user.selected_package.payment_period_type.to_i==2 then
-#    #      change_annual_plan
-#    #    else
-#    #      change_montly_plan
-#    #    end
-#    redirect_to root_url
+    #    payment()
+    #    add_coupon
+    #    #current_user.coupon=(params[:user][:coupon]) if params.include?:user
+    #    current_user.change_package(params[:package])
+    #    flash[:notice]= "Successfully Changed Your Package"
+    #
+    #    #    if current_user.selected_package.payment_period_type.to_i==2 then
+    #    #      change_annual_plan
+    #    #    else
+    #    #      change_montly_plan
+    #    #    end
+    #    redirect_to root_url
 
     #*****************authorize.net**************
 
@@ -71,16 +86,16 @@ class PackagesController < ApplicationController
 
   end
   def upgrade_combo
-#********* stripe code ***************
-#    @token = params[:stripeToken]
-#    #@amount =(current_user.ajust_amount(params[:total_amount]).to_f*100).to_i
-#    @amount =amount_to_charge
-#    @email= current_user.email
-#    payment()
-#    add_coupon
-#    current_user.change_product(params[:user][:product])
-#    current_user.change_package(params[:user][:package])
-#    redirect_to root_url
+    #********* stripe code ***************
+    #    @token = params[:stripeToken]
+    #    #@amount =(current_user.ajust_amount(params[:total_amount]).to_f*100).to_i
+    #    @amount =amount_to_charge
+    #    @email= current_user.email
+    #    payment()
+    #    add_coupon
+    #    current_user.change_product(params[:user][:product])
+    #    current_user.change_package(params[:user][:package])
+    #    redirect_to root_url
 
     #*****************authorize.net**************
 
@@ -105,7 +120,7 @@ class PackagesController < ApplicationController
     end
     redirect_to root_url
   end
-#  def change_montly_plan
+  #  def change_montly_plan
   #      @token = params[:stripeToken]
   #      #@amount =(current_user.ajust_amount(params[:total_amount]).to_f*100).to_i
   #      @amount =(params[:total_amount].to_f*100).to_i
