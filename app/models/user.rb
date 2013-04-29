@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_many :paintings, :dependent=>:destroy
   has_one :delayed_job, :through=>:user_delay_job, :dependent=>:destroy
   has_one :user_delay_job,  :dependent=>:destroy
+  before_save :set_balance
   after_create :set_auto_destroy_event
   after_create :add_coupon_transaction, :if=> Proc.new { |user| !user.assigned_coupon.nil?}
   has_many :payments, :dependent=> :destroy
@@ -32,6 +33,9 @@ class User < ActiveRecord::Base
   has_many :activities
   scope :recent, :limit => 5, :order => 'created_at DESC'
   delegate :coupon_id, :to=>:assigned_coupon, :prefix=>true
+  def set_balance
+    self.balance ||= 0
+  end
   
   def address
     "#{add1} #{add2}\n#{state} #{city}\n\n#{zipcode}"
@@ -104,17 +108,21 @@ class User < ActiveRecord::Base
     end
   end
 
-  #  def total_after_all_discounts(price)
-  #    balance=activities.last.balance
-  #    if any_coupon?
-  #      price=price_after_discount(price)
-  #    end
-  #    if balance< price
-  #      price-balance
-  #    else
-  #      0
-  #    end
-  #  end
+  def total_after_all_discounts
+    price=selected_package.price
+    if any_coupon?
+      price=price_after_discount(price)
+    end
+    if balance< price
+      price=price-balance
+     
+    else
+ 
+      price=0
+    end
+    
+    
+  end
   def packages_for_upgarde(package_type)
     #pkg=self.selected_package.package
     #price=pkg.yearly_price
@@ -270,7 +278,10 @@ class User < ActiveRecord::Base
       price
     end
   end
-
+ def adjust_balance
+    self.balance -= (package_price-payments.last.amount)
+    self.save
+  end
   def package_destroy
     self.selected_package.package_destroy
     #    pkg=self.selected_package
@@ -300,6 +311,7 @@ class User < ActiveRecord::Base
     send_reciept_user(payment)
 
   end
+ 
   def send_reciept_user(payment)
     msg="<table class='table table-bordered'><caption>Your Payment Details</caption><tr><th>Refference No</th><td> #{payment.reference}</td></tr> <tr><th> Date of Transaction</th><td>#{payment.created_at.strftime("%d-%b-%Y %H:%M")}</td></tr><tr><th>Amount</th><td> #{payment.amount}</td></tr> <tr><th> Payment Type</th><td> #{payment.payment_type_info}</td></tr></table>".html_safe
     subject= "Payment Reciept #{payment.created_at.strftime("%d-%b-%Y %H:%M")} "

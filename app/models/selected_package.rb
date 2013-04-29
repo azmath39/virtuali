@@ -42,7 +42,9 @@ class SelectedPackage < ActiveRecord::Base
     self.save
   end
 def renew_package
+
   self.renew_date += self.subscribed_days
+  user.adjust_balance
   self.save
   tours_enable
   self.user.set_auto_destroy_event
