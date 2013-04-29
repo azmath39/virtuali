@@ -1,16 +1,42 @@
 class RegistrationsController < Devise::RegistrationsController
+  helper :authorize_net
+  protect_from_forgery :except => :relay_response
   def new
     super
   end
   
   def create
     build_resource
-    @token = params[:stripeToken]
+      
     @amount = amount_to_charge
     @email= params[:user][:email]
-    payment
+    
+    #    payment
     if resource.save
       resource.company= Company.new(params[:company]) if params.include?:company
+      session[:user_id]=resource.id
+      @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :hosted_payment_form => true)
+      @sim_transaction.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST, :link_text => 'Continue', :link_url => registrations_save_user_url(:only_path => false)))
+      render '/payments/payment'
+
+
+    else
+      #      refund_payment(@charge["id"])
+      clean_up_passwords resource
+      respond_with resource
+    end
+    # create the charge on Stripe's servers - this will charge the user's card
+  end
+  #  def create
+  #
+  #  end
+  def save_user
+
+    resp = AuthorizeNet::SIM::Response.new(params)
+    resource=User.find(session[:user_id])
+    session[:user_id]=nil
+    if resp.approved?
+      resource.save_payment_details(params[:x_trans_id],params[:x_card_type],params[:x_amount])
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)
@@ -22,43 +48,46 @@ class RegistrationsController < Devise::RegistrationsController
         respond_with resource, :location => after_inactive_sign_up_path_for(resource)
       end
     else
-      refund_payment(@charge["id"])
-      clean_up_passwords resource
-      respond_with resource
+      resource.destory
+    
+      redirect_to root_url
     end
-    # create the charge on Stripe's servers - this will charge the user's card 
+
+    
   end
+  
   def edit
     render :layout => false
   end
+    
   
   private
-   def amount_to_charge
+  def amount_to_charge
     if params[:user].include?:coupon
-      (params[:user][:coupon][:amount].to_f*100).to_i
+      params[:user][:coupon][:amount].to_f
     else
-      (params[:total_amount].to_f*100).to_i
+      params[:total_amount].to_f
     end
   end
-  def payment()
-    if params[:user][:package].include?(:type_of_payment) and params[:user][:package][:type_of_payment].to_i==1
-      if params[:type_of_transaction] == "1"
-        stripe_charge
-        resource.save_payment_details(@charge["id"],1,@charge[:amount])
-      elsif params[:type_of_transaction] == "2"
-        subscription
-        save_stripe_customer_id(resource, @customer.id)
-        resource.save_payment_details(nil,3,@amount)
-      end
-    else
-      stripe_charge
-      resource.save_payment_details(@charge["id"],1,@charge[:amount])
-    end
-  end
-  def refund_payment(charge_id)
-   ch = Stripe::Charge.retrieve(charge_id)
-   refund= ch.refund
-   a= refund[:amount].to_i/100
-   Payment.create(:reference=>refund[:id],:amount=>a,:payment_type=>4)
-  end
+#  def payment()
+#    if params[:user][:package].include?(:type_of_payment) and params[:user][:package][:type_of_payment].to_i==1
+#      if params[:type_of_transaction] == "1"
+#        stripe_charge
+#        resource.save_payment_details(@charge["id"],1,@charge[:amount])
+#      elsif params[:type_of_transaction] == "2"
+#        subscription
+#        save_stripe_customer_id(resource, @customer.id)
+#        resource.save_payment_details(nil,3,@amount)
+#      end
+#    else
+#      stripe_charge
+#      resource.save_payment_details(@charge["id"],1,@charge[:amount])
+#    end
+#  end
+#  def refund_payment(charge_id)
+#    ch = Stripe::Charge.retrieve(charge_id)
+#    refund= ch.refund
+#    a= refund[:amount].to_i/100
+#    Payment.create(:reference=>refund[:id],:amount=>a,:payment_type=>4)
+#  end
 end

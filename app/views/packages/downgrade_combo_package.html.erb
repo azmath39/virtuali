@@ -1,6 +1,7 @@
 
 <div  class="border-box">
-  <%=form_for :package ,:url=>"upgrade_combo",:html => { :id => 'payment-form'} do|f|%>
+  <%#=form_for :package ,:url=>"upgrade_combo",:html => { :id => 'payment-form'} do|f|%>
+  <%=form_for :package ,:url=>"dowgrade_package_combo" do|f|%>
 
     <div id="product_select" >
 
@@ -31,51 +32,13 @@
     <div id ="package_info">
       <div id="packages">
       </div><br />
-      <%=link_to "Next","#", :class => "slidesjs-next slidesjs-navigation btn-large btn-primary", :id=>"btn_package", :style=>"float:right; margin-right:16%;" %>
+      <%= f.submit "Downgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
       <span><%= link_to "Cancel", root_url , :style=> 'float:right;margin-right:10px;margin-top:15px;'%></span>
     </div>
-    <div id="payment_info">
-      <div id="scont" style="margin:auto; width:50%;padding:4% 0 0 20%; ">
-        <h3>Payment Process</h3>
-        <hr></hr>
-        <div class = "payment-errors" style="margin:0 0 20px 15px; color: red;">
-        </div>
-        <div class="field" >Total Payable Amount($) : <%= hidden_field_tag "total_amount","",:class=> "money" %>
-          <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
-
-
-        <div class="field" style="padding:20px 0px;">
-          <%=hidden_field_tag "type_of_transaction",1%>
-
-  <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %>  <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
-        </div>
-        <%unless current_user.any_coupon?%>
-          <div class="field">
-
-            <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
-            <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %>
-            <div id='discounted_total'></div>
-          </div>
-        <%end%>
-        <div class="field">
-          <%= label_tag :card_number, "Credit Card Number" %>
-          <%= text_field_tag "card-number", nil, name: nil %>
-        </div>
-        <div class="field">
-          <%= label_tag :card_code, "Security Code on Card (CVV)" %>
-          <%= password_field_tag "card-cvc", nil, name: nil, :style => "width:50px;" %>
-        </div>
-        <div>
-          <%= label_tag :card_month, "Card Expiration" %>
-          <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card-expiry-month", :style=> 'width:30%;'} %>
-          <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card-expiry-year", :style=> 'width:30%;'} %>
-        </div></div>
-      <div id="next_btn" style="float:right; margin-right:16%;">
-        <%= f.submit "Upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
-        <span><%= link_to "Cancel", root_url , :style=> 'margin-right:10px;'%></span>
-      </div>
+   
+      
     </div>
-  </div>
+  
 
 <%end%>
 <script>
@@ -98,7 +61,7 @@
       //alert($("input[name='user[product]']:checked").val());
       $.ajax({
         type: 'GET',
-        url: '/packages/show',
+        url: '/packages/packages_for_downgrade_combo',
         data:{
           product:$("input[name='user[product]']:checked").val()
         }
@@ -123,7 +86,7 @@
       //alert($("input[name='user[package]']:checked").val());
       $.ajax({
         type: 'GET',
-        url: '/packages/total_value',
+        url: '/packages/upgrade_charge',
         data:{
           package_id:$("input[name='user[package][id]']:checked").val(),
           type_of_payment:payment_type
@@ -138,21 +101,7 @@
       $("#payment_info").show();
     }
   });
-  function apply_discount()
-  {
-    $.ajax({
-      type:'GET',
-      url: '/home/check_discount',
-      data:{
-        code: $('#coupon_id').val(),
-        amount:$('#total_amount').val()
-      }
-    }).done(function(html){
-
-      $('#discounted_total').html(html)
-
-    });
-  }
+  
 </script>
 <style>
   .border-box{

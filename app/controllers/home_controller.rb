@@ -13,6 +13,7 @@ class HomeController < ApplicationController
       @coupon=Coupon.find_by_code(params[:code])
       if !@coupon.nil?
         @amount= params[:amount].to_f-@coupon.value.to_f
+        @amount= 0 if @amount<=0
         render :partial=>'discount'
       else
         render :text=>"<i style='color:red;'>* Coupon code Invalid</i>".html_safe
