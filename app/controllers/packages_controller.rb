@@ -133,7 +133,9 @@ class PackagesController < ApplicationController
   #  def change_annual_plan
   #      current_user.change_to_montly_plan(params[:package])
   #  end
-
+def renew
+@total = current_user.total_after_all_discounts
+end
   private
   def add_coupon
     if params.include?:user and params[:user].include?:coupon

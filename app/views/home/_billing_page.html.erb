@@ -25,7 +25,7 @@
               <tr><td> <%=pkg.name%> </td><td> <%=pkg.status_info%></td><td> $<%=pkg.price%></td><th style="width:800px;">
 <%=link_to "View","##{pkg.id}", "data-toggle"=>"collapse", :class=>"btn btn-link"%>|
 <%if verify_renew_date%>
-<%= link_to "Renew", {:controller=>'payments',:action=>"renew"}, "data-toggle" => "modal", :class=>"btn btn-link",:onclick=>"renew(#{pkg.id})"  %>|
+<%= link_to "Renew", {:controller=>'packages',:action=>"renew"}, "data-toggle" => "modal", :class=>"btn btn-link",:onclick=>"renew(#{pkg.id})"  %>|
 <%end%>
       <%#=button_tag "Renew",:class=>"btn btn-success",:onclick=>"renew()"%>
               <%#end%>
