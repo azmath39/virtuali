@@ -1,4 +1,4 @@
-<%= form_for :sim_transaction, :url => AuthorizeNet::SIM::Transaction::Gateway::TEST do |f| %>
+<%= form_for :sim_transaction, :url => AuthorizeNet::SIM::Transaction::Gateway::TEST, :html=>{:id=>"payment_form"} do |f| %>
   <%= sim_fields(@sim_transaction) %>
   <%= label_tag 'x_amount', "Total: #{number_to_currency(@amount)}" %>
   <br />
@@ -6,3 +6,8 @@
   <%= hidden_field_tag("x_email", "jagadishwer@brilliance-works.com", {:id => "x_email"}) %>
   <%= f.submit 'Purchase'%>
 <% end %>
+  <script>
+  $(document).ready(function(){
+$('form#payment_form').submit();
+  });
+</script>
