@@ -94,7 +94,7 @@ DIV#img_bg.span7.well{
   padding: 12px;
   box-shadow: 0px 2px 4px #CCC;
   border-radius: 2px;
-}
+
 .map_container{
   margin-top: -7px;
 

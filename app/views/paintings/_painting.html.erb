@@ -44,7 +44,7 @@
   
   
   <div class="actions" style="font-size:14px;">
-    <%= link_to "edit", '#', :onclick=>"return launchEditor('#{painting.id}', 'http://virtualiinc.com#{painting.image_url(:large)}');"%> |
+    <%= link_to "edit", '#', :onclick=>"return launchEditor('#{painting.id}', 'http://virtualiinc.com:3000#{painting.image_url(:large)}');"%> |
     <%#= link_to "remove", painting, :method => :delete, :confirm => "Are you sure1?" %> <%#=$serial_no +=1%>
   <%= link_to "remove", "#", :class=>"removed", :id=>painting.id, :onclick=>"remove_image(#{painting.id})"%>
     <%=text_field_tag :priority,painting.priority,:class=>"priority_input_#{painting.id}", :onblur=>"change_priority(#{painting.id})" %>

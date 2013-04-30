@@ -143,5 +143,15 @@ end
       false
     end
   end
+  def display_image
+    if !self.paintings.where(:name=>"Front").empty?
+    self.paintings.where(:name=>"Front").first.image.url(:small)
+    elsif !self.paintings.empty?
+       self.paintings.first.image.url(:small)
+    else
+      '/assets/home_default_image_thumb.jpg'
+    end
+
+  end
   
 end

@@ -1,12 +1,7 @@
 # MySQL.  Versions 4.1 and 5.0 are recommended.
-# 
-# Install the MYSQL driver
-#   gem install mysql2
 #
-# Ensure the MySQL gem is defined in your Gemfile
-#   gem 'mysql2'
 #
-# And be sure to use new-style password hashing:
+# Be sure to use new-style password hashing:
 #   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
 development:
   adapter: mysql2
@@ -15,7 +10,7 @@ development:
   database: virtuali_development
   pool: 5
   username: root
-  password: 
+  password: mysql
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -35,8 +30,9 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: virtuali_development
+  database: virtuali_production
   pool: 5
   username: virtuali
   password: coolapp1413#
   host: localhost
+

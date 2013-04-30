@@ -42,7 +42,7 @@
     color: white;
     text-decoration:none;
     text-shadow:none;
-    font-size: 15px;
+    font-size: 18px;
     font-style: bold;
    
 }
@@ -52,7 +52,7 @@
 }
 .navbar .nav > li > a:hover {
 
-    font-size: 15px;
+    font-size: 18px;
 
     background-color: transparent;
     color: wheat;

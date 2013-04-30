@@ -6,9 +6,9 @@
 <%end%>
 
 <%#*<p class="title-text" style="margin:2% 0 10px 12%;">Tour slide show</p>%>
-<div class="span11" style="margin-left: 10%;border: 30px solid #C0C0C0;border-radius:30px; width:auto;padding:0px;">
+<div class="span11" style="margin-left: 10%;border: 30px solid #C0C0C0;border-radius:80px;border-width: 15px; width:auto;padding:0px;over-flow: hidden;">
 <div>
-<div id="abc" style="">
+<div id="abc" class = "image-border" style="overflow: hidden;padding:0px;position: relative;border-radius:50px;opacity = 0;">
 <% @tour.paintings.each do |p| %>
   <%=image_tag p.image_url(:large) %>
 <% end %>
@@ -16,9 +16,11 @@
 </div>
 </div>
 </div>
+</div>
 <script>
         Galleria.loadTheme("<%= javascript_path('galleria.classic.js') %>");
         Galleria.configure({
+
           transition: 'fade',
           transitionSpeed:1000,
           showInfo: false
@@ -26,6 +28,7 @@
         
         Galleria.run('#abc', {
           autoplay: 6000
+
         });
 
 </script>
@@ -34,4 +37,10 @@
       position:absolute;
       margin-left: -18%;
 }
+}
+
+
   </style>
+
+
+

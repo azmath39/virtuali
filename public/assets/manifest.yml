@@ -1,4 +1,4 @@
----
+--- 
 HELR45W.TTF: HELR45W.TTF
 HELR45W/index.TTF: HELR45W.TTF
 HELR46W.TTF: HELR46W.TTF
@@ -17,8 +17,12 @@ HELR68W.TTF: HELR68W.TTF
 HELR68W/index.TTF: HELR68W.TTF
 helveticalt23ultralightextended.ttf: helveticalt23ultralightextended.ttf
 helveticalt23ultralightextended/index.ttf: helveticalt23ultralightextended.ttf
+359.gif: 359.gif
+359/index.gif: 359.gif
 Virtual I Logo 300dpi.png: Virtual I Logo 300dpi.png
 Virtual I Logo 300dpi/index.png: Virtual I Logo 300dpi.png
+Virtual I Logo White.png: Virtual I Logo White.png
+Virtual I Logo White/index.png: Virtual I Logo White.png
 bg.jpg: bg.jpg
 bg/index.jpg: bg.jpg
 bg2.jpg: bg2.jpg
@@ -47,8 +51,6 @@ favicon.ico: favicon.ico
 favicon/index.ico: favicon.ico
 fdback.png: fdback.png
 fdback/index.png: fdback.png
-feedback.jpg: feedback.jpg
-feedback/index.jpg: feedback.jpg
 gridbg.gif: gridbg.gif
 gridbg/index.gif: gridbg.gif
 hide-this.jpg: hide-this.jpg
@@ -73,6 +75,8 @@ rails.png: rails.png
 rails/index.png: rails.png
 rsz_1virtual_i_logo_300dpi.png: rsz_1virtual_i_logo_300dpi.png
 rsz_1virtual_i_logo_300dpi/index.png: rsz_1virtual_i_logo_300dpi.png
+rsz_virtual_i_logo_white.png: rsz_virtual_i_logo_white.png
+rsz_virtual_i_logo_white/index.png: rsz_virtual_i_logo_white.png
 slide-01.jpg: slide-01.jpg
 slide-01/index.jpg: slide-01.jpg
 slide-02.jpg: slide-02.jpg
