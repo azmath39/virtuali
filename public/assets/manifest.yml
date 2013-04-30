@@ -1,4 +1,4 @@
---- 
+---
 HELR45W.TTF: HELR45W.TTF
 HELR45W/index.TTF: HELR45W.TTF
 HELR46W.TTF: HELR46W.TTF
@@ -77,6 +77,8 @@ rsz_1virtual_i_logo_300dpi.png: rsz_1virtual_i_logo_300dpi.png
 rsz_1virtual_i_logo_300dpi/index.png: rsz_1virtual_i_logo_300dpi.png
 rsz_virtual_i_logo_white.png: rsz_virtual_i_logo_white.png
 rsz_virtual_i_logo_white/index.png: rsz_virtual_i_logo_white.png
+rsz_virtual_i_logo_white1.png: rsz_virtual_i_logo_white1.png
+rsz_virtual_i_logo_white1/index.png: rsz_virtual_i_logo_white1.png
 slide-01.jpg: slide-01.jpg
 slide-01/index.jpg: slide-01.jpg
 slide-02.jpg: slide-02.jpg

@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   has_one :delayed_job, :through=>:user_delay_job, :dependent=>:destroy
   has_one :user_delay_job,  :dependent=>:destroy
   before_save :set_balance
-  after_create :set_auto_destroy_event
+  after_create :set_auto_destroy_event, :trace_activity
   after_create :add_coupon_transaction, :if=> Proc.new { |user| !user.assigned_coupon.nil?}
   has_many :payments, :dependent=> :destroy
   has_one :coupon, :through=>:assigned_coupon
@@ -36,7 +36,9 @@ class User < ActiveRecord::Base
   def set_balance
     self.balance ||= 0
   end
-  
+  def trace_activity
+    activities.create(:activity_type=>0, :charge=>Payments.last.amount)
+  end
   def address
     "#{add1} #{add2}\n#{state} #{city}\n\n#{zipcode}"
   end
@@ -194,7 +196,7 @@ class User < ActiveRecord::Base
       refund=0
     end
 
-    #activities.create(:activity_type=>1, :refund=>refund)
+    activities.create(:activity_type=>1, :refund=>refund)
     update_package(new_package)
     self.balance += refund
     self.save
@@ -215,9 +217,11 @@ class User < ActiveRecord::Base
   def upgrade(pkg)
     new_package= Package.find(pkg[:id])
     update_package(new_package)
+    activities.create(:activity_type=>2, :charge=>Payments.last.amount)
   end
   def update_package(pkg)
     selected_package.update_attributes(:package_id=>pkg.id,:price=>pkg.regular_price,:status=>1,:pictures_for_tour=>pkg.pictures_for_tour)
+
   end
 
   def tours_inactive
@@ -349,6 +353,14 @@ class User < ActiveRecord::Base
   end
   def any_coupon?
     !self.assigned_coupon.nil? and self.assigned_coupon.valid_date>Date.today
+  end
+  def any_package_change?
+
+   if !activities.nil? and  activities.any?{|activity| activity.activity_type!=0}
+     (Date.today-activities.where(:activity_type=>(1..2)).last.created_at.to_date).to_i > 30
+   else
+     true
+    end
   end
 
   #  def change_to_montly_plan(pkg)

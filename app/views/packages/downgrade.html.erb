@@ -1,5 +1,6 @@
-
+<%unless @regular_packages.empty? and @combo_packages.empty? %>
 <div class="border-box">
+  
   <%=form_for :package ,:url=>"dowgrade_package" do|f|%>
 
     <div id ="package_info">
@@ -66,7 +67,7 @@
         <%end%>
 
           <div id="next_btn" style="float:right; margin-right:16%;">
-            <%= f.submit "Upgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
+            <%= f.submit "Downgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.."  %>
             <span><%= link_to "Cancel", root_url , :tyle=> 'float:right;margin-right:120px;'%></span>
           </div>
     </div>
@@ -83,11 +84,15 @@
   
 
     <%end%>
+  
 
 
     </div>
 
+<%else%>
+  <p style="color:red;margin-left:34%;margin-top: 25%;"> No package Available To Downgrade.</p>
 
+  <%end%>
 
 
 

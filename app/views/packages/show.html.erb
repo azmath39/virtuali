@@ -1,3 +1,4 @@
+<%unless @regular_packages.empty? and @combo_packages.empty? %>
 <span id="package_error" style="color:red; margin-left: 5%;"></span>
 <div class="pricing_grid row" style="margin:4% 0 0 3%;">
   <% @regular_packages.each do |pkg| %>
@@ -79,3 +80,7 @@
           </div>
 
 </div>
+<%else%>
+  <p style="color:red;margin-left:34%;margin-top: 25%;"> No package Available.</p>
+
+  <%end%>

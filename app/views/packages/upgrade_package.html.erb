@@ -1,4 +1,4 @@
-
+<%unless @regular_packages.empty? and @combo_packages.empty? %>
 <div class="border-box">
   <%#=form_for :package ,:url=>"upgrade",:html => { :id => 'payment-form'} do|f|%>
 <%=form_for :package ,:url=>"/payments/upgrade" do|f|%>
@@ -114,6 +114,10 @@
     
 
   </div>
+  <%else%>
+  <p style="color:red;margin-left:34%;margin-top: 25%;"> No package Available.</p>
+
+  <%end%>
 
 <script>
   $(document).ready(function(){
