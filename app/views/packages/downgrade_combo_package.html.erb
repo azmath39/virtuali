@@ -32,7 +32,7 @@
     <div id ="package_info">
       <div id="packages">
       </div><br />
-      <%= f.submit "Downgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." %>
+      <%= f.submit "Downgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.." ,:id=>"btn_package"%>
       <span><%= link_to "Cancel", root_url , :style=> 'float:right;margin-right:10px;margin-top:15px;'%></span>
     </div>
    
@@ -81,24 +81,6 @@
     {
       $('#package_error').html("* Select any Package  to continue..... <br/>")
       $('#btn_package').die( "click" );
-    }else{
-
-      //alert($("input[name='user[package]']:checked").val());
-      $.ajax({
-        type: 'GET',
-        url: '/packages/upgrade_charge',
-        data:{
-          package_id:$("input[name='user[package][id]']:checked").val(),
-          type_of_payment:payment_type
-        }
-
-      }).done(function(text) {
-        $("#total_amount").val(text);
-        $('#total_amount1').val(text);
-
-      });
-      $("#package_info").hide();
-      $("#payment_info").show();
     }
   });
   
