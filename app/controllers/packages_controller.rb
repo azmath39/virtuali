@@ -9,7 +9,6 @@ class PackagesController < ApplicationController
   def manual_packages
     product=Product.find(params[:id])
     @packages = product.packages
-
     render :partial=>"manual_packages"
   end
 
@@ -130,7 +129,7 @@ class PackagesController < ApplicationController
 
   end
 
-
+  
   def destroy_user_package
     if current_user.any_cash_back
       current_user.cancel_annual_plan
@@ -166,7 +165,7 @@ class PackagesController < ApplicationController
       current_user.add_coupon_transaction
     end
   end
-
+  
   def amount_to_charge
     if params.include?:user and params[:user].include?:coupon
       (params[:user][:coupon][:amount].to_f*100).to_i
@@ -204,7 +203,7 @@ class PackagesController < ApplicationController
     cu.description = "Customer for test@example.com"
     cu.plan=plan # obtained with Stripe.js
     cu.save
-
+   
   end
   def choose_payment_type
     if params.include?"type_of_payment"
@@ -216,5 +215,5 @@ class PackagesController < ApplicationController
     end
   end
 
-
+ 
 end

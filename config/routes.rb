@@ -1,11 +1,11 @@
 VirtualTour::Application.routes.draw do
   match '/payments/payment', :to => 'payments#payment', :as => 'paymentspayment', :via => [:get]
- match 'payments/save_user', :to=>'payments#save_user', :as=>'payments_save_user' ,:via=>[:get]
+  match 'payments/save_user', :to=>'payments#save_user', :as=>'payments_save_user' ,:via=>[:get]
   match '/payments/thank_you', :to => 'payments#thank_you', :as => 'payments_thank_you', :via => [:get]
   match '/payments/renew_successfull', :to => 'payments#renew_successfull', :as => 'payments_renew_successfull', :via => [:get]
   match '/packages/upgrade', :to => 'packages#upgrade', :as => 'upgrade_packages', :via => [:get]
   match '/packages/upgrade_combo', :to => 'packages#upgrade_combo', :as => 'upgrade_combo_packages', :via => [:get]
-
+  match '/packages/manual_packages',:to => 'packages#manual_packages',:as =>'packages_manual_packages',:via => [:get]
   #get "home/index"
   get "packages/show"
   match '/tours/view_map' => 'tours#view_map'
@@ -28,10 +28,10 @@ VirtualTour::Application.routes.draw do
   devise_for :users,:controllers => { :registrations => "Registrations" }
   resources :paintings
   resources :tours
-devise_scope :user do
-   #get "registrations/text_visit" => "registrations#text_visit"
-  match "registrations/save_user" => "registrations#save_user"
-end
+  devise_scope :user do
+    #get "registrations/text_visit" => "registrations#text_visit"
+    match "registrations/save_user" => "registrations#save_user"
+  end
 
 
   resources :feedbacks, :except => [:edit, :update]

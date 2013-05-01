@@ -33,7 +33,7 @@
            Account
            <b class="caret"></b>
           </a>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" style="min-width:97%; text-align:center; ">
            <%#= link_to '<i class="icon-pencil"></i>Edit'.html_safe, edit_user_registration_path(:id)%>
            <%= link_to '<i class="icon-off"></i>Signout'.html_safe, destroy_user_session_path, :method => :delete %>
          </div>
@@ -75,7 +75,7 @@
         </a>
   <%#= link_to image_tag("Virtual I Logo 300dpi.png", :size => "100x100", :alt => "Virtuali"), root_path%>
         <div class="nav-collapse" style="margin-top:0%; ">
-          <ul class="nav" style="height:70px; margin-left: 11%;margin-top:0%;width:55%">
+          <ul class="nav" style="height:70px; margin-left: 13%;margin-top:0%;width:55%">
 
             <li class="tab active"><%= link_to '<center><i class="icon-2x icon-desktop"></i></center> Dashboard'.html_safe, '/'%> </li>
 
@@ -91,7 +91,7 @@
           </ul>
 
         </div>
-         <div style="float:left;margin-left: 2%; margin-top:2.6%;">
+         <div style="float:left;margin-left: 1%; margin-top:2.6%;">
  <%= link_to "Create New Tour", '/paintings/new', :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  if verify_tours_allowed%>
 </div>
       

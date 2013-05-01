@@ -17,8 +17,6 @@
             <p><li> <%=radio_button_tag "user[package][type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly</li> </p>
           <%elsif !pkg.special_price.nil?%>
             <%=hidden_field_tag "user[package][type_of_payment]",1%>
-       <%= render :partial=>"_pricing" %>
-
           <%end%>
         </ul></center>
     </div>

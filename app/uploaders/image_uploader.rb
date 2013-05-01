@@ -2,12 +2,12 @@
 class ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
-   include CarrierWave::RMagick
+  include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
-   include Sprockets::Helpers::RailsHelper
-   include Sprockets::Helpers::IsolatedHelper
+  include Sprockets::Helpers::RailsHelper
+  include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -16,32 +16,32 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
- 
-    
-  "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
-# def pre_limit file
-#
-#    #require 'debugger'; debugger
-#    if file && file.size >5.kilobytes
-#      raise Exception.new("too large")
-#    end
-#    true
-#  end
 
-#  process :save_image_dimensions
-# def save_image_dimensions file
-#
-#      puts "8"*15
-#        puts FastImage.size(file)
-#         puts "8"*15
-#      if FastImage.size(file)[0]< 700 and FastImage.size(file)[1]<500
-#
-#         raise Exception.new("Picture size Should Be more than 700X500")
-#      end
-#
-# true
-#    end
+
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+  # def pre_limit file
+  #
+  #    #require 'debugger'; debugger
+  #    if file && file.size >5.kilobytes
+  #      raise Exception.new("too large")
+  #    end
+  #    true
+  #  end
+
+  #  process :save_image_dimensions
+  # def save_image_dimensions file
+  #
+  #      puts "8"*15
+  #        puts FastImage.size(file)
+  #         puts "8"*15
+  #      if FastImage.size(file)[0]< 700 and FastImage.size(file)[1]<500
+  #
+  #         raise Exception.new("Picture size Should Be more than 700X500")
+  #      end
+  #
+  # true
+  #    end
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:
@@ -75,36 +75,39 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-#  process :resize_to_fit => [800, 800]
+  #  process :resize_to_fit => [800, 800]
 
 
-#  version :thumb do
-#    process :resize_to_fill=> [200, 200]
-#  end
-#  version :small do
-#    process :resize_to_fill =>[110, 110]
-#  end
-#  version :medium do
-#    process :resize_to_fill => [180, 180]
-#  end
-#
-#
-#  version :large do
-#    process :resize_to_fill => [911, 607]
-#  end
+  #  version :thumb do
+  #    process :resize_to_fill=> [200, 200]
+  #  end
+  #  version :small do
+  #    process :resize_to_fill =>[110, 110]
+  #  end
+  #  version :medium do
+  #    process :resize_to_fill => [180, 180]
+  #  end
+  #
+  #
+  #  version :large do
+  #    process :resize_to_fill => [911, 607]
+  #  end
 
 
-version :small do
+  version :small do
     process :resize_to_fit =>[130, 120]
   end
   version :medium do
     process :resize_to_fit => [205, 10000]
   end
-    version :thumb do
+  version :thumb do
     process :resize_to_fit => [200, 200]
   end
   version :large do
     process :resize_to_fit => [911, 607]
-
+  end
+  version :slide do
+    process :resize_to_fill => [911, 607]
   end
 end
+

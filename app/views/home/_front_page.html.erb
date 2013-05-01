@@ -1,109 +1,114 @@
 <script>
   $(document).ready(function(){
     $('.carousel').carousel({
-    interval: 7000,
-    autoplay: true
-  })
-});
+      interval: 7000,
+      autoplay: true
+    })
+  });
 </script>
 
 <div id="myCarousel1" class="carousel slide carousel-fade">
-     <div class="carousel-inner">
-        <div class="active item"><%= image_tag("slide-01.jpg")%> </div>
-        <div class="item"><%= image_tag("slide-02.jpg")%></div>
-        <div class="item"><%= image_tag("slide-03.jpg")%></div>
-        <div class="item"><%= image_tag("slide-04.jpg")%></div>
-        <div class="item"><%= image_tag("slide-05.jpg")%></div>
-      </div>
-       <a class="carousel-control left" href="#myCarousel1" data-slide="prev">&lsaquo;</a>
-       <a class="carousel-control right" href="#myCarousel1" data-slide="next">&rsaquo;</a>
-  </div><!-- end of carousel -->
-  <!-- Single page navigation code (make page/views as partials)
-  <%#*<div class="nav-collapse1" style="margin: 20px 25% 20px 30%;">%>
-    <%#*<ul id="nav" class="nav nav-pills one-page">%>
-        <%#*<li><%= link_to "About VI", '#aboutvi'%></li>%>
-        <%#*<li><%= link_to "Products", '#products'%> </li>%>
-        <%#*<li><%= link_to "Pricing", '#pricing' %> </li>%>
-        <%#*<li><%= link_to "Tutorial", '#tutorial' %> </li>%>
-        <%#*<li><%= link_to "How to?", '#howto' %> </li>%>
-        <%#*<li><%= link_to "FAQ", '#faq'%></li>%>
-    <%#*</ul>%>
-  <%#*</div>%>
-  -->
-  <div id="toTop">Back to Top&nbsp;<i class="icon-arrow-up"></i></div>
-  <div class="container marketing">
-<!-- START THE FEATURETTES -->
-     <div class="featurette">
-        <%= image_tag("home_image2.png", :class => "featurette-image pull-right featurette-image-round-shadow")%>
-        <h2 class="featurette-heading">Virtuali Visual Tours.. <span class="muted">It'll blow your mind.</span></h2>
-        <p class="lead" style="font-size:medium;">We here at Virtual I we strive to bring you an simple and easy to show case your home and rental on our web site. Just a simple upload of pictures and a click to optimize your picture and create your visual tour. Our optimizations of the pictures you upload are like no other site. You are able to lighten, darken and sharpen that is something that other sides don’t do. We have a template that is eye appealing and will draw home buyers to your home. Our mapping will make it easy for that home buyer to find what they are looking for. Our visual tour will show off the house your putting on the market. Our site is one of the best site you will find we offer you the chance to sell your home by offering the best visual tour on the web. </p>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <div class="featurette">
-        <%= image_tag("home_image3.png", :class => "featurette-image pull-left featurette-image-round-shadow") %>
-        <h2 class="featurette-heading">Oh yeah, it's that good. <span class="muted">See for yourself.</span></h2>
-        <p class="lead" style="font-size:medium;">We here at Virtual I we strive to bring you an simple and easy to show case your home and rental on our web site. Just a simple upload of pictures and a click to optimize your picture and create your visual tour. Our optimizations of the pictures you upload are like no other site. You are able to lighten, darken and sharpen that is something that other sides don’t do. We have a template that is eye appealing and will draw home buyers to your home. Our mapping will make it easy for that home buyer to find what they are looking for. Our visual tour will show off the house your putting on the market. Our site is one of the best site you will find we offer you the chance to sell your home by offering the best visual tour on the web. </p>
-      </div>
-
-      <hr class="featurette-divider">
-      <div class="featurette">
-        <%= image_tag("home_image1.png", :class => "featurette-image pull-right featurette-image-round-shadow") %>
-        <h2 class="featurette-heading">And lastly, this one. <span class="muted">Checkmate.</span></h2>
-        <p class="lead" style="font-size:medium;">We here at Virtual I we strive to bring you an simple and easy to show case your home and rental on our web site. Just a simple upload of pictures and a click to optimize your picture and create your visual tour. Our optimizations of the pictures you upload are like no other site. You are able to lighten, darken and sharpen that is something that other sides don’t do. We have a template that is eye appealing and will draw home buyers to your home. Our mapping will make it easy for that home buyer to find what they are looking for. Our visual tour will show off the house your putting on the market. Our site is one of the best site you will find we offer you the chance to sell your home by offering the best visual tour on the web. </p>
-      </div>
+  <div class="carousel-inner">
+    <div class="active item"><%= image_tag("slide-01.jpg")%> </div>
+    <div class="item"><%= image_tag("slide-02.jpg")%></div>
+    <div class="item"><%= image_tag("slide-03.jpg")%></div>
+    <div class="item"><%= image_tag("slide-04.jpg")%></div>
+    <div class="item"><%= image_tag("slide-05.jpg")%></div>
   </div>
-      <!-- /END THE FEATURETTES -->
-      <hr class="featurette-divider">
-      <!-- Three columns of text below the carousel -->
-      <%= render 'pricing' %>
-      <hr class="featurette-divider2">
+  <a class="carousel-control left" href="#myCarousel1" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel1" data-slide="next">&rsaquo;</a>
+</div><!-- end of carousel -->
+<!-- Single page navigation code (make page/views as partials)
+<%#*<div class="nav-collapse1" style="margin: 20px 25% 20px 30%;">%>
+<%#*<ul id="nav" class="nav nav-pills one-page">%>
+<%#*<li><%= link_to "About VI", '#aboutvi'%></li>%>
+<%#*<li><%= link_to "Products", '#products'%> </li>%>
+<%#*<li><%= link_to "Pricing", '#pricing' %> </li>%>
+<%#*<li><%= link_to "Tutorial", '#tutorial' %> </li>%>
+<%#*<li><%= link_to "How to?", '#howto' %> </li>%>
+<%#*<li><%= link_to "FAQ", '#faq'%></li>%>
+<%#*</ul>%>
+<%#*</div>%>
+-->
+<div id="toTop">Back to Top&nbsp;<i class="icon-arrow-up"></i></div>
+<div class="container marketing">
+  <!-- START THE FEATURETTES -->
+  <div class="featurette">
+    <%= image_tag("home_image2.png", :class => "featurette-image pull-right featurette-image-round-shadow")%>
+    <h2 class="featurette-heading">Virtuali Visual Tours.. <span class="muted">It'll blow your mind.</span></h2>
+    <p class="lead" style="font-size:medium;">We here at Virtual I we strive to bring you an simple and easy to show case your home and rental on our web site. Just a simple upload of pictures and a click to optimize your picture and create your visual tour. Our optimizations of the pictures you upload are like no other site. You are able to lighten, darken and sharpen that is something that other sides don’t do. We have a template that is eye appealing and will draw home buyers to your home. Our mapping will make it easy for that home buyer to find what they are looking for. Our visual tour will show off the house your putting on the market. Our site is one of the best site you will find we offer you the chance to sell your home by offering the best visual tour on the web. </p>
+  </div>
 
-      <!-- Single page nav app partials
-      <div id="aboutvi">
-      <div class="featurette">
-      
-        <%#= render 'pages/about_vi' %>
-      </div>
-</div>
-      <hr class="featurette-divider2">
-      <div id="products">
-      <div class="featurette">
+  <hr class="featurette-divider">
 
-        <%#= render 'pages/products' %>
-      </div>
-</div>
-      <hr class="featurette-divider2">
-      <div id="pricing">
-      <div class="featurette">
+  <div class="featurette">
+    <%= image_tag("home_image3.png", :class => "featurette-image pull-left featurette-image-round-shadow") %>
+    <h2 class="featurette-heading">Oh yeah, it's that good. <span class="muted">See for yourself.</span></h2>
+    <p class="lead" style="font-size:medium;">We here at Virtual I we strive to bring you an simple and easy to show case your home and rental on our web site. Just a simple upload of pictures and a click to optimize your picture and create your visual tour. Our optimizations of the pictures you upload are like no other site. You are able to lighten, darken and sharpen that is something that other sides don’t do. We have a template that is eye appealing and will draw home buyers to your home. Our mapping will make it easy for that home buyer to find what they are looking for. Our visual tour will show off the house your putting on the market. Our site is one of the best site you will find we offer you the chance to sell your home by offering the best visual tour on the web. </p>
+  </div>
 
-        <%#= render 'pages/pricing' %>
-      </div>
+  <hr class="featurette-divider">
+  <div class="featurette">
+    <%= image_tag("home_image1.png", :class => "featurette-image pull-right featurette-image-round-shadow") %>
+    <h2 class="featurette-heading">And lastly, this one. <span class="muted">Checkmate.</span></h2>
+    <p class="lead" style="font-size:medium;">We here at Virtual I we strive to bring you an simple and easy to show case your home and rental on our web site. Just a simple upload of pictures and a click to optimize your picture and create your visual tour. Our optimizations of the pictures you upload are like no other site. You are able to lighten, darken and sharpen that is something that other sides don’t do. We have a template that is eye appealing and will draw home buyers to your home. Our mapping will make it easy for that home buyer to find what they are looking for. Our visual tour will show off the house your putting on the market. Our site is one of the best site you will find we offer you the chance to sell your home by offering the best visual tour on the web. </p>
+  </div>
 </div>
-      <hr class="featurette-divider2">
-      <div id="tutorial">
-      <div class="featurette">
+<!-- /END THE FEATURETTES -->
+<hr class="featurette-divider">
 
-        <%#= render 'pages/tutorial' %>
-      </div>
+<!-- Three columns of text below the carousel -->
+<div style="text-align:center;">
+  <%= select_tag :product_id, options_from_collection_for_select(Product.all, "id", "name"),:onchange=>"packages_pricing()" %>
+  <div id="packages_pricing"></div>
 </div>
-      <hr class="featurette-divider2">
-      <div id="howto">
-      <div class="featurette">
+<%#= render 'pricing' %>
+<hr class="featurette-divider2">
 
-        <%#= render 'pages/how_to' %>
-      </div>
-</div>
-      <hr class="featurette-divider2">
-      <div id="faq">
-      <div class="featurette">
+<!-- Single page nav app partials
+<div id="aboutvi">
+<div class="featurette">
 
-        <%#= render 'pages/faq' %>
-      </div>
+<%#= render 'pages/about_vi' %>
 </div>
-      -->
-      
+</div>
+<hr class="featurette-divider2">
+<div id="products">
+<div class="featurette">
+
+<%#= render 'pages/products' %>
+</div>
+</div>
+<hr class="featurette-divider2">
+<div id="pricing">
+<div class="featurette">
+
+<%#= render 'pages/pricing' %>
+</div>
+</div>
+<hr class="featurette-divider2">
+<div id="tutorial">
+<div class="featurette">
+
+<%#= render 'pages/tutorial' %>
+</div>
+</div>
+<hr class="featurette-divider2">
+<div id="howto">
+<div class="featurette">
+
+<%#= render 'pages/how_to' %>
+</div>
+</div>
+<hr class="featurette-divider2">
+<div id="faq">
+<div class="featurette">
+
+<%#= render 'pages/faq' %>
+</div>
+</div>
+-->
+
 
 <!-- end of marketing fields -->
 
@@ -117,46 +122,59 @@
     filter: '',
     easing: 'swing',
     begin: function() {
-        //I get fired when the animation is starting
+      //I get fired when the animation is starting
     },
     end: function() {
-        //I get fired when the animation is ending
+      //I get fired when the animation is ending
     },
     scrollChange: function($currentListItem) {
-        //I get fired when you enter a section and I pass the list item of the section
+      //I get fired when you enter a section and I pass the list item of the section
     }
-});
+  });
 </script>
 <style>
   #toTop {
-	width:100px;
-        border:1px solid #ccc;
-        background:lightgreen;
-        box-shadow: 5px 5px 2px #888888;
-        text-align:center;
-        padding:5px;
-        position:fixed; /* this is the magic */
-        bottom:10px; /* together with this to put the div at the bottom*/
-        right:10px;
-        cursor:pointer;
-        display:none;
-        color:#333;
-        font-family:verdana;
-        font-size:11px;
-}
+    width:100px;
+    border:1px solid #ccc;
+    background:lightgreen;
+    box-shadow: 5px 5px 2px #888888;
+    text-align:center;
+    padding:5px;
+    position:fixed; /* this is the magic */
+    bottom:10px; /* together with this to put the div at the bottom*/
+    right:10px;
+    cursor:pointer;
+    display:none;
+    color:#333;
+    font-family:verdana;
+    font-size:11px;
+  }
 </style>
 <script>
   $(function() {
-	$(window).scroll(function() {
-		if($(this).scrollTop() != 0) {
-			$('#toTop').fadeIn();
-		} else {
-			$('#toTop').fadeOut();
-		}
-	});
+    $(window).scroll(function() {
+      if($(this).scrollTop() != 0) {
+        $('#toTop').fadeIn();
+      } else {
+        $('#toTop').fadeOut();
+      }
+    });
 
-	$('#toTop').click(function() {
-		$('body,html').animate({scrollTop:0},800);
-	});
-});
+    $('#toTop').click(function() {
+      $('body,html').animate({scrollTop:0},800);
+    });
+
+    packages_pricing();
+  });
+  function packages_pricing(){
+    $.ajax({
+      type: 'GET',
+      url:'/packages/pricing',
+      data:{
+        id:$('#product_id').val()
+      }
+    }).done(function(html){
+      $('#pricing').html(html);
+    });
+  }
 </script>
