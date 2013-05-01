@@ -13,12 +13,23 @@
         <ul class="unstyled">
           <p><li><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></li></p>
           <p><li><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></li></p>
-          <%if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?%>
-            <p><li> <%=radio_button_tag "user[package][type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly</li> </p>
-          <%elsif !pkg.special_price.nil?%>
-            <%=hidden_field_tag "user[package][type_of_payment]",1%>
+          <p><li>  Your tour will be placed on our Tours Map page and will be listed in All Tours page for as long as the subscription is current.</li></p>
+          <p><li> You will be able to down load a zip file containing the pictures you uploaded and optimized.</li></p>
+          <% if pkg.name == "Bronze"%>
+            <p><li> For and additional $15 you can add 10 more pictures to your tour.</li></p>
+          <%end%>
+          <%if pkg.product.category.name == "By Agent"%>
+            <p><li>  Upload to Realtor.com for $5.00 with Premier account and $25.00 for General account</li></p>
           <%end%>
         </ul></center>
+      <hr></hr>
+      <%= render '/home/signup_or_buy' %>
+
+      <%if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?%>
+        <p><li> <%=radio_button_tag "user[package][type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly</li> </p>
+      <%elsif !pkg.special_price.nil?%>
+        <%=hidden_field_tag "user[package][type_of_payment]",1%>
+      <%end%>
     </div>
   <% end %>
 </div>

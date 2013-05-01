@@ -1,3 +1,24 @@
 <h1 class="center">Virtuali Pricing</h1>
 <h2 class="grey center p60">After your wonderful thoughts, pick a plan that best fits your needs!</h2>
-<%= render '/home/pricing' %>
+<div style="text-align:center;">
+  <%= select_tag :product_id, options_from_collection_for_select(Product.all, "id", "name"),:onchange=>"manual_packages()" %>
+  <div id="manual_packages"></div>
+</div>
+
+
+<script>
+  $(function() {
+    manual_packages();
+  });
+  function manual_packages(){
+    $.ajax({
+      type: 'GET',
+      url:'/packages/manual_packages',
+      data:{
+        id:$('#product_id').val()
+      }
+    }).done(function(html){
+      $('#manual_packages').html(html);
+    });
+  }
+</script>

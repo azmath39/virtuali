@@ -59,8 +59,8 @@
 
 <!-- Three columns of text below the carousel -->
 <div style="text-align:center;">
-  <%= select_tag :product_id, options_from_collection_for_select(Product.all, "id", "name"),:onchange=>"packages_pricing()" %>
-  <div id="packages_pricing"></div>
+  <%= select_tag :product_id, options_from_collection_for_select(Product.all, "id", "name"),:onchange=>"manual_packages()" %>
+  <div id="manual_packages"></div>
 </div>
 <%#= render 'pricing' %>
 <hr class="featurette-divider2">
@@ -164,17 +164,17 @@
       $('body,html').animate({scrollTop:0},800);
     });
 
-    packages_pricing();
+    manual_packages();
   });
-  function packages_pricing(){
+  function manual_packages(){
     $.ajax({
       type: 'GET',
-      url:'/packages/pricing',
+      url:'/packages/manual_packages',
       data:{
         id:$('#product_id').val()
       }
     }).done(function(html){
-      $('#pricing').html(html);
+      $('#manual_packages').html(html);
     });
   }
 </script>
