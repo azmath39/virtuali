@@ -5,6 +5,16 @@ class PackagesController < ApplicationController
     @combo_packages=product.packages.where(:package_type=>2)
     render :layout => false
   end
+
+  def manual_packages
+    product=Product.find(params[:id])
+    @packages = product.packages
+
+    render :partial=>"manual_packages"
+  end
+
+
+
   def packages_for_downgrade_combo
     @regular_packages=current_user.packages_for_downgrade_combo(params["product"].to_i,1)
     @combo_packages=current_user.packages_for_downgrade_combo(params["product"].to_i,2)
@@ -46,7 +56,7 @@ class PackagesController < ApplicationController
   end
   def dowgrade_package_combo
     current_user.change_product(params[:user][:product])
-     if current_user.downgrade(params[:user][:package])
+    if current_user.downgrade(params[:user][:package])
       flash[:success]="Sucessfully downgraded. Change your tours according to new package."
       redirect_to root_url
     else
@@ -120,7 +130,7 @@ class PackagesController < ApplicationController
 
   end
 
-  
+
   def destroy_user_package
     if current_user.any_cash_back
       current_user.cancel_annual_plan
@@ -144,9 +154,9 @@ class PackagesController < ApplicationController
   #  def change_annual_plan
   #      current_user.change_to_montly_plan(params[:package])
   #  end
-def renew
-@total = current_user.total_after_all_discounts
-end
+  def renew
+    @total = current_user.total_after_all_discounts
+  end
   private
   def add_coupon
     if params.include?:user and params[:user].include?:coupon
@@ -156,7 +166,7 @@ end
       current_user.add_coupon_transaction
     end
   end
-  
+
   def amount_to_charge
     if params.include?:user and params[:user].include?:coupon
       (params[:user][:coupon][:amount].to_f*100).to_i
@@ -194,7 +204,7 @@ end
     cu.description = "Customer for test@example.com"
     cu.plan=plan # obtained with Stripe.js
     cu.save
-   
+
   end
   def choose_payment_type
     if params.include?"type_of_payment"
@@ -205,5 +215,6 @@ end
       2
     end
   end
+
 
 end
