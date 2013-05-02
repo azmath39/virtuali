@@ -27,8 +27,9 @@
       <%=link_to "delete", tour_path(tour.id),:method=>:delete, :confirm => "Are you sure?"%>
     <br />
     <strong>Price: </strong> <%= number_to_currency(tour.price) %><br />
-    <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
     <strong>Sq foot: </strong> <%= tour.square_footage %><br />
+    <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
+    
     <%#*<strong>Category: </strong><%= tour.product.name %<br />%>
     <%#*<strong>Description:</strong>%>
     <%#*<span><%=  strip_tags(truncate(tour.description, :length => 30))%</span>%>

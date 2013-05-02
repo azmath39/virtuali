@@ -18,7 +18,7 @@
         <div id="personal_info">
           <div id="scont">
             <h3>Personal Information</h3>
-            <% flash[:notice] = "You have logged in as #{Product.first.category.name}" %>
+            <% #flash[:notice] = "You have logged in as #{Product.first.category.name}" %>
             <hr />
             <div class="item-inner">
 
@@ -83,6 +83,8 @@
                 </div>
 
               </div></div>
+             <%= link_to "",root_url, :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal" %>
+          
             <div id="next_bn">
               <%=link_to '', '#signupCarousel',:class =>"carousel-control icon-arrow-right right btn-large btn-primary btn_personal", "data-slide"=>"next", :id=>"btn_personal",:onclick=>"button()" %>
             </div>
