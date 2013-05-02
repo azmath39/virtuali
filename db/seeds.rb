@@ -21,7 +21,7 @@ p2.packages.create(:name=>"Gold",:pictures_for_tour=>45,:status=>1,:subscription
 p3=Product.create(:name=>"Home sales by Owner",:category_id=>owner.id,:product_type=>1)
 p3.packages.create(:name=>"Bronze",:pictures_for_tour=>5,:status=>1,:subscription_period=>1, :regular_price=>10,:no_of_tours=>1,:package_type=>1)
 p3.packages.create(:name=>"Silver",:pictures_for_tour=>35,:status=>1,:subscription_period=>1, :regular_price=>30,:no_of_tours=>1,:package_type=>1)
-p3.packages.create(:name=>"Bronze",:pictures_for_tour=>45,:status=>1,:subscription_period=>1, :regular_price=>40,:no_of_tours=>1,:package_type=>1)
+p3.packages.create(:name=>"Gold",:pictures_for_tour=>45,:status=>1,:subscription_period=>1, :regular_price=>40,:no_of_tours=>1,:package_type=>1)
 
 p4=Product.create(:name=>"Rental Property by Owner",:category_id=>owner.id,:product_type=>1)
 p4.packages.create(:name=>"Bronze",:pictures_for_tour=>5,:status=>1,:subscription_period=>1, :regular_price=>10,:no_of_tours=>1,:package_type=>1)
