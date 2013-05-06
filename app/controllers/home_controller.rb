@@ -198,4 +198,12 @@ class HomeController < ApplicationController
       current_user.add_coupon_transaction
     end
   end
+
+
+
+  def instant_sign_up
+    
+  
+  end
+
 end

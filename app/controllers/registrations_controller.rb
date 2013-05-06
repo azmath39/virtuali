@@ -2,7 +2,17 @@ class RegistrationsController < Devise::RegistrationsController
   helper :authorize_net
   protect_from_forgery :except => :relay_response
   def new
-    super
+    resource = build_resource({})
+
+    if params.include?(:package_id)
+      @package=params[:package_id]
+
+      @product=Package.find(params[:package_id]).product.id
+      @notice="You have select #{Package.find(params[:package_id]).name} package of #{Package.find(params[:package_id]).product.name} "
+      render  'instant_sign_up'
+    else
+      respond_with resource
+    end
   end
   
   def create
@@ -59,7 +69,7 @@ class RegistrationsController < Devise::RegistrationsController
   def edit
     render :layout => false
   end
-    
+
   
   private
   def amount_to_charge
@@ -69,25 +79,25 @@ class RegistrationsController < Devise::RegistrationsController
       params[:total_amount].to_f
     end
   end
-#  def payment()
-#    if params[:user][:package].include?(:type_of_payment) and params[:user][:package][:type_of_payment].to_i==1
-#      if params[:type_of_transaction] == "1"
-#        stripe_charge
-#        resource.save_payment_details(@charge["id"],1,@charge[:amount])
-#      elsif params[:type_of_transaction] == "2"
-#        subscription
-#        save_stripe_customer_id(resource, @customer.id)
-#        resource.save_payment_details(nil,3,@amount)
-#      end
-#    else
-#      stripe_charge
-#      resource.save_payment_details(@charge["id"],1,@charge[:amount])
-#    end
-#  end
-#  def refund_payment(charge_id)
-#    ch = Stripe::Charge.retrieve(charge_id)
-#    refund= ch.refund
-#    a= refund[:amount].to_i/100
-#    Payment.create(:reference=>refund[:id],:amount=>a,:payment_type=>4)
-#  end
+  #  def payment()
+  #    if params[:user][:package].include?(:type_of_payment) and params[:user][:package][:type_of_payment].to_i==1
+  #      if params[:type_of_transaction] == "1"
+  #        stripe_charge
+  #        resource.save_payment_details(@charge["id"],1,@charge[:amount])
+  #      elsif params[:type_of_transaction] == "2"
+  #        subscription
+  #        save_stripe_customer_id(resource, @customer.id)
+  #        resource.save_payment_details(nil,3,@amount)
+  #      end
+  #    else
+  #      stripe_charge
+  #      resource.save_payment_details(@charge["id"],1,@charge[:amount])
+  #    end
+  #  end
+  #  def refund_payment(charge_id)
+  #    ch = Stripe::Charge.retrieve(charge_id)
+  #    refund= ch.refund
+  #    a= refund[:amount].to_i/100
+  #    Payment.create(:reference=>refund[:id],:amount=>a,:payment_type=>4)
+  #  end
 end
