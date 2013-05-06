@@ -1,9 +1,10 @@
 <span id="package_error" style="color:red; margin-left: 5%;"></span>
 <div class="pricing_grid row" style="margin:4% 0 0 3%;">
   <% @packages.each do |pkg| %>
-    <div class="span3 first-grid" style="width:21%;">
+    <div class="span3 first-grid" style="width:21%; height: 550px;">
   <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
-      <p><center><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package",:onclick=>"enable_btn_package()"%></center></p>
+      <p><center><%#=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package",:onclick=>"enable_btn_package()"%></center></p>
+
       <br />
       <p id="price">
         <sup id="dollar-symb">$</sup><%=just_price(pkg)%>
