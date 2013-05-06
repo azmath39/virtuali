@@ -5,10 +5,10 @@ class RegistrationsController < Devise::RegistrationsController
     resource = build_resource({})
 
     if params.include?(:package_id)
-      @package=params[:package_id]
+      @package=Package.find(params[:package_id])
 
-      @product=Package.find(params[:package_id]).product.id
-      @notice="You have select #{Package.find(params[:package_id]).name} package of #{Package.find(params[:package_id]).product.name} "
+      @product=@package.product.id
+      @notice="You have select #{@package.name} package of #{@package.product.name} "
       render  'instant_sign_up'
     else
       respond_with resource
@@ -47,6 +47,7 @@ class RegistrationsController < Devise::RegistrationsController
     session[:user_id]=nil
     if resp.approved?
       resource.save_payment_details(params[:x_trans_id],params[:x_card_type],params[:x_amount])
+      resource.trace_activity
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_up(resource_name, resource)

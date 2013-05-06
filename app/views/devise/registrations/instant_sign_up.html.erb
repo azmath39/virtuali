@@ -28,352 +28,315 @@
 
               <div class="span4" style="border-right:1px #0088CC solid;">
                 <div>
-                  <%= hidden_field_tag "user[package][id]", @package %>
+                  <%= hidden_field_tag "user[package][id]", @package.id %>
                   <%= hidden_field_tag "user[product]", @product %>
-                </div>
-                <div>
-                  <%= f.label "full_Name", 'Full Name <span>*<span>'.html_safe %>
-                  <%= f.text_field :name%><span id="personal_info_error_name" style="color:red;"></span>
-                </div>
-                <div>
-                  <%= f.label "email", "Email <span>*<span>".html_safe %>
-                  <%= f.email_field :email,:id=>"email_id",:onblur=>"email_validation()" %><span id="personal_info_error_email" style="color:red;"></span>
-                </div>
-                <div>
-                  <%= f.label "password", "Password <span>*<span>".html_safe %>
-                  <%= f.password_field :password, :id=>"password" %><br />
-                  <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i>
-                  <span id="personal_info_error_password" style="color:red;"></span><br /><br />
-                </div>
-                <div>
-                  <%= f.label "password_confirmation", "Password Confirmation <span>*<span>".html_safe %>
+                  
+                    <%if !@package.special_price.nil?%>
+                      <%=hidden_field_tag "user[package][type_of_payment]",1%>
+                    <%else%>
+                      <%=hidden_field_tag "user[package][type_of_payment]",3%>
+                    <%end%>
+                 
+                  </div>
+                  <div>
+                    <%= f.label "full_Name", 'Full Name <span>*<span>'.html_safe %>
+                    <%= f.text_field :name%><span id="personal_info_error_name" style="color:red;"></span>
+                  </div>
+                  <div>
+                    <%= f.label "email", "Email <span>*<span>".html_safe %>
+                    <%= f.email_field :email,:id=>"email_id",:onblur=>"email_validation()" %><span id="personal_info_error_email" style="color:red;"></span>
+                  </div>
+                  <div>
+                    <%= f.label "password", "Password <span>*<span>".html_safe %>
+                    <%= f.password_field :password, :id=>"password" %><br />
+                    <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i>
+                    <span id="personal_info_error_password" style="color:red;"></span><br /><br />
+                  </div>
+                  <div>
+                    <%= f.label "password_confirmation", "Password Confirmation <span>*<span>".html_safe %>
 
-                  <%= f.password_field :password_confirmation,:id=>"password_confirmation" %><br />
-                  <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i>
-                  <span id="personal_info_error_cpassword" style="color:red;"></span><br /><br />
+                    <%= f.password_field :password_confirmation,:id=>"password_confirmation" %><br />
+                    <i style="font-size:12px;">( Password needs to be minimum 8 characters )</i>
+                    <span id="personal_info_error_cpassword" style="color:red;"></span><br /><br />
+                  </div>
+                  <div>
+                    <%= f.label :phno, "Mobile Number" %>
+                    <%= f.text_field :phno %>
+                  </div>
+                  <%= f.label :image, "Profile Picture" %>
+                  <%= f.file_field :image, :id => 'user_file', :style => "display:none" %>
+                  <div class="input-append">
+                    <input id="photoCover" class="input-large" type="text" style="width:146px;"/>
+                    <a class="btn btn-primary" onclick="$('input[id=user_file]').click();">Browse</a>
+                  </div>
                 </div>
-                <div>
-                  <%= f.label :phno, "Mobile Number" %>
-                  <%= f.text_field :phno %>
-                </div>
-                <%= f.label :image, "Profile Picture" %>
-                <%= f.file_field :image, :id => 'user_file', :style => "display:none" %>
-                <div class="input-append">
-                  <input id="photoCover" class="input-large" type="text" style="width:146px;"/>
-                  <a class="btn btn-primary" onclick="$('input[id=user_file]').click();">Browse</a>
-                </div>
+                <div class="span4" style="margin-left:11%;">
+                  <div>
+                    <%= f.label :add1, "Address1 <span>*<span>".html_safe %>
+                    <%= f.text_field :add1 %><span id="personal_info_error_add1" style="color:red;"></span>
+                  </div>
+                  <div>
+                    <%= f.label :add2, "Address2" %>
+                    <%= f.text_field :add2 %><span id="personal_info_error_add2" style="color:red;"></span>
+                  </div>
+                  <div>
+                    <%= f.label "state", "State <span>*<span>".html_safe %>
+                    <%= f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
+                    <span id="personal_info_error_state" style="color:red;"></span>
+                  </div>
+                  <div class ="control-group">
+                    <%= f.label "city", "City <span>*<span>".html_safe, :html => {:class => 'control-label'} %>
+                    <%=f.select :city, {},:prompt=>"Select City"%>
+                    <span id="personal_info_error_city" style="color:red;"></span>
+                  </div>
+                  <div>
+                    <%= f.label :zipcode, "ZIP Code <span>*<span>".html_safe %>
+                    <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
+                  </div>
+
+                </div></div>
+              <%= link_to "",root_url, :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal" %>
+
+              <div id="next_bn">
+                <%=link_to '', '#signupCarousel',:class =>"carousel-control icon-arrow-right right btn-large btn-primary btn_instant_personal", "data-slide"=>"next", :id=>"btn_instant_personal",:onclick=>"button()" %>
               </div>
-              <div class="span4" style="margin-left:11%;">
-                <div>
-                  <%= f.label :add1, "Address1 <span>*<span>".html_safe %>
-                  <%= f.text_field :add1 %><span id="personal_info_error_add1" style="color:red;"></span>
-                </div>
-                <div>
-                  <%= f.label :add2, "Address2" %>
-                  <%= f.text_field :add2 %><span id="personal_info_error_add2" style="color:red;"></span>
-                </div>
-                <div>
-                  <%= f.label "state", "State <span>*<span>".html_safe %>
-                  <%= f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
-                  <span id="personal_info_error_state" style="color:red;"></span>
-                </div>
-                <div class ="control-group">
-                  <%= f.label "city", "City <span>*<span>".html_safe, :html => {:class => 'control-label'} %>
-                  <%=f.select :city, {},:prompt=>"Select City"%>
-                  <span id="personal_info_error_city" style="color:red;"></span>
-                </div>
-                <div>
-                  <%= f.label :zipcode, "ZIP Code <span>*<span>".html_safe %>
-                  <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
-                </div>
-
-              </div></div>
-            <%= link_to "",root_url, :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal" %>
-
-            <div id="next_bn">
-              <%=link_to '', '#signupCarousel',:class =>"carousel-control icon-arrow-right right btn-large btn-primary btn_personal", "data-slide"=>"next", :id=>"btn_instant_personal",:onclick=>"button()" %>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="item">
-        <div id="payment">
-          <div id="scont">
-            <h3>Payment Process</h3>
-            <hr />
-            <div class="item-payment">
-              <div class = "payment-errors" style="margin:0 0 20px 0px; color: red;">
+        <div class="item">
+          <div id="payment">
+            <div id="scont">
+              <h3>Payment Process</h3>
+              <hr />
+              <div class="item-payment">
+                <div class = "payment-errors" style="margin:0 0 20px 0px; color: red;">
+                </div>
+                <div class="field" >Total Payable Amount($): <%= hidden_field_tag "total_amount","",:class=> "money" %>
+                  &nbsp;&nbsp; <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
+
+
+                <div class="field" style="padding:20px 0px;">
+                  <%=hidden_field_tag "type_of_transaction",1%>
+    <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %> <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
+                </div>
+                <div class="field">
+
+                  <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
+                  <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %><br />
+                  <i style="font-size: 12px;">( Leave blank if no coupon is available now. )</i><br />
+                  <div id='discounted_total'></div>
+                </div><br />
               </div>
-              <div class="field" >Total Payable Amount($): <%= hidden_field_tag "total_amount","",:class=> "money" %>
-                &nbsp;&nbsp; <%= text_field_tag "total_amount1","",:class=> "money",:disabled=>true %></div>
 
-
-              <div class="field" style="padding:20px 0px;">
-                <%=hidden_field_tag "type_of_transaction",1%>
-  <%#=radio_button_tag "type_of_transaction", 1%> <%#= "Card Pay" %> <%#=radio_button_tag "type_of_transaction", 2%> <%#="Direct Debit Setup" %>
+              <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
+              <div id="next_btn">
+                <%= f.submit "Submit", 'data-disable-with' => "Processing", :class=>"btn-large btn-primary btn_submit" %>
               </div>
-              <div class="field">
-
-                <%=label_tag :coupon_id, "Enter Coupon Code to get discount"%>
-                <%=text_field_tag "coupon_id", nil, :onblur=>'apply_discount()' %><br />
-                <i style="font-size: 12px;">( Leave blank if no coupon is available now. )</i><br />
-                <div id='discounted_total'></div>
-              </div><br />
-            </div>
-
-            <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
-            <div id="next_btn">
-              <%= f.submit "Submit", 'data-disable-with' => "Processing", :class=>"btn-large btn-primary btn_submit" %>
             </div>
           </div>
         </div>
+
       </div>
-
-    </div>
-  <%#*<a class="carousel-control left" href="#signupCarousel" data-slide="prev">&lsaquo;</a>%>
-  <%#*<a class="carousel-control right" href="#signupCarousel" data-slide="next">&rsaquo;</a>%>
-  </div><!-- end of carousel -->
-<% end %>
+    <%#*<a class="carousel-control left" href="#signupCarousel" data-slide="prev">&lsaquo;</a>%>
+    <%#*<a class="carousel-control right" href="#signupCarousel" data-slide="next">&rsaquo;</a>%>
+    </div><!-- end of carousel -->
+  <% end %>
 
 
-<%#= javascript_include_tag "registrations" %>
-<script>
+  <%#= javascript_include_tag "registrations" %>
+  <script>
 
-  function state_city()
-  {
-    $.ajax({
-      type: 'GET',
-      url: "/home/state_cities",
-      data: {
-        'state' : $("#user_state").val()
-      }
-    }).done(function(text) {
-      $('#user_city').empty().append(text);
+    function state_city()
+    {
+      $.ajax({
+        type: 'GET',
+        url: "/home/state_cities",
+        data: {
+          'state' : $("#user_state").val()
+        }
+      }).done(function(text) {
+        $('#user_city').empty().append(text);
+      });
+    }
+
+    //file upload button
+    $('input[id=user_file]').change(function() {
+      $('#photoCover').val($(this).val());
     });
-  }
+    function apply_discount()
+    {
+      $.ajax({
+        type:'GET',
+        url: '/home/check_discount',
+        data:{
+          code: $('#coupon_id').val(),
+          amount:$('#total_amount').val()
+        }
+      }).done(function(html){
 
-  //file upload button
-  $('input[id=user_file]').change(function() {
-    $('#photoCover').val($(this).val());
-  });
-  function apply_discount()
-  {
-    $.ajax({
-      type:'GET',
-      url: '/home/check_discount',
-      data:{
-        code: $('#coupon_id').val(),
-        amount:$('#total_amount').val()
-      }
-    }).done(function(html){
+        $('#discounted_total').html(html)
 
-      $('#discounted_total').html(html)
+      });
+    }
 
+    $(document).ready(function(){
+      company();
     });
-  }
-
-  $(document).ready(function(){
-    company();
-  });
-  function company()
-  {
-    $.ajax({
-      type: 'GET',
-      url: '/companies/new',
-      data:{
-        product: $("input[name='user[product]']:checked").val()
-      }
-    }).done(function(html){
-      $('#company_details').html(html);
-    });
-    $('#btn_product').prop('disabled', false);
+    function company()
+    {
+      $.ajax({
+        type: 'GET',
+        url: '/companies/new',
+        data:{
+          product: $("input[name='user[product]']:checked").val()
+        }
+      }).done(function(html){
+        $('#company_details').html(html);
+      });
+      $('#btn_product').prop('disabled', false);
 
 
-  }
-  $('#btn_instant_personal').click(function(event) {
-    $('#btn_instant_personal').prop('disabled', true);
-    var count=0;
-    $('#personal_info_error').html("");
-    if($("#user_name").val()==""){
+    }
+    $('#btn_instant_personal').click(function(event) {
+      $('#btn_instant_personal').prop('disabled', true);
+      var count=0;
+      $('#personal_info_error').html("");
+      if($("#user_name").val()==""){
         $('#personal_info_error_name').html("<br/>* Required Full Name.");
         count +=1;
 
-    }
-    if($("#company_name").val()==""){
+      }
+      if($("#company_name").val()==""){
         $('#company_name_error').html("<br/>* Required Company Name.");
         count +=1;
 
-    }
+      }
 
-    if($("#password").val()==""){
+      if($("#password").val()==""){
         $('#personal_info_error_password').html("<br/>* Required field Password.");
         count +=1;
-    }
-    if(($("#password").val()).length<8){
+      }
+      if(($("#password").val()).length<8){
         $('#personal_info_error_password').html("<br/>* Password should be more than 8 characters.");
         count +=1;
-    }
+      }
 
-    if($("#password_confirmation").val()==""){
+      if($("#password_confirmation").val()==""){
         $('#personal_info_error_cpassword').html("<br/>* Required field password confirmation.");
         count +=1;
-    }
-    if($("#password_confirmation").val()!=$("#password").val()){
+      }
+      if($("#password_confirmation").val()!=$("#password").val()){
         $('#personal_info_error_cpassword').html("<br/>* Password and password confirmation should match.");
         count +=1;
-    }
+      }
 
 
-    if(!validEmail($("#email_id").val())){
+      if(!validEmail($("#email_id").val())){
         $('#personal_info_error_email').html("<br/>* Enter valid Email address.");
         count +=1;
 
-    }
-    if (ec==0){
+      }
+      if (ec==0){
         $('#personal_info_error_email').html("<br/>* Email already exists");
         count +=1;
 
-    }
-    if($("#user_add1").val()==""){
+      }
+      if($("#user_add1").val()==""){
         $('#personal_info_error_add1').html("<br/>* Address1 Can't be empty.");
         count +=1;
-    }
-    if($("#user_state").val()==""){
+      }
+      if($("#user_state").val()==""){
         $('#personal_info_error_state').html("<br/>* State Can't be empty.");
         count +=1;
-    }
-    if($("#user_city").val()==""){
+      }
+      if($("#user_city").val()==""){
         $('#personal_info_error_city').html("<br/>* City Can't be empty.");
         count +=1
-    }
-    if($("#user_zipcode").val()==""){
+      }
+      if($("#user_zipcode").val()==""){
         $('#personal_info_error_zipcode').html("<br/>* ZIP Code Can't be empty.");
         count +=1;
-    }
+      }
 
 
 
 
-    if (count == 0){
+      if (count == 0){
         $('#btn_instant_personal').prop('disabled', false);
-         get_price();
+        get_price();
+      }
+    });
+    function get_price() {
+      var payment_type= $("#user_package_type_of_payment").val() || 2;
+   
+      //alert($("input[name='user[package]']:checked").val());
+      $.ajax({
+        type: 'GET',
+        url: '/packages/total_value',
+        data:{
+          package_id:$("#user_package_id").val(),
+          type_of_payment:payment_type
+        }
+
+      }).done(function(text) {
+        $("#total_amount").val(text);
+        $('#total_amount1').val(text);
+      });
+    
     }
-//
-//    if($("#user_name").val()==""){
-//      $('#btn_personal').die( "click" );
-//    }
-//    if($("#email_id").val()==""){
-//      $('#btn_personal').die( "click" );
-//    }
-//    if($("#password").val()==""){
-//      $('#btn_personal').die( "click" );
-//    }
-//    if($("#password").val().length<8){
-//      $('#btn_personal').die( "click" );
-//    }
-//    if($("#password_confirmation").val()==""){
-//      $('#btn_personal').die( "click" );
-//    }
-//    if($("#password_confirmation").val()!=$("#password").val()){
-//      $('#btn_personal').die( "click" );
-//    }
-//    if($("#user_add1").val()==""){
-//      $('#btn_personal').die( "click" );
-//    }
-//    if($("#user_state").val()==""){
-//      $('#btn_personal').die( "click" );
-//    }
-//    if($("#user_city").val()==""){
-//      $('#btn_personal').die( "click" );
-//    }
-//    if($("#user_zipcode").val()==""){
-//      $('#btn_personal').die( "click" );
-//    }
-//    if(!validEmail($("#email_id").val())){
-//      $('#btn_personal').die( "click" );
-//    }
-//    if (ec==0){
-//
-//      $('#btn_personal').die( "click" );
-//    }
-});
-function get_price() {
-    var payment_type= $("#user_package_type_of_payment").val() || 2;
-    if (!$("input[name='user[package][id]']:checked").val())
-    {
-        $('#package_error').html    ("* Select any Package  to continue..... <br/>")
-        //$('#btn_package').die( "click" );
-        $('#btn_package').prop('disabled', true);
-    }else{
-        //alert($("input[name='user[package]']:checked").val());
-         $('#btn_package').prop('disabled', false);
-        $.ajax({
-            type: 'GET',
-            url: '/packages/total_value',
-            data:{
-                package_id:$("input[name='user[package][id]']:checked").val(),
-                type_of_payment:payment_type
-            }
 
-        }).done(function(text) {
-            $("#total_amount").val(text);
-            $('#total_amount1').val(text);
-        });
+  </script>
+  <%#= render "devise/shared/links" %>
+  <%#= javascript_include_tag "jquery.slides.min" %>
+  <style>
+    span{
+      color: red;
     }
-}
+    .btn_personal{
+      margin-top: 250px;
 
-</script>
-<%#= render "devise/shared/links" %>
-<%#= javascript_include_tag "jquery.slides.min" %>
-<style>
-  span{
-    color: red;
-  }
-  .btn_personal{
-    margin-top: 250px;
+    }
+    .btn_submit{
+      margin-left: 55%;
+      margin-top: -10%;
+      height:89px;
+      border-radius:49px;
 
-  }
-  .btn_submit{
-    margin-left: 55%;
-    margin-top: -10%;
-    height:89px;
-    border-radius:49px;
+    }
+    .item-inner{
+      margin-left: 11%;
+      margin-top: 2%;
 
-  }
-  .item-inner{
-    margin-left: 11%;
-    margin-top: 2%;
+    }
+    .item-payment{
+      margin-left: 23%;
+    }
+    .item-package{
+      margin-left: 4%;
+      margin-top: 2%;
+    }
+    #signupCarousel{
+      border-radius: 25px;
+      box-shadow:10px 10px 5px #0088CC ;
+      border:2px #0088CC solid;height:650px; width: 80%; margin:auto;
+    }
+    h3{
+      color: #0088CC;
 
-  }
-  .item-payment{
-    margin-left: 23%;
-  }
-  .item-package{
-    margin-left: 4%;
-    margin-top: 2%;
-  }
-  #signupCarousel{
-    border-radius: 25px;
-    box-shadow:10px 10px 5px #0088CC ;
-    border:2px #0088CC solid;height:650px; width: 80%; margin:auto;
-  }
-  h3{
-    color: #0088CC;
+      margin-left: 38%;
+    }
+    .product-list{
 
-    margin-left: 38%;
-  }
-  .product-list{
+      font-size: 20px;
+      margin-top: 6%;
+    }
+    #company_details{
+      margin-top: 2%;
 
-    font-size: 20px;
-    margin-top: 6%;
-  }
-  #company_details{
-    margin-top: 2%;
-
-  }
-  h4{
-    font-size: 25px;
-    color: #0088CC
-  }
-</style>
+    }
+    h4{
+      font-size: 25px;
+      color: #0088CC
+    }
+  </style>

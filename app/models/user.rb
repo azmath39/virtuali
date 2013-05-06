@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   has_one :delayed_job, :through=>:user_delay_job, :dependent=>:destroy
   has_one :user_delay_job,  :dependent=>:destroy
   before_save :set_balance
-  after_create :set_auto_destroy_event, :trace_activity
+  after_create :set_auto_destroy_event
   after_create :add_coupon_transaction, :if=> Proc.new { |user| !user.assigned_coupon.nil?}
   has_many :payments, :dependent=> :destroy
   has_one :coupon, :through=>:assigned_coupon
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
     self.balance ||= 0
   end
   def trace_activity
-    activities.create(:activity_type=>0, :charge=>Payments.last.amount)
+    activities.create(:activity_type=>0, :charge=>Payment.last.amount)
   end
   def address
     "#{add1} #{add2}\n#{state} #{city}\n\n#{zipcode}"
@@ -217,7 +217,7 @@ class User < ActiveRecord::Base
   def upgrade(pkg)
     new_package= Package.find(pkg[:id])
     update_package(new_package)
-    activities.create(:activity_type=>2, :charge=>Payments.last.amount)
+    activities.create(:activity_type=>2, :charge=>Payment.last.amount)
   end
   def update_package(pkg)
     selected_package.update_attributes(:package_id=>pkg.id,:price=>pkg.regular_price,:status=>1,:pictures_for_tour=>pkg.pictures_for_tour)
