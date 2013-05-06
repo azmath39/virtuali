@@ -8,6 +8,7 @@
 
   });
 </script>
+
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:multipart => true }) do |f| %>
   <%#= form_for(resource, :as => resource_name, :url => '/payments/new_account', :html => {:multipart => true }) do |f| %>
   <%= devise_error_messages! %>
@@ -16,6 +17,7 @@
     <div class="carousel-inner" style="height:650px; margin:auto;">
       <div class="active item" >
         <div id="personal_info">
+          <p><center><%=  @notice %></center></p>
           <div id="scont">
             <h3>Personal Information</h3>
             <hr />
@@ -25,6 +27,10 @@
               <span id="personal_info_error" style="color:red;"></span>
 
               <div class="span4" style="border-right:1px #0088CC solid;">
+                <div>
+                  <%= hidden_field_tag "user[package][id]", @package %>
+                  <%= hidden_field_tag "user[product]", @product %>
+                </div>
                 <div>
                   <%= f.label "full_Name", 'Full Name <span>*<span>'.html_safe %>
                   <%= f.text_field :name%><span id="personal_info_error_name" style="color:red;"></span>
@@ -85,74 +91,12 @@
             <%= link_to "",root_url, :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal" %>
 
             <div id="next_bn">
-              <%=link_to '', '#signupCarousel',:class =>"carousel-control icon-arrow-right right btn-large btn-primary btn_personal", "data-slide"=>"next", :id=>"btn_personal",:onclick=>"button()" %>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-
-
-      <div class="item" >
-
-        <div id="product_select">
-
-          <div id="scont" >
-            <h3>Product Selection</h3>
-            <hr />
-            <div class="item-inner">
-
-
-              <div class="span4" style="border-right:1px #0088CC solid;">
-
-                <span id="product_error" style="color:red;"></span>
-
-                <span id="product_error" style="color:red;"></span>
-                <%@i=0%>
-                <% Product.all.each do |x| %>
-                  <div class="product-list">
-                    <%= radio_button_tag "user[product]", x.id, nil, :id=>"product", :style =>"vertical-align: middle", :onclick => "company()" %>&nbsp;<%= x.name%>
-                  </div><br/>
-                  <% @i+=1 %>
-                <% end %><br />
-              </div>
-              <div id="company_details" class="span4" style="margin-left:11%;">
-
-              </div>
-
-              <br />
-            </div>
-
-            <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
-            <div id="next_btn">
-              <%=link_to "","#signupCarousel",:class => "carousel-control right icon-arrow-right btn-large btn-primary btn_personal",:id=>"btn_product","data-slide"=>"next" %>
-  <%#= link_to "Ok",'#', :onclick=>"packages()", :class => 'btn' %>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-
-      <div class="item" >
-        <div id ="package_info">
-
-          <div id="scont">
-            <h3>Package Selection</h3>
-            <hr />
-            <div class="item-package">
-              <div id="packages">
-              </div>
-            </div>
-
-            <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
-            <div id="next_btn">
-              <%=link_to "","#signupCarousel", :class => "carousel-control right icon-arrow-right btn-large btn-primary btn_personal",:id=>"btn_package","data-slide"=>"next"%>
+              <%=link_to '', '#signupCarousel',:class =>"carousel-control icon-arrow-right right btn-large btn-primary btn_personal", "data-slide"=>"next", :id=>"btn_instant_personal",:onclick=>"button()" %>
             </div>
           </div>
         </div>
       </div>
+
       <div class="item">
         <div id="payment">
           <div id="scont">
@@ -193,7 +137,7 @@
 <% end %>
 
 
-<%= javascript_include_tag "registrations" %>
+<%#= javascript_include_tag "registrations" %>
 <script>
 
   function state_city()
@@ -247,7 +191,137 @@
 
 
   }
+  $('#btn_instant_personal').click(function(event) {
+    $('#btn_instant_personal').prop('disabled', true);
+    var count=0;
+    $('#personal_info_error').html("");
+    if($("#user_name").val()==""){
+        $('#personal_info_error_name').html("<br/>* Required Full Name.");
+        count +=1;
 
+    }
+    if($("#company_name").val()==""){
+        $('#company_name_error').html("<br/>* Required Company Name.");
+        count +=1;
+
+    }
+
+    if($("#password").val()==""){
+        $('#personal_info_error_password').html("<br/>* Required field Password.");
+        count +=1;
+    }
+    if(($("#password").val()).length<8){
+        $('#personal_info_error_password').html("<br/>* Password should be more than 8 characters.");
+        count +=1;
+    }
+
+    if($("#password_confirmation").val()==""){
+        $('#personal_info_error_cpassword').html("<br/>* Required field password confirmation.");
+        count +=1;
+    }
+    if($("#password_confirmation").val()!=$("#password").val()){
+        $('#personal_info_error_cpassword').html("<br/>* Password and password confirmation should match.");
+        count +=1;
+    }
+
+
+    if(!validEmail($("#email_id").val())){
+        $('#personal_info_error_email').html("<br/>* Enter valid Email address.");
+        count +=1;
+
+    }
+    if (ec==0){
+        $('#personal_info_error_email').html("<br/>* Email already exists");
+        count +=1;
+
+    }
+    if($("#user_add1").val()==""){
+        $('#personal_info_error_add1').html("<br/>* Address1 Can't be empty.");
+        count +=1;
+    }
+    if($("#user_state").val()==""){
+        $('#personal_info_error_state').html("<br/>* State Can't be empty.");
+        count +=1;
+    }
+    if($("#user_city").val()==""){
+        $('#personal_info_error_city').html("<br/>* City Can't be empty.");
+        count +=1
+    }
+    if($("#user_zipcode").val()==""){
+        $('#personal_info_error_zipcode').html("<br/>* ZIP Code Can't be empty.");
+        count +=1;
+    }
+
+
+
+
+    if (count == 0){
+        $('#btn_instant_personal').prop('disabled', false);
+         get_price();
+    }
+//
+//    if($("#user_name").val()==""){
+//      $('#btn_personal').die( "click" );
+//    }
+//    if($("#email_id").val()==""){
+//      $('#btn_personal').die( "click" );
+//    }
+//    if($("#password").val()==""){
+//      $('#btn_personal').die( "click" );
+//    }
+//    if($("#password").val().length<8){
+//      $('#btn_personal').die( "click" );
+//    }
+//    if($("#password_confirmation").val()==""){
+//      $('#btn_personal').die( "click" );
+//    }
+//    if($("#password_confirmation").val()!=$("#password").val()){
+//      $('#btn_personal').die( "click" );
+//    }
+//    if($("#user_add1").val()==""){
+//      $('#btn_personal').die( "click" );
+//    }
+//    if($("#user_state").val()==""){
+//      $('#btn_personal').die( "click" );
+//    }
+//    if($("#user_city").val()==""){
+//      $('#btn_personal').die( "click" );
+//    }
+//    if($("#user_zipcode").val()==""){
+//      $('#btn_personal').die( "click" );
+//    }
+//    if(!validEmail($("#email_id").val())){
+//      $('#btn_personal').die( "click" );
+//    }
+//    if (ec==0){
+//
+//      $('#btn_personal').die( "click" );
+//    }
+});
+function get_price() {
+    var payment_type= $("#user_package_type_of_payment").val() || 2;
+    if (!$("input[name='user[package][id]']:checked").val())
+    {
+        $('#package_error').html    ("* Select any Package  to continue..... <br/>")
+        //$('#btn_package').die( "click" );
+        $('#btn_package').prop('disabled', true);
+    }else{
+        //alert($("input[name='user[package]']:checked").val());
+         $('#btn_package').prop('disabled', false);
+        $.ajax({
+            type: 'GET',
+            url: '/packages/total_value',
+            data:{
+                package_id:$("input[name='user[package][id]']:checked").val(),
+                type_of_payment:payment_type
+            }
+
+        }).done(function(text) {
+            $("#total_amount").val(text);
+            $('#total_amount1').val(text);
+        });
+    }
+}
 
 </script>
 <%#= render "devise/shared/links" %>
