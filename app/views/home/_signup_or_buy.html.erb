@@ -1,5 +1,5 @@
 <% if current_user %>
-  <p><%= link_to "Buy Now", '#', :class => 'btn btn-primary'%> </p>
+  <p><%#= link_to "Buy Now", '#', :class => 'btn btn-primary'%> </p>
 <% else %>
   <%#  <p><a class="btn btn-primary" href="/users/sign_up">Sign up Now &raquo;</a></p>%>
   <p class = "btn btn-primary"><%= link_to "Sign Up Now", :controller => "users", :action => "sign_up", :package_id => pkg.id %></p>
