@@ -55,15 +55,15 @@
   </div>
 </div>
 <!-- /END THE FEATURETTES -->
-<hr class="featurette-divider">
+<%#*<hr class="featurette-divider">%>
 
 <!-- Three columns of text below the carousel -->
 <div style="text-align:center;">
-  <%= select_tag :product_id, options_from_collection_for_select(Product.all, "id", "name"),:onchange=>"manual_packages()" %>
+  <%#= select_tag :product_id, options_from_collection_for_select(Product.all, "id", "name"),:onchange=>"manual_packages()" %>
   <div id="manual_packages"></div>
 </div>
 <%#= render 'pricing' %>
-<hr class="featurette-divider2">
+<%#*<hr class="featurette-divider2">%>
 
 <!-- Single page nav app partials
 <div id="aboutvi">
@@ -164,9 +164,9 @@
       $('body,html').animate({scrollTop:0},800);
     });
 
-    manual_packages();
+    //manual_packages();
   });
-  function manual_packages(){
+  /*function manual_packages(){
     $.ajax({
       type: 'GET',
       url:'/packages/manual_packages',
@@ -176,5 +176,5 @@
     }).done(function(html){
       $('#manual_packages').html(html);
     });
-  }
+  }*/
 </script>
