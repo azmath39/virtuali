@@ -13,7 +13,7 @@
       </a>
 <%#= link_to image_tag("Virtual I Logo 300dpi.png", :size => "100x100", :alt => "Virtuali"), root_path%>
       <div class="nav-collapse" style="margin-top:20px;">
-      <ul class="nav nav-pills" style=" margin-left: 3%;margin-top:1%;width:55%">
+      <ul class="nav nav-pills" style=" margin-left: 3%;margin-top:3%;width:55%">
         <li><%= link_to "Home", root_path if !current_user %></li>
         
         <li><%#= link_to "Products", '/pages/products'%> </li>
@@ -23,7 +23,7 @@
         <li><%= link_to "All Tours", tours_path %> </li>
         
       </ul>
-      <div class="navbar-text pull-left"style="margin-top:1%;" >
+      <div class="navbar-text pull-left"style="margin-top:3%;" >
       <ul class="nav" >
       <% if current_user %>
         <li><a href="#"><i class="icon-user"></i><%= current_user.name%> </a></li>
