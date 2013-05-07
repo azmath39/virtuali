@@ -1,8 +1,8 @@
 <%= javascript_include_tag 'jquery.nav' %>
 <%= javascript_include_tag 'jquery.scrollTo' %>
 <div class="navbar navbar-fixed-top" style="background: rgb(19, 39, 90);">
-  <div style="float:left;margin-left: 5%;"><%= link_to image_tag("logo.png", :alt => "Virtuali"), root_path, :style=> "float:left; clear:none;"%></div>
-  <div class="navbar-inner" style="background: rgb(19, 39, 90)">
+  <div  style="float:left;margin-left: 5%;"><%= link_to image_tag("logo.png", :alt => "Virtuali"), root_path%></div>
+  <div class="navbar-inner" style="background: rgb(19, 39, 90);">
     <%#= link_to image_tag("rsz_1virtual_i_logo_300dpi.png", :alt => "Virtuali"), root_path, :style=> "float:left; clear:none;"%>
     <%#= link_to image_tag("logo.png", :alt => "Virtuali"), root_path, :style=> "float:left; clear:none;"%>
 
@@ -79,9 +79,9 @@
         </a>
   <%#= link_to image_tag("Virtual I Logo 300dpi.png", :size => "100x100", :alt => "Virtuali"), root_path%>
         <div class="nav-collapse nav2" >
-          <ul class="nav">
+          <ul class="nav dash">
 
-            <li class="tab active"><%= link_to '<center><i class="icon-2x icon-desktop"></i></center> Dashboard'.html_safe, '/'%> </li>
+            <li class="tab active"><%= link_to '<center><i class="icon-2x icon-dashboard"></i></center> Dashboard'.html_safe, '/'%> </li>
 
             <li class="tab"><%= link_to '<center><i class="icon-2x icon-eye-open"></i></center> Status'.html_safe, '#', "data-toggle" => "tab",:onclick=>'status()'%> </li>
             <li class="tab"><%= link_to '<center><i class="icon-2x icon-money"></i></center> Billing'.html_safe, '#', "data-toggle" => "tab",:onclick=>'billing()'%></li>
@@ -91,12 +91,15 @@
             <li class="tab"><%= link_to '<center><i class="icon-2x icon-edit"></i> </center>Profile'.html_safe, '#', "data-toggle" => "tab", :onclick=>'profile()' %></li>
             <li class="tab"><%= link_to '<center><i class="icon-2x icon-envelope-alt"></i> </center>Messages'.html_safe, '#', "data-toggle" => "tab", :onclick => 'messages()'%> </li>
             <li class="tab"><%#= link_to "Upgrade Account", '#div_upgrade', "data-toggle" => "tab"%> </li>
+<li class="tab"><%= link_to '<center><i class="icon-2x icon-cloud-upload"></i> </center>Create New Tour'.html_safe, '/paintings/new' if verify_tours_allowed%>
+  </li>
 
           </ul>
 
         </div>
-         <div style="float:left;margin-left: 1%; margin-top:2.6%;">
- <%= link_to "Create New Tour", '/paintings/new', :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  if verify_tours_allowed%>
+         <div style="float:left;margin-left: 1%; margin-top:2.6%;"> 
+           <%#= link_to '<center><i class="icon-2x icon-cloud-upload"></i> </center>Create New Tour'.html_safe, '/paintings/new', "data-toggle" => "tab", :class=>"tab" if verify_tours_allowed%>
+ <%#= link_to "Create New Tour", '/paintings/new', :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  if verify_tours_allowed%>
 </div>
       
       </div>
@@ -322,7 +325,7 @@
   margin-left: 24%;
 }
 .nav2{
-   margin-left: 22%;
+   margin-left: 24%;
 }
 .pull-left{
   margin-left: 15%;
