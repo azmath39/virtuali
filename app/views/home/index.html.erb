@@ -12,7 +12,9 @@
 <%= render 'shared/welcome_message' if current_user.tours.empty? %>
 <div id="user_tours" style="float:left;margin-top: 6%;">
 <%=render 'search_form' %>
+  <div class="tourspagination">
 <%=render '/tours/list_of_tours'%>
+  </div>
 </div>
 <%content_for :side_bar do %>
 <div id="outer_side_bar">
