@@ -271,3 +271,6 @@ filter: alpha(opacity=50);
 .navbar-inner{
     border-width: 0px;
 }
+#myCarousel1 {
+    margin-top: -5%;
+}
