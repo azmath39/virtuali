@@ -33,12 +33,12 @@
    
 
 }
-.navbar-fixed-top{
-    background: #0088CC ;
+.navbar {
+    margin-bottom: 0px;
 }
 .navbar .nav>li>a{
     float:none;
-    padding:16px 8px 0px;
+    /*padding:16px 8px 0px;*/
     color: white;
     text-decoration:none;
     text-shadow:none;
@@ -263,6 +263,11 @@ filter: alpha(opacity=50);
     ------------------------- */
     .container{
         width:100%;
-        margin-top: 120px;
+
+        margin-top: 13%;
+       
         
+}
+.navbar-inner{
+    border-width: 0px;
 }
