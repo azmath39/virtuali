@@ -115,7 +115,7 @@ You have already published Sufficient Tours. To create more tours upgrade your S
 <%= javascript_include_tag "http://jzaefferer.github.com/jquery-validation/jquery.validate.js" %>
  <script>
    $(document).ready(function(){
-  
+  $('.tab:last-child').addClass('active');
     $("#new_tour").validate();
 $('#submit-button').click(function(e) {
   e.preventDefault();
