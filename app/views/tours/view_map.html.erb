@@ -1,6 +1,10 @@
 
 <%content_for :search do%>
-  <div class ="span3" id="map-search" style="margin-top: 5%;">
+<%if current_user%>
+  <div class ="span3" id="map-search" style="margin-top: 9%;">
+    <%else%>
+    <div class ="span3" id="map-search" style="margin-top: 5.5%;">
+    <%end%>
   <%#*<p class="title-text">Search</p>%>
     <%= search_form_for @search, :url => '/tours/view_map', :class => 'well form-inline', :id => 'img_bg' do |f| %>
       <table>
