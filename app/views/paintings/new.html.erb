@@ -49,7 +49,7 @@
   <%= f.label "state*", :html => {:class => 'control-label'}%>
   <%#= f.text_field :state %>
  
-  <%=f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()",:class=>"required", :onchange=>"set_session('tour_state')"%>
+  <%=f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()",:class=>"required"%>
 </div>
 <div class ="control-group">
   <%= f.label "city*", :html => {:class => 'control-label'} %>
@@ -198,6 +198,7 @@ $.session.remove('tour_state');
 $.session.remove('tour_city');
 }
 function set_city(){
+  $.session.set('tour_state', $("#tour_state").val());
   $.ajax({
       type: 'GET',
       url: "/home/state_cities",

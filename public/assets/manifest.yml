@@ -1,4 +1,4 @@
---- 
+---
 HELR45W.TTF: HELR45W.TTF
 HELR45W/index.TTF: HELR45W.TTF
 HELR46W.TTF: HELR46W.TTF
@@ -71,6 +71,10 @@ loading.gif: loading.gif
 loading/index.gif: loading.gif
 logo.png: logo.png
 logo/index.png: logo.png
+logo1.png: logo1.png
+logo1/index.png: logo1.png
+logo2.png: logo2.png
+logo2/index.png: logo2.png
 menu_bg.png: menu_bg.png
 menu_bg/index.png: menu_bg.png
 rails.png: rails.png
