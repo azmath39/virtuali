@@ -21,8 +21,8 @@
     <%= f.text_field :add2 %><span id="personal_info_error_add2" style="color:red;"></span>
     <%= f.label "state*" %>
     <%= f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()"%>
-    <%= f.label "city*", :html => {:class => 'control-label'} %>
-    <%=f.select :city, {},:prompt=>"Select City"%>
+    <%= f.label "city*",:html => {:class => 'control-label'} %>
+    <%=f.select :city, cities_for_profile,:prompt=>"Select City"%>
     <%= f.label :zipcode, "ZIP Code*" %>
     <%= f.text_field :zipcode %><span id="personal_info_error_zipcode" style="color:red;"></span>
     
@@ -85,6 +85,7 @@
 </div>
 </div>
 <script>
+ 
   function state_city()
   {
     $.ajax({

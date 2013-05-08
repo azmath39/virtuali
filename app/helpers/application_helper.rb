@@ -7,7 +7,11 @@ module ApplicationHelper
     end
     return true
   end
-
+def cities_for_profile
+  state=State.find_by_name(current_user.state)
+  cities= City.find(:all,:conditions=>{:code=>state.code})
+  cities.collect {|s| [s.name,s.name]}
+end
   def price(pkg)
     if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?
       "#{pkg.regular_price}<sub id='per-month'>/month</sub> (or) #{pkg.special_price}<sub id='per-month'>/year</sub> ".html_safe

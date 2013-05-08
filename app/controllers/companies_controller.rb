@@ -14,8 +14,13 @@ class CompaniesController < ApplicationController
   def update
     @company = Company.find(params[:company][:id])
     if @company.update_attributes(params[:company])
-      flash[:notice]="Company details updated successfully!"
-      redirect_to root_path
+      #flash[:notice]="Company details updated successfully!"
+      respond_to do |format|
+        format.html {redirect_to root_url}
+        format.js
+      end
+
+
     else
       render 'edit'
     end

@@ -14,7 +14,6 @@ class RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
-  
   def create
     build_resource
       

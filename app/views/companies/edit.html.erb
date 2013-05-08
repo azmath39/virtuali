@@ -2,7 +2,7 @@
 <div>
 <h3>Edit Company Details</h3>
 <hr />
-<%= form_for @company, :url => '/companies/update' do |f| %>
+<%= form_for @company, :url => '/companies/update',:remote=>true do |f| %>
 <%= f.hidden_field :id %>
 <div>
   <%= f.label :name, 'Company Name'  %>
