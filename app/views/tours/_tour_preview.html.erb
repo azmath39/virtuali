@@ -29,8 +29,8 @@
 <%#*<p class="title-text" style="margin:2% 0 10px 10%;">Initial Tour Preview</p>%>
 <div class="span11" id="final_tour" style="margin-left: 8%; border-color: #C0C0C0;border-width: 15px;border-radius:15px; color: black;background: white;-webkit-border-radius: 80px;
 -moz-border-radius: 80px;
-border-radius: 80px;">
-  <div style="height: 507px; width: 800px; margin:  -20px 10px 10px -20px; height:575;">
+border-radius: 80px;width:1236px">
+  <div style="height: 510px; width: 950px; margin:  -20px 10px 10px -20px; height:575;">
     <% @objs = @tour.paintings.offset(1).first 4 %>
     <%# @tour.paintings.each do |img|%>
       <%# @objs << img %>
@@ -85,10 +85,10 @@ border-radius: 80px;">
       <p style="margin: 0% 0 0 30%;">Please, <%= link_to "edit", edit_tour_path(@tour.id) %> tour! </p>
       <% end %>
   <% end %>
-  <div style="width: 240px;float: right; margin: -620px 0px 0 150px; font-size: 12px;">
+  <div style="width: 240px;float: right;margin-left: 3%; margin: -620px 0px 0 150px; font-size: 20px;">
     <center><br/>
     <h4><%= "#{@tour.zip} #{@tour.city}" %></h4>
-    <table style="margin-right:0px;margin-top: 2px;">
+    <table style="margin-left:-119px;margin-top: 2px;">
       <tr id="tbr">
         <th id="tbh">Price</th>
         <th id="tbh">Beds</th>
@@ -102,11 +102,11 @@ border-radius: 80px;">
         <td><%= @tour.square_footage %> </td>
       </tr>
     </table></center>
-    </div><br /><br />
+    </div><br /><br /><br />
   <div style = "position: relative; float:right;height: 150px; width: 22%; margin: -550px 2px 0 0; overflow: auto;">
-    <%= @tour.description.html_safe %>
+    <h4> <%= @tour.description.html_safe %></h4>
   </div>
-  <div id ="user_img" style="float: right; height: 200px; width: 150px;margin: -350px 70px -40px 30px;">
+  <div id ="user_img" style="float: right; height: 450px; width: 150px;margin: -350px 70px -40px 30px;">
     <% if @tour.user.company %>
       <% if @tour.user.company.logo? %>
         <%= image_tag(@tour.user.company.logo_url(:medium)) %>
@@ -157,9 +157,9 @@ a:focus {
   color: black;
 }
 #tbh{
-  border-right: 1px black solid;
-  padding: 2px;
-  font-size: 16px;
+  border-right: 3px black solid;
+  padding: 5px;
+  font-size: 25px;
 }
 #tbr{
   border: 4px solid #C0C0C0;

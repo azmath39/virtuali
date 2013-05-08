@@ -109,5 +109,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :slide do
     process :resize_to_fill => [911, 607]
   end
+  version :extra_large do
+    process :resize_to_fit => [1108,673 ]
+  end
 end
 
