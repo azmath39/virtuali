@@ -75,6 +75,8 @@ logo1.png: logo1.png
 logo1/index.png: logo1.png
 logo2.png: logo2.png
 logo2/index.png: logo2.png
+logo3.png: logo3.png
+logo3/index.png: logo3.png
 menu_bg.png: menu_bg.png
 menu_bg/index.png: menu_bg.png
 rails.png: rails.png
