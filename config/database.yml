@@ -9,8 +9,8 @@ development:
   reconnect: false
   database: virtuali_development
   pool: 5
-  username: virtuali
-  password: coolapp1413#
+  username: root
+  password: root123
   host: localhost
 
 # Warning: The database defined as "test" will be erased and

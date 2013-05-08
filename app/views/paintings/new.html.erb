@@ -1,7 +1,7 @@
 <% if verify_tours_allowed %>
 <%#= render '/home/account_mangement'  %>
 
-<div class="span12" style="width:85%;">
+<div class="span12" style="width:90%;">
   <p class="title-text">Create a Tour</p>
   <%= render 'shared/error_messages', :target => @tour  %>
 <%= form_for Painting.new,{:remote=>true} do |f| %>
