@@ -11,11 +11,15 @@
 
       <br />
       <p id="price">
-        <sup id="dollar-symb">$</sup><%=just_price(pkg)%>
+        <sup id="dollar-symb">$</sup>
+<%if pkg.package_type==1%><%=just_price(pkg)%><%else%><%=actual_price(pkg)%><%end%>
       </p>
       <hr />
       <center><h2><%=pkg.name%></h2>
         <ul class="unstyled">
+          <%unless pkg.package_type==1%>
+          <p><li><b>Offer Price:</b>&nbsp;<%=price(pkg)%></li></p>
+          <%end%>
           <p><li><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></li></p>
           <p><li><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></li></p>
           <p><li>  Your tour will be placed on our Tours Map page and will be listed in All Tours page for as long as the subscription is current.</li></p>

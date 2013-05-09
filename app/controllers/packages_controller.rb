@@ -5,6 +5,10 @@ class PackagesController < ApplicationController
     @combo_packages=product.packages.where(:package_type=>2)
     render :layout => false
   end
+  def index
+    @package_price=current_user.package_price
+    @payments=current_user.payments.order('created_at DESC')
+  end
 
   def manual_packages
     product=Product.find(params[:id])

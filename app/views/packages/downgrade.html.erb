@@ -68,7 +68,7 @@
 
           <div id="next_btn" style="float:right; margin-right:16%;">
             <%= f.submit "Downgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.."  %>
-            <span><%= link_to "Cancel", root_url , :tyle=> 'float:right;margin-right:120px;'%></span>
+            <span><%= link_to "Back", root_url ,:remote=>true, :tyle=> 'float:right;margin-right:120px;'%></span>
           </div>
     </div>
 
@@ -90,7 +90,10 @@
     </div>
 
 <%else%>
-  <p style="color:red;margin-left:34%;margin-top: 25%;"> No package Available To Downgrade.</p>
+  <p style="color:red;margin-left:34%;margin-top: 25%;"> No package Available To Downgrade.
+  <span><%= link_to "Back", '/packages' ,:remote=>true, :tyle=> 'float:right;margin-right:120px;'%></span>
+   
+  </p>
 
   <%end%>
 
