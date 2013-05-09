@@ -24,6 +24,7 @@
       <center><h2><%=pkg.name%></h2>
         <ul class="unstyled">
           <%unless pkg.package_type==1%>
+            <p><li><b>Special Offer:</b>&nbsp;15 % discount</li></p>
           <p><li><b>Offer Price:</b>&nbsp;<%=price(pkg)%></li></p>
           <%end%>
           <p><li><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></li></p>
