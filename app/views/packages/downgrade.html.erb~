@@ -35,7 +35,7 @@
 
         <%unless @combo_packages.empty?%>
 
-                  <div class="pricing_grid row" style="margin:4% 0 0 30%;">
+                  <div class="pricing_grid row" style="margin:4% 0 0 3%;">
                     <span id="package_error" style="color:red;"></span>
                     <% @combo_packages.each do |pkg| %>
                     <div class="span3 first-grid" style="width:21%;">

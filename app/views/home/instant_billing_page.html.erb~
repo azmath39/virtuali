@@ -33,7 +33,7 @@
 <%= link_to "Downgrade", '/packages/downgrade', :class => "btn btn-link" %>|
 <%= link_to "Upgrade", '/packages/upgrade_package', :class => "btn btn-link" %>|
 <%end%>
-            <%= link_to "Delete", "/packages/destroy_user_package", :class => "btn btn-link",:confirm=>"Are You Sure, Your are about to delete your package." %>
+            <%= link_to "Delete Account", "/packages/destroy_user_package", :class => "btn btn-link",:confirm=>"Are You Sure, Your are about to delete your package." %>
 <%#=link_to "Payment History","##{pkg.id}payment_history", "data-toggle"=>"collapse", :class=>"btn btn-link"%></th></tr>
 
  </table>
@@ -80,7 +80,7 @@
     </div>
 
 
-<%=render "/home/payment_history"%>
+<%=render "payment_history"%>
  
  
 <%else%>

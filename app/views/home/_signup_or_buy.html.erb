@@ -2,7 +2,5 @@
   <p><%#= link_to "Buy Now", '#', :class => 'btn btn-primary'%> </p>
 <% else %>
   <%#  <p><a class="btn btn-primary" href="/users/sign_up">Sign up Now &raquo;</a></p>%>
-  <div class="btn btn-primary">
-  <p><%= link_to "Sign Up Now", :controller => "users", :action => "sign_up", :package_id => pkg.id ,:class=> "btn btn-primary"%></p>
-  </div>
+  <p><%= link_to "Sign Up Now",{:controller => "users", :action => "sign_up", :package_id => pkg.id},:class=>"btn btn-primary"%></p>
 <% end %>
