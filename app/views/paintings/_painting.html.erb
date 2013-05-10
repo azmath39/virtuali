@@ -28,15 +28,15 @@
  
 </script>
 <div id='injection_site'></div>
-<div class="painting" style="height: 250px;" >
-  <div style="height: 140px; width: 180px;">
-    <%= image_tag(painting.image_url(:medium), :id => painting.id)%>
+<div class="painting" style="height: 195px;width: 133px;" >
+  <div style="height: 89px; width: 133px;">
+    <%= image_tag(painting.image_url(:small), :id => painting.id)%>
   </div>
   <div class="name">
     <%#= painting.name %>
     <%# @names= ["Living Rm", "Kitchen", "Den", "Great Rm", "Dinning Rm", "Bath Rm", "Master Batch", "Half Batch", "Master Bed Rm", "Bed Rm1", "Bed Rm2", "Bed Rm3"] %>
 <%@names=["Bath Room", "Bed Room", "Bonus Rm", "Den", "Dinning Room", "Foyer", "Front", "Great Room", "Kitchen", "Living Room", "Rear", "Others"]%>
-<%= select_tag "Name", options_for_select(@names), :id => "select#{painting.id}",:onchange=>"check_others(#{painting.id})" ,:prompt=>"#{painting.name ||"Please Select Name."}",:style=>"width: 100%"%>
+<%= select_tag "Name", options_for_select(@names), :id => "select#{painting.id}",:onchange=>"check_others(#{painting.id})" ,:prompt=>"#{painting.name ||"Select Name."}",:style=>"width: 100%"%>
   <div id="other-name<%=painting.id%>">
 
   </div>
