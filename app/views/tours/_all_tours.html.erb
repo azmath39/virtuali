@@ -29,9 +29,9 @@
 <%#******************************************%>
 
 <% @tours.each do |tour| %>
-  <div class="listing-grid-item"  style="margin: 0px 9px 0 0; width:240px;">
+  <div class="listing-grid-item"  style="margin: 0px 0px 0 0; width:215px;">
 
-    <div class="span2">
+    <div class="span2" style="margin-left:0px;">
       <% unless tour.paintings.where(:name=>"Front").empty?%>
         <%= link_to(image_tag(tour.paintings.where(:name=>"Front").first.image_url(:extra_small)), tour)   %>
       <%else%>
@@ -41,7 +41,7 @@
       <%end%>
     </div>
 
-    <div class="span2" style="width:150px;margin: -83px 21px 0px 137px;height:100px;">
+    <div class="span2" style="width:150px;margin: -83px 21px 0px 105px;height:100px;">
       <h4><%= number_to_currency(tour.price) %></h4>
   <%#*<strong>Sq foot: </strong> <%= tour.square_footage %>
       <span class="vtip" title="<%= tour.add_line_1%><%= tour.add_line_2%>"><%=link_to "#{tour.add_line_1}, #{tour.state_code}","#" %></span><br />

@@ -85,7 +85,7 @@ class Tour < ActiveRecord::Base
 
 
  def self.tours_list_pagination(page)
-   order('created_at DESC').paginate(:page => page, :per_page => 4)
+   order('created_at DESC').paginate(:page => page, :per_page => 24)
  end
  def add_line_1
    "#{address1} #{address2}"

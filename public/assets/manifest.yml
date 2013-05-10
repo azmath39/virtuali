@@ -1,4 +1,4 @@
----
+--- 
 HELR45W.TTF: HELR45W.TTF
 HELR45W/index.TTF: HELR45W.TTF
 HELR46W.TTF: HELR46W.TTF
@@ -45,6 +45,8 @@ default_company_logo.png: default_company_logo.png
 default_company_logo/index.png: default_company_logo.png
 default_user_company_logo.gif: default_user_company_logo.gif
 default_user_company_logo/index.gif: default_user_company_logo.gif
+default_very_small_home.png: default_very_small_home.png
+default_very_small_home/index.png: default_very_small_home.png
 down_arrow.gif: down_arrow.gif
 down_arrow/index.gif: down_arrow.gif
 favicon.ico: favicon.ico
