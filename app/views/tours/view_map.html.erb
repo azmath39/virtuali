@@ -1,67 +1,80 @@
 
 <%content_for :search do%>
-<%if current_user%>
-  <div class ="span3" id="map-search" style="margin-top: 9%;">
+  <%if current_user%>
+    <div class ="span3" id="map-search" style="margin-top: 9%;">
     <%else%>
-    <div class ="span3" id="map-search" style="margin-top: 5.5%;">
-    <%end%>
+      <div class ="span3" id="map-search" style="margin-top: 5.5%;">
+      <%end%>
   <%#*<p class="title-text">Search</p>%>
-    <%= search_form_for @search, :url => '/tours/view_map', :class => 'well form-inline', :id => 'img_bg' do |f| %>
-      <table>
-        <tr><td>  State
-          </td> <td><%=f.select :state_cont, State.all.collect {|s| [s.name, s.name]},{:include_blank => "All"},:onchange=>"state_city()"%>
-          </td></tr><tr><td>City
-          </td> <td><%=f.select :city_cont, {}, :include_blank => "All"%>
-          </td></tr><tr><td>Category
-          </td> <td><%= f.select :product_name_cont,  Product.where(:product_type=>1).collect {|p| [ p.name, p.name ] }, {:include_blank => "All"}%>
-          </td></tr><tr><td>Status
-          </td> <td><%= f.select :status_eq, {"Active" => 1, "Sold" => 3}  %>
+      <%= search_form_for @search, :url => '/tours/view_map', :class => 'well form-inline', :id => 'img_bg' do |f| %>
+        <table>
+          <tr><td>  State
+            </td> <td><%=f.select :state_cont, State.all.collect {|s| [s.name, s.name]},{:include_blank => "All"},:onchange=>"state_city()"%>
+            </td></tr><tr><td>City
+            </td> <td><%=f.select :city_cont, {}, :include_blank => "All"%>
+            </td></tr><tr><td>Category
+            </td> <td><%= f.select :product_name_cont,  Product.where(:product_type=>1).collect {|p| [ p.name, p.name ] }, {:include_blank => "All"}%>
+            </td></tr><tr><td>Status
+            </td> <td><%= f.select :status_eq, {"Active" => 1, "Sold" => 3}  %>
     <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %>
     <%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
-            <br /></td></tr>
-        <tr><td><%= f.submit "Search", :class => 'btn btn-medium btn-success' %></td></tr></table>
+              <br /></td></tr>
+          <tr><td><%= f.submit "Search", :class => 'btn btn-medium btn-success' %></td></tr></table>
+      </div>
+    <% end %>
+  <%end%>
+  <%if current_user%>
+    <div id="map-div" style="margin-left: 0%; margin-top: 0%;">
+    <%else%>
+      <div id="map-div" style="margin-left: 25%; margin-top: 1%;">
+      <%end%>
+      <h1 class="title-text">Tours Map</h1>
+<%#= gmaps4rails(@json)%>
+
+      <%= gmaps({
+          "map_options" =>  {"center_latitude" => 40.4230,
+            "center_longitude" => 620.7372,
+            "detect_location" => false,
+            "center_on_user" => false,
+            "auto_adjust" => false,
+            "auto_zoom" => true,
+            "zoom" => 4 },
+          "markers"     => {"data" => @json }
+        })
+    %>
+
     </div>
-  <% end %>
-<%end%>
-<%if current_user%>
-<div id="map-div" style="margin-left: 0%; margin-top: 0%;">
-  <%else%>
-    <div id="map-div" style="margin-left: 25%; margin-top: 1%;">
-    <%end%>
-    <h1 class="title-text">Tours Map</h1>
-    <%= gmaps4rails(@json)%>
-  </div>
 
-  <script>
-    function state_city()
-    {
-      $.ajax({
-        type: 'GET',
-        url: "/home/state_cities",
+    <script>
+      function state_city()
+      {
+        $.ajax({
+          type: 'GET',
+          url: "/home/state_cities",
 
-        data: {
-          'state' :  $("#q_state_cont").val()
-        }
-      }).done(function(text) {
+          data: {
+            'state' :  $("#q_state_cont").val()
+          }
+        }).done(function(text) {
 
-        $('#q_city_cont').empty().append(text);
-      });
-    }
-    function find_map_tours()
-    {
-      //alert('ok');
-      $('form#map_tour_form').submit();
-    }
-  </script>
-  <style>
-    .gmaps4rails_map{ 
-      height: 550px;
-      width: 97%;
-    }
-    .map_container{
-      height: 550px;
-      width: 97%;
+          $('#q_city_cont').empty().append(text);
+        });
+      }
+      function find_map_tours()
+      {
+        //alert('ok');
+        $('form#map_tour_form').submit();
+      }
+    </script>
+    <style>
+      .gmaps4rails_map{
+        height: 550px;
+        width: 97%;
+      }
+      .map_container{
+        height: 550px;
+        width: 97%;
 
 
-    }
-  </style>
+      }
+    </style>

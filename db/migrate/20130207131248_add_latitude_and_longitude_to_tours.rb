@@ -1,4 +1,4 @@
-class AddLatitudeAndLongitudeToTours < ActiveRecord::Migration
+ class AddLatitudeAndLongitudeToTours < ActiveRecord::Migration
   def up
     add_column :tours, :latitude, :float
     add_column :tours, :longitude, :float

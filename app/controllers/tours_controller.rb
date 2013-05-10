@@ -112,7 +112,7 @@ class ToursController < ApplicationController
     if @tours.empty?
       flash.now[:notice] = "No tours were found!"
     end
-    @json = @tours.to_gmaps4rails do |tour, marker|
+     @json = @tours.to_gmaps4rails do |tour, marker|
       marker.infowindow("<center><img src=\"#{tour.display_image}\" width=\"150\" height=\"100\"><br />
                          <b>#{tour.zip} #{tour.state} #{tour.city}</b><br />
                          " "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<br />
