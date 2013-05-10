@@ -4,50 +4,51 @@
   <%else%>
     <div class="pricing_grid row" style="margin:1% 0 0 4%;">
     <%end%>
-  <% @packages.each do |pkg| %>
-  <% if current_user %>
+    <% @packages.each do |pkg| %>
+      <% if current_user %>
         <div class="span3 first-grid" style="width:24%; height: 500px;">
-        <%elsif @product.product_type == 2%>
+        <%elsif @product.product_type ==2%>
           <div class="span3 first-grid" style="width:26%; height: 600px;margin-right: 5px">
             <%else%>
             <div class="span3 first-grid" style="width:24%; height: 550px;margin-right: 5px">
           <%end%>
   <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
-      <p><center><%#=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package",:onclick=>"enable_btn_package()"%></center></p>
+          <p><center><%#=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package",:onclick=>"enable_btn_package()"%></center></p>
 
-      <br />
-      <p id="price">
-        <sup id="dollar-symb">$</sup>
-<%if pkg.package_type==1%><%=just_price(pkg)%><%else%><%=actual_price(pkg)%><%end%>
-      </p>
-      <hr />
-      <center><h2><%=pkg.name%></h2>
-        <ul class="unstyled">
-          <%unless pkg.package_type==1%>
-            <p><li><b>Special Offer:</b>&nbsp;15 % discount</li></p>
-          <p><li><b>Offer Price:</b>&nbsp;<%=price(pkg)%></li></p>
-          <%end%>
-          <p><li><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></li></p>
-          <p><li><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></li></p>
-          <p><li>  Your tour will be placed on our Tours Map page and will be listed in All Tours page for as long as the subscription is current.</li></p>
-          <p><li> You will be able to down load a zip file containing the pictures you uploaded and optimized.</li></p>
-          <% if pkg.name == "Bronze"%>
-            <p><li> For and additional $15 you can add 10 more pictures to your tour.</li></p>
-          <%end%>
-          <%if pkg.product.category.name == "By Agent"%>
-            <p><li>  Upload to Realtor.com for $5.00 with Premier account and $25.00 for General account</li></p>
-          <%end%>
-        </ul></center>
-      <%if !current_user %>
-        <hr></hr>
-      <%end%>
-      <%= render '/home/signup_or_buy', :pkg=>pkg %>
+          <br />
+          <p id="price">
+            <sup id="dollar-symb">$</sup><%=just_price(pkg).to_i%>
+          </p>
+          <hr />
+          <center><h2><%=pkg.name%></h2>
+            <ul class="unstyled"style="text-align:left" >
+              <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
+              <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
+              <p>  Your tour will be placed on our Tours Map page and will be listed in All Tours page for as long as the subscription is current.</p>
+              <p> You will be able to down load a zip file containing the pictures you uploaded and optimized.</p>
+              <% if pkg.name == "Bronze"%>
+                <p> For and additional $15 you can add 10 more pictures to your tour.</p>
+              <%end%>
+              <%if pkg.product.category.name == "By Agent"%>
+                <p>  upload to Realtor.com.<br/>
+                  Showcase account $5.00<br/>
+                  Non- Showcase account $25.00 </p>
+              <%end%>
+            </ul></center>
+          <%if !current_user %>
 
-      <%if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?%>
-        <p><li> <%=radio_button_tag "user[package][type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly</li> </p>
-      <%elsif !pkg.special_price.nil?%>
-        <%=hidden_field_tag "user[package][type_of_payment]",1%>
-      <%end%>
+            <hr></hr>
+
+          <%end%>
+          <%= render '/home/signup_or_buy', :pkg=>pkg %>
+
+          <%if !current_user.nil? and current_user.special_offer and !pkg.special_price.nil?%>
+            <p><li> <%=radio_button_tag "user[package][type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly</li> </p>
+          <%elsif !pkg.special_price.nil?%>
+            <%=hidden_field_tag "user[package][type_of_payment]",1%>
+          <%end%>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
