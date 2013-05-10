@@ -1,7 +1,9 @@
 <% unless current_user %>
   <%= render 'front_page'%>
 <% else %>
-<p><span class="title-text" style="position:absolute;margin-left:0%;">Dashboard </span></p>
+<%#*<p><span class="title-text" style="position:absolute;margin-left:0%;">Dashboard </span></p>%>
+<%=render 'search_form' %>
+<div> <div style="float:left;"> <h1 class="title-text">Dashboard </h1></div><div id="search-div"> <%=yield :search%></div></div>
   <%#=render 'account_mangement'%>
 <div style="float:left; margin-bottom:-5%;margin-left:490px;margin-top: 0%; ">  <%=select_tag "product_id", options_from_collection_for_select(current_user.subscribe_product,"id","name"),:onchange=>"display_tours()",:prompt=>"All" if current_user.multiple_products?%>
 </div>
@@ -10,8 +12,8 @@
 <%#*</div>%>
 <%=render 'shared/package_change_instruction' if current_user.any_instructions? or current_user.check_tours_type?%>
 <%= render 'shared/welcome_message' if current_user.tours.empty? %>
-<div id="user_tours" style="float:left;margin-top: 6%;">
-<%=render 'search_form' %>
+<div id="user_tours" style="float:left;">
+
   <div class="tourspagination">
 <%=render '/tours/list_of_tours'%>
   </div>
@@ -38,16 +40,7 @@
 <% end %>
 <style>
   #side_bar{
-  
-    width: 11%;
-    height: 155px;
-    float:left;
-    margin-top: 9.2%;
-      margin-left:84.5%;
-    background: url('/assets/bg2.jpg') repeat;
-    position: fixed;
-
-
+margin-top: 11%;
 }
 th{
   text-align:left;
