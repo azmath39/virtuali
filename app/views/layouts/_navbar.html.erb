@@ -1,20 +1,20 @@
 <%= javascript_include_tag 'jquery.nav' %>
 <%= javascript_include_tag 'jquery.scrollTo' %>
-<div class="navbar navbar-fixed-top" style="background: #3B5998">
+<div class="navbar navbar-fixed-top" style="background: #3B5998;">
   <div  style="float:left;margin-left: 5%;"><%= link_to image_tag("logo.png", :alt => "Virtuali"), root_path%></div>
-  <div class="navbar-inner" style="background: #3B5998;">
+  <div class="navbar-inner" style="background: #3B5998">
     <%#= link_to image_tag("rsz_1virtual_i_logo_300dpi.png", :alt => "Virtuali"), root_path, :style=> "float:left; clear:none;"%>
     <%#= link_to image_tag("logo.png", :alt => "Virtuali"), root_path, :style=> "float:left; clear:none;"%>
 
-    <div>
+    <div style="background: #3B5998;">
       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav1">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
 <%#= link_to image_tag("Virtual I Logo 300dpi.png", :size => "100x100", :alt => "Virtuali"), root_path%>
-      <div class="nav-collapse nav1" >
-      <ul class="nav nav-pills" >
+      <div class="nav-collapse nav1" style="background: #3B5998;" >
+      <ul class="nav nav-pills"style="background: #3B5998;"  >
 
         <li><%= link_to "Home", root_path if !current_user %></li>
         
@@ -26,7 +26,7 @@
         <li><%= link_to "About", '/pages/about_vi'%> </li>
 
       </ul>
-      <div class="navbar-text pull-left" >
+      <div class="navbar-text pull-left" style="background: #3B5998;" >
       <ul class="nav" >
       <% if current_user %>
         <li><a href="#"><i class="icon-user"></i><%= current_user.name%> </a></li>

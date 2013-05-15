@@ -29,7 +29,7 @@
 <%#******************************************%>
 
 <% @tours.each do |tour| %>
-  <div class="listing-grid-item"  style="margin: 0px 0px 0 0; width:215px;">
+  <div class="listing-grid-item"  style="margin: 0px 0px 0 0; width:240px;">
 
     <div class="span2" style="margin-left:0px;">
       <% unless tour.paintings.where(:name=>"Front").empty?%>
@@ -44,7 +44,7 @@
     <div class="span2" style="width:150px;margin: -83px 21px 0px 105px;height:100px;">
       <h4><%= number_to_currency(tour.price) %></h4>
   <%#*<strong>Sq foot: </strong> <%= tour.square_footage %>
-      <span class="vtip" title="<%= tour.add_line_1%><%= tour.add_line_2%>"><%=link_to "#{tour.add_line_1}, #{tour.state_code}","#" %></span><br />
+      <span class="vtip" title="<%= tour.add_line_1%><%= tour.add_line_2%>"><%=link_to "#{tour.city}, #{tour.state_code}","#" %></span><br />
       Beds: <%= tour.bed_rooms %> / Baths: <%= tour.bath_rooms %><br />
   <%#*<strong>Category: </strong><%= tour.product.name %<br />%>
   <%#*<strong>Description:</strong>%>

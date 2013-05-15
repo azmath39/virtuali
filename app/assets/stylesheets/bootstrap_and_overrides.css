@@ -13,6 +13,9 @@
       font-family: helvetica_reg;
       height: 100%;
 }
+.navbar-inner{
+    background: #3B5998;
+}
 
   .navbar-inner1 {
    /* background: url(cut.png);
