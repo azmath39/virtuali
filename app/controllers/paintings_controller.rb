@@ -34,7 +34,7 @@ class PaintingsController < ApplicationController
       @painting.user_id= current_user.id
       if @painting.save
       respond_to do |format|
-        format.html {render :js=>"window.location.reload(true);"}
+        format.html {redirect_to :back}
         format.js
       end
       else
