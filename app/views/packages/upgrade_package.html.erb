@@ -17,7 +17,7 @@
       <%#*&nbsp;<b><span style="color:rgb(0, 136, 204);font-weight: bold;"><%=pkg.name%</span></b>%>
                 <br />
                 <p id="price">
-                  <sup id="dollar-symb">$</sup><%=  price(pkg)%>
+                  <sup id="dollar-symb">$</sup><%=  price(pkg).to_i%>
                 </p>
                 <hr />
                 <center><h2><%=pkg.name%></h2>
@@ -54,7 +54,7 @@
                   <p><center><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%></center></p>
                   <br />
                   <p id="price">
-                    <sup id="dollar-symb">$</sup><%=price(pkg)%>
+                    <sup id="dollar-symb">$</sup><%=price(pkg).to_i%>
                   </p>
                   <hr />
                   <center><h2><%=pkg.name%></h2></center>
