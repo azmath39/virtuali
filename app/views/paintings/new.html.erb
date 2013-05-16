@@ -5,15 +5,15 @@
 <div class="span12" style="width:99%;margin-left:0%;">
   <p class="title-text">Create a Tour</p>
   <%= render 'shared/error_messages', :target => @tour  %>
-<%= form_for Painting.new,{:remote=>true} do |f| %>
+<%= form_for Painting.new do |f| %>
   <%$serial_no= @priority||1%>
 <div class="fileupload btn btn-primary">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
   </div>
-  
-  <%=f.submit :upload, :class=>"ie-upload-button btn btn-primary" if browser.ie8? or browser.ie7?%>
-  
+ 
+  <%=f.submit :upload, :class=>"ie-submit-button btn btn-primary" if browser.ie8? or browser.ie7?%>
+
 <% end %>
 
 <span id="painting_error"></span>
@@ -176,29 +176,6 @@ function set_session(id){
   setCookie(id,val,1);
 }
 function  assign_session_to_fields(){
-  /*$('select option[value='+$.session.get('tour_state') +']').attr("selected",true);
-  
-  $('#tour_address1').val($.session.get('tour_address1'));
-  $('#tour_address2').val($.session.get('tour_address2'));
-  $('#tour_zip').val($.session.get('tour_zip'));
-  $('#tour_price').val($.session.get('tour_price'));
-  $('#tour_square_footage').val($.session.get('tour_square_footage'));
-  $('#tour_subdivision').val($.session.get('tour_subdivision'));
-  $('#tour_description').val($.session.get('tour_description'));
-  $('select option[value='+$.session.get('tour_product_id') +']').attr("selected",true);
-  set_city();*/
-    /*$('select option[value='+$.cookie('tour_state') +']').attr("selected",true);
-
-  $('#tour_address1').val($.cookie('tour_address1'));
-  $('#tour_address2').val($.cookie('tour_address2'));
-  $('#tour_zip').val($.cookie('tour_zip'));
-  $('#tour_price').val($.cookie('tour_price'));
-  $('#tour_square_footage').val($.cookie('tour_square_footage'));
-  $('#tour_subdivision').val($.cookie('tour_subdivision'));
-  $('#tour_description').val($.cookie('tour_description'));
-  $('select option[value='+$.cookie('tour_product_id') +']').attr("selected",true);
-  set_city();*/
-
 $('#tour_address1').val(getCookie('tour_address1'));
   $('#tour_address2').val(getCookie('tour_address2'));
   $('#tour_zip').val(getCookie('tour_zip'));
@@ -211,26 +188,6 @@ $('#tour_address1').val(getCookie('tour_address1'));
   
 }
 function destroy_all_sessions(){
-/*$.session.remove('tour_address1');
-$.session.remove('tour_address2');
-$.session.remove('tour_zip');
-$.session.remove('tour_price');
-$.session.remove('tour_square_footage');
-$.session.remove('tour_subdivision');
-$.session.remove('tour_description');
-$.session.remove('tour_product_id');
-$.session.remove('tour_state');
-$.session.remove('tour_city');*/
-/*$.removeCookie('tour_address1');
-$.removeCookie('tour_address2');
-$.removeCookie('tour_zip');
-$.removeCookie('tour_price');
-$.removeCookie('tour_square_footage');
-$.removeCookie('tour_subdivision');
-$.removeCookie('tour_description');
-$.removeCookie('tour_product_id');
-$.removeCookie('tour_state');
-$.removeCookie('tour_city');*/
 deleteCookie('tour_address1');
 deleteCookie('tour_address2');
 deleteCookie('tour_zip');
@@ -245,8 +202,6 @@ deleteCookie('tour_city');
 
 }
 function set_city(){
-  //$.session.set('tour_state', $("#tour_state").val());
-  //$.cookie('tour_state', $("#tour_state").val());
   setCookie('tour_state',$("#tour_state").val(),1);
   $.ajax({
       type: 'GET',
@@ -382,52 +337,10 @@ $('#'+id).closest('.painting').hide();
      }
 
 }
-
-    jQuery(function() {
-
-  return $('#new_painting').fileupload({
-    type:'POST',
-    dataType: "script",
-    cache:false,
-
-    add: function(e, data) {
-
-      var file, types;
-      types = /(\.|\/)(gif|jpe?g|png)$/i;
-      file = data.files[0];
-      if (types.test(file.type) || types.test(file.name)) {
-
-        data.context = $(tmpl("template-upload", file));
-        $('#new_painting').append(data.context);
-        return data.submit();
-      } else {
-        return alert("" + file.name + " is not a gif, jpeg, or png image file");
-      }
-    },
-    progress: function(e, data) {
-      var progress;
-      if (data.context) {
-        progress = parseInt(data.loaded / data.total * 100, 10);
-        return data.context.find('.bar').css('width', progress + '%');
-      }
-    },
-    beforeSend: function (XMLHttpRequest) {
-
-   // alert("ok");
-   //Specifying this header ensures that the results will be returned as JSON.
-   XMLHttpRequest.setRequestHeader("Accept", "text/javascript");
-}
-
-  });
-
-});
-
-
-
 </script>
 <style>
-  .ie-upload-button{
-    float: right;
-      margin-right:31%;
+  .ie-submit-button{
+    float:right;
+    margin-right: 31%;
 }
 </style>
