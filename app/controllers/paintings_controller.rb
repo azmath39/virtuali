@@ -30,7 +30,7 @@ class PaintingsController < ApplicationController
   def create
     @previous_count=params[:count] if params.include?"count"
     if verify_no_image then
-      @painting = Painting.create(params[:painting])
+      @painting = Painting.new(params[:painting])
       @painting.user_id= current_user.id
       if @painting.save
       respond_to do |format|

@@ -1,3 +1,4 @@
+<%#= javascript_include_tag 'jquery.session.js'%>
 <% if verify_tours_allowed %>
 <%#= render '/home/account_mangement'  %>
 
@@ -9,9 +10,12 @@
 <div class="fileupload btn btn-primary">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
+  </div>
+  
+  <%=f.submit :upload, :class=>"ie-upload-button btn btn-primary" if browser.ie8? or browser.ie7?%>
   
 <% end %>
-</div>
+
 <span id="painting_error"></span>
 <div id="paintings">
   <%= render @paintings %>
@@ -141,7 +145,7 @@ $('#submit-button').click(function(e) {
       $('.wysihtml5').each(function(i, elem) {
     $(elem).wysihtml5();
      });
-      assign_session_to_fields();
+     
      $.ajax({
       type: "GET",
       url:"/paintings/count_rooms",
@@ -160,19 +164,19 @@ $('#submit-button').click(function(e) {
            // alert("Caution! You have choosed Bath Room more than one.")
           //}
     });
+     assign_session_to_fields();
+
    });
    function grt(){
    //alert("ok");
    //return false;
    }
 function set_session(id){
-  
   var val=$('#'+id).val();
-  $.session.set(id, val);
-  
+  setCookie(id,val,1);
 }
 function  assign_session_to_fields(){
-  $('select option[value='+$.session.get('tour_state') +']').attr("selected",true);
+  /*$('select option[value='+$.session.get('tour_state') +']').attr("selected",true);
   
   $('#tour_address1').val($.session.get('tour_address1'));
   $('#tour_address2').val($.session.get('tour_address2'));
@@ -182,11 +186,32 @@ function  assign_session_to_fields(){
   $('#tour_subdivision').val($.session.get('tour_subdivision'));
   $('#tour_description').val($.session.get('tour_description'));
   $('select option[value='+$.session.get('tour_product_id') +']').attr("selected",true);
+  set_city();*/
+    /*$('select option[value='+$.cookie('tour_state') +']').attr("selected",true);
+
+  $('#tour_address1').val($.cookie('tour_address1'));
+  $('#tour_address2').val($.cookie('tour_address2'));
+  $('#tour_zip').val($.cookie('tour_zip'));
+  $('#tour_price').val($.cookie('tour_price'));
+  $('#tour_square_footage').val($.cookie('tour_square_footage'));
+  $('#tour_subdivision').val($.cookie('tour_subdivision'));
+  $('#tour_description').val($.cookie('tour_description'));
+  $('select option[value='+$.cookie('tour_product_id') +']').attr("selected",true);
+  set_city();*/
+
+$('#tour_address1').val(getCookie('tour_address1'));
+  $('#tour_address2').val(getCookie('tour_address2'));
+  $('#tour_zip').val(getCookie('tour_zip'));
+  $('#tour_price').val(getCookie('tour_price'));
+  $('#tour_square_footage').val(getCookie('tour_square_footage'));
+  $('#tour_subdivision').val(getCookie('tour_subdivision'));
+  $('#tour_description').val(getCookie('tour_description'));
+  $('select option[value='+getCookie('tour_product_id') +']').attr("selected",true);
   set_city();
   
 }
 function destroy_all_sessions(){
-$.session.remove('tour_address1');
+/*$.session.remove('tour_address1');
 $.session.remove('tour_address2');
 $.session.remove('tour_zip');
 $.session.remove('tour_price');
@@ -195,10 +220,34 @@ $.session.remove('tour_subdivision');
 $.session.remove('tour_description');
 $.session.remove('tour_product_id');
 $.session.remove('tour_state');
-$.session.remove('tour_city');
+$.session.remove('tour_city');*/
+/*$.removeCookie('tour_address1');
+$.removeCookie('tour_address2');
+$.removeCookie('tour_zip');
+$.removeCookie('tour_price');
+$.removeCookie('tour_square_footage');
+$.removeCookie('tour_subdivision');
+$.removeCookie('tour_description');
+$.removeCookie('tour_product_id');
+$.removeCookie('tour_state');
+$.removeCookie('tour_city');*/
+deleteCookie('tour_address1');
+deleteCookie('tour_address2');
+deleteCookie('tour_zip');
+deleteCookie('tour_price');
+deleteCookie('tour_square_footage');
+deleteCookie('tour_subdivision');
+deleteCookie('tour_description');
+deleteCookie('tour_product_id');
+deleteCookie('tour_state');
+deleteCookie('tour_city');
+
+
 }
 function set_city(){
-  $.session.set('tour_state', $("#tour_state").val());
+  //$.session.set('tour_state', $("#tour_state").val());
+  //$.cookie('tour_state', $("#tour_state").val());
+  setCookie('tour_state',$("#tour_state").val(),1);
   $.ajax({
       type: 'GET',
       url: "/home/state_cities",
@@ -207,7 +256,7 @@ function set_city(){
       }
     }).done(function(text) {
   $('#tour_city').empty().append(text);
-$('select option[value='+$.session.get('tour_city') +']').attr("selected",true);
+$('select option[value='+getCookie('tour_city') +']').attr("selected",true);
     });
 }
  function state_city()
@@ -376,3 +425,9 @@ $('#'+id).closest('.painting').hide();
 
 
 </script>
+<style>
+  .ie-upload-button{
+    float: right;
+      margin-right:31%;
+}
+</style>
