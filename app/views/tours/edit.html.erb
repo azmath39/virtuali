@@ -9,7 +9,7 @@
       <%= f.file_field :image, multiple: true, name: "painting[image]" %>
    </div>
   <%=link_to "re-order","edit",:remote => true, :class=>"ie-re-order-button btn btn-primary"%>
-      <%=f.submit :upload, :class=>"ie-submit-button btn btn-primary" unless browser.ie8? or browser.ie7?%>
+      <%=f.submit :upload, :class=>"ie-submit-button btn btn-primary" if browser.ie8? or browser.ie7?%>
 
     <% end %>
   
