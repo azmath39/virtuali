@@ -29,7 +29,7 @@
 <%end%>
       <%#=button_tag "Renew",:class=>"btn btn-success",:onclick=>"renew()"%>
               <%#end%>
-<%if current_user.any_package_change?%>
+<%unless current_user.any_package_change?%>
 <%= link_to "Downgrade", '/packages/downgrade', :class => "btn btn-link" %>|
 <%= link_to "Upgrade", '/packages/upgrade_package', :class => "btn btn-link" %>|
 <%end%>
