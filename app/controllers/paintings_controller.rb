@@ -136,6 +136,7 @@ class PaintingsController < ApplicationController
 
     end
   end
+  
 
   private
   #  def selected_pkgs_without_tour

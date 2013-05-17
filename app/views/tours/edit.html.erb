@@ -7,9 +7,12 @@
     <div class="fileupload btn btn-primary">
       <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
       <%= f.file_field :image, multiple: true, name: "painting[image]" %>
+   </div>
+  <%=link_to "re-order","edit",:remote => true, :class=>"ie-re-order-button btn btn-primary"%>
+      <%=f.submit :upload, :class=>"ie-submit-button btn btn-primary" unless browser.ie8? or browser.ie7?%>
 
     <% end %>
-  </div>
+  
   <span id="painting_error"></span>
   <div id="paintings">
     <%= render @paintings %>
@@ -269,43 +272,15 @@
 
   }
 
-  jQuery(function() {
-
-    return $('#new_painting').fileupload({
-      type:'POST',
-      dataType: "script",
-      cache:false,
-
-      add: function(e, data) {
-
-        var file, types;
-        types = /(\.|\/)(gif|jpe?g|png)$/i;
-        file = data.files[0];
-        if (types.test(file.type) || types.test(file.name)) {
-
-          data.context = $(tmpl("template-upload", file));
-          $('#new_painting').append(data.context);
-          return data.submit();
-        } else {
-          return alert("" + file.name + " is not a gif, jpeg, or png image file");
-        }
-      },
-      progress: function(e, data) {
-        var progress;
-        if (data.context) {
-          progress = parseInt(data.loaded / data.total * 100, 10);
-          return data.context.find('.bar').css('width', progress + '%');
-        }
-      },
-      beforeSend: function (XMLHttpRequest) {
-
-        // alert("ok");
-        //Specifying this header ensures that the results will be returned as JSON.
-        XMLHttpRequest.setRequestHeader("Accept", "text/javascript");
-      }
-
-    });
-
-  });
-
 </script>
+<style>
+  .ie-submit-button{
+    float:right;
+    margin-right: 1%;
+}
+.ie-re-order-button{
+  float:right;
+  margin-right: 31%;
+  height:19px;
+}
+</style>

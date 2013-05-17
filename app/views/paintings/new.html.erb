@@ -11,7 +11,7 @@
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
   </div>
- 
+ <%=link_to "re-order","new",:remote => true, :class=>"ie-re-order-button btn btn-primary"%>
   <%=f.submit :upload, :class=>"ie-submit-button btn btn-primary" if browser.ie8? or browser.ie7?%>
 
 <% end %>
@@ -342,5 +342,9 @@ $('#'+id).closest('.painting').hide();
   .ie-submit-button{
     float:right;
     margin-right: 31%;
+}
+.ie-re-order-button{
+  float:right;
+  margin-right: 3%;
 }
 </style>
