@@ -92,7 +92,7 @@
             <% end %>
             <li class="tab"><%= link_to '<center><i class="icon-2x icon-edit"></i> </center>Profile'.html_safe, '#', "data-toggle" => "tab", :onclick=>'profile()' %></li>
             <li class="tab"><%= link_to '<center><i class="icon-2x icon-envelope-alt"></i> </center>Messages'.html_safe, '#', "data-toggle" => "tab", :onclick => 'messages()'%> </li>
-            <li class="tab"><%#= link_to "Upgrade Account", '#div_upgrade', "data-toggle" => "tab"%> </li>
+           
 <li class="tab"><%= link_to '<center><i class="icon-2x icon-cloud-upload"></i> </center>Create New Tour'.html_safe, '/paintings/new' if verify_tours_allowed%>
   </li>
 
