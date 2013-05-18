@@ -10,7 +10,7 @@
         <span id="package_error" style="color:red;"></span>
         <% @regular_packages.each do |pkg| %>
            <div class="span3 first-grid" style="width:35%;">
-            <p><center><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%></center></p>
+            <p><center><%=radio_button_tag "package[id]",pkg.id,1,:id=>"package"%></center></p>
 
             <br />
             <p id="price">
@@ -39,7 +39,7 @@
                     <span id="package_error" style="color:red;"></span>
                     <% @combo_packages.each do |pkg| %>
                     <div class="span3 first-grid" style="width:21%;">
-                        <p><center><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%></center></p>
+                        <p><center><%=radio_button_tag "package[id]",pkg.id,1,:id=>"package"%></center></p>
                     <br />
             <p id="price">
               <sup id="dollar-symb">$</sup><%=  price(pkg).to_i%>
@@ -68,7 +68,7 @@
 
           <div id="next_btn" style="float:right; margin-right:16%;">
             <%= f.submit "Downgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.."  %>
-            <span><%= link_to "Back", root_url ,:remote=>true, :tyle=> 'float:right;margin-right:120px;'%></span>
+            <span><%= link_to "Back", '/packages' ,:remote=>true, :tyle=> 'float:right;margin-right:120px;'%></span>
           </div>
     </div>
 

@@ -13,7 +13,7 @@
             <span id="package_error" style="color:red;"></span>
             <% @regular_packages.each do |pkg| %>
               <div class="span3 first-grid" style="width:30%;">
-                <p><center><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%></center></p>
+                <p><center><%=radio_button_tag "package[id]",pkg.id,1,:id=>"package"%></center></p>
       <%#*&nbsp;<b><span style="color:rgb(0, 136, 204);font-weight: bold;"><%=pkg.name%</span></b>%>
                 <br />
                 <p id="price">
@@ -51,7 +51,7 @@
               <span id="package_error" style="color:red;"></span>
               <% @combo_packages.each do |pkg| %>
                 <div class="span3 first-grid" style="width:35%;">
-                  <p><center><%=radio_button_tag "package[id]",pkg.id,nil,:id=>"package"%></center></p>
+                  <p><center><%=radio_button_tag "package[id]",pkg.id,1,:id=>"package"%></center></p>
                   <br />
                   <p id="price">
                     <sup id="dollar-symb">$</sup><%=price(pkg).to_i%>
@@ -119,9 +119,11 @@
 
       </div>
     <%else%>
+
       <p style="color:red;margin-left:34%;margin-top: 25%;"> No package Available.
-      <span><%= link_to "Back", '/packages',:remote=>true , :style=> 'float:right;margin-right:10px;margin-top:15px;'%></span>
-          </p>
+        <span><%= link_to "Back", '/packages' ,:remote=>true, :tyle=> 'float:right;margin-right:120px;'%></span>
+
+      </p>
 
     <%end%>
 

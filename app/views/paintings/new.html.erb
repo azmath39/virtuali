@@ -7,12 +7,24 @@
   <%= render 'shared/error_messages', :target => @tour  %>
 <%= form_for Painting.new do |f| %>
   <%$serial_no= @priority||1%>
-<div class="fileupload btn btn-primary">
+  <div class="row-fluid">
+    <div class="span5">
+<div class="fileupload btn btn-primary ">
   <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
   <%= f.file_field :image, multiple: true, name: "painting[image]" %>
   </div>
- <%=link_to "re-order","new",:remote => true, :class=>"ie-re-order-button btn btn-primary"%>
-  <%=f.submit :upload, :class=>"ie-submit-button btn btn-primary" if browser.ie8? or browser.ie7?%>
+    <br/>
+    <span >(Note: Picture size Should Be more than 700X500. )</span></div>
+    <div class="span1">
+  <%=f.submit :upload, :class=>"btn btn-primary" if browser.ie8? or browser.ie7?%>
+    </div>
+    <div class="span5">
+ <%=link_to "re-order","new",:remote => true, :class=>"btn btn-primary"%>
+    <br/>
+    <span>(Note:Arrange your Pictures according to priority.)</span>
+    </div>
+    </div>
+  
 
 <% end %>
 
@@ -338,14 +350,3 @@ $('#'+id).closest('.painting').hide();
 
 }
 </script>
-<style>
-  .ie-submit-button{
-    float:right;
-    margin-right: 1%;
-}
-.ie-re-order-button{
-  float:right;
-  margin-right: 31%;
-  height:19px;
-}
-</style>
