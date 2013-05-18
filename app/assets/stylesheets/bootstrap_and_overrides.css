@@ -252,15 +252,15 @@ filter: alpha(opacity=50);
     }
     
     .featurette-image {
-      margin-top: -110px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
+      /*margin-top: -110px;  Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
       margin-right: 12px;
       margin-bottom: 12px;
       margin-left:12px;
     }
     .featurette-image-round-shadow{
-        -webkit-border-radius: 50em;
-	-moz-border-radius: 50em;
-	border-radius: 50em;
+        -webkit-border-radius: 3em;
+	-moz-border-radius: 3em;
+	border-radius: 3em;
         -moz-box-shadow: 3px 3px 5px 6px #ccc;
         -webkit-box-shadow: 3px 3px 5px 6px #ccc;
         box-shadow: 3px 3px 5px 6px #ccc;
