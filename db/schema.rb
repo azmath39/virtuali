@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130427025456) do
+ActiveRecord::Schema.define(:version => 20130518123858) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -131,6 +131,33 @@ ActiveRecord::Schema.define(:version => 20130427025456) do
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
+  create_table "drafts", :force => true do |t|
+    t.string   "name"
+    t.string   "state"
+    t.text     "description"
+    t.integer  "user_id"
+    t.string   "city"
+    t.string   "zip"
+    t.string   "subdivision"
+    t.float    "price"
+    t.integer  "square_footage"
+    t.integer  "bed_rooms"
+    t.integer  "bath_rooms"
+    t.integer  "product_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "gmaps"
+    t.string   "slug"
+    t.text     "address"
+    t.integer  "status"
+    t.integer  "selected_package_id"
+    t.datetime "deleted_at"
+    t.string   "address1"
+    t.string   "address2"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
   create_table "feedbacks", :force => true do |t|
     t.string   "satisfaction_status"
     t.text     "content"
@@ -236,6 +263,34 @@ ActiveRecord::Schema.define(:version => 20130427025456) do
     t.string   "code"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "tour_drafts", :force => true do |t|
+    t.integer  "tour_id"
+    t.string   "name"
+    t.string   "state"
+    t.text     "description"
+    t.integer  "user_id"
+    t.string   "city"
+    t.string   "zip"
+    t.string   "subdivision"
+    t.float    "price"
+    t.integer  "square_footage"
+    t.integer  "bed_rooms"
+    t.integer  "bath_rooms"
+    t.integer  "product_id"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "gmaps"
+    t.string   "slug"
+    t.text     "address"
+    t.integer  "status"
+    t.integer  "selected_package_id"
+    t.datetime "deleted_at"
+    t.string   "address1"
+    t.string   "address2"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "tours", :force => true do |t|
