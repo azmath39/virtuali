@@ -29,6 +29,7 @@ class Painting < ActiveRecord::Base
   
   belongs_to :tour
   belongs_to :user
+  belongs_to :draft
   #belongs_to :paintable, :polymorphic => true
   #mount_uploader :image, ImageUploader
   #before_create :default_name

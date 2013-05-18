@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :phno, :email, :password, :password_confirmation, :add1, :add2, :state, :city, :zipcode, :remember_me, :image,:product,:package,:coupon
   mount_uploader :image, ImageUploader
   has_many :tours, :dependent => :destroy
+  has_many :drafts, :dependent => :destroy
   has_one :product, :through => :selected_product
   has_one :selected_product,:dependent => :destroy
   has_one :package, :through => :selected_package

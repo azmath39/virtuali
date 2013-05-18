@@ -25,22 +25,14 @@ class ToursController < ApplicationController
     @selected_pkgs=selected_pkgs_without_tour
   end
   def create
-    @tour = Tour.new(params[:tour])
-    if @tour.save
-      current_user.tours << @tour
-      #NotificationsMailer.tour_created_message(current_user, @tour).deliver
-      @paintings=current_user.paintings.where(:tour_id => nil)
-      @paintings.each do |pic|
-        @tour.paintings << pic
-      end 
-      flash[:notice] = "Tour was created successfully."
-      #redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
-      redirect_to tour_path(@tour)
+    unless params.include?:draft
+      tour_creation
     else
-      error_to_flash
-      redirect_to :action=>'new', :controller=>"paintings"
+      saved_to_draft
     end
   end
+
+
   def edit
     @tour = current_user.tours.find(params[:id].to_i)
     @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id).order('priority ASC')
@@ -205,10 +197,39 @@ class ToursController < ApplicationController
   end
   private
   def get_priority
-   priority=@tour.paintings.maximum(:priority)
-   priority += 1 unless priority.nil?
+    priority=@tour.paintings.maximum(:priority)
+    priority += 1 unless priority.nil?
   end
-
+  def tour_creation
+    @tour = Tour.new(params[:tour])
+    if @tour.save
+      current_user.tours << @tour
+      #NotificationsMailer.tour_created_message(current_user, @tour).deliver
+      @paintings=current_user.paintings.where(:tour_id => nil)
+      @paintings.each do |pic|
+        @tour.paintings << pic
+      end
+      flash[:notice] = "Tour was created successfully."
+      #redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
+      redirect_to tour_path(@tour)
+    else
+      error_to_flash
+      redirect_to :action=>'new', :controller=>"paintings"
+    end
+  end
+  def saved_to_draft
+    @draft = Draft.new(params[:tour])
+    @draft.user= current_user
+    @draft.save
+    
+    current_user.paintings.where(:tour_id => nil,:draft_id => nil).each do |pic|
+      @draft.paintings << pic
+    end
+   
+    flash[:notice] = "Sucessfully saved to draft."
+    #redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
+    redirect_to root_url
+  end
 
 end
  

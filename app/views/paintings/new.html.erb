@@ -1,164 +1,175 @@
 <%#= javascript_include_tag 'jquery.session.js'%>
 <% if verify_tours_allowed %>
-<%#= render '/home/account_mangement'  %>
+  <%#= render '/home/account_mangement'  %>
 
-<div class="span12" style="width:99%;margin-left:0%;">
-  <p class="title-text">Create a Tour</p>
-  <%= render 'shared/error_messages', :target => @tour  %>
-<%= form_for Painting.new do |f| %>
-  <%$serial_no= @priority||1%>
-  <div class="row-fluid">
-    <div class="span5">
-<div class="fileupload btn btn-primary ">
-  <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
-  <%= f.file_field :image, multiple: true, name: "painting[image]" %>
-  </div>
-    <br/>
-    <span >(Note: Picture size Should Be more than 700X500. )</span></div>
-    <div class="span1">
-  <%=f.submit :upload, :class=>"btn btn-primary" if browser.ie8? or browser.ie7?%>
-    </div>
-    <div class="span5">
- <%=link_to "re-order","new",:remote => true, :class=>"btn btn-primary"%>
-    <br/>
-    <span>(Note:Arrange your Pictures according to priority.)</span>
-    </div>
-    </div>
-  
-
-<% end %>
-
-<span id="painting_error"></span>
-<div id="paintings">
-  <%= render @paintings %>
-
-</div>
-
-
-<br/>
-</div>
-<%= form_for @painting,:url=>'update', :html => {:multipart => true, :id=>"updated_image_form"} do |f| %>
-<%=f.hidden_field "id",:id=>"image_updated_id"%>
-<%=f.hidden_field "remote_image_url"%>
-
-<%#= f.submit "Done", :class=>"btn-small btn-success"%>
-<%end%>
-<div class="span12" style="width:85%;">
-<%= form_for @tour, :url => '/tours/create', :html =>{:class => "form-horizontal",:onsubmit=>"grt()"}  do |f| %>
- <h3><legend>Tour Details:</legend></h3>
-<div style="float:left;">
-   <div class ="control-group">
-  <%= f.label "Category*", :html => {:class => 'control-label'} %>
-  <%= f.select :product_id, @products.collect{|p| [p.name,p.id]},{:prompt=>"Select Category"},:class=>"required",:onchange=>"set_session('tour_product_id')" %>
-  </div>
-  <div class ="control-group">
-  <%= f.label "Address1*", :html => {:class => 'control-label'} %>
-    <i style="font-size:12px;">( Address1 Format Ex: 19 Quaker Ridge Rd )</i><br />
+  <div class="span12" style="width:99%;margin-left:0%;">
+    <p class="title-text">Create a Tour</p>
+    <%= render 'shared/error_messages', :target => @tour  %>
+    <%= form_for Painting.new do |f| %>
+      <%$serial_no= @priority||1%>
     
-  <%= f.text_field :address1,:class=>"required",:onblur=>"set_session('tour_address1')" %>
+      <div class="row-fluid">
+        <div class="span5">
+          <div class="fileupload btn btn-primary ">
+            <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
+            <%= f.file_field :image, multiple: true, name: "painting[image]" %>
+          </div>
+          <br/>
+          <span >(Note: Picture size Should Be more than 700X500. )</span></div>
+        <div class="span1">
+          <%=f.submit :upload, :class=>"btn btn-primary" if browser.ie8? or browser.ie7?%>
+        </div>
+        <div class="span5">
+          <%=link_to "re-order","new",:remote => true, :class=>"btn btn-primary"%>
+          <br/>
+          <span>(Note:Arrange your Pictures according to priority.)</span>
+        </div>
+      </div>
+
+
+    <% end %>
+
+    <span id="painting_error"></span>
+    <div id="paintings">
+      <%= render @paintings %>
+
+    </div>
+
+
+    <br/>
   </div>
-  <div class ="control-group">
-  <%= f.label "Address2 (Optional)", :html => {:class => 'control-label'} %>
-  <%= f.text_field :address2,:onblur=>"set_session('tour_address2')"  %>
+  <%= form_for @painting,:url=>'update', :html => {:multipart => true, :id=>"updated_image_form"} do |f| %>
+    <%=f.hidden_field "id",:id=>"image_updated_id"%>
+    <%=f.hidden_field "remote_image_url"%>
+
+    <%#= f.submit "Done", :class=>"btn-small btn-success"%>
+  <%end%>
+  <div class="span12" style="width:85%;">
+    <%= form_for @tour, :url => '/tours/create', :html =>{:class => "form-horizontal",:onsubmit=>"grt()"}  do |f| %>
+      <h3><legend>Tour Details:</legend></h3>
+      <div class="draft_field"></div>
+      <div style="float:left;">
+        <div class ="control-group">
+          <%= f.label "Category*", :html => {:class => 'control-label'} %>
+          <%= f.select :product_id, @products.collect{|p| [p.name,p.id]},{:prompt=>"Select Category"},:class=>"required",:onchange=>"set_session('tour_product_id')" %>
+        </div>
+        <div class ="control-group">
+          <%= f.label "Address1*", :html => {:class => 'control-label'} %>
+          <i style="font-size:12px;">( Address1 Format Ex: 19 Quaker Ridge Rd )</i><br />
+
+          <%= f.text_field :address1,:class=>"required",:onblur=>"set_session('tour_address1')" %>
+        </div>
+        <div class ="control-group">
+          <%= f.label "Address2 (Optional)", :html => {:class => 'control-label'} %>
+          <%= f.text_field :address2,:onblur=>"set_session('tour_address2')"  %>
+        </div>
+        <div class ="control-group">
+          <%= f.label "state*", :html => {:class => 'control-label'}%>
+    <%#= f.text_field :state %>
+
+          <%=f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()",:class=>"required"%>
+        </div>
+        <div class ="control-group">
+          <%= f.label "city*", :html => {:class => 'control-label'} %>
+    <%#= f.text_field :city %>
+          <%=f.select :city, {},{:prompt=>"Select City"},:class=>"required",:onchange=>"set_session('tour_city')"%>
+
+        </div>
+        <div class ="control-group">
+          <%= f.label :zip, "Zip Code*:", :html => {:class => 'control-label'} %>
+          <%= f.text_field :zip,:class=>"required",:onblur=>"set_session('tour_zip')"  %>
+        </div>
+
+      </div>
+      <div class="span1"></div>
+      <div style="float:left; ">
+        <div class="control-group">
+          <%= f.label "price*" %>
+          <%= f.text_field :price,:class=>"required number",:onblur=>"set_session('tour_price')"  %>
+        </div>
+        <div class="control-group">
+          <%= f.label "square_footage*" %>
+          <%= f.text_field :square_footage,:class=>"required digits",:onblur=>"set_session('tour_square_footage')"  %>
+        </div>
+        <div class="control-group">
+          <%= f.label :bed_rooms %>
+          <%= f.text_field :bed_rooms,:class=>"required digits" %>
+        </div>
+        <div class="control-group">
+          <%= f.label :bath_rooms %>
+          <%= f.text_field :bath_rooms,:class=>"required digits" %>
+        </div>
+        <div class ="control-group">
+          <%= f.label "subdivision", :html => {:class => 'control-label'} %>
+          <%= f.text_field :subdivision,:onblur=>"set_session('tour_subdivision')"  %>
+        </div>
+
+      </div>
+
+      <div style="float:left;margin-top: 0px;margin-right:26%;width: 650px;">
+        <div>
+          <%= f.label :description %>
+          <%= f.text_area :description, :rows => 10, :style=>"width: 87%;", :class=>'wysihtml5', :onblur=>"set_session('tour_description')" %>
+        </div>
+      </div>
+      <div style="float:left;margin-top: 10px;clear: both;">
+        <div>
+          <%=f.button "Save to Draft", :onclick=>"saveToDraft()",:class=>"btn btn-large btn-primary saveToDraft"%>
+          <%= f.submit :class => 'btn btn-large btn-primary',:id=>"submit-button" %>
+          <span><%= link_to "Cancel", root_url , :tyle=> 'float:right;margin-right:120px;'%></span>
+        </div>
+      <% end %>
+    </div>
   </div>
-<div class ="control-group">
-  <%= f.label "state*", :html => {:class => 'control-label'}%>
-  <%#= f.text_field :state %>
- 
-  <%=f.select :state, State.all.collect {|s| [s.name,s.name]},{:prompt=>"Select State"},:onchange=>"state_city()",:class=>"required"%>
-</div>
-<div class ="control-group">
-  <%= f.label "city*", :html => {:class => 'control-label'} %>
-  <%#= f.text_field :city %>
-  <%=f.select :city, {},{:prompt=>"Select City"},:class=>"required",:onchange=>"set_session('tour_city')"%>
-
-</div>
-<div class ="control-group">
-  <%= f.label :zip, "Zip Code*:", :html => {:class => 'control-label'} %>
-  <%= f.text_field :zip,:class=>"required",:onblur=>"set_session('tour_zip')"  %>
-</div>
-
-</div>
-<div class="span1"></div>
-<div style="float:left; ">
-<div class="control-group">
-  <%= f.label "price*" %>
-  <%= f.text_field :price,:class=>"required number",:onblur=>"set_session('tour_price')"  %>
-</div>
-<div class="control-group">
-  <%= f.label "square_footage*" %>
-  <%= f.text_field :square_footage,:class=>"required digits",:onblur=>"set_session('tour_square_footage')"  %>
-</div>
-<div class="control-group">
-  <%= f.label :bed_rooms %>
-  <%= f.text_field :bed_rooms,:class=>"required digits" %>
-</div>
-<div class="control-group">
-  <%= f.label :bath_rooms %>
-  <%= f.text_field :bath_rooms,:class=>"required digits" %>
-</div>
-  <div class ="control-group">
-  <%= f.label "subdivision", :html => {:class => 'control-label'} %>
-  <%= f.text_field :subdivision,:onblur=>"set_session('tour_subdivision')"  %>
-</div>
-  
-</div>
-
-<div style="float:left;margin-top: 0px;margin-right:26%;width: 650px;">
-<div>
-  <%= f.label :description %>
-  <%= f.text_area :description, :rows => 10, :style=>"width: 87%;", :class=>'wysihtml5', :onblur=>"set_session('tour_description')" %>
-</div>
-</div>
-<div style="float:left;margin-top: 10px;clear: both;">
-<div>
-  <%= f.submit :class => 'btn btn-large btn-primary',:id=>"submit-button" %>
-  <span><%= link_to "Cancel", root_url , :tyle=> 'float:right;margin-right:120px;'%></span>
-</div>
-<% end %>
-</div>
-</div>
-<script id="template-upload" type="text/x-tmpl">
-<%#*<div class="upload">%>
+  <script id="template-upload" type="text/x-tmpl">
+  <%#*<div class="upload">%>
   <%#*{%=o.name%}%>
   <%#*<div class="progress"><div class="bar" style="width: 0%"></div></div>%>
-<%#*</div>%>
-</script>
+  <%#*</div>%>
+  </script>
 <%else%>
-<br/><br/><br/><br/><br/><br/>
-You have already published Sufficient Tours. To create more tours upgrade your Subscription.
+  <br/><br/><br/><br/><br/><br/>
+  You have already published Sufficient Tours. To create more tours upgrade your Subscription.
 <%end%>
 <%= javascript_include_tag "http://jzaefferer.github.com/jquery-validation/jquery.validate.js" %>
- <script>
-   $(document).ready(function(){
-  $('.tab:last-child').addClass('active');
+<script>
+  $(document).ready(function(){
+    $('.tab:last-child').addClass('active');
     $("#new_tour").validate();
-$('#submit-button').click(function(e) {
-  e.preventDefault();
-  $.ajax({
-      type: "GET",
-      url:"/paintings/check_name_of_pictures"
+    $('#submit-button').click(function(e) {
+      e.preventDefault();
+      $.ajax({
+        type: "GET",
+        url:"/paintings/check_name_of_pictures"
 
-    }).done(function(text){
+      }).done(function(text){
     
-      if (text==1){
-        destroy_all_sessions();
+        if (text==1){
+          destroy_all_sessions();
           $('form#new_tour').submit();
-      }
-      else{
-        alert("Please Select Name for Pictures");
-      }
+        }
+        else{
+          alert("Please Select Name for Pictures");
+        }
           
+      });
     });
-        });
+    $('.saveToDraft').click(function(e){
+         e.preventDefault();
+          $('.draft_field').html($('<input type="hidden" name="draft" id="draft" />').val(1));
+         alert($('#draft').val());
+         $("#new_tour").validate().cancelSubmit = true
+         $('form#new_tour').submit();
+
+    });
 
 
 
-      $('.wysihtml5').each(function(i, elem) {
-    $(elem).wysihtml5();
-     });
+    $('.wysihtml5').each(function(i, elem) {
+      $(elem).wysihtml5();
+    });
      
-     $.ajax({
+    $.ajax({
       type: "GET",
       url:"/paintings/count_rooms",
       data:{
@@ -166,67 +177,68 @@ $('#submit-button').click(function(e) {
       }
     }).done(function(text){
    
-     text = text.split(',');
-    var bed=parseInt(text[0]);
-    var bath=parseInt(text[1]);
+      text = text.split(',');
+      var bed=parseInt(text[0]);
+      var bath=parseInt(text[1]);
 
-          $("#tour_bed_rooms").val(bed);
-          $("#tour_bath_rooms").val(bath);
-         // if (bath > 1){
-           // alert("Caution! You have choosed Bath Room more than one.")
-          //}
+      $("#tour_bed_rooms").val(bed);
+      $("#tour_bath_rooms").val(bath);
+      // if (bath > 1){
+      // alert("Caution! You have choosed Bath Room more than one.")
+      //}
     });
-     assign_session_to_fields();
+    assign_session_to_fields();
 
-   });
-   function grt(){
-   //alert("ok");
-   //return false;
-   }
-function set_session(id){
-  var val=$('#'+id).val();
-  setCookie(id,val,1);
-}
-function  assign_session_to_fields(){
-$('#tour_address1').val(getCookie('tour_address1'));
-  $('#tour_address2').val(getCookie('tour_address2'));
-  $('#tour_zip').val(getCookie('tour_zip'));
-  $('#tour_price').val(getCookie('tour_price'));
-  $('#tour_square_footage').val(getCookie('tour_square_footage'));
-  $('#tour_subdivision').val(getCookie('tour_subdivision'));
-  $('#tour_description').val(getCookie('tour_description'));
-  $('select option[value='+getCookie('tour_product_id') +']').attr("selected",true);
-  set_city();
+  });
+  function grt(){
+    //alert("ok");
+    //return false;
+  }
+   
+  function set_session(id){
+    var val=$('#'+id).val();
+    setCookie(id,val,1);
+  }
+  function  assign_session_to_fields(){
+    $('#tour_address1').val(getCookie('tour_address1'));
+    $('#tour_address2').val(getCookie('tour_address2'));
+    $('#tour_zip').val(getCookie('tour_zip'));
+    $('#tour_price').val(getCookie('tour_price'));
+    $('#tour_square_footage').val(getCookie('tour_square_footage'));
+    $('#tour_subdivision').val(getCookie('tour_subdivision'));
+    $('#tour_description').val(getCookie('tour_description'));
+    $('select option[value='+getCookie('tour_product_id') +']').attr("selected",true);
+    set_city();
   
-}
-function destroy_all_sessions(){
-deleteCookie('tour_address1');
-deleteCookie('tour_address2');
-deleteCookie('tour_zip');
-deleteCookie('tour_price');
-deleteCookie('tour_square_footage');
-deleteCookie('tour_subdivision');
-deleteCookie('tour_description');
-deleteCookie('tour_product_id');
-deleteCookie('tour_state');
-deleteCookie('tour_city');
+  }
+  function destroy_all_sessions(){
+    deleteCookie('tour_address1');
+    deleteCookie('tour_address2');
+    deleteCookie('tour_zip');
+    deleteCookie('tour_price');
+    deleteCookie('tour_square_footage');
+    deleteCookie('tour_subdivision');
+    deleteCookie('tour_description');
+    deleteCookie('tour_product_id');
+    deleteCookie('tour_state');
+    deleteCookie('tour_city');
 
 
-}
-function set_city(){
-  setCookie('tour_state',$("#tour_state").val(),1);
-  $.ajax({
+  }
+  function set_city(){
+    setCookie('tour_state',$("#tour_state").val(),1);
+    $.ajax({
       type: 'GET',
       url: "/home/state_cities",
       data: {
         'state' :  $("#tour_state").val()
       }
     }).done(function(text) {
-  $('#tour_city').empty().append(text);
-$('select option[value='+getCookie('tour_city') +']').attr("selected",true);
+      $('#tour_city').empty().append(text);
+      $('select option[value='+getCookie('tour_city') +']').attr("selected",true);
     });
-}
- function state_city()
+  }
+  function state_city()
   {
     
     $.ajax({
@@ -236,7 +248,7 @@ $('select option[value='+getCookie('tour_city') +']').attr("selected",true);
         'state' :  $("#tour_state").val()
       }
     }).done(function(text) {
-  $('#tour_city').empty().append(text);
+      $('#tour_city').empty().append(text);
   
     });
   }
@@ -246,18 +258,18 @@ $('select option[value='+getCookie('tour_city') +']').attr("selected",true);
     //alert(name);
     if (name == 'Others') {
       $('#other-name'+id).show();
-            $('#other-name'+id).html("<input type=text id='text"+id+"'name='name' style='width:93%;' onblur='text_field_data("+id+")'>");
-        } else {
-            $('#other-name'+id).hide();
-            set_image_name(name, id);
-        }
+      $('#other-name'+id).html("<input type=text id='text"+id+"'name='name' style='width:93%;' onblur='text_field_data("+id+")'>");
+    } else {
+      $('#other-name'+id).hide();
+      set_image_name(name, id);
+    }
   }
   function text_field_data(id)
   {
     var name= $("#text"+id).val();
     //alert(name);
     if (name != "") {
-    set_image_name(name, id);
+      set_image_name(name, id);
     }
     else{
       alert("Name cant be empty")
@@ -268,7 +280,7 @@ $('select option[value='+getCookie('tour_city') +']').attr("selected",true);
   {
     //var name= $("#select"+id).attr('value');
 
-   //alert(name);
+    //alert(name);
     
     $.ajax({
       type: "GET",
@@ -280,16 +292,16 @@ $('select option[value='+getCookie('tour_city') +']').attr("selected",true);
 
 
     }).done(function(text){
-    //alert(text);
-     text = text.split(',');
-    var bed=parseInt(text[0]);
-    var bath=parseInt(text[1]);
+      //alert(text);
+      text = text.split(',');
+      var bed=parseInt(text[0]);
+      var bath=parseInt(text[1]);
     
-          $("#tour_bed_rooms").val(bed);
-          $("#tour_bath_rooms").val(bath);
-          if (bath > 1){
-            alert("Caution! You have choosed Bath Room more than one.")
-          }
+      $("#tour_bed_rooms").val(bed);
+      $("#tour_bath_rooms").val(bath);
+      if (bath > 1){
+        alert("Caution! You have choosed Bath Room more than one.")
+      }
     });
   }
   function change_priority(id)
@@ -299,54 +311,54 @@ $('select option[value='+getCookie('tour_city') +']').attr("selected",true);
       type:"GET",
       url:"/paintings/update_priority",
       data:{
-         id: id,
-         value: value
+        id: id,
+        value: value
       }
 
     }).done(function(text){
       text = text.split(',');
-    var id=parseInt(text[0]);
-    var value=parseInt(text[1]);
+      var id=parseInt(text[0]);
+      var value=parseInt(text[1]);
       $('.priority_input_'+id).val(value);
 
     });
   }
 
   /*$('.removed').click(function(e){
-   if(confirm("Are You Sure")){
-    e.preventDefault();
-    $(this).closest('.painting').hide();
-  // alert($(this).attr("id"));
-   $.ajax({
-     type:'DELETE',
-     dataType: "script",
-     url:'/paintings/'+$(this).attr("id")
+  if(confirm("Are You Sure")){
+   e.preventDefault();
+   $(this).closest('.painting').hide();
+ // alert($(this).attr("id"));
+  $.ajax({
+    type:'DELETE',
+    dataType: "script",
+    url:'/paintings/'+$(this).attr("id")
      
-   }).done(function(){
+  }).done(function(){
 
-     $('#painting_error').html("<div class='alert'>Picture Successfully Removed. </div> ")
-   });
-   }else
-     {
-       return false;
-     }
+    $('#painting_error').html("<div class='alert'>Picture Successfully Removed. </div> ")
+  });
+  }else
+    {
+      return false;
+    }
 });*/
-function remove_image(id){
- if(confirm("Are You Sure")){
+  function remove_image(id){
+    if(confirm("Are You Sure")){
 
-$.ajax({
-     type:'DELETE',
-     dataType: "script",
-     url:'/paintings/'+$('#'+id).attr("id")
+      $.ajax({
+        type:'DELETE',
+        dataType: "script",
+        url:'/paintings/'+$('#'+id).attr("id")
 
-   }).done(function(){
-$('#'+id).closest('.painting').hide();
-     $('#painting_error').html("<div class='alert'>Picture Successfully Removed. </div> ")
-   });
-   }else
-     {
-       return false;
-     }
+      }).done(function(){
+        $('#'+id).closest('.painting').hide();
+        $('#painting_error').html("<div class='alert'>Picture Successfully Removed. </div> ")
+      });
+    }else
+    {
+      return false;
+    }
 
-}
+  }
 </script>
