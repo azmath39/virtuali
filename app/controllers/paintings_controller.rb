@@ -14,13 +14,17 @@ class PaintingsController < ApplicationController
   
   def new
     #render :layout => false
-    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil).order('priority ASC')
+    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil).order('priority ASC')
 
     @painting = Painting.new
     @tour = Tour.new
     @products = current_user.subscribe_product
     @priority=get_priority
-    
+    if session[:cancel_request].nil?
+    Painting.destroy_all(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
+    else
+      session[:cancel_request]=nil
+    end
     #    respond_to do |format|
     #    format.js {render :layout=>false}
     #  end
@@ -34,7 +38,7 @@ class PaintingsController < ApplicationController
       @painting.user_id= current_user.id
       if @painting.save
       respond_to do |format|
-        format.html {redirect_to :back}
+        format.html {session[:cancel_request]=1;redirect_to :back}
         format.js
       end
       else
@@ -109,10 +113,11 @@ class PaintingsController < ApplicationController
     painting= Painting.find(params[:id])
     painting.update_attributes(:name=>params[:name])
     if params.include?"tour_id"
-   
       str = "#{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bath Room").count}"
+    elsif params.include?"draft_id"
+      str = "#{current_user.paintings.where(:draft_id=>[params[:draft_id].to_i,nil],:tour_id=>nil,:name=>"Bed Room").count}, #{current_user.paintings.where(:draft_id=>[params[:draft_id].to_i,nil],:tour_id=>nil,:name=>"Bath Room").count}"
     else
-      str = "#{current_user.paintings.where(:tour_id=>nil,:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>nil,:name=>"Bath Room").count}"
+      str = "#{current_user.paintings.where(:tour_id=>nil,:draft_id=>nil,:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>nil,:draft_id=>nil,:name=>"Bath Room").count}"
     end
     render :text=>str
   end
@@ -120,7 +125,7 @@ class PaintingsController < ApplicationController
     if params.include?"tour_id"
       str = "#{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bath Room").count}"
     elsif params.include?"draft_id"
-      str = "#{current_user.paintings.where(:draft_id=>[nil,params[:draft_id].to_i],:name=>"Bed Room").count}, #{current_user.paintings.where(:draft_id=>[nil,params[:draft_id].to_i],:name=>"Bath Room").count}"
+      str = "#{current_user.paintings.where(:draft_id=>[params[:draft_id].to_i,nil],:tour_id=>nil,:name=>"Bed Room").count}, #{current_user.paintings.where(:draft_id=>[params[:draft_id].to_i,nil],:tour_id=>nil,:name=>"Bath Room").count}"
     else
       str = "#{current_user.paintings.where(:tour_id=>nil,:draft_id=>nil,:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>nil,:draft_id=>nil,:name=>"Bath Room").count}"
     end

@@ -37,8 +37,13 @@ class ToursController < ApplicationController
     @tour = current_user.tours.find(params[:id].to_i)
     @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id).order('priority ASC')
     @count=@paintings.count unless @paintings.nil?
-    #@paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil)
-    Painting.destroy_all(:user_id=>current_user.id,:tour_id=>nil)
+    @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil)
+    if session[:cancel_request].nil?
+      Painting.destroy_all(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
+    else
+      session[:cancel_request]=nil
+    end
+    @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
     @paintings.flatten!
     @painting = Painting.new
     @products = current_user.subscribe_product
@@ -49,7 +54,7 @@ class ToursController < ApplicationController
   def update
     @tour = current_user.tours.find(params[:tour][:id])
     if @tour.update_attributes(params[:tour])
-      @paintings=current_user.paintings.where(:tour_id=>nil)
+      @paintings=current_user.paintings.where(:tour_id=>nil,:draft_id=>nil)
       @paintings.each do |pic|
         @tour.paintings<<pic
       end unless @paintings.empty?
@@ -104,12 +109,12 @@ class ToursController < ApplicationController
     if @tours.empty?
       flash.now[:notice] = "No tours were found!"
     end
-     @json = @tours.to_gmaps4rails do |tour, marker|
+    @json = @tours.to_gmaps4rails do |tour, marker|
       marker.infowindow("<center><img src=\"#{tour.display_image}\" width=\"150\" height=\"100\"><br />
                          <b>#{tour.zip} #{tour.state} #{tour.city}</b><br />
-                         " "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<br />
+        " "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<br />
                           Category: #{tour.product.name}<hr>
-                          " "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
+        " "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
       marker.title("#{tour.city}")
     end
   end
@@ -205,7 +210,7 @@ class ToursController < ApplicationController
     if @tour.save
       current_user.tours << @tour
       #NotificationsMailer.tour_created_message(current_user, @tour).deliver
-      @paintings=current_user.paintings.where(:tour_id => nil)
+      @paintings=current_user.paintings.where(:tour_id => nil,:draft_id=>nil)
       @paintings.each do |pic|
         @tour.paintings << pic
       end
@@ -228,7 +233,7 @@ class ToursController < ApplicationController
    
     flash[:notice] = "Sucessfully saved to draft."
     #redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
-    redirect_to root_url
+    redirect_to drafts_url
   end
 
 end
