@@ -12,13 +12,13 @@
     <%= csrf_meta_tags %>
 <%#*<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>%>
 <%#*<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />%>
-    <%#= render 'layouts/navbar' %>
-    <!--[if lt IE 8 ]>
-   http://www.seooffpage.com/ie/ie8.css
+<%#= render 'layouts/navbar' %>
+    <!--[if IE 8 ]>
+<link href="http://www.seooffpage.com/ie/ie8.css" media="all" rel="stylesheet" type="text/css">
 <![endif]-->
-<!--[if lt IE 7 ]>
-    http://www.seooffpage.com/ie/ie7.css
-<![endif]-->
+    <!--[if IE 7 ]>
+    <link href="http://www.seooffpage.com/ie/ie7.css" media="all" rel="stylesheet" type="text/css">
+    <![endif]-->
   </head>
   <body>
     <%= render 'layouts/navbar' %>
@@ -32,9 +32,9 @@
         <div class ="container " >
           <%= render 'shared/flash_messages' %>
 
-          <%#=yield :search%>
+<%#=yield :search%>
           <%if current_user%>
-          
+
             <%=yield :side_bar%>
             <div id="jquery-container">
             <%else%>
@@ -54,22 +54,22 @@
           </div>
           <div id="push"></div>
         </div>
-        </div>
-        <%= render 'layouts/footer' %>
-        </body>
-        </html>
-        <style>
-          #jquery-container{
+      </div>
+      <%= render 'layouts/footer' %>
+  </body>
+</html>
+<style>
+  #jquery-container{
 
-            margin-left:25%;
-            min-height: 700px;
-           width: 925px;
-            overflow: auto;
-            margin-top:5%;
-           
-          }
-          .nav [class^="icon-"], .nav [class*=" icon-"] {
-            line-height: 0.9em;
-}
-          
-        </style>
+    margin-left:25%;
+    min-height: 700px;
+    width: 925px;
+    overflow: auto;
+    margin-top:5%;
+
+  }
+  .nav [class^="icon-"], .nav [class*=" icon-"] {
+    line-height: 0.9em;
+  }
+
+</style>

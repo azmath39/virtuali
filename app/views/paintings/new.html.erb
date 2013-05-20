@@ -157,9 +157,24 @@
     $('.saveToDraft').click(function(e){
          e.preventDefault();
           $('.draft_field').html($('<input type="hidden" name="draft" id="draft" />').val(1));
-         alert($('#draft').val());
+         
          $("#new_tour").validate().cancelSubmit = true
-         $('form#new_tour').submit();
+         $.ajax({
+        type: "GET",
+        url:"/paintings/check_name_of_pictures"
+
+      }).done(function(text){
+
+        if (text==1){
+          destroy_all_sessions();
+          $('form#edit_draft').submit();
+        }
+        else{
+          alert("Please Select Name for Pictures");
+        }
+
+      });
+         
 
     });
 

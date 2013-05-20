@@ -17,8 +17,8 @@
 
           <br />
           <p id="price">
-            <sup id="dollar-symb">$</sup> <%if @product.product_type ==2%><%=actual_price(pkg).to_i%><%else%>
-<%=just_price(pkg).to_i%>
+            <sup id="dollar-symb">$</sup> <%if @product.product_type ==2%><%=actual_price(pkg)%><%else%>
+<%=just_price(pkg)%>
   <%end%>
           </p>
           <hr />
@@ -26,7 +26,7 @@
             <ul class="unstyled"style="text-align:left" >
               <%if @product.product_type ==2%>
               <p ><b>Discount:</b>&nbsp;<%="15%"%></p>
-              <p><b>Actual Price:</b>&nbsp;<%=actual_price(pkg).to_i%></p>
+              <p><b>Offer Price:</b>&nbsp;<%=price(pkg)%></p>
               <%end%>
               <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
               <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
@@ -36,7 +36,7 @@
                 <p>For and additional $15 you can add 10 more pictures to your tour.</p>
               <%end%>
               <%if pkg.product.category.name == "By Agent"%>
-                <p>upload to Realtor.com.<br/>
+                <p>Upload to Realtor.com.<br/>
                   Showcase account $5.00<br/>
                   Non- Showcase account $25.00 </p>
               <%end%>
