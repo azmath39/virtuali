@@ -28,6 +28,7 @@ VirtualTour::Application.routes.draw do
   devise_for :users,:controllers => { :registrations => "Registrations" }
   resources :paintings
   resources :tours
+  resources :drafts
   devise_scope :user do
     #get "registrations/text_visit" => "registrations#text_visit"
     match "registrations/save_user" => "registrations#save_user"

@@ -117,15 +117,13 @@ class PaintingsController < ApplicationController
     render :text=>str
   end
   def count_rooms
-  
     if params.include?"tour_id"
-
       str = "#{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bath Room").count}"
+    elsif params.include?"draft_id"
+      str = "#{current_user.paintings.where(:draft_id=>[nil,params[:draft_id].to_i],:name=>"Bed Room").count}, #{current_user.paintings.where(:draft_id=>[nil,params[:draft_id].to_i],:name=>"Bath Room").count}"
     else
-    
-      str = "#{current_user.paintings.where(:tour_id=>nil,:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>nil,:name=>"Bath Room").count}"
+      str = "#{current_user.paintings.where(:tour_id=>nil,:draft_id=>nil,:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>nil,:draft_id=>nil,:name=>"Bath Room").count}"
     end
- 
     render :text=>str
   end
   def check_name_of_pictures
