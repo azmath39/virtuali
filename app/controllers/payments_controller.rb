@@ -39,6 +39,13 @@ class PaymentsController < ApplicationController
     @auth_code = params[:x_auth_code]
     render 'thank_you', :layout=>false
   end
+  def renew_successfull_zero_amount
+    #current_user.save_payment_details(params[:x_trans_id],params[:x_card_type],params[:x_amount])
+    current_user.selected_package.renew_package
+    #@auth_code = params[:x_auth_code]
+     @auth_code = ""
+    render 'thank_you', :layout=>false
+  end
 
 
   # GET

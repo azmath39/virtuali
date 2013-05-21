@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
       @package=Package.find(params[:package_id])
 
       @product=@package.product.id
-      @notice="You have select #{@package.name} package of #{@package.product.name} "
+      @notice="You have selected #{@package.name} package of #{@package.product.name} "
       render  'instant_sign_up'
     else
       respond_with resource
