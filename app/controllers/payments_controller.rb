@@ -14,10 +14,14 @@ class PaymentsController < ApplicationController
  
   def renew
     #@amount = current_user.total_after_all_discounts
+
      @amount =amount_to_charge
+    if @amount>0
     @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :hosted_payment_form => true)
     @sim_transaction.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST, :link_text => 'Continue', :link_url => payments_renew_successfull_url(:only_path => false)))
-
+    else
+      redirect_to :action=>'renew_successfull_zero_amount'
+    end
 
   end
 
@@ -36,14 +40,12 @@ class PaymentsController < ApplicationController
   def renew_successfull
     current_user.save_payment_details(params[:x_trans_id],params[:x_card_type],params[:x_amount])
     current_user.selected_package.renew_package
+    current_user.change_balance(params[:x_amount])
     @auth_code = params[:x_auth_code]
     render 'thank_you', :layout=>false
   end
   def renew_successfull_zero_amount
-    #current_user.save_payment_details(params[:x_trans_id],params[:x_card_type],params[:x_amount])
-    current_user.selected_package.renew_package
-    #@auth_code = params[:x_auth_code]
-     @auth_code = ""
+    current_user.selected_package.renew_package  
     render 'thank_you', :layout=>false
   end
 

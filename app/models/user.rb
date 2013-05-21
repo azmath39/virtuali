@@ -118,13 +118,15 @@ class User < ActiveRecord::Base
     end
     if balance< price
       price=price-balance
-     
     else
- 
       price=0
+    end 
+  end
+  def change_balance(charged)
+    if selected_package.price.to_f>charged.to_f
+      self.balance -= selected_package.price.to_f - charged.to_f
+      self.save
     end
-    
-    
   end
   def packages_for_upgarde(package_type)
     #pkg=self.selected_package.package
@@ -380,7 +382,7 @@ class User < ActiveRecord::Base
   #    size/(1024*1024)
   #  end
   def send_message(subject,message)
-    #NotificationsMailer.alert_message(self.email,subject, message).deliver
+    NotificationsMailer.alert_message(self.email,subject, message).deliver
   end
   
   private
