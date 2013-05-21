@@ -20,8 +20,8 @@
           <%=f.submit :upload, :class=>"btn btn-primary" if browser.ie8? or browser.ie7?%>
         </div>
         <div class="span5">
-          <%=link_to "re-order","new",:remote => true, :class=>"btn btn-primary"%>
-          <br/>
+          <%=link_to "re-order",{:action=>  "edit", :cancel_request=>1},:remote => true, :class=>"ie-re-order-button btn btn-primary"%>
+<br/>
           <span>(Note:Arrange your Pictures according to priority.)</span>
         </div>
       </div>

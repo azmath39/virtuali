@@ -20,7 +20,7 @@
           <%=f.submit :upload, :class=>"btn btn-primary" if browser.ie8? or browser.ie7?%>
         </div>
         <div class="span5">
-          <%=link_to "re-order","new",:remote => true, :class=>"btn btn-primary"%>
+          <%=link_to "re-order",{:action=>"new", :cancel_request=>1},:remote => true, :class=>"btn btn-primary"%>
           <br/>
           <span>(Note:Arrange your Pictures according to priority.)</span>
         </div>
@@ -338,26 +338,6 @@
 
     });
   }
-
-  /*$('.removed').click(function(e){
-  if(confirm("Are You Sure")){
-   e.preventDefault();
-   $(this).closest('.painting').hide();
- // alert($(this).attr("id"));
-  $.ajax({
-    type:'DELETE',
-    dataType: "script",
-    url:'/paintings/'+$(this).attr("id")
-     
-  }).done(function(){
-
-    $('#painting_error').html("<div class='alert'>Picture Successfully Removed. </div> ")
-  });
-  }else
-    {
-      return false;
-    }
-});*/
   function remove_image(id){
     if(confirm("Are You Sure")){
 
