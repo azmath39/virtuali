@@ -31,12 +31,6 @@ bg2.jpg: bg2.jpg
 bg2/index.jpg: bg2.jpg
 bg2.png: bg2.png
 bg2/index.png: bg2.png
-browser-icon-chrome.png: browser-icon-chrome.png
-browser-icon-chrome/index.png: browser-icon-chrome.png
-browser-icon-firefox.png: browser-icon-firefox.png
-browser-icon-firefox/index.png: browser-icon-firefox.png
-browser-icon-safari.png: browser-icon-safari.png
-browser-icon-safari/index.png: browser-icon-safari.png
 classic-loader.gif: classic-loader.gif
 classic-loader/index.gif: classic-loader.gif
 classic-map.png: classic-map.png
@@ -101,6 +95,8 @@ slide-04.jpg: slide-04.jpg
 slide-04/index.jpg: slide-04.jpg
 slide-05.jpg: slide-05.jpg
 slide-05/index.jpg: slide-05.jpg
+slide-06.jpg: slide-06.jpg
+slide-06/index.jpg: slide-06.jpg
 up_arrow.gif: up_arrow.gif
 up_arrow/index.gif: up_arrow.gif
 user_default_image.gif: user_default_image.gif

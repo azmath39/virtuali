@@ -75,6 +75,12 @@
     font-style: bold;
    
 }
+.navbar .nav{
+   /* float:none;*/
+}
+.nav-pills{
+   float:left;
+}
 .navbar .brand {
     text-shadow:none;
     color: whitesmoke;
@@ -258,12 +264,12 @@ filter: alpha(opacity=50);
       margin-left:12px;
     }
     .featurette-image-round-shadow{
-        -webkit-border-radius: 3em;
+        /*-webkit-border-radius: 3em;
 	-moz-border-radius: 3em;
 	border-radius: 3em;
         -moz-box-shadow: 3px 3px 5px 6px #ccc;
         -webkit-box-shadow: 3px 3px 5px 6px #ccc;
-        box-shadow: 3px 3px 5px 6px #ccc;
+        box-shadow: 3px 3px 5px 6px #ccc;*/
 }
 
     /* Give some space on the sides of the floated elements so text doesn't run right into it. */
