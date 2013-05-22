@@ -20,9 +20,9 @@ class PaintingsController < ApplicationController
     @tour = Tour.new
     @products = current_user.subscribe_product
     @priority=get_priority
-    if session[:cancel_request].nil?
-    Painting.destroy_all(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
-    else
+    if session[:cancel_request].nil? and !params.include?:cancel_request
+      Painting.destroy_all(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
+    elsif session[:cancel_request].nil?
       session[:cancel_request]=nil
     end
     #    respond_to do |format|
@@ -37,31 +37,16 @@ class PaintingsController < ApplicationController
       @painting = Painting.new(params[:painting])
       @painting.user_id= current_user.id
       if @painting.save
-      respond_to do |format|
-        format.html {session[:cancel_request]=1;redirect_to :back}
-        format.js
-      end
+        respond_to do |format|
+          format.html {session[:cancel_request]=1;redirect_to :back}
+          format.js
+        end
       else
 
         render :js=>"alert(#{@painting.errors[:image]})"
       end
      
     end
-    #    def create_ie
-    #      @painting= Painting.find(params[:id])
-    #
-    #    end
-    #    puts "***********************"
-    #    p @painting
-    #
-    #    $ids << @painting.id
-    #    session[:painting] = $ids
-    #    puts "**********************"
-    #
-    #    puts "*****************#session******"
-    #    p session[:painting].flatten()
-    #  puts "***********************"
-    #p session[:painting]=nil
   end
 
   def edit
@@ -90,18 +75,18 @@ class PaintingsController < ApplicationController
   def update_priority
 
     target= current_user.paintings.find(params[:id])
-   target_priority=target.priority
+    target_priority=target.priority
     if params.include?"tour_id"
-     other= current_user.paintings.where(:priority=>params[:value],:tour_id=>[nil,params[:tour_id]]).last
+      other= current_user.paintings.where(:priority=>params[:value],:tour_id=>[nil,params[:tour_id]]).last
     else
-    other= current_user.paintings.where(:priority=>params[:value],:tour_id=>nil).last
+      other= current_user.paintings.where(:priority=>params[:value],:tour_id=>nil).last
     end
 
 
     target.update_attributes(:priority=>params[:value])
     unless other.nil?
-    other.update_attributes(:priority=>target_priority)
-    render :text=> "#{other.id},#{target_priority}"
+      other.update_attributes(:priority=>target_priority)
+      render :text=> "#{other.id},#{target_priority}"
     else
       render :nothing=>true
     end
@@ -113,7 +98,9 @@ class PaintingsController < ApplicationController
     painting= Painting.find(params[:id])
     painting.update_attributes(:name=>params[:name])
     if params.include?"tour_id"
-      str = "#{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bath Room").count}"
+      bedroom=current_user.paintings.where(:tour_id=>params[:tour_id].to_i,:name=>"Bed Room").count + current_user.paintings.where(:tour_id=>nil,:draft_id=>nil,:name=>"Bed Room").count
+      bathroom=current_user.paintings.where(:tour_id=>params[:tour_id].to_i,:name=>"Bath Room").count + current_user.paintings.where(:tour_id=>nil,:draft_id=>nil,:name=>"Bath Room").count
+      str = "#{bedroom},#{bathroom}"
     elsif params.include?"draft_id"
       str = "#{current_user.paintings.where(:draft_id=>[params[:draft_id].to_i,nil],:tour_id=>nil,:name=>"Bed Room").count}, #{current_user.paintings.where(:draft_id=>[params[:draft_id].to_i,nil],:tour_id=>nil,:name=>"Bath Room").count}"
     else
@@ -123,7 +110,9 @@ class PaintingsController < ApplicationController
   end
   def count_rooms
     if params.include?"tour_id"
-      str = "#{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bed Room").count}, #{current_user.paintings.where(:tour_id=>[nil,params[:tour_id].to_i],:name=>"Bath Room").count}"
+      bedroom=current_user.paintings.where(:tour_id=>params[:tour_id].to_i,:name=>"Bed Room").count + current_user.paintings.where(:tour_id=>nil,:draft_id=>nil,:name=>"Bed Room").count
+      bathroom=current_user.paintings.where(:tour_id=>params[:tour_id].to_i,:name=>"Bath Room").count + current_user.paintings.where(:tour_id=>nil,:draft_id=>nil,:name=>"Bath Room").count
+      str = "#{bedroom},#{bathroom}"
     elsif params.include?"draft_id"
       str = "#{current_user.paintings.where(:draft_id=>[params[:draft_id].to_i,nil],:tour_id=>nil,:name=>"Bed Room").count}, #{current_user.paintings.where(:draft_id=>[params[:draft_id].to_i,nil],:tour_id=>nil,:name=>"Bath Room").count}"
     else
@@ -133,9 +122,9 @@ class PaintingsController < ApplicationController
   end
   def check_name_of_pictures
     unless current_user.check_name_of_pictures?
-     render :text=>"1"
+      render :text=>"1"
     else
-       render :text=>"0"
+      render :text=>"0"
 
     end
   end
@@ -164,8 +153,8 @@ class PaintingsController < ApplicationController
   end
   private
   def get_priority
-   priority=current_user.paintings.where(:tour_id=>nil).maximum(:priority)
-   priority += 1 unless priority.nil?
+    priority=current_user.paintings.where(:tour_id=>nil,:draft_id=>nil).maximum(:priority)
+    priority += 1 unless priority.nil?
   end
 
   #  def set_default_response_format

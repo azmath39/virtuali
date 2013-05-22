@@ -35,12 +35,12 @@ class ToursController < ApplicationController
 
   def edit
     @tour = current_user.tours.find(params[:id].to_i)
-    @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>@tour.id).order('priority ASC')
+    @paintings = @tour.paintings.order('priority ASC')
     @count=@paintings.count unless @paintings.nil?
-    @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil)
-    if session[:cancel_request].nil?
+    
+    if session[:cancel_request].nil? and !params.include?:cancel_request
       Painting.destroy_all(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
-    else
+    elsif session[:cancel_request].nil?
       session[:cancel_request]=nil
     end
     @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)

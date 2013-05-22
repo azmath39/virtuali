@@ -1,4 +1,9 @@
 class DraftsController < ApplicationController
+
+  def new
+  end
+
+
   def edit
     @draft=Draft.find(params[:id])
     @paintings=@draft.paintings
@@ -7,9 +12,9 @@ class DraftsController < ApplicationController
     @cities=[]
     state=State.find_by_name(@draft.state)
     @cities= City.find(:all,:conditions=>{:code=>state.code}) unless state.nil?
-    if session[:cancel_request].nil?
+    if session[:cancel_request].nil? and !params.include?:cancel_request
       Painting.destroy_all(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
-    else
+    elsif session[:cancel_request].nil?
       session[:cancel_request]=nil
     end
     @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
