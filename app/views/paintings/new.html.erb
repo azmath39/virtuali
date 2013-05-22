@@ -242,6 +242,7 @@
   }
   function set_city(){
     setCookie('tour_state',$("#tour_state").val(),1);
+    if ($("#tour_state").val()!=""){
     $.ajax({
       type: 'GET',
       url: "/home/state_cities",
@@ -252,6 +253,7 @@
       $('#tour_city').empty().append(text);
       $('select option[value='+getCookie('tour_city') +']').attr("selected",true);
     });
+  }
   }
   function state_city()
   {

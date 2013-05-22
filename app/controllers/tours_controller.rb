@@ -35,16 +35,17 @@ class ToursController < ApplicationController
 
   def edit
     @tour = current_user.tours.find(params[:id].to_i)
-    @paintings = @tour.paintings.order('priority ASC')
+    @paintings = @tour.paintings
     @count=@paintings.count unless @paintings.nil?
     
     if session[:cancel_request].nil? and !params.include?:cancel_request
       Painting.destroy_all(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
-    elsif session[:cancel_request].nil?
+    elsif !session[:cancel_request].nil?
       session[:cancel_request]=nil
     end
     @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
     @paintings.flatten!
+    @paintings=@paintings.order('priority ASC')
     @painting = Painting.new
     @products = current_user.subscribe_product
     state=State.find_by_name(@tour.state)
@@ -59,7 +60,6 @@ class ToursController < ApplicationController
         @tour.paintings<<pic
       end unless @paintings.empty?
       flash[:notice] = 'Tour updated successfully.'
-      #redirect_to :controller => 'tours', :action => 'final_tour', :id => @tour.id
       redirect_to tour_path(@tour)
     else
       error_to_flash
@@ -83,23 +83,6 @@ class ToursController < ApplicationController
     @tour = Tour.find_by_slug(params[:id])
   end
   def view_map
-    #      if params.has_key? "map_product"
-    #        if params["map_product"] == ""
-    #          @tours = Tour.all
-    #        else
-    #        @tours = []
-    #        @products=SelectedProduct.find(:all,:conditions=>{:product_id=>params[:map_product].to_i})
-    #        @products.each do |product|
-    #          @tours << product.user.tours.where(:status => 1)
-    #        end
-    #        end
-    #        @tours.compact!
-    #        @tours.flatten!
-    #      elsif params.has_key? "status"
-    #        @tours = Tour.where(:status => params[:status].to_i)
-    #      else
-    #        @tours = Tour.active
-    #      end
     @search = Tour.search(params[:q])
     if !params[:q].nil?
       @tours = @search.result

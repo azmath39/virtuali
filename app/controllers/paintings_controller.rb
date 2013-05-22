@@ -22,8 +22,12 @@ class PaintingsController < ApplicationController
     @priority=get_priority
     if session[:cancel_request].nil? and !params.include?:cancel_request
       Painting.destroy_all(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
-    elsif session[:cancel_request].nil?
+    elsif !session[:cancel_request].nil?
+      puts "--88--"*10
+       puts session[:cancel_request]
+      puts "--88--"*10
       session[:cancel_request]=nil
+
     end
     #    respond_to do |format|
     #    format.js {render :layout=>false}
@@ -38,7 +42,14 @@ class PaintingsController < ApplicationController
       @painting.user_id= current_user.id
       if @painting.save
         respond_to do |format|
-          format.html {session[:cancel_request]=1;redirect_to :back}
+          format.html do
+            session[:cancel_request]=1
+            if browser.ie9?
+             render :js=>"window.location.reload(true);"
+            else
+            redirect_to :back
+            end
+          end
           format.js
         end
       else
@@ -77,9 +88,12 @@ class PaintingsController < ApplicationController
     target= current_user.paintings.find(params[:id])
     target_priority=target.priority
     if params.include?"tour_id"
-      other= current_user.paintings.where(:priority=>params[:value],:tour_id=>[nil,params[:tour_id]]).last
+      other= (current_user.paintings.where(:priority=>params[:value],:tour_id=>params[:tour_id])+current_user.paintings.where(:priority=>params[:value],:tour_id=>nil,:draft_id=>nil)).compact.last
+    elsif params.include? "draft_id"
+      other= (current_user.paintings.where(:priority=>params[:value],:draft_id=>params[:draft_id])+current_user.paintings.where(:priority=>params[:value],:tour_id=>nil,:draft_id=>nil)).compact.last
+
     else
-      other= current_user.paintings.where(:priority=>params[:value],:tour_id=>nil).last
+      other= current_user.paintings.where(:priority=>params[:value],:tour_id=>nil, :draft_id=>nil).last
     end
 
 
