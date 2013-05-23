@@ -12,7 +12,7 @@ $(document).ready(function(){
         interval: false
 
     })
-    company();
+    company_details();
 
     $("#user_name").blur(function(event){
 
