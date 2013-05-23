@@ -23,9 +23,6 @@ class PaintingsController < ApplicationController
     if session[:cancel_request].nil? and !params.include?:cancel_request
       Painting.destroy_all(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
     elsif !session[:cancel_request].nil?
-      puts "--88--"*10
-       puts session[:cancel_request]
-      puts "--88--"*10
       session[:cancel_request]=nil
 
     end

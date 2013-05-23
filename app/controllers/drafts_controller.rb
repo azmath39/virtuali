@@ -17,9 +17,9 @@ class DraftsController < ApplicationController
     elsif !session[:cancel_request].nil?
       session[:cancel_request]=nil
     end
-    @paintings << Painting.where(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
+    @paintings += Painting.where(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
     @paintings.flatten!
-    @paintings=@paintings.order('priority ASC')
+    @paintings=@paintings.sort_by &:priority
     @priority=get_priority
   end
   def update
