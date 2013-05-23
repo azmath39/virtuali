@@ -1,14 +1,12 @@
 <%unless @regular_packages.empty? and @combo_packages.empty? %>
 
-  <div id ="package_info">
+ 
     
     
         <span id="package_error" style="color:red; margin-left: 5%;"></span>
         <div class="pricing_grid row" >
         <% @regular_packages.each do |pkg| %>
           <div class="span3 first-grid" style="width:24%;">
-
-    <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
             <p><center><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package",:onclick=>"enable_btn_package()"%></center></p>
             <br />
             <p id="price">
@@ -34,27 +32,12 @@
         <% end %>
         </div>
         <%unless @combo_packages.empty?%>
-    <%#*<div class="container-fluid">%>
-    <%#*<div class="accordion" id="accordion2">%>
-    <%#*<div >%>
-    <%#*<div class="accordion-heading">%>
-    <%#*<p><b><span style="color:rgb(0, 136, 204);font-weight: bold;">Combo Packages</span></b>%>
-    <%#=link_to "view","#pack", "data-toggle"=>"collapse", :class=>"btn btn-link"%></p>
-
-    <%#*</div>%>
-    <%#*<div id="pack" class="accordion-body collapse" style="height: 0px; ">%>
-
-    <%#*</div>%>
-
-    <%#*</div>%>
-    <%#*</div>%>
-    <%#*</div>%>
+   
 
           <div class="pricing_grid row" style="margin:auto;width:100%;">
             <% @combo_packages.each do |pkg| %>
               <div class="span3 first-grid" >
                 <p><center><%=radio_button_tag "user[package][id]",pkg.id,nil,:id=>"package"%></center></p>
-      <%#*<table class="table table-bordered" style="width: 100%; height: 10px; font-size: 12px;">%>
                 <br />
                 <p id="price">
 
@@ -76,20 +59,17 @@
                     <%elsif !pkg.special_price.nil?%>
                       <%=hidden_field_tag "user[package][type_of_payment]",1%>
                     <%end%>
-      <%#unless pkg.monthly_price.nil?%>
-      <%#=hidden_field_tag "user[package][type_of_payment]",1%>
-      <%#*<p><b>Subscription Period</b>:&nbsp;<%=radio_button_tag "user[package][type_of_payment]",1% &nbsp;Monthly&nbsp;<%=radio_button_tag "user[package][type_of_payment]",2%&nbsp;Yearly</p>%>
-      <%#end%>
                   
               </div>
 
             <% end %>
+            </div>
           <%end%>
-        </div>
+        
 
    
     <%else%>
       <p style="color:red;margin-left:34%;margin-top: 25%;"> No package Available.</p>
 
     <%end%>
-  </div>
+  

@@ -4,7 +4,7 @@ class ToursController < ApplicationController
     #@search = Tour.where(:status => (0..1)).search(params[:q])
     if params[:q].nil?
       @search = Tour.active.search(params[:q])
-      @tours = Tour.active.tours_list_pagination(params[:page])
+      @tours=@search.result.tours_list_pagination(params[:page])
     elsif params[:q][:status_eq] == "3"
       @search = Tour.sold.search(params[:q])
       @tours = @search.result.tours_list_pagination(params[:page])
