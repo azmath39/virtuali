@@ -161,6 +161,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    remotipart (1.0.5)
     responders (0.9.3)
       railties (~> 3.1)
     rmagick (2.13.2)
@@ -228,6 +229,7 @@ DEPENDENCIES
   paranoia
   rails (= 3.2.11)
   ransack
+  remotipart (~> 1.0)
   rmagick
   rubyzip
   sass-rails (~> 3.2.3)

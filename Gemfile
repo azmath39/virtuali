@@ -19,6 +19,7 @@ gem 'rails', '3.2.11'
 gem 'browser'
 gem 'authorize-net'
 gem 'newrelic_rpm'
+gem 'remotipart', '~> 1.0'
   gem 'whenever', :require => false
   gem "fastimage"
   gem 'devise'
