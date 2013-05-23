@@ -19,8 +19,6 @@ class CompaniesController < ApplicationController
         format.html {redirect_to root_url}
         format.js
       end
-
-
     else
       render 'edit'
     end

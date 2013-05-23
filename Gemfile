@@ -18,12 +18,13 @@ gem 'rails', '3.2.11'
 
 gem 'browser'
 gem 'authorize-net'
+gem 'newrelic_rpm'
   gem 'whenever', :require => false
   gem "fastimage"
   gem 'devise'
   gem 'activeadmin'
   gem 'annotate'
-  gem 'stripe'
+ # gem 'stripe'
   gem 'twitter-bootstrap-rails'
   gem 'kaminari' #for pagination only
   gem 'will_paginate'
@@ -38,6 +39,7 @@ gem 'authorize-net'
   gem 'delayed_job_active_record'
   gem "daemons"
   gem 'bootstrap-wysihtml5-rails'
+
   #gem 'uniquify-uuid'
 # Gems used only for assets and not required
 # in production environments by default.

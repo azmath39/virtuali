@@ -4,32 +4,20 @@ class PaymentsController < ApplicationController
   helper :authorize_net
   protect_from_forgery :except => :relay_response
 
-  # GET
-  # Displays a payment form.
-  #  def payment
-  #    @amount = 10.00
-  #    @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :hosted_payment_form => true)
-  #    @sim_transaction.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::GET, :link_text => 'Continue', :link_url => payments_thank_you_url(:only_path => false)))
-  #  end
- 
+  
   def renew
-    #@amount = current_user.total_after_all_discounts
-
-     @amount =amount_to_charge
+    @amount =amount_to_charge
     if @amount>0
     @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :hosted_payment_form => true)
     @sim_transaction.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST, :link_text => 'Continue', :link_url => payments_renew_successfull_url(:only_path => false)))
     else
       redirect_to :action=>'renew_successfull_zero_amount'
     end
-
   end
-
-  
   def upgrade
     @amount =amount_to_charge
     @email= current_user.email
-    #add_coupon
+ 
     if params.include?:user and !params.include?:package
       combo_upgrade
     else
@@ -48,10 +36,6 @@ class PaymentsController < ApplicationController
     current_user.selected_package.renew_package  
     render 'thank_you', :layout=>false
   end
-
-
-  # GET
-  # Displays a thank you page.
   def thank_you
     @auth_code = params[:x_auth_code]
   end

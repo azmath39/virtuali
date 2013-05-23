@@ -44,7 +44,7 @@ class ToursController < ApplicationController
       session[:cancel_request]=nil
     end
     @paintings += Painting.where(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
-    #@paintings.flatten!
+    
     @paintings=@paintings.sort_by &:priority
     @painting = Painting.new
     @products = current_user.subscribe_product

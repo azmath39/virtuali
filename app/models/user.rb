@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
     self.balance ||= 0
   end
   def trace_activity
-    activities.create(:activity_type=>0, :charge=>Payment.last.amount)
+    self.activities<<Activity.create(:activity_type=>0, :charge=>Payment.last.amount)
   end
   def address
     "#{add1} #{add2}\n#{state} #{city}\n\n#{zipcode}"

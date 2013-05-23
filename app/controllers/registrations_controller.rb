@@ -3,7 +3,6 @@ class RegistrationsController < Devise::RegistrationsController
   protect_from_forgery :except => :relay_response
   def new
     resource = build_resource({})
-
     if params.include?(:package_id)
       @package=Package.find(params[:package_id])
 
@@ -19,16 +18,12 @@ class RegistrationsController < Devise::RegistrationsController
       
     @amount = amount_to_charge
     @email= params[:user][:email]
-    
-    #    payment
     if resource.save
       resource.company= Company.new(params[:company]) if params.include?:company
       session[:user_id]=resource.id
       @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :hosted_payment_form => true)
       @sim_transaction.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST, :link_text => 'Continue', :link_url => registrations_save_user_url(:only_path => false)))
       render '/payments/payment'
-
-
     else
       #      refund_payment(@charge["id"])
       clean_up_passwords resource
@@ -39,7 +34,6 @@ class RegistrationsController < Devise::RegistrationsController
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
-
     if resource.update_with_password(params[:user])
       if is_navigational_format?
         flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
@@ -48,19 +42,16 @@ class RegistrationsController < Devise::RegistrationsController
       end
       sign_in resource_name, resource, :bypass => true
       respond_to do|format|
-       format.html {respond_with resource, :location => after_update_path_for(resource)}
-       format.js
+        format.html {respond_with resource, :location => after_update_path_for(resource)}
+        format.js
       end
     else
       clean_up_passwords resource
       respond_with resource
     end
   end
-  #  def create
-  #
-  #  end
+  
   def save_user
-
     resp = AuthorizeNet::SIM::Response.new(params)
     resource=User.find(session[:user_id])
     session[:user_id]=nil
@@ -72,18 +63,14 @@ class RegistrationsController < Devise::RegistrationsController
         sign_up(resource_name, resource)
         respond_with resource, :location => after_sign_up_path_for(resource)
       else
-
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
         expire_session_data_after_sign_in!
         respond_with resource, :location => after_inactive_sign_up_path_for(resource)
       end
     else
       resource.destory
-    
       redirect_to root_url
     end
-
-    
   end
   
   def edit
