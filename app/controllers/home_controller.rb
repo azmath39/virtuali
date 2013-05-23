@@ -98,7 +98,7 @@ class HomeController < ApplicationController
   end
   def state_cities
     state=State.find_by_name(params[:state])
-    @cities= City.find(:all,:conditions=>{:code=>state.code}) unless state.nil?
+    @cities= City.where(:code=>state.code) unless state.nil?
     @str=""
     unless @cities.empty?
       @str +="'<option value="">Select City</option>"

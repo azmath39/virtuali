@@ -23,8 +23,6 @@ Virtual I Logo 300dpi.png: Virtual I Logo 300dpi.png
 Virtual I Logo 300dpi/index.png: Virtual I Logo 300dpi.png
 Virtual I Logo White.png: Virtual I Logo White.png
 Virtual I Logo White/index.png: Virtual I Logo White.png
-_2.jpg: _2.jpg
-_2/index.jpg: _2.jpg
 bg.jpg: bg.jpg
 bg/index.jpg: bg.jpg
 bg2.jpg: bg2.jpg
@@ -69,12 +67,6 @@ loading.gif: loading.gif
 loading/index.gif: loading.gif
 logo.png: logo.png
 logo/index.png: logo.png
-logo1.png: logo1.png
-logo1/index.png: logo1.png
-logo2.png: logo2.png
-logo2/index.png: logo2.png
-logo3.png: logo3.png
-logo3/index.png: logo3.png
 menu_bg.png: menu_bg.png
 menu_bg/index.png: menu_bg.png
 rails.png: rails.png
@@ -101,8 +93,6 @@ up_arrow.gif: up_arrow.gif
 up_arrow/index.gif: up_arrow.gif
 user_default_image.gif: user_default_image.gif
 user_default_image/index.gif: user_default_image.gif
-virtuali_logo.png: virtuali_logo.png
-virtuali_logo/index.png: virtuali_logo.png
 active_admin.js: active_admin.js
 active_admin/index.js: active_admin.js
 application.js: application.js

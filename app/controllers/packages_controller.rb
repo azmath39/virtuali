@@ -3,7 +3,7 @@ class PackagesController < ApplicationController
     product=Product.find(params["product"].to_i)
     @regular_packages=product.packages.where(:package_type=>1).order("regular_price ASC")
     @combo_packages=product.packages.where(:package_type=>2)
-    render :layout => false
+    render :partial => "show"
   end
   def index
     @package_price=current_user.package_price

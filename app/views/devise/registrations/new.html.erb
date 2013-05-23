@@ -1,13 +1,4 @@
-<script>
-  $(document).ready(function(){
-    $('#signupCarousel').carousel({
-      //pause:true,
-      interval: false
 
-    })
-
-  });
-</script>
 <%=render 'form'%>
 <%= javascript_include_tag "registrations" %>
 <script>
@@ -45,9 +36,7 @@
     });
   }
 
-  $(document).ready(function(){
-    company();
-  });
+ 
   function company()
   {
     $.ajax({
@@ -63,6 +52,8 @@
 
 
   }
+
+  
 
 
 </script>
