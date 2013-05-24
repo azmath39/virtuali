@@ -206,7 +206,6 @@ class User < ActiveRecord::Base
     tours_disable
   end
   def upgrade_charge(id)
-    puts "-------------"
     previous_package=selected_package
     new_package= Package.find(id)
     if previous_package.remaining_days>15 and previous_package.payment_period_type==1
