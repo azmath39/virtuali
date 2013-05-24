@@ -102,7 +102,7 @@
                 <%@i=0%>
                 <% Product.all.each do |x| %>
                   <div class="product-list">
-                    <%= radio_button_tag "user[product]", x.id, nil, :id=>"product", :style =>"vertical-align: middle", :onclick => "company()" %>&nbsp;<%= x.name%>
+                    <%= radio_button_tag "user[product]", x.id, nil, :id=>"product", :style =>"vertical-align: middle", :onclick => "company_details()" %>&nbsp;<%= x.name%>
                   </div><br/>
                   <% @i+=1 %>
                 <% end %><br />

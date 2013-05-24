@@ -3,6 +3,15 @@
 <%= javascript_include_tag "registrations" %>
 <script>
 
+$(document).ready(function(){
+    $('#signupCarousel').carousel({
+        //pause:true,
+        interval: false
+
+    });
+  
+    company_details();
+});
   function state_city()
   {
     $.ajax({
