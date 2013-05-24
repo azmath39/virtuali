@@ -6,13 +6,7 @@ var ec=0;
 //        navigation: true
 //    });
 //});
-$(document).ready(function(){
-    $('#signupCarousel').carousel({
-        //pause:true,
-        interval: false
 
-    })
-    company_details();
 
     $("#user_name").blur(function(event){
 
@@ -211,7 +205,7 @@ $(document).ready(function(){
             });
         }
     });
-});
+
 
 function email_validation(){
     $('#personal_info_error_email').html("");
