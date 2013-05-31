@@ -1,4 +1,5 @@
 <%user=current_user%>
+<div class="after_sign_in">
 <div id="company_error"></div>
 <div style="margin-left: 2%;">
 <p><span class="title-text">Company Details</span>&nbsp;<b><%= link_to "Edit".html_safe, "#edit_company", :onclick => "edit_company(#{current_user.company.id})", :class=>"btn btn-link" %></b></p>
@@ -22,4 +23,5 @@
 <%= user.company.phno %>
 <% end %><br /><br />
 <hr />
+</div>
 </div>
