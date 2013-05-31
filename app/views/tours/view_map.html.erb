@@ -24,11 +24,9 @@
       </div>
     <% end %>
   <%end%>
-  <%if current_user%>
-    <div id="map-div" style="margin-left: 0%; margin-top: 0%;">
-    <%else%>
-      <div id="map-div" style="margin-left: 25%; margin-top: 1%;">
-      <%end%>
+  
+      <div id="map-div" style="margin-left: 7%; margin-top: 1%;">
+
         <div class="row"> <span class="span1"><h1 class="title-text">Map</h1></span><span class="span8"> <%=yield :search%></span></div>
 <%#= gmaps4rails(@json)%>
 
@@ -38,7 +36,6 @@
             "detect_location" => false,
             "center_on_user" => false,
             "auto_adjust" => false,
-            "auto_zoom" => true,
             "zoom" => 4 },
           "markers"     => {"data" => @json }
         })

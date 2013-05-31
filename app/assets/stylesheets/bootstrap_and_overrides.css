@@ -12,15 +12,16 @@
       background-repeat: repeat;
       font-family: helvetica_reg;
       height: 100%;
+      color:gray;
 }
 .navbar-inner
 {
-/* background:none !important;*/
+/* background:none !important;
  -moz-border-radius:4px;
  -moz-box-shadow:0 1px 4px rgba(0,0,0,0.065);
  -webkit-border-radius:4px;
 
- -webkit-box-shadow:0 1px 4px rgba(0,0,0,0.065);
+ -webkit-box-shadow:0 1px 4px rgba(0,0,0,0.065);*/
  background: url(bg.jpg);
  /*ABD NAV background-color:#fafafa;
  background-image:linear-gradient(tobottom,#fff,#f2f2f2);
@@ -28,7 +29,7 @@
  border:1px solid #d4d4d4;
  border-radius:4px;
  border-width:0;
- box-shadow:0 1px 4px rgba(0,0,0,0.065);
+ /*box-shadow:0 1px 4px rgba(0,0,0,0.065);*/
  /*filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#fff2f2f2',GradientType=0);*/
  min-height:40px;
  padding-left:20px;
@@ -64,21 +65,44 @@
    
 
 }*/
+.btn-primary,.btn-warning, .btn-success{
+    background-color: #25AAE2 ;
+    background-image: linear-gradient(to bottom, #25AAE2, #25AAE2);
+}
+.btn-primary:hover,.btn-warning:hover,.btn-success:hover{
+    background-color: #25AAE2 ;
+    background-image: linear-gradient(to bottom, #25AAE2);
+}
 .navbar {
     margin-bottom: 0px;
 }
 .navbar .nav>li>a{
     float:none;
     /*padding:16px 8px 0px;*/
-    color: #3B5998;
+    color: white;
     text-decoration:none;
     text-shadow:none;
     font-size: 18px;
     font-style: bold;
    
 }
+ .top-menu>li>a{
+     background:#25AAE2;
+    border-radius:20px;
+   
+ }
+ .top-menu>li{
+    margin:0px 12px;
+}
+.top-menu>li>a:hover{
+    background:#787c7e !important;
+    border-radius:20px;
+    color:white !important;
+
+ }
 .navbar .nav{
    /* float:none;*/
+   
 }
 .nav-pills{
    float:left;
@@ -92,7 +116,7 @@
     font-size: 18px;
 
     background-color: transparent;
-    color:gray;
+    
     text-shadow: whitesmoke 0.01em 0.01em 0.01em;
     text-decoration: none;
     background:none;
@@ -177,6 +201,9 @@ filter: alpha(opacity=50);
 }
 .carousel img {
   height: 600px;
+  width:100%;
+  border-radius:50px;
+
 }
 .carousel-inner{
     height: 600px;
@@ -300,7 +327,7 @@ filter: alpha(opacity=50);
     ------------------------- */
     .container{
         width:100%;
-
+        min-height: 900px;
         margin-top: 13%;
        
         
@@ -309,5 +336,12 @@ filter: alpha(opacity=50);
     border-width: 0px;
 }*/
 #myCarousel1 {
-    margin-top: -5%;
+    margin-top: 0%;
+    width:90%;
+    margin-left: 5%;
+    border-radius:50px;
+}
+.after_sign_in{
+    margin:2% 6% 0% 7%;
+    
 }

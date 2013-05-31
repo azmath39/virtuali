@@ -1,4 +1,5 @@
 <%#= javascript_include_tag 'jquery.session.js'%>
+<div class="after_sign_in">
 <% if verify_tours_allowed %>
   <%#= render '/home/account_mangement'  %>
 
@@ -132,6 +133,7 @@
   <br/><br/><br/><br/><br/><br/>
   You have already published Sufficient Tours. To create more tours upgrade your Subscription.
 <%end%>
+</div>
 <%= javascript_include_tag "http://jzaefferer.github.com/jquery-validation/jquery.validate.js" %>
 <script>
   $(document).ready(function(){
