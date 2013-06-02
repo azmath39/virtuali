@@ -18,6 +18,7 @@ jQuery(function() {
         } else {
           return alert("" + file.name + " is not a gif, jpeg, or png image file");
         }
+        
       },
       progress: function(e, data) {
         var progress;

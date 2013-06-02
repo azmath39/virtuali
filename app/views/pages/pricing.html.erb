@@ -13,7 +13,8 @@
         manual_packages();
       });
       function manual_packages(){
-        $.ajax({
+        $('#manual_packages').html('<img id="theImg" src="/assets/359.gif" />');
+       $.ajax({
           type: 'GET',
           url:'/packages/manual_packages',
           data:{

@@ -233,7 +233,18 @@ function email_validation(){
     }
 
 }
+$('#btn_terms').click(function(event){
 
+
+ if ($('#user_terms').is(':checked')) {
+   $('#btn_terms').prop('disabled', false);
+ }
+ else{
+   $('#btn_terms').prop('disabled', true);
+   $('#term_error').html("* Read and Accept terms and conditions.. <br/>");
+ }
+
+});
 
 function validEmail(v) {
     var r = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
