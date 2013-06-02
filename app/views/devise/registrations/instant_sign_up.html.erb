@@ -103,7 +103,21 @@
             </div>
           </div>
         </div>
-
+ <div class="item">
+        <div id="terms_and_conditions">
+          <div id="scont">
+            <h3>Terms and Conditions</h3>
+            <span id="term_error"></span>
+            <hr/>
+            <%=render 'terms'%><br/>
+            <div id="terms_check_box"><%=check_box_tag "user[terms]"%> &nbsp;&nbsp; I accept the Terms and Conditions.</div>
+            <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal_pack","data-slide"=>"prev" %>
+            <div id="next_btn">
+              <%=link_to "","#signupCarousel", :class => "carousel-control right icon-arrow-right btn-large btn-primary btn_personal_pack",:id=>"btn_terms","data-slide"=>"next"%>
+            </div>
+          </div>
+        </div>
+      </div>
         <div class="item">
           <div id="payment">
             <div id="scont">
@@ -129,7 +143,7 @@
                 </div><br />
               </div>
 
-              <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
+              <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal_back","data-slide"=>"prev" %>
               <div id="next_btn">
                 <%= f.submit "Submit", 'data-disable-with' => "Processing", :class=>"btn-large btn-primary btn_submit" %>
               </div>
@@ -285,6 +299,18 @@
       });
     
     }
+$('#btn_terms').click(function(event){
+
+
+ if ($('#user_terms').is(':checked')) {
+   $('#btn_terms').prop('disabled', false);
+ }
+ else{
+   $('#btn_terms').prop('disabled', true);
+   $('#term_error').html("* Read and Accept terms and conditions.. <br/>");
+ }
+
+});
 
   </script>
   <%#= render "devise/shared/links" %>
@@ -294,14 +320,21 @@
       color: red;
     }
     .btn_personal, .btn_instant_personal{
-      margin-top: 250px;
+      margin-top: 500px;
 
     }
+    
+  .btn_personal_pack{
+    margin-top: 360px;
+}
+.btn_personal_back{
+    margin-top: 450px;
+}
     .btn_submit{
       margin-left: 55%;
       margin-top: -10%;
-      height:89px;
-      border-radius:49px;
+      /*height:89px;
+      border-radius:49px;*/
 
     }
     .item-inner{
@@ -339,4 +372,17 @@
       font-size: 25px;
       color: #0088CC
     }
+     #terms_text{
+    width: 70%;
+    height: 360px;
+    border: 2px solid;
+    margin: 0px 15%;
+    overflow: auto;
+    background-color:#ffffcc;
+}
+#terms_check_box{
+   margin: 0px 15%;
+    width: 70%;
+    font-size: 20px;
+}
   </style>

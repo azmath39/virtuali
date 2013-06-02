@@ -91,13 +91,13 @@ class Tour < ActiveRecord::Base
    "#{address1} #{address2}"
  end
  def add_line_2
-   "#{city} #{state} #{zip}"
+   "#{city} #{state_code} #{zip}"
  end
  def state_code
    State.find_by_name(state).code
  end
  def set_name
-    self.name="#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
+    self.name="#{self.state_code}%#{self.city}%#{self.zip}%#{self.subdivision}"
     self.save
  end
   def gmaps4rails_address
@@ -108,13 +108,13 @@ class Tour < ActiveRecord::Base
     self.status ||= 1
   end
   def address
-  "#{self.address1},#{self.city},#{self.state},#{self.zip}"
+  "#{self.address1},#{self.city},#{self.state_code},#{self.zip}"
 end
 def location
-  "#{self.address1},#{self.city},#{self.state},#{self.zip}"
+  "#{self.address1},#{self.city},#{self.state_code},#{self.zip}"
 end
   def tour_name
-    "#{self.state}%#{self.city}%#{self.zip}%#{self.subdivision}"
+    "#{self.state_code}%#{self.city}%#{self.zip}%#{self.subdivision}"
   end
   def tour_status
     case status
