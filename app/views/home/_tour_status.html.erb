@@ -1,4 +1,6 @@
-<p><span class="title-text">Status</span></p>
+
+<div class="after_sign_in">
+  <p><span class="title-text">Status</span></p>
   <div style="float:right; margin-bottom:-6%;margin-top: -5%; ">
 <%=select_tag "product_id_status", options_from_collection_for_select(current_user.subscribe_product,"id","name"),:onchange=>"display_tours_for_status()",:prompt=>"All" if current_user.multiple_products?%>
 </div>
@@ -6,3 +8,4 @@
 <div id="tour_status" style="float:left;width:100%">
   <%=render '/home/inner_tour_status'%>
   </div>
+</div>

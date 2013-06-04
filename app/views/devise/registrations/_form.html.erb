@@ -137,9 +137,24 @@
               </div>
             </div>
 
-            <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
+            <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal_pack","data-slide"=>"prev" %>
             <div id="next_btn">
-              <%=link_to "","#signupCarousel", :class => "carousel-control right icon-arrow-right btn-large btn-primary btn_personal",:id=>"btn_package","data-slide"=>"next"%>
+              <%=link_to "","#signupCarousel", :class => "carousel-control right icon-arrow-right btn-large btn-primary btn_personal_pack",:id=>"btn_package","data-slide"=>"next"%>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div id="terms_and_conditions">
+          <div id="scont">
+            <h3>Terms and Conditions</h3>
+            <span id="term_error"></span>
+            <hr/>
+            <%=render 'terms'%><br/>
+            <div id="terms_check_box"><%=check_box_tag "user[terms]"%> &nbsp;&nbsp; I accept the Terms and Conditions.</div>
+            <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal_pack","data-slide"=>"prev" %>
+            <div id="next_btn">
+              <%=link_to "","#signupCarousel", :class => "carousel-control right icon-arrow-right btn-large btn-primary btn_personal_pack",:id=>"btn_terms","data-slide"=>"next"%>
             </div>
           </div>
         </div>
@@ -169,7 +184,7 @@
               </div><br />
             </div>
 
-            <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
+            <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal_back","data-slide"=>"prev" %>
             <div id="next_btn">
               <%= f.submit "Submit", 'data-disable-with' => "Processing", :class=>"btn-large btn-primary btn_submit" %>
             </div>

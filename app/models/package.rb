@@ -34,9 +34,9 @@ class Package < ActiveRecord::Base
   end
   def price
     if !self.special_price.nil? 
-      "$#{self.regular_price}/month"
+      "$#{self.regular_price.to_i}/30days"
     else
-      "$#{self.regular_price}/ 3 months"
+      "$#{self.regular_price.to_i}/90days"
 
     end
   end

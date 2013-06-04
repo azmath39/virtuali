@@ -1,8 +1,9 @@
 <%#= javascript_include_tag 'jquery.session.js'%>
+<div class="after_sign_in">
 <% if verify_tours_allowed %>
   <%#= render '/home/account_mangement'  %>
 
-  <div class="span12" style="width:99%;margin-left:0%;">
+  <div class="span12 " style="width:99%;margin-left:0%;">
     <p class="title-text">Create a Tour</p>
     <%= render 'shared/error_messages', :target => @tour  %>
     <%= form_for Painting.new do |f| %>
@@ -30,6 +31,7 @@
     <% end %>
 
     <span id="painting_error"></span>
+   
     
     <div id="paintings">
       <%= render @paintings %>
@@ -132,6 +134,7 @@
   <br/><br/><br/><br/><br/><br/>
   You have already published Sufficient Tours. To create more tours upgrade your Subscription.
 <%end%>
+</div>
 <%= javascript_include_tag "http://jzaefferer.github.com/jquery-validation/jquery.validate.js" %>
 <script>
   $(document).ready(function(){

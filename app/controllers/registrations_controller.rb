@@ -21,6 +21,7 @@ class RegistrationsController < Devise::RegistrationsController
     if resource.save
       resource.company= Company.new(params[:company]) if params.include?:company
       session[:user_id]=resource.id
+      @product="#{Product.find(params[:user][:product]).name} #{Package.find(params[:user][:package]).name}"
       @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :hosted_payment_form => true)
       @sim_transaction.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST, :link_text => 'Continue', :link_url => registrations_save_user_url(:only_path => false)))
       render '/payments/payment'
