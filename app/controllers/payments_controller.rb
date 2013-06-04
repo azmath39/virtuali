@@ -8,15 +8,17 @@ class PaymentsController < ApplicationController
   def renew
     @amount =amount_to_charge
     if @amount>0
-    @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :hosted_payment_form => true)
-    @sim_transaction.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST, :link_text => 'Continue', :link_url => payments_renew_successfull_url(:only_path => false)))
+      @email= current_user.email
+      @product="#{current_user.product.name} #{current_user.package.name}"
+      @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :hosted_payment_form => true)
+      @sim_transaction.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST, :link_text => 'Continue', :link_url => payments_renew_successfull_url(:only_path => false)))
     else
       redirect_to :action=>'renew_successfull_zero_amount'
     end
   end
   def upgrade
     @amount =amount_to_charge
-    @email= current_user.email
+    #@email= current_user.email
  
     if params.include?:user and !params.include?:package
       combo_upgrade
@@ -60,6 +62,8 @@ class PaymentsController < ApplicationController
     session[:package]=params[:user][:package]
     session[:product]=params[:user][:product]
     if @amount>0
+      @email= current_user.email
+      @product="#{Product.find(params[:user][:product]).name} #{Package.find(params[:user][:package]).name}"
       @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :hosted_payment_form => true)
       @sim_transaction.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST, :link_text => 'Continue', :link_url => upgrade_combo_packages_url(:only_path => false)))
       render 'payment'
@@ -70,6 +74,8 @@ class PaymentsController < ApplicationController
   def normal_upgrade
     session[:package]=params[:package]
     if @amount>0
+      @email= current_user.email
+      @product="#{current_user.product.name} #{Package.find(params[:package]).name}"
       @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :hosted_payment_form => true)
       @sim_transaction.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST, :link_text => 'Continue', :link_url => upgrade_packages_url(:only_path => false)))
       render 'payment'
