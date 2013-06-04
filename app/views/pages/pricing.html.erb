@@ -1,33 +1,37 @@
 
-    <div class="pricing_grid row" style="margin-left: 5%; text-align: center;margin-top:2%;">
-   
-    <h1 class="center">Virtuali Pricing</h1>
-    <h2 class="grey center p60">After your wonderful thoughts, pick a plan that best fits your needs!</h2>
-    <div   style="text-align:center;">
-      <%= select_tag :product_id, options_from_collection_for_select(Product.all, "id", "name"),:onchange=>"manual_packages()",:class=>"select1" %>
-      <div id="manual_packages"></div>
+<div class="pricing_grid row" style="margin-left: 5%; text-align: center;">
 
-    </div>
-    <script>
-      $(function() {
-        manual_packages();
-      });
-      function manual_packages(){
-        $('#manual_packages').html('<img id="theImg" src="/assets/359.gif" />');
-       $.ajax({
-          type: 'GET',
-          url:'/packages/manual_packages',
-          data:{
-            id:$('#product_id').val()
-          }
-        }).done(function(html){
-          $('#manual_packages').html(html);
-        });
-      }
-    </script>
+  <h1 class="center price-head ">V pricing</h1>
+  <h2 class="grey center p60">After your wonderful thoughts, pick a plan that best fits your needs!</h2>
+  <div   style="text-align:center;">
+    <%= select_tag :product_id, options_from_collection_for_select(Product.all, "id", "name"),:onchange=>"manual_packages()",:class=>"select1" %>
+    <div id="manual_packages"></div>
 
-    <style>
-      .select1 {
-        width: 250px;
+  </div></div>
+<script>
+  $(function() {
+    manual_packages();
+  });
+  function manual_packages(){
+    $('#manual_packages').html('<img id="theImg" src="/assets/359.gif" />');
+    $.ajax({
+      type: 'GET',
+      url:'/packages/manual_packages',
+      data:{
+        id:$('#product_id').val()
       }
-    </style>
+    }).done(function(html){
+      $('#manual_packages').html(html);
+    });
+  }
+</script>
+
+<style>
+  .select1 {
+    width: 250px;
+  }
+  .price-head{
+    color:#25AAE2;
+   font-size: 40px;
+  }
+</style>

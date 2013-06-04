@@ -94,9 +94,9 @@ class ToursController < ApplicationController
     end
     @json = @tours.to_gmaps4rails do |tour, marker|
       marker.infowindow("<center><img src=\"#{tour.display_image}\" width=\"150\" height=\"100\"><br />
-                         <b>#{tour.zip} #{tour.state_code} #{tour.city}</b><br />
+                         <b>#{tour.zip} #{tour.state_code} #{tour.city}</b><br /><b>$#{tour.price}</b><br/>
         " "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<br />
-                          Category: #{tour.product.name}<hr>
+                          Category: #{tour.product.name}<br/>
         " "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
       marker.title("#{tour.city}")
     end
