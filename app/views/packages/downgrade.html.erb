@@ -1,76 +1,78 @@
 <%unless @regular_packages.empty? and @combo_packages.empty? %>
-<div class="border-box">
-  
-  <%=form_for :package ,:url=>"dowgrade_package" do|f|%>
+  <div class="border-box">
 
-    <div id ="package_info">
-         <h3>Package Selection</h3>
+    <%=form_for :package ,:url=>"dowgrade_package" do|f|%>
+
+      <div id ="package_info">
+        <h3>Package Selection</h3>
         <hr />
-<div class="pricing_grid row" style="margin:0% 0 0 30%;">
-        <span id="package_error" style="color:red;"></span>
-        <% @regular_packages.each do |pkg| %>
-           <div class="span3 first-grid" style="width:35%;">
-            <p><center><%=radio_button_tag "package[id]",pkg.id,1,:id=>"package"%></center></p>
+        <div class="pricing_grid row" style="margin:0% 0 0 30%;">
+          <span id="package_error" style="color:red;"></span>
+          <% @regular_packages.each do |pkg| %>
+            <div class="span3 first-grid" style="width:35%;">
+              <p><center><%=radio_button_tag "package[id]",pkg.id,1,:id=>"package"%></center></p>
 
-            <br />
-            <p id="price">
-              <sup id="dollar-symb">$</sup><%=  price(pkg)%>
-            </p>
-            <hr />
-            <center><h2><%=pkg.name%></h2>
-              <ul class="unstyled">
-                <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
-                <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
-                <p><b>Template size:</b>&nbsp;600x400</p>
+              <br />
+              <p id="price">
+                <sup id="dollar-symb">$</sup><%=  price(pkg)%>
+              </p>
+              <hr />
+              <center><h2 class="<%=pkg.name%>"><%=pkg.name%></h2>
+                <ul class="unstyled">
+                  <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
+                  <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
+                  <p><b>Template size:</b>&nbsp;600x400</p>
 
-              <%if current_user.special_offer and !pkg.special_price.nil?%>
-                <p> <%=radio_button_tag "package[type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </p>
-              <%elsif !pkg.special_price.nil?%>
-                <%=hidden_field_tag "package[type_of_payment]",1%>
-              <%end%>
+                  <%if current_user.special_offer and !pkg.special_price.nil?%>
+                    <p> <%=radio_button_tag "package[type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </p>
+                  <%elsif !pkg.special_price.nil?%>
+                    <%=hidden_field_tag "package[type_of_payment]",1%>
+                  <%end%>
                 </ul>
-          </div>
-        <% end %>
-      </div>
+            </div>
+          <% end %>
+        </div>
 
         <%unless @combo_packages.empty?%>
 
-                  <div class="pricing_grid row" style="margin:4% 0 0 30%;">
-                    <span id="package_error" style="color:red;"></span>
-                    <% @combo_packages.each do |pkg| %>
-                    <div class="span3 first-grid" style="width:21%;">
-                        <p><center><%=radio_button_tag "package[id]",pkg.id,1,:id=>"package"%></center></p>
-                    <br />
-            <p id="price">
-              <sup id="dollar-symb">$</sup><%=  price(pkg).to_i%>
-            </p>
-            <hr />
-            <center><h2><%=pkg.name%></h2></center>
-            <ul class="unstyled">
-                        <p><b>Actual Price:</b>&nbsp;<%=actual_price(pkg)%></p>
-                        <p><b>Offer Price:</b>&nbsp;<%=price(pkg)%></p>
-                        <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
-                        <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
-                        <p><b>Template size:</b>&nbsp;600x400</p>
+          <div class="pricing_grid row" style="margin:4% 0 0 30%;">
+            <span id="package_error" style="color:red;"></span>
+            <% @combo_packages.each do |pkg| %>
+              <div class="span3 first-grid" style="width:21%;">
+                <p><center><%=radio_button_tag "package[id]",pkg.id,1,:id=>"package"%></center></p>
+                <br />
+                <p id="price">
+                  <sup id="dollar-symb">$</sup><%=  price(pkg).to_i%>
+                </p>
+                <hr />
+                <center><h2 class="<%=pkg.name%>"><%=pkg.name%></h2></center>
+                <ul class="unstyled">
+                  <p><b>Actual Price:</b>&nbsp;<%=actual_price(pkg)%></p>
+                  <p><b>Offer Price:</b>&nbsp;<%=price(pkg)%></p>
+                  <p><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></p>
+                  <p><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></p>
+                  <p><b>Template size:</b>&nbsp;600x400</p>
 
-                        <%if current_user.special_offer and !pkg.special_price.nil?%>
-                          <p> <%=radio_button_tag "package[type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </p>
+                  <%if current_user.special_offer and !pkg.special_price.nil?%>
+                    <p> <%=radio_button_tag "package[type_of_payment]",1,true%> &nbsp;Monthly&nbsp;&nbsp;&nbsp;<%=radio_button_tag "package[type_of_payment]",2%> &nbsp;Yearly </p>
 
-                        <%elsif !pkg.special_price.nil?%>
-                          <%=hidden_field_tag "package[type_of_payment]",1%>
-                        <%end%>
-                     </ul>
-                  </div>
-                    <% end %>
+                  <%elsif !pkg.special_price.nil?%>
+                    <%=hidden_field_tag "package[type_of_payment]",1%>
+                  <%end%>
+                </ul>
+              </div>
+            <% end %>
 
-      </div>
+          </div>
         <%end%>
 
-          <div id="next_btn" style="float:right; margin-right:16%;">
-            <%= f.submit "Downgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.."  %>
-            <span><%= link_to "Back", '/packages' ,:remote=>true, :tyle=> 'float:right;margin-right:120px;'%></span>
-          </div>
-    </div>
+        <div id="next_btn" style="float:right; margin-right:16%;">
+          <%= f.submit "Downgrade",  :class=>"btn-large btn-primary", :disable_with => "Please wait.."  %>
+          <span><%= link_to "Back", '/packages' ,:remote=>true, :tyle=> 'float:right;margin-right:120px;'%>
+
+          </span>
+        </div>
+      </div>
 
 
 
@@ -81,21 +83,24 @@
 
 
 
-  
+
 
     <%end%>
-  
 
 
-    </div>
+
+  </div>
 
 <%else%>
-  <p style="color:red;margin-left:34%;margin-top: 25%;"> No package Available To Downgrade.
-  <span><%= link_to "Back", '/packages' ,:remote=>true, :tyle=> 'float:right;margin-right:120px;'%></span>
-   
-  </p>
+  <p style="color:red;margin-left:40%;margin-top: 5%;"> No package Available To Downgrade.
+    <span><%= link_to "Back", '/packages' ,:remote=>true, :tyle=> 'float:right;margin-right:120px;'%>
 
-  <%end%>
+    </span>
+
+  </p>
+  <%= link_to "",'/packages', :remote=>true,:class =>"back_button carousel-control left icon-arrow-left btn-large btn-primary btn_personal","data-slide"=>"prev" %>
+
+<%end%>
 
 
 
@@ -107,6 +112,12 @@
   .border-box{
     border-radius: 25px;
 
-    border:2px #0088CC solid;height:690px;
+    border:2px gray solid;height:690px;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .back_button{
+    margin-left:5%;
   }
 </style>

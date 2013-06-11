@@ -13,7 +13,7 @@
               <sup id="dollar-symb">$</sup><%=just_price(pkg)%>
             </p>
             <hr />
-            <center><h2><%=pkg.name%></h2></center>
+            <center><h2 class="<%=pkg.name%>"><%=pkg.name%></h2></center>
               <ul class="unstyled">
                 <p><li><b>No Of Tours:</b>&nbsp;<%=pkg.max_tours%></li></p>
                 <p><li><b>Pictures per Tour:</b> &nbsp;<%=pkg.pictures_for_tour%></li></p>
@@ -44,7 +44,7 @@
                   <sup id="dollar-symb">$</sup><%=actual_price(pkg)%>
                 </p>
                 <hr />
-                <center><h2><%=pkg.name%></h2></center>
+                <center><h2 class="<%=pkg.name%>"><%=pkg.name%></h2></center>
                   
                      
                     <p><b>Actual Price:</b>&nbsp;<%=actual_price(pkg)%></p>

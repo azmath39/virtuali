@@ -49,13 +49,9 @@ class PackagesController < ApplicationController
     end
   end
   def dowgrade_package
-    if current_user.downgrade(params[:package])
+    current_user.downgrade(params[:package])
       flash[:success]="Sucessfully downgraded. Change your tours according to new package."
       redirect_to root_url
-    else
-      flash[:error]= "Unable to downgrade at this moment. try some other time."
-      redirect_to :action=>"downgrade"
-    end
   end
   def dowgrade_package_combo
     current_user.change_product(params[:user][:product])

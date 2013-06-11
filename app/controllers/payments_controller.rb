@@ -26,6 +26,24 @@ class PaymentsController < ApplicationController
       normal_upgrade
     end
   end
+  def registration
+    transaction = AuthorizeNet::ARB::Transaction.new('2Mp89hQ4', '4xr7VY5n6KQ3v6V8', :gateway => :sandbox)
+    subscription = AuthorizeNet::ARB::Subscription.new(
+      :name => "Monthly Gift Basket",
+      :length => 1,
+      :unit => :month,
+      :start_date => Date.today,
+      :total_occurrences => 12,
+      :amount =>params[:amount],
+      :description => "John Doe's Monthly Gift Basket",
+      :credit_card => AuthorizeNet::CreditCard.new(params[:card_no], params[:expire_date],:card_code=>params[:card_code]),
+      :billing_address => AuthorizeNet::Address.new(:first_name => 'John', :last_name => 'Doe')
+    )
+    response = transaction.create(subscription)
+
+    render :text=> response.inspect
+    card=Card.create()
+  end
 
   def renew_successfull
     current_user.save_payment_details(params[:x_trans_id],params[:x_card_type],params[:x_amount])
@@ -63,7 +81,7 @@ class PaymentsController < ApplicationController
     session[:product]=params[:user][:product]
     if @amount>0
       @email= current_user.email
-      @product="#{Product.find(params[:user][:product]).name} #{Package.find(params[:user][:package]).name}"
+      @product="#{Product.find(params[:user][:product]).name} #{Package.find(params[:user][:package][:id]).name}"
       @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :hosted_payment_form => true)
       @sim_transaction.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST, :link_text => 'Continue', :link_url => upgrade_combo_packages_url(:only_path => false)))
       render 'payment'
@@ -75,7 +93,7 @@ class PaymentsController < ApplicationController
     session[:package]=params[:package]
     if @amount>0
       @email= current_user.email
-      @product="#{current_user.product.name} #{Package.find(params[:package]).name}"
+      @product="#{current_user.product.name} #{Package.find(params[:package][:id]).name}"
       @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :hosted_payment_form => true)
       @sim_transaction.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST, :link_text => 'Continue', :link_url => upgrade_packages_url(:only_path => false)))
       render 'payment'
