@@ -111,3 +111,12 @@ td{
 #search-div{
         float:left;
 }
+.color3, .Gold{
+  color:#FFD700;
+}
+.color2,.Silver{
+  color:#C0C0C0;
+}
+.color1,.Bronze{
+  color:#A67D3D;
+}

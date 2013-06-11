@@ -34,7 +34,7 @@ class DraftsController < ApplicationController
   end
 
   def index
-    @drafts=Draft.order('updated_at DESC')
+    @drafts=current_user.drafts.order('updated_at DESC')
   end
   private
   def tour_creation
