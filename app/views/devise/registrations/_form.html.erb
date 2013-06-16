@@ -182,12 +182,12 @@
                 <i style="font-size: 12px;">( Leave blank if no coupon is available now. )</i><br />
                 <div id='discounted_total'></div>
               </div>
-              <%#*<div class="field">%>
-                <%#=label_tag :coupon_id, "Would you like to a recursive Payment?"%>
-                <%#=radio_button_tag :type_of_payment,1%Yes &nbsp; <%=radio_button_tag :type_of_payment,2%No%>
-              <%#*</div>%>
-              <%#*<br />%>
-            <%#*</div>%>
+              <div class="field">
+                <%=label_tag :coupon_id, "Would you like to a recursive Payment?"%>
+                <%=radio_button_tag :type_of_payment,1%> Yes &nbsp; <%=radio_button_tag :type_of_payment,2%> No%>
+              </div>
+              <br />
+            </div>
 
             <%= link_to "","#signupCarousel", :class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personal_back","data-slide"=>"prev" %>
             <div id="next_btn">
