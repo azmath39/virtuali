@@ -205,13 +205,13 @@ ActiveRecord::Schema.define(:version => 20130616145614) do
   create_table "paintings", :force => true do |t|
     t.string   "name"
     t.string   "image"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "tour_id"
     t.integer  "user_id"
     t.integer  "priority"
     t.integer  "draft_id"
-    t.boolean  "select_image", :default => false
+    t.boolean  "select_image"
   end
 
   create_table "payments", :force => true do |t|
@@ -265,34 +265,6 @@ ActiveRecord::Schema.define(:version => 20130616145614) do
     t.string   "code"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "tour_drafts", :force => true do |t|
-    t.integer  "tour_id"
-    t.string   "name"
-    t.string   "state"
-    t.text     "description"
-    t.integer  "user_id"
-    t.string   "city"
-    t.string   "zip"
-    t.string   "subdivision"
-    t.float    "price"
-    t.integer  "square_footage"
-    t.integer  "bed_rooms"
-    t.integer  "bath_rooms"
-    t.integer  "product_id"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.boolean  "gmaps"
-    t.string   "slug"
-    t.text     "address"
-    t.integer  "status"
-    t.integer  "selected_package_id"
-    t.datetime "deleted_at"
-    t.string   "address1"
-    t.string   "address2"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
   end
 
   create_table "tours", :force => true do |t|
