@@ -5,6 +5,7 @@
   <h2 class="grey center p60">After your wonderful thoughts, pick a plan that best fits your needs!</h2>
   <div   style="text-align:center;">
     <%= select_tag :product_id, options_from_collection_for_select(Product.all, "id", "name"),:onchange=>"manual_packages()",:class=>"select1" %>
+    <div class="package_name center package-head"></div>
     <div id="manual_packages"></div>
 
   </div></div>
@@ -13,6 +14,10 @@
     manual_packages();
   });
   function manual_packages(){
+      //var name = document.getElementById("product_id");
+     // var fin = name.options[name.selectedIndex].value;
+     // alert('aaaa'+$('#product_id option:selected').text());
+    $('.package_name').html($('#product_id option:selected').text());
     $('#manual_packages').html('<img id="theImg" src="/assets/359.gif" />');
     $.ajax({
       type: 'GET',
@@ -22,7 +27,9 @@
       }
     }).done(function(html){
       $('#manual_packages').html(html);
+
     });
+
   }
 </script>
 
@@ -33,5 +40,9 @@
   .price-head{
     color:#25AAE2;
    font-size: 40px;
+  }
+  .package-head{
+    color:#2069a3;
+      font-size: 20px;
   }
 </style>

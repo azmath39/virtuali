@@ -11,4 +11,8 @@ class PagesController < ApplicationController
   def tutorial
     
   end
+def display 
+@product=Product.new(params["Product"])
+@product.save
+end
 end

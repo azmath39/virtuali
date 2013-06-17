@@ -13,6 +13,7 @@
         <div class="span5">
           <div class="fileupload btn btn-primary ">
             <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
+            
             <%= f.file_field :image, multiple: true, name: "painting[image]" %>
           </div>
           <br/>
@@ -26,6 +27,7 @@
           <span>(Note:Arrange your Pictures according to priority.)</span>
         </div>
       </div>
+
 
 
     <% end %>
@@ -101,6 +103,7 @@
         <div class="control-group">
           <%= f.label :bath_rooms %>
           <%= f.text_field :bath_rooms,:class=>"required digits" %>
+                    
         </div>
         <div class ="control-group">
           <%= f.label "subdivision", :html => {:class => 'control-label'} %>
@@ -296,6 +299,55 @@
       alert("Name cant be empty")
     }
   }
+  
+ function main_tour_check(id,state)
+  {
+    //var name= $("#text"+id).val();
+    //alert(name);
+   // if (name != "") {
+  //    set_image_name(name, id);
+  
+   // }
+   // else{
+   
+   
+   
+     // alert("Name cant be empty----"+id+state);
+      set_main_image(id,state);
+   // }
+  }
+  
+    function set_main_image(id,state)
+  {
+    //var name= $("#select"+id).attr('value');
+
+    //alert("name----"+id+state);
+    
+    $.ajax({
+      type: "GET",
+      url:"/paintings/set_main_image_true",
+      data:{
+        id: id,
+        state:state
+        
+      }
+
+
+    }).done(function(){
+      //alert(text);
+     // text = text.split(',');
+     //var bed=parseInt(text[0]);
+      //var bath=parseInt(text[1]);
+    
+     // $("#tour_bed_rooms").val(bed);
+    //  $("#tour_bath_rooms").val(bath);
+     // if (bath > 1){
+        alert("Caution! You have choosed Bath Room more than one.")
+     // }
+    });
+  }
+  
+  
 
   function set_image_name(name, id)
   {

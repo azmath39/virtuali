@@ -7,9 +7,9 @@
       <%i=0%>
     <% @packages.each do |pkg| %>
       <% if current_user %>
-        <div class="span3 first-grid" style="width:24%; height: 500px;">
+        <div class="span3 first-grid-shadow" style="width:24%; height: 500px;">
         <%elsif @product.product_type ==2%>
-          <div class="span3 first-grid" style="width:30%; height: 550px;margin-right: 5px">
+          <div class="span3 first" style="width:30%; height: 550px;margin-right: 5px">
             <%else%>
             <div class="span3 first-grid" style="width:24%; height: 550px;margin-right: 5px">
           <%end%>
@@ -38,8 +38,8 @@
               <%end%>
               <%if pkg.product.category.name == "By Agent"%>
                 <p>Note: Upload to Realtor.com.<br/>
-                  Showcase account $5.00<br/>
-                  Non- Showcase account $25.00 </p>
+                  Showcase account $5/Tour<br/>
+                  Non- Showcase account $25/Tour </p>
               <%end%>
             </center>
 </div>
@@ -47,7 +47,7 @@
 
             <hr></hr>
           <%end%>
-          <%= render '/home/signup_or_buy', :pkg=>pkg %>
+          <%= render '/home/signup_or_buy', :pkg=>pkg %> 
 
          
         </div>
@@ -55,6 +55,13 @@
     </div>
   </div>
 </div>
+    
+
+    
+    
+    
+    
+    
     <style>
       p{
         text-align: left;
@@ -63,5 +70,13 @@
   
   height: 390px;
 }
-
+.color3{
+  color:#FFD700;
+}
+.color2{
+  color:#C0C0C0;
+}
+.color1{
+  color:#A67D3D;
+}
     </style>

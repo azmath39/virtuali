@@ -174,7 +174,81 @@
     
   });
 
+   function main_tour_check(id,state)
+  {
+    //var name= $("#text"+id).val();
+    //alert(name);
+   // if (name != "") {
+  //    set_image_name(name, id);
+  
+   // }
+   // else{
+   
+   
+   
+      alert("Name cant be empty----"+id+state);
+      set_main_image(id,state);
+   // }
+  }
+  
+    function set_main_image(id,state)
+  {
+    //var name= $("#select"+id).attr('value');
 
+    alert("name----"+id+state);
+    
+    $.ajax({
+      type: "GET",
+      url:"/paintings/set_main_image_true",
+      data:{
+        id: id,
+        state:state
+        
+      }
+
+
+    }).done(function(){
+      //alert(text);
+     // text = text.split(',');
+     //var bed=parseInt(text[0]);
+      //var bath=parseInt(text[1]);
+    
+     // $("#tour_bed_rooms").val(bed);
+    //  $("#tour_bath_rooms").val(bath);
+     // if (bath > 1){
+        alert("Caution! You have choosed Bath Room more than one.")
+     // }
+    });
+  }
+
+      function set_image_name(name, id)
+  {
+    //var name= $("#select"+id).attr('value');
+
+    //alert(name);
+    
+    $.ajax({
+      type: "GET",
+      url:"/paintings/set_name",
+      data:{
+        id: id,
+        name: name
+      }
+
+
+    }).done(function(text){
+      //alert(text);
+      text = text.split(',');
+      var bed=parseInt(text[0]);
+      var bath=parseInt(text[1]);
+    
+      $("#tour_bed_rooms").val(bed);
+      $("#tour_bath_rooms").val(bath);
+      if (bath > 1){
+        alert("Caution! You have choosed Bath Room more than one.")
+      }
+    });
+  }
 
 
   function state_city()

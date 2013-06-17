@@ -345,3 +345,22 @@ filter: alpha(opacity=50);
     margin:2% 6% 0% 7%;
     
 }
+.first-grid-shadow{
+ -moz-box-shadow:    3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow:         3px 3px 5px 6px #ccc;
+}
+.image-edit {
+ width: 1150px; 
+ height: 673px;
+}
+.galleria-layer img{
+        left: 0px;
+        width:1250px;
+        height:900px;
+}
+.galleria-container.notouch{
+    width: 900px;
+    height: 600px;
+  }
+ 

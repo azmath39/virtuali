@@ -211,6 +211,7 @@ ActiveRecord::Schema.define(:version => 20130616145614) do
     t.integer  "user_id"
     t.integer  "priority"
     t.integer  "draft_id"
+    t.boolean  "select_image", :default => false
   end
 
   create_table "payments", :force => true do |t|
@@ -236,7 +237,7 @@ ActiveRecord::Schema.define(:version => 20130616145614) do
   create_table "selected_packages", :force => true do |t|
     t.integer  "user_id"
     t.integer  "package_id"
-    t.float    "price"
+    t.integer  "price"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
     t.integer  "status"
@@ -304,7 +305,7 @@ ActiveRecord::Schema.define(:version => 20130616145614) do
     t.string   "city"
     t.string   "zip"
     t.string   "subdivision"
-    t.float    "price"
+    t.integer  "price"
     t.integer  "square_footage"
     t.integer  "bed_rooms"
     t.integer  "bath_rooms"

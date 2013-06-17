@@ -27,7 +27,7 @@
 .slider-pager a.pager-active { background: #2c8571; }
 </style>
 <%#*<p class="title-text" style="margin:2% 0 10px 10%;">Initial Tour Preview</p>%>
-<div class="span11" id="final_tour" style="margin-left:5%; border-color: #C0C0C0;border-width: 15px;border-radius:15px; color: black;background: white;-webkit-border-radius: 80px;
+<div class="span11" id="final_tour" style="margin-left:10%; border-color: #C0C0C0;border-width: 15px;border-radius:15px; color: black;background: white;-webkit-border-radius: 80px;
 -moz-border-radius: 80px;
 border-radius: 80px;width:1120px">
   <div style="height: 510px; width: 880px; margin:  -20px 10px 10px -20px; height:575;">
@@ -41,21 +41,24 @@ border-radius: 80px;width:1120px">
         <%unless @tour.paintings.empty?%>
         <div class="active item">
 <div class="img-border">
-          <%= image_tag(@tour.paintings.first.image_url(:large))%>
+      <%@t= @tour.paintings.find(:all,:conditions =>['select_image=?','1'])%>
+          <%= image_tag(@t.first.image_url(:large)) %>
+      <%#end%>
 </div>
           <div class="container1">
           <div class="carousel-caption1">
-              <p><%= @tour.paintings.first.name %></p>  
+              <p><%= @t.first.name%></p>  
             </div>
           </div>
         </div>
-        <%@objs.each do |painting|%>
+        <%@t.each do |painting|%>
         <div class="item">
 <div class="img-border">
           <%= image_tag(painting.image_url(:large))%>
 </div>
           <div class="container1">
           <div class="carousel-caption1">
+            
               <p><%=painting.name%></p>
             </div>
           </div>
@@ -73,8 +76,8 @@ border-radius: 80px;width:1120px">
   <%# unless @objs.empty? %>
   <% unless @tour.paintings.empty? %>
   <div class="slider-pager" style="margin: 6% 0 20px 20%; width: 50%;">
-    <a href="#main-slider" class="final-tour-btn" ><%= @tour.paintings.first.name%></a>&nbsp;&nbsp;
-    <% @objs.each do |painting| %>
+    
+    <% @t.each do |painting| %>
     <%# images = @objs.first 5 %>
     <a href="#main-slider" class="final-tour-btn"><%= painting.name%></a>&nbsp;&nbsp;
     <% end %>
