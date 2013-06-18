@@ -44,7 +44,7 @@ class PaintingsController < ApplicationController
             if browser.ie9?
              render :js=>"window.location.reload(true);"
             else
-            redirect_to :back
+             render :nothing => true
             end
           end
           format.js
