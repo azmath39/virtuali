@@ -48,6 +48,15 @@ $(function() {
 		silverlight_xap_url : '/assets/plupload/plupload.silverlight.xap'
 	});
 
+  var uploader = $('#uploader').pluploadQueue();
+    
+  uploader.bind('StateChanged', function(uploader) {
+    if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
+      window.location.reload(true);
+    }
+  });
+
+
 	// Client side form validation
 	$('#upload_by_rahul').submit(function(e) {
         var uploader = $('#uploader').pluploadQueue();
