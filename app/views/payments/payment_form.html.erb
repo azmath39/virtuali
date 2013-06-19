@@ -1,5 +1,8 @@
 <%= form_tag("/payments/registration", :method => "get") do %>
-amount:      <%=label_tag "amount"%><br/>
+<%= hidden_field_tag("description", @product) %>
+  <%= hidden_field_tag("email",@email) %>
+<%= hidden_field_tag("amount",@amount) %>
+amount:      <%=label_tag  @amount%><br/>
 Card No:     <%=text_field_tag "card_no"%><br/>
 Card Code:   <%=text_field_tag "card_code"%><br/>
 expire_date: <%=text_field_tag "expire_date"%><br/>

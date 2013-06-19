@@ -27,22 +27,32 @@ class PaymentsController < ApplicationController
     end
   end
   def registration
+    @amount=params[:amount]
+    @email=params[:email]
+    @product=params[:description]
     transaction = AuthorizeNet::ARB::Transaction.new('2Mp89hQ4', '4xr7VY5n6KQ3v6V8', :gateway => :sandbox)
     subscription = AuthorizeNet::ARB::Subscription.new(
-      :name => "Monthly Gift Basket",
+      :name => @product,
       :length => 1,
       :unit => :month,
       :start_date => Date.today,
       :total_occurrences => 12,
-      :amount =>params[:amount],
-      :description => "John Doe's Monthly Gift Basket",
+      :amount =>@amount,
+      :description => @product,
       :credit_card => AuthorizeNet::CreditCard.new(params[:card_no], params[:expire_date],:card_code=>params[:card_code]),
-      :billing_address => AuthorizeNet::Address.new(:first_name => 'John', :last_name => 'Doe')
+      :billing_address => AuthorizeNet::Address.new(:first_name => @email, :last_name =>'xxx')
     )
     response = transaction.create(subscription)
-
-    render :text=> response.inspect
-    card=Card.create()
+    
+   unless response.subscription_id.nil?
+   
+    Card.create!(:subcription_id=>response.subscription_id,:user_id=>session[:user_id])
+     #resource.save_payment_details(response.reference_id,"xxxx",@amount)
+    redirect_to registrations_save_user_url
+   else
+     flash[:error]=response.message_text
+    render 'payments/payment_form'
+   end
   end
 
   def renew_successfull

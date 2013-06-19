@@ -13,6 +13,7 @@ VirtualTour::Application.routes.draw do
   match '/tours/update' => 'tours#update'
   match '/tours/user_tours'=>'tours#user_tours'
   match '/paintings/set_name'=>'paintings#set_name'
+  match '/paintings/set_main_image_true'=>'paintings#set_main_image_true'
   match '/paintings/update_priority'=>'paintings#update_priority'
   match '/paintings/check_name_of_pictures'=>'paintings#check_name_of_pictures'
   match '/tours/find_tours' => 'tours#find_tours'

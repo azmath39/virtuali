@@ -42,7 +42,7 @@
     </div>
 
     <div class="span2" style="width:150px;margin: -83px 21px 0px 105px;height:100px;">
-      <h4><%= number_to_currency(tour.price) %></h4>
+      <h4><%= number_to_currency(tour.price, :precision => 0) %></h4>
   <%#*<strong>Sq foot: </strong> <%= tour.square_footage %>
       <span class="vtip" title="<%= tour.add_line_1%><%= tour.add_line_2%>"><%=link_to "#{tour.city}, #{tour.state_code}","#" %></span><br />
       Beds: <%= tour.bed_rooms %> / Baths: <%= tour.bath_rooms %><br />

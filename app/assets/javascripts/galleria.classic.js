@@ -79,6 +79,7 @@ Galleria.addTheme({
         this.bind('loadstart', function(e) {
             if (!e.cached) {
                 this.$('loader').show().fadeTo(200, 0.4);
+               
             }
 
             this.$('info').toggle( this.hasInfo() );

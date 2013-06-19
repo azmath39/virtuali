@@ -16,6 +16,7 @@ class ToursController < ApplicationController
 
   def show
     @tour = Tour.find(params[:id])
+    @paintings= Painting.where(params[:tour_id])
     if request.path != tour_path(@tour)
       redirect_to @tour, status: :moved_permanently
     end
@@ -27,6 +28,7 @@ class ToursController < ApplicationController
   def create
     unless params.include?:draft
       tour_creation
+      
     else
       saved_to_draft
     end
@@ -195,6 +197,9 @@ class ToursController < ApplicationController
       #NotificationsMailer.tour_created_message(current_user, @tour).deliver
       @paintings=current_user.paintings.where(:tour_id => nil,:draft_id=>nil)
       @paintings.each do |pic|
+        puts "tour......!"
+       p pic 
+        puts "tour......!" 
         @tour.paintings << pic
       end
       flash[:notice] = "Tour was created successfully."

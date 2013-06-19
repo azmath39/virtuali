@@ -11,9 +11,10 @@
     -moz-user-select: none;
     -webkit-user-select: none;
     -o-user-select: none;
+     
 }
 .galleria-stage {
-    position: absolute;
+    position: relative;
     top: 10px;
     bottom: 60px;
     left: 10px;

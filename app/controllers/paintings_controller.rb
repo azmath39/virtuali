@@ -12,7 +12,7 @@ class PaintingsController < ApplicationController
     @painting = Painting.find(params[:id])
   end
   
-  def new
+  def new 
     #render :layout => false
     @paintings = Painting.where(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil).order('priority ASC')
 
@@ -20,6 +20,8 @@ class PaintingsController < ApplicationController
     @tour = Tour.new
     @products = current_user.subscribe_product
     @priority=get_priority
+   
+    
     if session[:cancel_request].nil? and !params.include?:cancel_request
       Painting.destroy_all(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
     elsif !session[:cancel_request].nil?
@@ -37,6 +39,7 @@ class PaintingsController < ApplicationController
     if verify_no_image then
       @painting = Painting.new(params[:painting])
       @painting.user_id= current_user.id
+      puts "painitng/.............!"
       if @painting.save
         respond_to do |format|
           format.html do
@@ -105,6 +108,20 @@ class PaintingsController < ApplicationController
 
 
   end
+  
+  
+  def set_main_image_true
+    #true or false when checking main tour images
+    p =Painting.find(params[:id])
+    if params[:state]=="true"
+      p.update_attributes(:select_image=>true)
+      
+    else 
+      p.update_attributes(:select_image=>false)
+    end
+  end
+  
+  
   def set_name
     painting= Painting.find(params[:id])
     painting.update_attributes(:name=>params[:name])

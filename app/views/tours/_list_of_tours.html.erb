@@ -25,7 +25,7 @@
       <%=link_to "download", :controller => 'tours', :action => 'download_zip', :id => tour.id,:confirm => "Are you sure?" %>&nbsp;|
       <%=link_to "delete", tour_path(tour.id),:method=>:delete, :confirm => "Are you sure?"%><br />
    
-    <strong>Price: </strong> <%= number_to_currency(tour.price) %><br />
+    <strong>Price: </strong> <%= number_to_currency(tour.price, :precision => 0) %><br />
     <strong>Sq foot: </strong> <%= tour.square_footage %><br />
     <b>Beds: </b><%= tour.bed_rooms %> / <strong>Baths: </strong><%= tour.bath_rooms %><br />
     

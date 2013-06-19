@@ -21,14 +21,14 @@ class RegistrationsController < Devise::RegistrationsController
     if resource.save
       resource.company= Company.new(params[:company]) if params.include?:company
       session[:user_id]=resource.id
-#      if params[:type_of_payment].to_i !=1
+     if params[:type_of_payment].to_i !=1
       @product="#{Product.find(params[:user][:product]).name} #{Package.find(params[:user][:package][:id]).name}"
       @sim_transaction = AuthorizeNet::SIM::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], @amount, :hosted_payment_form => true)
       @sim_transaction.set_hosted_payment_receipt(AuthorizeNet::SIM::HostedReceiptPage.new(:link_method => AuthorizeNet::SIM::HostedReceiptPage::LinkMethod::POST, :link_text => 'Continue', :link_url => registrations_save_user_url(:only_path => false)))
     render '/payments/payment'
-#      else
-#      render '/payments/payment_form'
-#      end
+     else
+     render '/payments/payment_form'
+     end
     else
       #      refund_payment(@charge["id"])
       clean_up_passwords resource
@@ -73,9 +73,27 @@ class RegistrationsController < Devise::RegistrationsController
         respond_with resource, :location => after_inactive_sign_up_path_for(resource)
       end
     else
-      resource.destory
+      resource.destroy
       redirect_to root_url
     end
+  end
+   def save_user_subcription
+
+    resource=User.find(session[:user_id])
+    session[:user_id]=nil
+
+
+      #resource.trace_activity
+      if resource.active_for_authentication?
+        set_flash_message :notice, :signed_up if is_navigational_format?
+        sign_up(resource_name, resource)
+        respond_with resource, :location => after_sign_up_path_for(resource)
+      else
+        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
+        expire_session_data_after_sign_in!
+        respond_with resource, :location => after_inactive_sign_up_path_for(resource)
+      end
+
   end
   
   def edit

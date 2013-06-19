@@ -12,15 +12,15 @@
 #
 
 class Painting < ActiveRecord::Base
-
-  attr_accessible :image, :name, :pro,:remote_image_url,:priority
+  
+  attr_accessible :image, :name, :pro,:remote_image_url,:priority, :select_image
   #validates :priority, :uniqueness=>{:scope => :tour_id,:message => "priority aleardy assigned."}
 
   #  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   mount_uploader :image, ImageUploader
   before_create :add_priority
   def add_priority
-
+    
     self.priority=$serial_no
     $serial_no+=1
   end
