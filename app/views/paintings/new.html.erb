@@ -22,7 +22,7 @@
           <%=f.submit :upload, :class=>"btn btn-primary" if browser.ie8? or browser.ie7?%>
         </div>
         <div class="span5">
-          <%=link_to "re-order",{:action=>"new", :cancel_request=>1},:remote => true, :class=>"btn btn-primary"%>
+          <%=link_to "re-order",{:action=>"new", :cancel_request=>1},:remote => true, :class=>"btn btn-primary", :onclick => "reorder()"%>
           <br/>
           <span>(Note:Arrange your Pictures according to priority.)</span>
         </div>
@@ -109,7 +109,10 @@
           <%= f.label "subdivision", :html => {:class => 'control-label'} %>
           <%= f.text_field :subdivision,:onblur=>"set_session('tour_subdivision')"  %>
         </div>
-
+		<div class ="control-group">
+        	<%= f.label "acreage", :html => {:class => 'control-label'} %>
+        	<%= f.text_field :acreage %>
+      </div>
       </div>
 
       <div style="float:left;margin-top: 0px;margin-right:26%;width: 650px;">
@@ -413,5 +416,8 @@
       return false;
     }
 
+  }
+  function reorder(){
+  	$("#paintings").html('')
   }
 </script>

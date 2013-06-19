@@ -20,7 +20,7 @@
   <%=f.submit :upload, :class=>"btn btn-primary" if browser.ie8? or browser.ie7?%>
     </div>
     <div class="span5">
-  <%=link_to "re-order",{:action=>  "edit", :cancel_request=>1},:remote => true, :class=>"ie-re-order-button btn btn-primary"%>
+  <%=link_to "re-order",{:action=>  "edit", :cancel_request=>1},:remote => true, :class=>"ie-re-order-button btn btn-primary",:onclick => "reorder()"%>
 
       <br/>
     <span>(Note:Arrange your Pictures according to priority.)</span>
@@ -99,6 +99,10 @@
         <%= f.label "subdivision", :html => {:class => 'control-label'} %>
         <%= f.text_field :subdivision %>
       </div>
+      <div class ="control-group">
+        <%= f.label "acreage", :html => {:class => 'control-label'} %>
+        <%= f.text_field :acreage %>
+      </div>
     </div>
     <div style="float:left;margin-top: 0px;margin-right:26%;width: 650px;">
       <div>
@@ -106,6 +110,7 @@
         <%= f.text_area :description, :rows => 10, :style=>"width: 87%;",:class=>'wysihtml5'%>
       </div>
     </div>
+    
     <div style="float:left;margin-top: 10px;clear: both;">
       <div>
         <%= f.submit :class => 'btn btn-large btn-primary',:id=>"submit-button" %>
@@ -361,6 +366,9 @@
       return false;
     }
 
+  }
+   function reorder(){
+  	$("#paintings").html('')
   }
 
 </script>

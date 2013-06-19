@@ -20,7 +20,7 @@ class Painting < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   before_create :add_priority
   def add_priority
-
+    
     self.priority=$serial_no
     $serial_no+=1
   end
