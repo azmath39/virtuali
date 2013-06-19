@@ -13,10 +13,12 @@
     
       <div class="row-fluid">
         <div class="span5">
+        <% unless browser.ie? %>
           <div class="fileupload btn btn-primary ">
             <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
             <%= f.file_field :image, multiple: true, name: "painting[image]" %>
           </div>
+        <% end %>
           <br/>
           <span >(Note: Picture size Should Be more than 700X500. )</span></div>
         <div class="span5">
