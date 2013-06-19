@@ -1,3 +1,5 @@
+<%= render "/paintings/plupload"%>
+
 <div class="after_sign_in">
 <div class="span12" style="width:99%;margin-left:0%;">
   <p class="title-text">Edit a Tour</p>
@@ -16,9 +18,6 @@
     <br/>
     <span >(Note: Picture size Should Be more than 700X500. )</span></div>
 
-      <div class="span1">
-  <%=f.submit :upload, :class=>"btn btn-primary" if browser.ie8? or browser.ie7?%>
-    </div>
     <div class="span5">
   <%=link_to "re-order",{:action=>  "edit", :cancel_request=>1},:remote => true, :class=>"ie-re-order-button btn btn-primary"%>
 
