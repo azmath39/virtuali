@@ -54,7 +54,7 @@
 
 class Tour < ActiveRecord::Base
   extend FriendlyId
-  attr_accessible :gmaps, :state, :description, :city, :zip, :subdivision, :price,:address1,:address2, :square_footage, :status,:user_id,:name,:bed_rooms, :bath_rooms,:product_id,:selected_package_id,:status
+  attr_accessible :gmaps, :state, :description, :city, :zip, :subdivision, :price,:address1,:address2, :square_footage, :status,:user_id,:name,:bed_rooms, :bath_rooms,:product_id,:selected_package_id,:status, :acreage
   #attr_accessor :pro
   acts_as_paranoid
   validates :state, :city, :zip, :price, :address1, :square_footage,:product_id, :presence => true
