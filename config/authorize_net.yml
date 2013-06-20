@@ -1,8 +1,8 @@
-default:
-  api_login_id: 6wKtGX28dB
-  api_transaction_key: 3QEPw3J4y4gT63R5
-  merchant_hash_value: 6wKtGX28dB
+default: 
+  api_login_id: 6wKtGX28dB 
+  api_transaction_key: 86U7qT7KA42k6k2T 
+  merchant_hash_value: 6wKtGX28dB 
 
-development:
-test:
+development: 
+test: 
 production:

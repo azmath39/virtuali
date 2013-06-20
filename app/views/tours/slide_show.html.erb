@@ -3,13 +3,14 @@
  
 
 <%#*<p class="title-text" style="margin:2% 0 10px 12%;">Tour slide show</p>%>
-    <div class="span12 image-edit" style="width:1150px; height: 673px;" >
+    <div class="span12 image-edit" style="width:1450px; height: 573px;" >
       <div>
-        <div id="abc"style="width:1050px; height: 600px; margin-left: 15%; border-radius:50px;">
-          <% @tour.paintings.each do |p| %>
-            <%=image_tag p.image  %>
+        <div id="abc"style="width:850px; height: 500px; margin-left: 15%; border-radius:50px;">
+          
+            <% @tour.paintings.each do |p| %>
+            <%=image_tag p.image_url(:test)  %>
           <% end %>
-
+       
         </div>
       </div>
     </div>
@@ -36,14 +37,13 @@
     margin-left: -18%;
   }
   .galleria-container{
-    border: 10px #C0C0C0 solid;
+    
     -webkit-border-radius: 80px;
     -moz-border-radius: 80px;
     border-radius: 80px;
     overflow: hidden;
     background-color:transparent;
     
-    height:700px
   }
   .main-image{
     border: 10px #C0C0C0 solid;
@@ -70,7 +70,19 @@
   .galleria-thumbnails-container{
     margin-left: 8%;
   }
- 
+ .galleria-stage .galleria-image img{
+    border: 10px #C0C0C0 solid;
+    -webkit-border-radius: 90px;
+    -moz-border-radius: 90px;
+    border-radius: 90px;
+    overflow: hidden;
+    width:1120px;
+    
+      margin-bottom: 10px;
+      position:relative;
+      top:-10px;
+    
+  }
  
 </style>
 
