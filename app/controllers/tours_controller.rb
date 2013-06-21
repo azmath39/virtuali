@@ -78,6 +78,28 @@ class ToursController < ApplicationController
       redirect_to :action => 'index',:controller=>"home"
     end
   end
+  def ind_map
+  @search = Tour.search(params[:q])
+    @tour =Tour.find(params[:id])
+ p @tour
+    
+    if @tour.nil?
+      flash.now[:notice] = "No tours were found!"
+    end
+    @json = @tour.to_gmaps4rails do |tour, marker|
+      marker.infowindow("<center><img src=\"#{tour.display_image}\" width=\"150\" height=\"100\"><br />
+                         <b>#{tour.zip} #{tour.state_code} #{tour.city}</b><br /><b>$#{tour.price}</b><br/>
+        " "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<br />
+                          Acreage: #{tour.acreage}<br/>
+                          Category: #{tour.product.name}<br/>
+        " "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
+      marker.title("#{tour.city}")
+    end
+    
+    
+    puts "gfgdgd..............................!"
+    render 'ind_map'
+  end
   def final_tour
     @tour = Tour.find(params[:id])
   end
@@ -98,11 +120,36 @@ class ToursController < ApplicationController
       marker.infowindow("<center><img src=\"#{tour.display_image}\" width=\"150\" height=\"100\"><br />
                          <b>#{tour.zip} #{tour.state_code} #{tour.city}</b><br /><b>$#{tour.price}</b><br/>
         " "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<br />
+                          Acreage: #{tour.acreage}<br/>
                           Category: #{tour.product.name}<br/>
         " "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
       marker.title("#{tour.city}")
     end
   end
+  def view_mapi
+    #@search = Tour.search(params[:q])
+   # @tour =Tour.find(params[:id])
+#    @paintings= Painting.where(params[:tour_id])
+#    if !params[:q].nil?
+#      @tours = @search.result
+#    else
+#      @tours = Tour.active
+#    end
+#    if @tours.empty?
+#      flash.now[:notice] = "No tours were found!"
+#    end
+#       @json = @tour.to_gmaps4rails do |tour, marker|
+#      marker.infowindow("<center><img src=\"#{tour.display_image}\" width=\"150\" height=\"100\"><br />
+                   #      <b>#{tour.zip} #{tour.state_code} #{tour.city}</b><br /><b>$#{tour.price}</b><br/>
+        #" "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<br />
+                  #        Acreage: #{tour.acreage}<br/>
+                 #         Category: #{tour.product.name}<br/>
+        #" "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
+#      marker.title("#{tour.city}")
+#    end
+  end
+ 
+  
   def status_change
     tour = Tour.find(params[:id].to_i)
     if tour.status == 2

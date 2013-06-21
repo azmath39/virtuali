@@ -1,0 +1,77 @@
+<%content_for :search do%>
+  <%#if current_user%>
+    <%#*<div class ="span3" id="map-search" style="margin-top: 9%;">%>
+    <%#else%>
+      <%#*<div class ="span3" id="map-search" style="margin-top: 5.5%;">%>
+      <%#end%>
+<div>
+
+  <%#*<p class="title-text">Search</p>%>
+  <%= search_form_for @search,:url => '/tours/view_map', :class => 'form-inline search-form' do |f| %>
+      
+         <%=f.select :state_cont, State.all.collect {|s| [s.name, s.name]},{:include_blank => "State"},:onchange=>"state_city()"%>
+
+           <%=f.select :city_cont, {}, :include_blank => "City"%>
+
+            <%= f.select :product_name_cont,  Product.where(:product_type=>1).collect {|p| [ p.name, p.name ] }, {:include_blank => "Category"}%>
+
+            <%= f.select :status_eq, {"Active" => 1, "Sold" => 3},{:prompt => "Status"}  %>
+    <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %>
+    <%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
+
+         <%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
+      </div>
+    <% end %>
+  <%end%>
+  
+      <div id="map-div" style="margin-left: 7%; margin-top: 1%;">
+
+        <div class="row"> <span class="span1"><h1 class="title-text">Map</h1></span><span class="span8"> <%=yield :search%></span></div>
+<%#= gmaps4rails(@json)%>
+
+      <%= gmaps({
+          "map_options" =>  {"center_latitude" => "#{@tour.latitude}",
+            "center_longitude" => "#{@tour.longitude}",
+            "detect_location" => false,
+            "center_on_user" => false,
+            "auto_adjust" => false,
+            "zoom" => 6 },
+          "markers"     => {"data" => @json }
+        })
+    %>
+
+    </div>
+
+    <script>
+      function state_city()
+      {
+        $.ajax({
+          type: 'GET',
+          url: "/home/state_cities",
+
+          data: {
+            'state' :  $("#q_state_cont").val()
+          }
+        }).done(function(text) {
+
+          $('#q_city_cont').empty().append(text);
+        });
+      }
+      function find_map_tours()
+      {
+        //alert('ok');
+        $('form#map_tour_form').submit();
+      }
+    </script>
+    <style>
+      .gmaps4rails_map{
+        height: 550px;
+        width: 97%;
+      }
+      .map_container{
+        height: 550px;
+        width: 97%;
+
+
+      }
+    </style>

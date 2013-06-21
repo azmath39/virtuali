@@ -9,7 +9,7 @@
   <div class="after_sign_in">
   <%#*<p><span class="title-text" style="position:absolute;margin-left:0%;">Dashboard </span></p>%>
     <%=render 'search_form' %>
-    <div> <div style="float:left;"> <h1 class="title-text">Dashboard </h1></div><div id="search-div"> <%=yield :search%></div></div>
+    <div> <div style="float:left;"> <h1 class="title-text"> </h1></div><div id="search-div"> <%=yield :search%></div></div>
 
 
      <%#=render 'account_mangement'%>
@@ -36,6 +36,7 @@
         <div class ="well"id="side_bar"  >
 
           <table class="table-striped">
+
             <h2>Tours</h2>
             <tr><th>Active:</th><td><%=current_user.tours.active.size%></td></tr>
             <tr><th> Sold :</th><td><%=current_user.tours.sold.size%></td></tr>
@@ -51,14 +52,9 @@
   #side_bar{
    margin-top: 7%;
    margin-left: 72%;
-   height: 13%;
-   width:7%;
   }
   th{
     text-align:left;
-  }
-  h2{
-    line-height: 17px;
   }
 </style>
 <script>

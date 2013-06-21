@@ -115,6 +115,8 @@ bootstrap-wysihtml5/wysiwyg-color.css: bootstrap-wysihtml5/wysiwyg-color.css
 bootstrap-wysihtml5/wysiwyg-color/index.css: bootstrap-wysihtml5/wysiwyg-color.css
 fontawesome-webfont.eot: fontawesome-webfont.eot
 fontawesome-webfont/index.eot: fontawesome-webfont.eot
+fontawesome-webfont.svg: fontawesome-webfont.svg
+fontawesome-webfont/index.svg: fontawesome-webfont.svg
 fontawesome-webfont.ttf: fontawesome-webfont.ttf
 fontawesome-webfont/index.ttf: fontawesome-webfont.ttf
 fontawesome-webfont.woff: fontawesome-webfont.woff

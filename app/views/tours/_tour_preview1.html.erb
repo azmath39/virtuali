@@ -36,20 +36,16 @@ border-radius: 80px;width:1120px">
       <%# @objs << img %>
       <%# @objs.compact! %>
     <%# end %>
-  
     <div id="myCarousel2" class="carousel slide carousel-fade">
       <div class="carousel-inner" style="height: 507px;">
         <%unless @tour.paintings.empty?%>
         <div class="active item">
 <div class="img-border">
-     <%@t= @tour.paintings.find(:all,:conditions =>['select_image=?','1'],:order =>'priority')%>
-  <%if !@t.empty?%>
-          <%= image_tag(@t.first.image) %>
-  <%else%>
-  <%@t= @tour.paintings.find(:all, :conditions =>['select_image=?','0'], :limit=> '5')%>
-    <%= image_tag(@t.first.image) %>
-      <%end%>
-  
+      <%@t= @tour.paintings.find(:all,:conditions =>['select_image=?','1'], :limit=> 5)%>
+ <%= image_tag(@t.first.image) %>
+ 
+</div>
+          <div class="container1">
           <div class="carousel-caption1">
               <p><%= @t.first.name%></p>  
             </div>
@@ -71,12 +67,12 @@ border-radius: 80px;width:1120px">
           <% else %>
              <div class="active item"><%= image_tag('home_default_image.png')%> </div>
         <% end %>
-      </div>
-
+      </div
        <%#*<a class="carousel-control left" href="#myCarousel2" data-slide="prev">&lsaquo;</a>%>
        <%#*<a class="carousel-control right" href="#myCarousel2" data-slide="next">&rsaquo;</a>%>
     </div>
   </div>
+  
   <%# unless @objs.empty? %>
   <% unless @tour.paintings.empty? %>
   <div class="slider-pager" style="margin: 6% 0 20px 20%; width: 50%;">
@@ -92,6 +88,7 @@ border-radius: 80px;width:1120px">
       <p style="margin: 0% 0 0 30%;">Please, <%= link_to "edit", edit_tour_path(@tour.id) %> tour! </p>
       <% end %>
   <% end %>
+ 
   <div style="width: 240px;float: right;margin-left: 3%; margin: -620px 0px 0 150px; font-size: 15px;">
     <center><br/>
     <h4><%= "#{@tour.zip} #{@tour.city}" %></h4>
