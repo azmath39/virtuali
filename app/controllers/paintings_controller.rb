@@ -1,5 +1,6 @@
 class PaintingsController < ApplicationController
   before_filter :verify_account_validity, :only=>["new"]
+  
   # before_filter :set_default_response_format
 
 
@@ -19,9 +20,8 @@ class PaintingsController < ApplicationController
     @painting = Painting.new
     @tour = Tour.new
     @products = current_user.subscribe_product
-    @priority=get_priority
-   
-    
+    @token_take=Painting.last
+    @token="paint_#{@token_take.id}"
     if session[:cancel_request].nil? and !params.include?:cancel_request
       Painting.destroy_all(:user_id=>current_user.id,:tour_id=>nil,:draft_id=>nil)
     elsif !session[:cancel_request].nil?
@@ -181,7 +181,8 @@ class PaintingsController < ApplicationController
   end
   private
   def get_priority
-    priority=current_user.paintings.where(:tour_id=>nil,:draft_id=>nil).maximum(:priority)
+    #priority=current_user.paintings.where(:tour_id=>nil,:draft_id=>nil).maximum(:priority)
+    priority=$serial_no
     priority += 1 unless priority.nil?
   end
 

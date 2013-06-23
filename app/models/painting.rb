@@ -13,16 +13,23 @@
 
 class Painting < ActiveRecord::Base
   
-  attr_accessible :image, :name, :pro,:remote_image_url,:priority, :select_image
+  attr_accessible :image, :name, :pro,:remote_image_url,:priority, :select_image, :token
   #validates :priority, :uniqueness=>{:scope => :tour_id,:message => "priority aleardy assigned."}
 
   #  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   mount_uploader :image, ImageUploader
+  validate :token, :presence => true
   before_create :add_priority
   def add_priority
     
-    self.priority=$serial_no
-    $serial_no+=1
+    
+    temp_priority=Painting.where("token=?",token).maximum("priority")
+    if temp_priority.present?
+      self.priority=temp_priority+1;
+    else
+      self.priority=1;
+    end
+  
   end
 
 

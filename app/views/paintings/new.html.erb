@@ -7,13 +7,13 @@
     <p class="title-text">Create a Tour</p>
     <%= render 'shared/error_messages', :target => @tour  %>
     <%= form_for Painting.new do |f| %>
-      <%$serial_no= @priority||1%>
+      <%#$serial_no= @priority||1%>
     
       <div class="row-fluid">
         <div class="span5">
           <div class="fileupload btn btn-primary ">
             <%= f.label :image, "+ Add Files", :style => 'margin-top: 5px;'%>
-            
+            <input value= <%= @token %> name="painting[token]"/>
             <%= f.file_field :image, multiple: true, name: "painting[image]" %>
           </div>
           <br/>
