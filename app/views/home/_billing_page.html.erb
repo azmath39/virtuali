@@ -8,12 +8,14 @@
 <%pkg=current_user.selected_package %>
     <%initiate(pkg)%>
 <div style="float:right;margin-right: 50px; margin-bottom: 20px;" >
-<%#if !current_user.card.nil?%>
-    <%#= render 'card_change_form' %>
-    <%#= link_to "Change Card Details", "#card_change", "data-toggle" => "modal", :class => 'btn btn-primary'%>
-<%#elsif check_payment_type%>
- <%#= link_to "Create Direct Debit", "#card_details", "data-toggle" => "modal", :class => "btn btn-danger", :onclick=>"create_direct_debit()"  %>
-  <%#end%>
+<%if !current_user.card.nil?%>
+    <%= render 'card_change_form' %>
+    <%= link_to "Change Card Details", "#card_change", "data-toggle" => "modal", :class => 'btn btn-primary'%>
+  <%=link_to "Cancel Recursive Payment", "/payments/cancel-subscription", :remote=>true,:class => "btn btn-danger"%>
+  
+<%elsif check_payment_type%>
+ <%= link_to "Create Recursive Payment", "#card_details", "data-toggle" => "modal", :class => "btn btn-danger", :onclick=>"create_direct_debit()"  %>
+  <%end%>
   </div>
   <h3> Package Details</h3>
     <div class="container-fluid">

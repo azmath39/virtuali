@@ -5,7 +5,7 @@
   <h3>Card Details</h3>
 </div>
   <div class="modal-body">
-<%=form_tag "/home/make_payment", :id=>'payment-form' do%>
+<%=form_tag "/payments/create_recursive_payment", :remote=>true do%>
     <%= hidden_field_tag "operation_type", nil %>
     <%=hidden_field_tag "pkg_id",nil%>
     
