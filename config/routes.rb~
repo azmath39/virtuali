@@ -9,7 +9,7 @@ VirtualTour::Application.routes.draw do
   #get "home/index"
   get "packages/show"
   match '/tours/view_map' => 'tours#view_map'
-  match '/tours/ind_map' => 'tours#ind_map'
+  match '/tours/view_mapi' => 'tours#view_mapi'
   match '/tours/status_change' => 'tours#status_change'
   match '/tours/update' => 'tours#update'
   match '/tours/user_tours'=>'tours#user_tours'
@@ -29,16 +29,7 @@ VirtualTour::Application.routes.draw do
 
   devise_for :users,:controllers => { :registrations => "Registrations" }
   resources :paintings
-  
-  resources :tours 
-#  do
-#  end
-#  collection do
-#    get 'ind_map'
-#  end
-#end
-  
-  
+  resources :tours
   resources :drafts
   devise_scope :user do
     #get "registrations/text_visit" => "registrations#text_visit"
