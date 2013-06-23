@@ -6,8 +6,12 @@ class DraftsController < ApplicationController
 
   def edit
     @draft=Draft.find(params[:id])
-    @token="draft_#{@draft.id}"
     @paintings=@draft.paintings
+    if @paintings.present?
+      @token=@paintings.first.token
+    else
+      @token="draft_#{@draft.id}"
+    end  
     @painting=Painting.new
     @products = current_user.subscribe_product
     @cities=[]
