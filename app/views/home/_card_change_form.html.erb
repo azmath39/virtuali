@@ -4,7 +4,7 @@
   <h3>New Card Details:</h3>
 </div>
   <div class="modal-body">
-<%=form_tag "home/change_card_details", :id=>'payment-form' do%>
+<%=form_tag "/payments/change_card_details", :remote=>true do%>
 <%=render 'payment_fields'%>
 <%end%>
 

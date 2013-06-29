@@ -26,11 +26,53 @@ class PaymentsController < ApplicationController
       normal_upgrade
     end
   end
+  def create_recursive_payment
+    @amount=current_user.package.regular_price
+    @email=current_user.email
+    @product="#{current_user.product.name} (#{current_user.package.name})"
+    transaction = AuthorizeNet::ARB::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], :gateway => :live)
+    subscription = AuthorizeNet::ARB::Subscription.new(
+      :name => @product,
+      :length => 1,
+      :unit => :month,
+      :start_date => current_user.payment_date,
+      :total_occurrences => 12,
+      :amount =>@amount,
+      :description => @product,
+      :credit_card => AuthorizeNet::CreditCard.new(params[:card_no], params[:expire_date],:card_code=>params[:card_code]),
+      :billing_address => AuthorizeNet::Address.new(:first_name => @email, :last_name =>'xxx')
+    )
+    @response = transaction.create(subscription)
+ 
+   unless @response.subscription_id.nil?
+    Card.create!(:subcription_id=>@response.subscription_id,:user_id=>session[:user_id])
+   end
+   render  'response'
+  end
+  def cancel_subscription
+    transaction = AuthorizeNet::ARB::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], :gateway => :live)
+    subscription = AuthorizeNet::ARB::Subscription.new(
+       :subscription_id=>current_user.card.subcription_id
+    )
+    @response = transaction.cancel(subscription)
+     render  'response'
+
+  end
+  def change_card_details
+    transaction = AuthorizeNet::ARB::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], :gateway => :live)
+    subscription = AuthorizeNet::ARB::Subscription.new(
+       :subscription_id=>current_user.card.subcription_id,
+       :credit_card => AuthorizeNet::CreditCard.new(params[:card_no], params[:expire_date],:card_code=>params[:card_code]),
+       :billing_address => AuthorizeNet::Address.new(:first_name => @email, :last_name =>'xxx')
+    )
+    @response = transaction.update(subscription)
+     render  'response'
+  end
   def registration
     @amount=params[:amount]
     @email=params[:email]
     @product=params[:description]
-    transaction = AuthorizeNet::ARB::Transaction.new('2Mp89hQ4', '4xr7VY5n6KQ3v6V8', :gateway => :sandbox)
+    transaction = AuthorizeNet::ARB::Transaction.new(AUTHORIZE_NET_CONFIG['api_login_id'], AUTHORIZE_NET_CONFIG['api_transaction_key'], :gateway => :live)
     subscription = AuthorizeNet::ARB::Subscription.new(
       :name => @product,
       :length => 1,
@@ -43,7 +85,7 @@ class PaymentsController < ApplicationController
       :billing_address => AuthorizeNet::Address.new(:first_name => @email, :last_name =>'xxx')
     )
     response = transaction.create(subscription)
-    
+   
    unless response.subscription_id.nil?
    
     Card.create!(:subcription_id=>response.subscription_id,:user_id=>session[:user_id])

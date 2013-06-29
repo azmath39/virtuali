@@ -30,7 +30,7 @@ module HomeHelper
      @selected_pkg.renew_date<Date.today+15
   end
   def check_payment_type
-      @selected_pkg.payment_period_type==1  
+      @selected_pkg.payment_period_type == 1
   end
   def space20
     str = String.new

@@ -62,6 +62,9 @@ class User < ActiveRecord::Base
   #    @comp = cmp
   #    self.company= Company.create(@comp)
   #  end
+  def payment_date
+    Date.today + self.selected_package.remaining_days
+  end
   def package=(pkg)
     assign_package(pkg)
   end
