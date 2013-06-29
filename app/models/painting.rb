@@ -21,15 +21,15 @@ class Painting < ActiveRecord::Base
   validate :token, :presence => true
   before_create :add_priority
   def add_priority
-    
-    
+    lock = Monitor.new
+    lock.synchronize do
     temp_priority=Painting.where("token=?",token).maximum("priority")
     if temp_priority.present?
       self.priority=temp_priority+1;
     else
       self.priority=1;
     end
-  
+    end
   end
 
 
