@@ -54,7 +54,7 @@
 
 class Tour < ActiveRecord::Base
   extend FriendlyId
-  attr_accessible :gmaps, :state, :description, :city, :zip, :subdivision, :price,:address1,:address2, :square_footage, :status,:user_id,:name,:bed_rooms, :bath_rooms,:product_id,:selected_package_id,:status, :acreage
+  attr_accessible :gmaps, :state, :description, :city, :zip, :subdivision, :price,:address1,:address2, :square_footage, :status,:user_id,:name,:bed_rooms, :bath_rooms,:product_id,:selected_package_id,:status, :acreage, :mls_id, :store_realtor
   #attr_accessor :pro
   acts_as_paranoid
   validates :state, :city, :zip, :price, :address1, :square_footage,:product_id, :presence => true
@@ -69,6 +69,11 @@ class Tour < ActiveRecord::Base
   belongs_to :product
   belongs_to :selected_package
   after_create :set_name
+   before_create :reset_priority
+   def reset_priority
+     $serial_no=0;
+   end
+ before_save :send_tour_to_realtor
 #  after_create :set_name, :set_product_id
 #  def set_product_id
 #    product=self.user.selected_package.package.product_id
@@ -86,6 +91,12 @@ class Tour < ActiveRecord::Base
 
  def self.tours_list_pagination(page)
    order('created_at DESC').paginate(:page => page, :per_page => 24)
+ end
+ def send_tour_to_realtor
+   if self.order_number.blank? && self.store_realtor.present?
+     create_realtor
+   end
+   
  end
  def add_line_1
    "#{address1} #{address2}"
@@ -156,5 +167,42 @@ end
     end
 
   end
-  
+  def create_realtor
+    uri = URI('http://picturepath.homestore.com/picturepath/cgi-bin/receiver.pl');
+   send_xml =
+  "<?xml version='1.0'?>
+  <AUI_SUBMISSION VERSION='5.0'>
+  <TOUR>
+  <CUSTREFNUM></CUSTREFNUM>
+  <ORDERNUM></ORDERNUM>
+  <PRODUCT_SKU></PRODUCT_SKU>
+  <PRODUCT_LINE>LINK</PRODUCT_LINE>
+  <ADDRESS>
+  <STREET1>self.address1</STREET1>
+  <STREET2/>
+  <CITY>#{self.city}</CITY>
+  <STATE>#{self.state}</STATE>
+  <COUNTRY CODE='US'/>
+  <ZIP>#{self.zip}</ZIP>
+  </ADDRESS>
+  <IDENTIFIERS>
+  <ID1 VALUE='#{self.mls_id}' TYPE='MLSID'/>
+  <ID2 VALUE='' TYPE='MLSID'/>
+  </IDENTIFIERS>
+  <DISTRIBUTION>
+  <SITE>2845</SITE>
+  </DISTRIBUTION>
+  <TOUR_URL>
+  http://www.virtualiinc.com/tours/110-clay-brook-dr-goldsboro-north-carolina-27530--112
+  </TOUR_URL>
+  </TOUR>
+  </AUI_SUBMISSION>"
+  params_xml = { :username => "virtuali", :password => "kevislad1", :client => "AUI", :version => 5.0, :action => "Submit", :xml => send_xml}
+   uri.query = URI.encode_www_form(params_xml)
+   res = Net::HTTP.get_response(uri)
+   @doc=Nokogiri::XML(res.body) if res.is_a?(Net::HTTPSuccess)
+   logger.info @doc.to_xml
+   self.order_number=@doc.xpath("//ORDER_NUMBER/text()")
+   logger.info self.order_number
+  end
 end
