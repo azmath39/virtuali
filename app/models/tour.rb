@@ -94,7 +94,7 @@ class Tour < ActiveRecord::Base
  end
  def send_tour_to_realtor
    if self.order_number.blank? && self.store_realtor.present?
-     create_realtor
+     Tour.create_realtor self
    end
    
  end
@@ -167,42 +167,44 @@ end
     end
 
   end
-  def create_realtor
+  def self.create_realtor obj
+    state=State.where(:name => obj.state);
+
     uri = URI('http://picturepath.homestore.com/picturepath/cgi-bin/receiver.pl');
-   send_xml =
-  "<?xml version='1.0'?>
-  <AUI_SUBMISSION VERSION='5.0'>
-  <TOUR>
-  <CUSTREFNUM></CUSTREFNUM>
-  <ORDERNUM></ORDERNUM>
-  <PRODUCT_SKU></PRODUCT_SKU>
-  <PRODUCT_LINE>LINK</PRODUCT_LINE>
-  <ADDRESS>
-  <STREET1>self.address1</STREET1>
-  <STREET2/>
-  <CITY>#{self.city}</CITY>
-  <STATE>#{self.state}</STATE>
-  <COUNTRY CODE='US'/>
-  <ZIP>#{self.zip}</ZIP>
-  </ADDRESS>
-  <IDENTIFIERS>
-  <ID1 VALUE='#{self.mls_id}' TYPE='MLSID'/>
-  <ID2 VALUE='' TYPE='MLSID'/>
-  </IDENTIFIERS>
-  <DISTRIBUTION>
-  <SITE>2845</SITE>
-  </DISTRIBUTION>
-  <TOUR_URL>
-  http://www.virtualiinc.com/tours/110-clay-brook-dr-goldsboro-north-carolina-27530--112
-  </TOUR_URL>
-  </TOUR>
-  </AUI_SUBMISSION>"
-  params_xml = { :username => "virtuali", :password => "kevislad1", :client => "AUI", :version => 5.0, :action => "Submit", :xml => send_xml}
+    send_xml =
+      "<?xml version='1.0'?>
+      <AUI_SUBMISSION VERSION='5.0'>
+      <TOUR>
+      <CUSTREFNUM></CUSTREFNUM>
+      <ORDERNUM></ORDERNUM>
+      <PRODUCT_SKU></PRODUCT_SKU>
+      <PRODUCT_LINE>LINK</PRODUCT_LINE>
+      <ADDRESS>
+      <STREET1>obj.address1</STREET1>
+      <STREET2/>
+      <CITY>#{obj.city}</CITY>
+      <STATE>#{state.first.code}</STATE>
+      <COUNTRY CODE='US'/>
+      <ZIP>#{obj.zip}</ZIP>
+      </ADDRESS>
+      <IDENTIFIERS>
+      <ID1 VALUE='#{obj.mls_id}' TYPE='MLSID'/>
+      <ID2 VALUE='' TYPE='MLSID'/>
+      </IDENTIFIERS>
+      <DISTRIBUTION>
+      <SITE>2845</SITE>
+      </DISTRIBUTION>
+      <TOUR_URL>
+      http://www.virtualiinc.com/tours/110-clay-brook-dr-goldsboro-north-carolina-27530--112
+      </TOUR_URL>
+      </TOUR>
+      </AUI_SUBMISSION>"
+    params_xml = { :username => "virtuali", :password => "kevislad1", :client => "AUI", :version => 5.0, :action => "Submit", :xml => send_xml}
    uri.query = URI.encode_www_form(params_xml)
    res = Net::HTTP.get_response(uri)
    @doc=Nokogiri::XML(res.body) if res.is_a?(Net::HTTPSuccess)
    logger.info @doc.to_xml
-   self.order_number=@doc.xpath("//ORDER_NUMBER/text()")
-   logger.info self.order_number
+   obj.order_number=(@doc.xpath("//ORDER_NUMBER/text()")).to_s
+   logger.info "#{obj.order_number}-------------------------------------------------"
   end
 end
