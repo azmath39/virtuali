@@ -67,10 +67,11 @@ $("#name").html(current.title);
 <script>
   Galleria.loadTheme("<%= javascript_path('galleria.classic.js') %>");
   Galleria.configure({
-
     transition: 'fade',
     transitionSpeed:1000,
-    showInfo: false
+    showInfo: false,
+    pauseOnInteraction: false,
+    autoplay: 6000
   });
 
   Galleria.run('#abc', {
