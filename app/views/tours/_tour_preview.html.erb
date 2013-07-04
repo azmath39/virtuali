@@ -1,5 +1,7 @@
 <script>
-   function slide_image(id) {
+
+
+function slide_image(id) {
        //alert(id);
 
        $('.carousel').carousel(id);
@@ -10,12 +12,18 @@ $('.carousel').carousel({
   })
   }
   $(document).ready(function(){
+
     $('.carousel').carousel({
     interval: 4500,
     autoplay: true,
     pause: false
+
+
+
+
+
   })
-  
+
 
   var slider = $(".carousel")
 
@@ -23,11 +31,17 @@ $('.carousel').carousel({
             var index = $(this).find(".active").index();
             $(this).find("a").removeClass('pager-active').eq(index).addClass('pager-active');
         });
-    $(".slider-pager a").click(function(e){
+    $(".final-tour-btn a").click(function(e){
         var index = $(this).index();
+alert('aaaa');
         slider.carousel(index);
         e.preventDefault();
     });
+
+
+
+
+
 });
 </script>
 <style>
