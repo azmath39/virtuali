@@ -90,15 +90,17 @@ class ToursController < ApplicationController
     if @tour.nil?
       flash.now[:notice] = "No tours were found!"
     end
-    @json = @tour.to_gmaps4rails do |tour, marker|
-      marker.infowindow("<center><img src=\"#{tour.display_image}\" width=\"150\" height=\"100\"><br />
+     @json = @tour.to_gmaps4rails do |tour, marker|
+      marker.infowindow("<center><a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a><br /><img src=\"#{tour.display_image}\" width=\"150\" height=\"100\"><br />
                          <b>#{tour.zip} #{tour.state_code} #{tour.city}</b><br /><b>$#{tour.price}</b><br/>
         " "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<br />
                           Acreage: #{tour.acreage}<br/>
-                          Category: #{tour.product.name}<br/>
-        " "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
+                          Category: #{tour.product.name}")
       marker.title("#{tour.city}")
     end
+    
+    
+    
     
     
     puts "gfgdgd..............................!"
@@ -121,12 +123,11 @@ class ToursController < ApplicationController
       flash.now[:notice] = "No tours were found!"
     end
     @json = @tours.to_gmaps4rails do |tour, marker|
-      marker.infowindow("<center><img src=\"#{tour.display_image}\" width=\"150\" height=\"100\"><br />
+      marker.infowindow("<center><a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a><br /><img src=\"#{tour.display_image}\" width=\"150\" height=\"100\"><br />
                          <b>#{tour.zip} #{tour.state_code} #{tour.city}</b><br /><b>$#{tour.price}</b><br/>
         " "Beds:#{tour.bed_rooms}/Baths: #{tour.bath_rooms}<br />
                           Acreage: #{tour.acreage}<br/>
-                          Category: #{tour.product.name}<br/>
-        " "<a href='http://#{request.host_with_port}/tours/show/#{tour.id}' target = \"_blank\">Click for Tour</a>".html_safe)
+                          Category: #{tour.product.name}")
       marker.title("#{tour.city}")
     end
   end
@@ -243,6 +244,9 @@ class ToursController < ApplicationController
   end
   def tour_creation
     @tour = Tour.new(params[:tour])
+      puts "tourllll......!"
+    p params[:tour]
+      puts "tourlll......!"
     if @tour.save
       current_user.tours << @tour
       #NotificationsMailer.tour_created_message(current_user, @tour).deliver

@@ -3,17 +3,19 @@
 <p><span class="title-text">Billing</span></p>
 
 
-<%#= render :text=>"ok" %>
+
 <%= render '/home/payment_form' %>
 <%pkg=current_user.selected_package %>
     <%initiate(pkg)%>
 <div style="float:right;margin-right: 50px; margin-bottom: 20px;" >
-<%#if !current_user.card.nil?%>
-    <%#= render 'card_change_form' %>
-    <%#= link_to "Change Card Details", "#card_change", "data-toggle" => "modal", :class => 'btn btn-primary'%>
-<%#elsif check_payment_type%>
- <%#= link_to "Create Direct Debit", "#card_details", "data-toggle" => "modal", :class => "btn btn-danger", :onclick=>"create_direct_debit()"  %>
-  <%#end%>
+<%if !current_user.card.nil?%>
+    <%= render 'card_change_form' %>
+    <%= link_to "Change Card Details", "#card_change", "data-toggle" => "modal", :class => 'btn btn-primary'%>
+  <%=link_to "Cancel Recursive Payment", "/payments/cancel-subscription", :remote=>true,:class => "btn btn-danger"%>
+  
+<%elsif check_payment_type%>
+ <%= link_to "Create Recursive Payment", "#card_details", "data-toggle" => "modal", :class => "btn btn-danger", :onclick=>"create_direct_debit()"  %>
+  <%end%>
   </div>
   <h3> Package Details</h3>
     <div class="container-fluid">
@@ -46,19 +48,37 @@
 
 <table class="table table-bordered">
   <tr>
-    <td>Start Date:<%20.times do %>&nbsp;<%end%> <%=start_date%></td>
-    <td>Expires on:<%20.times do %>&nbsp;<%end%> <%=end_date%></td>
+    <td>Start Date:<%20.times do %>&nbsp;<%end%> </td>
+    <td><%=start_date%></td>
   </tr>
   <tr>
-    <td colspan="2" style="text-align:center;">
-      <h4>Description</h4>
-      <hr />
-      <ul class="unstyled">
-        <li>Number of Pictures:<%=  pictures %></li><br />
-        <li><%= description %></li>
-      </ul>
-      
-    </td>
+    <td>Expire Date:<%20.times do %>&nbsp;<%end%></td>
+  <td><%=end_date%></td>
+  </tr>
+  <tr>
+    <td>Number of Pictures</td>
+    <td><%=@selected_pkg.pictures_for_tour%></td>
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td><%=@selected_pkg.package_name%></td>
+  </tr>
+  <tr>
+    <td>No. of Tours</td>
+    <td><%=@selected_pkg.package_no_of_tours%></td>
+  </tr>
+  <tr>
+    <td>Price</td>
+    <td><%=@selected_pkg.price%></td>
+  </tr>
+  <tr>
+    <td>Subscription Period</td>
+    <td><%=@selected_pkg.subscribed_days%></td>
+  </tr>
+  <tr>
+    <td>Days Left</td>
+     <td><%=(@selected_pkg.renew_date-Date.today).to_i%>   days</td> 
+  </tr>
     <%#*<td>%>
       <%#unless current_user.card.nil?%>
       <%#*<div id="alert_message">%>
@@ -71,7 +91,6 @@
       <%#else%>
       <%#= render 'renew_form' %>
     <%#*</td>%>
-  </tr>
 </table>
             </div>
           </div>

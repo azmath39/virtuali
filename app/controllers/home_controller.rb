@@ -51,6 +51,8 @@ class HomeController < ApplicationController
     @package_price=current_user.package_price
     @payments=current_user.payments.order('created_at DESC')
     render :partial=>'/home/billing_page'
+    
+   
   end
   def profile
     render :partial=>'/home/user_profile'

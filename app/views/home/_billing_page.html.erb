@@ -48,21 +48,49 @@
 
 <table class="table table-bordered">
   <tr>
-    <td>Start Date:<%20.times do %>&nbsp;<%end%> <%=start_date%></td>
-    <td>Expires on:<%20.times do %>&nbsp;<%end%> <%=end_date%></td>
+    <td>Start Date:<%20.times do %>&nbsp;<%end%> </td>
+    <td><%=start_date%></td>
   </tr>
   <tr>
-    <td colspan="2" style="text-align:center;">
-      <h4>Description</h4>
-      <hr />
-      <ul class="unstyled">
-        <li>Number of Pictures:<%=  pictures %></li><br />
-        <li><%= description %></li>
-      </ul>
-      
-    </td>
-    
+    <td>Expire Date:<%20.times do %>&nbsp;<%end%></td>
+  <td><%=end_date%></td>
   </tr>
+  <tr>
+    <td>Number of Pictures</td>
+    <td><%=@selected_pkg.pictures_for_tour%></td>
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td><%=@selected_pkg.package_name%></td>
+  </tr>
+  <tr>
+    <td>No. of Tours</td>
+    <td><%=@selected_pkg.package_no_of_tours%></td>
+  </tr>
+  <tr>
+    <td>Price</td>
+    <td><%=@selected_pkg.price%></td>
+  </tr>
+  <tr>
+    <td>Subscription Period</td>
+    <td><%=@selected_pkg.subscribed_days%></td>
+  </tr>
+  <tr>
+    <td>Days Left</td>
+     <td><%=(@selected_pkg.renew_date-Date.today).to_i%>   days</td> 
+  </tr>
+    <%#*<td>%>
+      <%#unless current_user.card.nil?%>
+      <%#*<div id="alert_message">%>
+      <%#unless pkg.status==3%>
+      <%#=button_tag "Unsubsribe",:class=>"btn btn-primary",:onclick=>"unsubsribe(#{pkg.id})"%>
+      <%#else%>
+      <%#*Unsubscribed%>
+      <%#end%>
+      <%#*</div>%>
+      <%#else%>
+      <%#= render 'renew_form' %>
+    <%#*</td>%>
 </table>
             </div>
           </div>

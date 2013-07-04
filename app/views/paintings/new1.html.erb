@@ -83,15 +83,6 @@
         <%= f.label :bath_rooms %>
         <%= f.text_field :bath_rooms,:class=>"required digits"%>
       </div>
-        
-      	<div class ="control-group">
-        	<%= f.label "MLSID", :html => {:class => 'control-label'} %>
-        	<%= f.text_field :mls_id %>
-      	</div>
-      	<div class ="control-group">
-        	<%= f.check_box :store_realtor%> Store in realtor
-      	</div>
-      </div>
       </div>
 
       </div>
@@ -126,7 +117,18 @@
           <br/>
           <span>(Note:Arrange your Pictures according to priority.)</span>
         </div>
-		
+		<div class ="control-group">
+        	<%= f.label "acreage", :html => {:class => 'control-label'} %>
+        	<%= f.text_field :acreage %>
+      	</div>
+      	<div class ="control-group">
+        	<%= f.label "MLSID", :html => {:class => 'control-label'} %>
+        	<%= f.text_field :mls_id %>
+      	</div>
+      	<div class ="control-group">
+        	<%= f.check_box :store_realtor%> Store in realtor
+      	</div>
+      </div>
 
 
 

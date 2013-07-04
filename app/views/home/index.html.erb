@@ -9,12 +9,13 @@
   <div class="after_sign_in">
   <%#*<p><span class="title-text" style="position:absolute;margin-left:0%;">Dashboard </span></p>%>
     <%=render 'search_form' %>
-    <div> <div style="float:left;"> <h1 class="title-text">Dashboard </h1></div><div id="search-div"> <%=yield :search%></div></div>
-
+    <div> <div style="float:left;"> <h1 class="title-text">Dashboard </h1></div><div id="search-div" style="width: 72%"> <%=yield :search%></div></div>
+<%#*<div style="float:left; margin-bottom:0%;margin-left:490px;margin-top: 0%;">%>  
+<%#=select_tag "product_id", options_from_collection_for_select(current_user.subscribe_product,"id","name"),:onchange=>"display_tours()",:prompt=>"All" if current_user.multiple_products?%>
+    <%#*</div>%>
 
      <%#=render 'account_mangement'%>
-    <div style="float:left; margin-bottom:-5%;margin-left:490px;margin-top: 0%; ">  <%=select_tag "product_id", options_from_collection_for_select(current_user.subscribe_product,"id","name"),:onchange=>"display_tours()",:prompt=>"All" if current_user.multiple_products?%>
-    </div>
+    
   <%#*<div style="float:right;margin-right: 9%; margin-bottom: 3%;">%>
   <%#= link_to "Create New Tour", '/paintings/new', :class => 'btn-large btn-primary',:style=>"border-radius:34px;"  if verify_tours_allowed%>
   <%#*</div>%>
@@ -49,16 +50,18 @@
   <%end unless current_user.nil?%>
 <style>
   #side_bar{
-   margin-top: 7%;
-   margin-left: 72%;
-   height: 13%;
-   width:7%;
+   margin-top: 135px;  /*7%*/
+   margin-left: 69%;
+   height: 14%;
+   width:4%;
   }
   th{
     text-align:left;
   }
   h2{
-    line-height: 17px;
+    line-height: 10px;
+    font-size: 23.5px;
+    margin-top: -5px;
   }
 </style>
 <script>

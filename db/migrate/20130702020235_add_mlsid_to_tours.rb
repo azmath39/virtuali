@@ -5,10 +5,10 @@ class AddMlsidToTours < ActiveRecord::Migration
     add_column :tours, :store_realtor, :boolean, :default => false
     rescue
     end
-    Tour.all.each{|tour|
-      tour.store_realtor=false
-      tour.save
-    }
+    #Tour.all.each{|tour|
+     # tour.store_realtor=false
+      #tour.save
+    #}
   
   end
 end

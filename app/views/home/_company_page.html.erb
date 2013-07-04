@@ -5,7 +5,7 @@
 <p><span class="title-text">Company Details</span>&nbsp;<b><%= link_to "Edit".html_safe, "#edit_company", :onclick => "edit_company(#{current_user.company.id})", :class=>"btn btn-link" %></b></p>
 
 <% if user.company %>
-<div style="float: right; height:200px;width: 120px;">
+<div style="float: right; height:200px;width: 120px; margin-right: 850px;">
   <%if user.company.logo?%>
   <%= image_tag user.company.logo_url(:thumb), :class=>'first-grid' %>
   <% else %>

@@ -352,7 +352,7 @@ class User < ActiveRecord::Base
     self.tours.any?{|tour| pkg.package_type!=2 and pkg.product.id!=tour.product_id}
   end
   def check_name_of_pictures?
-    paintings.any?{|painting| painting.name.nil?}
+    paintings.any?{|painting| painting.name.nil?  }
   end
   def multiple_products?
     self.subscribe_product.count>1

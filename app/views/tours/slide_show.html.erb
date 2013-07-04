@@ -1,6 +1,30 @@
 
- 
- 
+<script>
+
+
+Galleria.ready(function() {
+
+            var gallery = this;
+this.bind(Galleria.IMAGE, function(e) {
+                var current = gallery.getData(gallery.getIndex());
+               
+                
+
+$("#name").html(current.title);
+            });
+
+
+
+
+  });
+</script>
+<style>
+  .slider-pager{
+    margin-top: 10px;
+  }
+
+.slider-pager a.pager-active { background: #2c8571; }
+</style>
 
 <%#*<p class="title-text" style="margin:2% 0 10px 12%;">Tour slide show</p>%>
     <div class="span12 image-edit" style="width:1450px; height: 573px;" >
@@ -8,14 +32,37 @@
         <div id="abc"style="width:850px; height: 500px; margin-left: 15%; border-radius:50px;">
           
             <% @tour.paintings.each do |p| %>
-            <%=image_tag p.image_url(:test)  %>
-          
-          <% end %>
-       
-        </div>
+          <%=image_tag p.image_url(:test),:data=>{:title=>p.name}  %>
+         <% end %>
+      
+        </div
       </div>
+<div class="slider-pager" >
+      <%@t=@tour.paintings.all%>
+      <%@t.each do |painting|%>
+       
+
+          <div class="container1">
+          <div class="carousel-caption1">
+            
+              <div id="name" style="font-family: sans-serif; font-size: 30px;margin-top: -20px;color: #fff;"></div>
+            </div>
+          </div>
+       
+        <%end%>
+      
+      </div>
+      
+      
+      
     </div>
+<div class="back-button" style="margin-top: 50px">
   
+  <h4 style="margin:10px 0 0 -235px;"><button><%=link_to "", :back,:class =>"carousel-control left icon-arrow-left btn-large btn-primary btn_personalcarousel-control left icon-arrow-left btn-large btn-primary btn_personal_back" %></button></h4>
+  
+    
+  
+</div>
 
 <script>
   Galleria.loadTheme("<%= javascript_path('galleria.classic.js') %>");
@@ -31,6 +78,7 @@
 
   });
 
+
 </script>
 <style>
   .sign_in_css_slide_show{
@@ -38,15 +86,16 @@
     margin-left: -18%;
   }
   .galleria-container{
-    
+     border: 10px #C0C0C0 solid;
     -webkit-border-radius: 80px;
     -moz-border-radius: 80px;
     border-radius: 80px;
     overflow: hidden;
     background-color:transparent;
-    
+    height: 620px;
   }
   .main-image{
+    
     border: 10px #C0C0C0 solid;
     -webkit-border-radius: 80px;
     -moz-border-radius: 80px;
@@ -84,6 +133,45 @@
       top:-10px;
     
   }
+  .carousel-control{
+    margin-top: 650px;
+margin-left: 53px;
+
+  }
+  .carousel-caption1 {
+      width: 100%;
+      background-color: transparent;
+      position: absolute;
+      z-index: 1;
+      max-width: 550px;
+      padding: 0 20px;
+      text-align: center;
+      margin-top: 50px;
+      margin-left: 450px;
+    }
+.carousel-caption1 p{
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+.carousel .container1 {
+        text-align: center;
+  position: absolute;
+  top: 33%;
+  right: 40%;
+  bottom: 0;
+  left: 35%;
+  }
+  .name_of_image
+  {
+   position:absolute;
+   z-index:10001;
+   background-color: black; 
+   text-align: center;
+      margin-top: 50px;
+      margin-left: 450px;
+  }
+ 
  
 </style>
 

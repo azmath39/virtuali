@@ -16,6 +16,7 @@
             <%= f.select :status_eq, {"Active" => 1, "Sold" => 3},{:prompt => "Status"}  %>
     <%#= f.text_field :price_gteq, :style=> 'width: 94px;' %>
     <%#= f.text_field :price_lteq, :style=> 'width: 94px;' %>
+<%=select_tag "product_id", options_from_collection_for_select(current_user.subscribe_product,"id","name"),:onchange=>"display_tours()",:prompt=>"All" if current_user.multiple_products?%>
 
          <%= f.submit "Search", :class => 'btn btn-medium btn-success' %>
       </div>
