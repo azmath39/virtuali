@@ -1,7 +1,17 @@
 <script>
+   function slide_image(id) {
+       //alert(id);
+
+       $('.carousel').carousel(id);
+$('.carousel').carousel({
+    interval: 6000,
+    autoplay: true,
+    pause: false
+  })
+  }
   $(document).ready(function(){
     $('.carousel').carousel({
-    interval: 4500,
+    interval: 6000,
     autoplay: true,
     pause: false
   })
@@ -82,8 +92,8 @@ border-radius: 80px;width:1120px">
   <div class="slider-pager" style="margin: 6% 0 20px 20%; width: 50%;">
     
     <% @t.each do |painting| %>
-    <%# images = @objs.first 5 %>
-    <a href="#main-slider" class="final-tour-btn"><%= painting.name%></a>&nbsp;&nbsp;
+   
+     <%= link_to "#{painting.name}", "#", :class=>"final-tour-btn", :id=>painting.id, :onclick=>"slide_image(#{@t.index(painting)+1})"%>&nbsp;&nbsp;
     <% end %>
   </div>
   <% else %>

@@ -84,13 +84,7 @@
         <%= f.text_field :bath_rooms,:class=>"required digits"%>
       </div>
         
-      	<div class ="control-group">
-        	<%= f.label "MLSID", :html => {:class => 'control-label'} %>
-        	<%= f.text_field :mls_id %>
-      	</div>
-      	<div class ="control-group">
-        	<%= f.check_box :store_realtor%> Store in realtor
-      	</div>
+      	
       </div>
       </div>
 
@@ -102,6 +96,16 @@
           <%= f.text_area :description, :rows => 10, :style=>"width: 130%;", :class=>'wysihtml5', :onblur=>"set_session('tour_description')" %>
         </div>
       </div>
+      <div style="float:left;margin-top: 20px;margin-right:26%;margin-left: 33px;">
+  <div class ="control-group">
+        	<%= f.label "MLSID", :html => {:class => 'control-label'} %>
+        	<%= f.text_field :mls_id %>
+      	</div>
+      	<div class ="control-group">
+        	<%= f.check_box :store_realtor%> Store in realtor
+      	</div>
+      </div>
+ 
   <%end%>
   
   

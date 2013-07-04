@@ -33,6 +33,8 @@ bg2.jpg: bg2.jpg
 bg2/index.jpg: bg2.jpg
 bg2.png: bg2.png
 bg2/index.png: bg2.png
+black.png: black.png
+black/index.png: black.png
 classic-loader.gif: classic-loader.gif
 classic-loader/index.gif: classic-loader.gif
 classic-map.png: classic-map.png
